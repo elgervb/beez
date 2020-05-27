@@ -1,26 +1,32 @@
 import { Controller, Get, Post, Param, Body, Logger } from '@nestjs/common';
 import { CreateLocationDto } from '../dto/location';
+import { LocationService } from '../services/location.service';
+import { Location } from '../interfaces/location';
 
 @Controller('location')
 export class LocationController {
 
   private readonly logger = new Logger(LocationController.name);
 
-  @Get()
-  findAll(): string {
-    this.logger.debug('findAll');
+  constructor(private locationService: LocationService) { }
 
-    return 'This action returns all locations';
+  @Get()
+  findAll(): Location[] {
+    this.logger.debug(this.findAll.name);
+
+    return this.locationService.findAll();
   }
 
   @Post()
-  async create(@Body() dto: CreateLocationDto) {
-    return `This action adds a new location ${dto.name}`;
+  create(@Body() dto: CreateLocationDto) {
+    this.logger.debug(this.create.name);
+
+    this.locationService.create(dto);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): string {
-    return `This action returns a #${id} location`;
+  findOne(@Param('name') name: string): Location {
+    return this.locationService.findOne(name);
   }
 
 }

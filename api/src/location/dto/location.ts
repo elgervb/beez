@@ -1,5 +1,6 @@
+import { Location } from "../interfaces/location";
 
-export class CreateLocationDto {
+export class CreateLocationDto implements Location {
   name: string;
   long: number;
   lat: number;
