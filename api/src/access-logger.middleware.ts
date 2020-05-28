@@ -7,7 +7,7 @@ export class AccessLoggerMiddleware implements NestMiddleware {
   private readonly logger = new Logger('access');
 
   use(req: Request, res: Response, next: () => void) {
-    this.logger.log(`${req.method} ${req.baseUrl}${req.url} ${res.statusCode}`);
+    this.logger.log(`${req.method} ${req.baseUrl} ${res.statusCode}`);
     next();
   }
 }

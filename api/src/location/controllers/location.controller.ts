@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Delete } from '@nestjs/common';
 import { CreateLocationDto } from '../dto/location';
 import { LocationService } from '../services/location.service';
 import { Location } from '../interfaces/location';
@@ -14,13 +14,18 @@ export class LocationController {
   }
 
   @Post()
-  create(@Body() dto: CreateLocationDto) {
+  create(@Body() dto: CreateLocationDto): void {
     this.locationService.create(dto);
   }
 
-  @Get(':id')
+  @Get(':name')
   findOne(@Param('name') name: string): Location {
     return this.locationService.findOne(name);
+  }
+
+  @Delete(':name')
+  delete(@Param('name') name: string): void {
+    this.locationService.delete(name);
   }
 
 }

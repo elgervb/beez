@@ -10,6 +10,10 @@ export class LocationService {
     this.locations = [...this.locations, location];
   }
 
+  delete(locationName: string): void {
+    this.locations = this.locations.filter(location => location.name !== locationName);
+  }
+
   findAll(): Location[] {
     return [...this.locations];
   }
