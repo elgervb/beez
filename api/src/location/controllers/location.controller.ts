@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Param, Body, Delete } from '@nestjs/common';
 import { CreateLocationDto } from '../dto/location';
 import { LocationService } from '../services/location.service';
-import { Location } from '../interfaces/location';
+import { Location } from '@common/interfaces/location';
 
 @Controller('location')
 export class LocationController {

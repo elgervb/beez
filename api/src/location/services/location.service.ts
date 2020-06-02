@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Location } from 'src/location/interfaces/location';
+import { Location } from '@common/interfaces/location';
 
 @Injectable()
 export class LocationService {

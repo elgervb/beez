@@ -1,6 +1,6 @@
 
 import { register, FactoryType } from '@elgervb/mock-data';
-import { Location } from './location/interfaces/location';
+import { Location } from '@common/interfaces/location';
 
 register<Location>('beez.location', {
   name: FactoryType.guid,

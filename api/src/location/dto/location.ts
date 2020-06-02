@@ -1,4 +1,4 @@
-import { Location } from "../interfaces/location";
+import { Location } from "@common/interfaces/location";
 
 export class CreateLocationDto implements Location {
   name: string;
