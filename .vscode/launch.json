@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Nest Framework",
+            "args": [
+                "${workspaceFolder}/api/src/main.ts"
+            ],
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register"
+            ],
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}/api",
+            "protocol": "inspector"
+        },
+        {
+            "name": "Launch Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:4200",
+            "runtimeArgs": [
+                "--user-data-dir=/tmp/beezs",
+                "--remote-debugging-port=9222"
+            ],
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}/app"
+        },
+        {
+            "type": "node",
+            "name": "vscode-jest-tests",
+            "request": "launch",
+            "args": [
+                "--config",
+                "jest.app.config.js",
+                "--runInBand"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "program": "${workspaceFolder}/app/node_modules/jest/bin/jest"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Spec Test Current File",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/app/node_modules/jest/bin/jest",
+            "args": [
+                "--config",
+                "jest.app.config.js",
+                "--runTestsByPath",
+                "${relativeFile}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true
+        }
+    ]
+}

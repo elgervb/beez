@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Param, Body, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { CreateLocationDto } from '../dto/location';
 import { LocationService } from '../services/location.service';
-import { Location } from '@common/interfaces/location';
+import { Location } from 'src/interfaces/location';
 
 @Controller('location')
 export class LocationController {
@@ -27,7 +27,4 @@ export class LocationController {
   findOne(@Param('name') name: string): Location {
     return this.locationService.findOne(name);
   }
-
-
-
 }

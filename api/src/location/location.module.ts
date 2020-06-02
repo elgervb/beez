@@ -6,6 +6,8 @@ import { LocationService } from './services/location.service';
   controllers: [
     LocationController
   ],
-  providers: [LocationService]
+  providers: [
+    LocationService
+  ]
 })
 export class LocationModule { }

@@ -17,6 +17,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    quotes: ['error', 'single'],
     semi: ['error', 'always'],
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

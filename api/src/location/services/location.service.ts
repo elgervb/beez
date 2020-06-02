@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { Location } from '@common/interfaces/location';
+import { Location } from 'src/interfaces/location';
+import { arrayFrom } from '@elgervb/mock-data';
 
 @Injectable()
 export class LocationService {
 
-  private locations: Location[] = [];
+  private locations = arrayFrom<Location>('beez.location', 10);
+
+  constructor() {
+  }
 
   create(location: Location): Location {
     this.locations = [...this.locations, location];

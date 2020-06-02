@@ -318,10 +318,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@elgervb/mock-data@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@elgervb/mock-data/-/mock-data-0.0.2.tgz#7a43b5684294fb4d4492075771fc1484edef20b4"
-  integrity sha512-hAGNN12eH6MwYDddHPfEvlVsPTVnhlsPpB8gEkmH6S3S9kpv5TBZAF3iftnH3bQ6sG/54oSUpekgwRaql9EvCw==
+"@elgervb/mock-data@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@elgervb/mock-data/-/mock-data-0.0.3.tgz#e65d678b30e5f86f03649017d079628aa79d8cf2"
+  integrity sha512-hgOKjCj+Tb2bSbdDgrPqj2WR7MUxwghCSFN16Kgac5aqfSn01Pv7rzF+vQPnJh1HL1qhrBek5hErxi61WPx90w==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"

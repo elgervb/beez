@@ -1,0 +1,11 @@
+<h1> Locations </h1>
+
+<a routerLink="./create">add</a>
+
+<ul>
+  <li *ngFor="let location of locations$ |async; trackBy: trackLocation">
+    {{location.name}}
+    <button *ngIf="location.lat && location.long" (click)="showInGoogleMaps(location)">show -></button>
+    <button (click)="delete(location)">delete</button>
+  </li>
+</ul>

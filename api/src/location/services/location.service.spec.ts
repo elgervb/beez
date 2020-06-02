@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LocationService } from './location.service';
 import { from, } from '@elgervb/mock-data';
-import { Location } from '../interfaces/location';
 import { arrayFrom } from '@elgervb/mock-data/lib/blueprint/blueprint';
+import { Location } from 'src/interfaces/location';
 
 describe('LocationService', () => {
   let service: LocationService;
@@ -25,7 +25,7 @@ describe('LocationService', () => {
     expect(service.findOne(expected.name)).toEqual(expected);
   });
 
-  it('should delete  a location', () => {
+  it('should delete a location', () => {
     const expected = from<Location>('beez.location');
     expect(service.create(expected)).toEqual(expected);
 
@@ -38,7 +38,7 @@ describe('LocationService', () => {
     const locations = arrayFrom<Location>('beez.location', 5);
     locations.forEach(location => service.create(location));
 
-    expect(service.findAll()).toHaveLength(5);
+    expect(service.findAll()).toHaveLength(15);
   });
 
 });

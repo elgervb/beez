@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LocationController } from './location.controller';
 import { LocationService } from '../services/location.service';
-import { Location } from '../interfaces/location';
 import { arrayFrom, from } from '@elgervb/mock-data/lib/blueprint/blueprint';
+import { Location } from 'src/interfaces/location';
 
 describe('Location Controller', () => {
   let controller: LocationController;

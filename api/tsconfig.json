@@ -15,12 +15,7 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "paths": {
-      "@common/*": [
-        "../common/*"
-      ]
-    }
+    "noUnusedParameters": true
   },
   "exclude": [
     "node_modules",
