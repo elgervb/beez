@@ -8,14 +8,19 @@ export class LocationController {
 
   constructor(private locationService: LocationService) { }
 
+  @Post()
+  create(@Body() dto: CreateLocationDto): Location {
+    return this.locationService.create(dto);
+  }
+
+  @Delete(':name')
+  delete(@Param('name') name: string): void {
+    this.locationService.delete(name);
+  }
+
   @Get()
   findAll(): Location[] {
     return this.locationService.findAll();
-  }
-
-  @Post()
-  create(@Body() dto: CreateLocationDto): void {
-    this.locationService.create(dto);
   }
 
   @Get(':name')
@@ -23,9 +28,6 @@ export class LocationController {
     return this.locationService.findOne(name);
   }
 
-  @Delete(':name')
-  delete(@Param('name') name: string): void {
-    this.locationService.delete(name);
-  }
+
 
 }

@@ -6,8 +6,10 @@ export class LocationService {
 
   private locations: Location[] = [];
 
-  create(location: Location): void {
+  create(location: Location): Location {
     this.locations = [...this.locations, location];
+
+    return location;
   }
 
   delete(locationName: string): void {
