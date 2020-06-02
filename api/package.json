@@ -2,6 +2,10 @@
   "name": "beez",
   "version": "0.0.1",
   "description": "",
+  "keywords": [
+    "bees",
+    "beehive administration"
+  ],
   "author": "",
   "private": true,
   "license": "UNLICENSED",
