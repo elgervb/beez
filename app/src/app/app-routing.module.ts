@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: 'location',
     loadChildren: () => import('./location/location.module').then(m => m.LocationModule)
-  }];
+  },
+  {
+    path: 'hive',
+    loadChildren: () => import('./hive/hive.module').then(m => m.HiveModule)
+  }
+];
 
 @NgModule({
   imports: [

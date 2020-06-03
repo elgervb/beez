@@ -3,9 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LocationModule } from './location/location.module';
 import { AccessLoggerMiddleware } from './access-logger.middleware';
+import { HiveModule } from './hive/hive.module';
 
 @Module({
-  imports: [LocationModule],
+  imports: [
+    LocationModule,
+    HiveModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

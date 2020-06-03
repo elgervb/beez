@@ -1,0 +1,10 @@
+<h1> Hives </h1>
+
+<a routerLink="./create">add</a>
+
+<ul>
+  <li *ngFor="let hive of hives$ |async; trackBy: trackHive">
+    {{hive.name}} {{hive.number}}
+    <button (click)="delete(hive)">delete</button>
+  </li>
+</ul>

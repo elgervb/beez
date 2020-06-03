@@ -38,7 +38,7 @@ describe('LocationService', () => {
     const locations = arrayFrom<Location>('beez.location', 5);
     locations.forEach(location => service.create(location));
 
-    expect(service.findAll()).toHaveLength(15);
+    expect(service.findAll()).toHaveLength(16);
   });
 
 });

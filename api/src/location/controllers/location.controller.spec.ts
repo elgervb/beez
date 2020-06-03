@@ -48,5 +48,5 @@ describe('Location Controller', () => {
     const expected = from<Location>('beez.location');
     jest.spyOn(locationService, 'findOne').mockReturnValueOnce(expected);
     expect(controller.findOne('')).toEqual(expected);
-  })
+  });
 });
