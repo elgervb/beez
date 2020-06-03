@@ -5,10 +5,7 @@ import { arrayFrom } from '@elgervb/mock-data';
 @Injectable()
 export class LocationService {
 
-  private locations = arrayFrom<Location>('beez.location', 10);
-
-  constructor() {
-  }
+  private locations = [...arrayFrom<Location>('beez.location', 10), { name: 'My Hive 1', long: 51.829711, lat: 5.8793828 }];
 
   create(location: Location): Location {
     this.locations = [...this.locations, location];
