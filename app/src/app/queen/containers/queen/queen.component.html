@@ -1,0 +1,10 @@
+<h1> Queens </h1>
+
+<a routerLink="./create">add</a>
+
+<ul>
+  <li *ngFor="let queen of queens$ |async; trackBy: trackQueen">
+    {{queen.name}}
+    <button (click)="delete(queen)">delete</button>
+  </li>
+</ul>

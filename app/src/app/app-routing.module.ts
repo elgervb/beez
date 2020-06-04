@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'hive',
     loadChildren: () => import('./hive/hive.module').then(m => m.HiveModule)
+  },
+  {
+    path: 'queen',
+    loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule)
   }
 ];
 
