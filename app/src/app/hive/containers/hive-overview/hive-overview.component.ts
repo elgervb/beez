@@ -6,10 +6,10 @@ import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hive',
-  templateUrl: './hive.component.html',
-  styleUrls: ['./hive.component.css']
+  templateUrl: './hive-overview.component.html',
+  styleUrls: ['./hive-overview.component.css']
 })
-export class HiveComponent implements OnInit {
+export class HiveOverviewComponent implements OnInit {
 
   hives$: Observable<Hive[]>;
 

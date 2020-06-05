@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-location',
-  templateUrl: './location.component.html',
-  styleUrls: ['./location.component.css']
+  selector: 'app-location-overview',
+  templateUrl: './location-overview.component.html',
+  styleUrls: ['./location-overview.component.css']
 })
-export class LocationComponent implements OnInit {
+export class LocationOverviewComponent implements OnInit {
 
   locations$: Observable<Location[]>;
 

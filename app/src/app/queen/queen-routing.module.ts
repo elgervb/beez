@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { QueenComponent } from './containers/queen/queen.component';
-import { QueenFormComponent } from './containers/queen-form/queen-form.component';
+import { QueenOverviewComponent, QueenFormComponent } from './containers';
 
 const routes: Routes = [
   {
     path: '',
-    component: QueenComponent
+    component: QueenOverviewComponent
   },
   {
     path: 'create',

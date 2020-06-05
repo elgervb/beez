@@ -6,10 +6,10 @@ import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-queen',
-  templateUrl: './queen.component.html',
-  styleUrls: ['./queen.component.css']
+  templateUrl: './queen-overview.component.html',
+  styleUrls: ['./queen-overview.component.css']
 })
-export class QueenComponent implements OnInit {
+export class QueenOverviewComponent implements OnInit {
 
   queens$: Observable<Queen[]>;
 

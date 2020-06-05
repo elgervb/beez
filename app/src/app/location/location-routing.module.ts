@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LocationComponent } from './containers/location/location.component';
+import { LocationOverviewComponent } from './containers/location-overview/location-overview.component';
 import { LocationFormComponent } from './containers/location-form/location-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LocationComponent
+    component: LocationOverviewComponent
   },
   {
     path: 'create',

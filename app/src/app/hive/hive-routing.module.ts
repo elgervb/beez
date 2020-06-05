@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HiveComponent } from './containers/hives/hive.component';
+import { HiveOverviewComponent } from './containers/hive-overview/hive-overview.component';
 import { HiveFormComponent } from './containers/hive-form/hive-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HiveComponent
+    component: HiveOverviewComponent
   },
   {
     path: 'create',
