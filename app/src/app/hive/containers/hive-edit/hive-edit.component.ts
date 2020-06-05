@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HiveService } from '../../services/hive.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tap, take } from 'rxjs/operators';
 import { Location } from '@common/location';
 import { Observable } from 'rxjs';
 import { LocationService } from 'src/app/location/services/location.service';
+import { Hive } from '@common/hive';
 
 @Component({
   selector: 'app-hive-edit',
@@ -14,11 +14,10 @@ import { LocationService } from 'src/app/location/services/location.service';
 })
 export class HiveEditComponent implements OnInit {
 
-  form: FormGroup;
   locations$: Observable<Location[]>;
+  edit?: Observable<Hive>;
 
   constructor(
-    private formBuilder: FormBuilder,
     private hiveService: HiveService,
     private locationService: LocationService,
     private router: Router,
@@ -26,29 +25,19 @@ export class HiveEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      number: [''],
-      type: [''],
-      location: ['']
-    });
-
     this.locations$ = this.locationService.findAll();
-  }
 
-  save() {
-    if (this.form.valid) {
-      this.hiveService.save(this.form.value)
-        .pipe(
-          tap(() => this.router.navigate(['..'], { relativeTo: this.route })),
-          take(1)
-        )
-        .subscribe();
+    if (this.route.snapshot.params.name) {
+      this.edit = this.hiveService.findOne(this.route.snapshot.params.name);
     }
   }
 
-  trackLocation(_: number, location: Location) {
-    return location.name;
+  save(hive: Hive) {
+    this.hiveService.save(hive)
+      .pipe(
+        tap(() => this.router.navigate([this.edit ? '../..' : '..'], { relativeTo: this.route })),
+        take(1)
+      )
+      .subscribe();
   }
-
 }

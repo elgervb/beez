@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: HiveEditComponent
+  },
+  {
+    path: 'edit/:name',
+    component: HiveEditComponent
   }
 ];
 

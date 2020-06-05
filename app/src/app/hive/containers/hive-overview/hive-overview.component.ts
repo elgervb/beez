@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HiveService } from '../../services/hive.service';
 import { Hive } from '@common/hive';
 import { switchMap, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hive',
@@ -13,10 +14,17 @@ export class HiveOverviewComponent implements OnInit {
 
   hives$: Observable<Hive[]>;
 
-  constructor(private hiveService: HiveService) { }
+  constructor(
+    private router: Router,
+    private hiveService: HiveService
+  ) { }
 
   ngOnInit(): void {
     this.hives$ = this.hiveService.findAll();
+  }
+
+  edit(hive: Hive) {
+    this.router.navigateByUrl(this.router.url + '/edit/' + encodeURIComponent(hive.name));
   }
 
   delete(location: Hive) {
