@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LocationOverviewComponent } from './containers/location-overview/location-overview.component';
-import { LocationFormComponent } from './containers/location-form/location-form.component';
+import { LocationOverviewComponent, LocationEditComponent } from './containers';
 
 const routes: Routes = [
   {
@@ -11,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: LocationFormComponent
+    component: LocationEditComponent
   }
 ];
 

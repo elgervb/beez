@@ -1,2 +1,2 @@
-export * from './location-form/location-form.component';
+export * from './location-edit/location-edit.component';
 export * from './location-overview/location-overview.component';

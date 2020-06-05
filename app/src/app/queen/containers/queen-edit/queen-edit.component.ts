@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LocationService } from '../../services/location.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { QueenService } from '../../services/queen.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tap, take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-location-form',
-  templateUrl: './location-form.component.html',
-  styleUrls: ['./location-form.component.css']
+  selector: 'app-queen-edit',
+  templateUrl: './queen-edit.component.html',
+  styleUrls: ['./queen-edit.component.css']
 })
-export class LocationFormComponent implements OnInit {
+export class QueenEditComponent implements OnInit {
 
   form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private locationService: LocationService,
+    private queenService: QueenService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -23,14 +23,15 @@ export class LocationFormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      lat: [''],
-      long: ['']
+      color: [''],
+      year: [''],
+      active: [true, Validators.required]
     });
   }
 
   save() {
     if (this.form.valid) {
-      this.locationService.save(this.form.value)
+      this.queenService.save(this.form.value)
         .pipe(
           tap(() => this.router.navigate(['..'], { relativeTo: this.route })),
           take(1)
@@ -38,5 +39,4 @@ export class LocationFormComponent implements OnInit {
         .subscribe();
     }
   }
-
 }

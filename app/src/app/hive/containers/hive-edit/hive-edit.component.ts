@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 import { LocationService } from 'src/app/location/services/location.service';
 
 @Component({
-  selector: 'app-hive-form',
-  templateUrl: './hive-form.component.html',
-  styleUrls: ['./hive-form.component.css']
+  selector: 'app-hive-edit',
+  templateUrl: './hive-edit.component.html',
+  styleUrls: ['./hive-edit.component.css']
 })
-export class HiveFormComponent implements OnInit {
+export class HiveEditComponent implements OnInit {
 
   form: FormGroup;
   locations$: Observable<Location[]>;

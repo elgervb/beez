@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HiveFormComponent } from './hive-form.component';
+import { HiveEditComponent } from './hive-edit.component';
 
-describe('HiveFormComponent', () => {
-  let component: HiveFormComponent;
-  let fixture: ComponentFixture<HiveFormComponent>;
+describe('HiveEditComponent', () => {
+  let component: HiveEditComponent;
+  let fixture: ComponentFixture<HiveEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HiveFormComponent ]
+      declarations: [HiveEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HiveFormComponent);
+    fixture = TestBed.createComponent(HiveEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

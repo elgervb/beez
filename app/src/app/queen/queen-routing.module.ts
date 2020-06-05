@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { QueenOverviewComponent, QueenFormComponent } from './containers';
+import { QueenOverviewComponent, QueenEditComponent } from './containers';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: QueenFormComponent
+    component: QueenEditComponent
   }
 ];
 
