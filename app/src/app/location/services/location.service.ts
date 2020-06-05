@@ -18,6 +18,10 @@ export class LocationService {
     return this.http.get<Location[]>('http://localhost:3000/location');
   }
 
+  findOne(name: string) {
+    return this.http.get<Location>(`http://localhost:3000/location/${name}`);
+  }
+
   save(location: Location) {
     return this.http.post<Location>('http://localhost:3000/location', location);
   }

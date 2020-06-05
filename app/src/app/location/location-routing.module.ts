@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: LocationEditComponent
+  },
+  {
+    path: 'edit/:name',
+    component: LocationEditComponent
   }
 ];
 

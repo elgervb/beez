@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from '../../services/location.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tap, take } from 'rxjs/operators';
+import { Location } from '@common/location';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-location-edit',
@@ -11,32 +12,27 @@ import { tap, take } from 'rxjs/operators';
 })
 export class LocationEditComponent implements OnInit {
 
-  form: FormGroup;
+  edit$?: Observable<Location>;
 
   constructor(
-    private formBuilder: FormBuilder,
     private locationService: LocationService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      lat: [''],
-      long: ['']
-    });
+    if (this.route.snapshot.params.name) {
+      this.edit$ = this.locationService.findOne(this.route.snapshot.params.name);
+    }
   }
 
-  save() {
-    if (this.form.valid) {
-      this.locationService.save(this.form.value)
-        .pipe(
-          tap(() => this.router.navigate(['..'], { relativeTo: this.route })),
-          take(1)
-        )
-        .subscribe();
-    }
+  save(location: Location) {
+    this.locationService.save(location)
+      .pipe(
+        tap(() => this.router.navigate([this.edit$ ? '../..' : '..'], { relativeTo: this.route })),
+        take(1)
+      )
+      .subscribe();
   }
 
 }

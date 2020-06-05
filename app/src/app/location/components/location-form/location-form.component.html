@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+
+  <div class="formcontrol">
+    <label for="name">name</label>
+    <input type="text" formControlName="name" id="name" />
+  </div>
+
+  <div class="formcontrol">
+    <label for="long">longitude</label>
+    <input type="number" formControlName="long" id="long" />
+  </div>
+
+  <div class="formcontrol">
+    <label for="lat">latitude</label>
+    <input type="number" formControlName="lat" id="lat" />
+  </div>
+
+  <div class="buttons">
+    <a [routerLink]="edit ? '../..' : '..'">cancel</a>
+    <button (click)="save()" [disabled]="form.invalid || form.pristine">save</button>
+  </div>
+
+</form>

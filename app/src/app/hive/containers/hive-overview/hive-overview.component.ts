@@ -24,7 +24,7 @@ export class HiveOverviewComponent implements OnInit {
   }
 
   edit(hive: Hive) {
-    this.router.navigateByUrl(this.router.url + '/edit/' + encodeURIComponent(hive.name));
+    this.router.navigateByUrl(this.router.url + '/edit/' + hive.name);
   }
 
   delete(location: Hive) {

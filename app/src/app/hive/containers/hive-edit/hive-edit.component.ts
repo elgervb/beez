@@ -15,7 +15,7 @@ import { Hive } from '@common/hive';
 export class HiveEditComponent implements OnInit {
 
   locations$: Observable<Location[]>;
-  edit?: Observable<Hive>;
+  edit$?: Observable<Hive>;
 
   constructor(
     private hiveService: HiveService,
@@ -28,14 +28,14 @@ export class HiveEditComponent implements OnInit {
     this.locations$ = this.locationService.findAll();
 
     if (this.route.snapshot.params.name) {
-      this.edit = this.hiveService.findOne(this.route.snapshot.params.name);
+      this.edit$ = this.hiveService.findOne(this.route.snapshot.params.name);
     }
   }
 
   save(hive: Hive) {
     this.hiveService.save(hive)
       .pipe(
-        tap(() => this.router.navigate([this.edit ? '../..' : '..'], { relativeTo: this.route })),
+        tap(() => this.router.navigate([this.edit$ ? '../..' : '..'], { relativeTo: this.route })),
         take(1)
       )
       .subscribe();

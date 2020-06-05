@@ -4,12 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { LocationRoutingModule } from './location-routing.module';
 import { LocationOverviewComponent, LocationEditComponent } from './containers/';
+import { LocationFormComponent } from './components/location-form/location-form.component';
 
 
 @NgModule({
   declarations: [
     LocationOverviewComponent,
-    LocationEditComponent
+    LocationEditComponent,
+    LocationFormComponent
   ],
   imports: [
     CommonModule,

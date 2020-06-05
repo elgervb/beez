@@ -2,7 +2,7 @@
 <h2> edit hive </h2>
 
 <app-hive-form
-  [edit]="edit |async"
+  [edit]="edit$ |async"
   [locations]="locations$ | async"
   (submitEvent)=save($event)>
 </app-hive-form>

@@ -3,6 +3,7 @@ import { LocationService } from '../../services/location.service';
 import { Location } from '@common/location';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-overview',
@@ -13,7 +14,10 @@ export class LocationOverviewComponent implements OnInit {
 
   locations$: Observable<Location[]>;
 
-  constructor(private locationService: LocationService) { }
+  constructor(
+    private router: Router,
+    private locationService: LocationService
+  ) { }
 
   ngOnInit(): void {
     this.locations$ = this.locationService.findAll();
@@ -25,6 +29,10 @@ export class LocationOverviewComponent implements OnInit {
         switchMap(() => this.locationService.findAll()),
         take(1)
       );
+  }
+
+  edit(location: Location) {
+    this.router.navigateByUrl(this.router.url + '/edit/' + location.name);
   }
 
   showInGoogleMaps(location: Location) {
