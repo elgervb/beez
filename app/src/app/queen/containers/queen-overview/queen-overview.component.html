@@ -3,7 +3,8 @@
 <a routerLink="./create">add</a>
 
 <ul>
-  <li *ngFor="let queen of queens$ |async; trackBy: trackQueen">
+  <li *ngFor="let queen of queens$ |async; trackBy: trackQueen"
+    (click)="edit(queen)">
     {{queen.name}}
     <button (click)="delete(queen)">delete</button>
   </li>

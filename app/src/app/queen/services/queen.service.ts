@@ -17,6 +17,10 @@ export class QueenService {
     return this.http.get<Queen[]>('http://localhost:3000/queen');
   }
 
+  findOne(name: string) {
+    return this.http.get<Queen>(`http://localhost:3000/queen/${name}`);
+  }
+
   save(queen: Queen) {
     return this.http.post<Queen>('http://localhost:3000/queen', queen);
   }

@@ -1,24 +1,5 @@
 
-<form [formGroup]="form">
-
-  <div class="formcontrol">
-    <label for="name">name</label>
-    <input type="text" formControlName="name" id="name" />
-  </div>
-
-  <div class="formcontrol">
-    <label for="color">color</label>
-    <input type="text" formControlName="color" id="color" />
-  </div>
-
-  <div class="formcontrol">
-    <label for="year">year</label>
-    <input type="number" formControlName="year" id="year" />
-  </div>
-
-  <div class="buttons">
-    <a routerLink="..">cancel</a>
-    <button (click)="save()" [disabled]="form.invalid || form.pristine">save</button>
-  </div>
-
-</form>
+<app-queen-form
+  [edit]="edit$ | async"
+  (submitEvent)="save($event)">
+</app-queen-form>

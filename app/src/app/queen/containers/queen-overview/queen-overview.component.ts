@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Queen } from '@common/queen';
 import { QueenService } from '../../services/queen.service';
 import { switchMap, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-queen',
@@ -13,7 +14,10 @@ export class QueenOverviewComponent implements OnInit {
 
   queens$: Observable<Queen[]>;
 
-  constructor(private queenService: QueenService) { }
+  constructor(
+    private router: Router,
+    private queenService: QueenService
+  ) { }
 
   ngOnInit(): void {
     this.queens$ = this.queenService.findAll();
@@ -25,6 +29,10 @@ export class QueenOverviewComponent implements OnInit {
         switchMap(() => this.queenService.findAll()),
         take(1)
       );
+  }
+
+  edit(queen: Queen) {
+    this.router.navigateByUrl(this.router.url + '/edit/' + queen.name);
   }
 
   trackQueen(_: number, queen: Queen) {

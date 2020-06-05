@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QueenService } from '../../services/queen.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tap, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Queen } from '@common/queen';
 
 @Component({
   selector: 'app-queen-edit',
@@ -11,32 +12,26 @@ import { tap, take } from 'rxjs/operators';
 })
 export class QueenEditComponent implements OnInit {
 
-  form: FormGroup;
+  edit$?: Observable<Queen>;
 
   constructor(
-    private formBuilder: FormBuilder,
     private queenService: QueenService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      color: [''],
-      year: [''],
-      active: [true, Validators.required]
-    });
+    if (this.route.snapshot.params.name) {
+      this.edit$ = this.queenService.findOne(this.route.snapshot.params.name);
+    }
   }
 
-  save() {
-    if (this.form.valid) {
-      this.queenService.save(this.form.value)
-        .pipe(
-          tap(() => this.router.navigate(['..'], { relativeTo: this.route })),
-          take(1)
-        )
-        .subscribe();
-    }
+  save(queen: Queen) {
+    this.queenService.save(queen)
+      .pipe(
+        tap(() => this.router.navigate([this.edit$ ? '../..' : '..'], { relativeTo: this.route })),
+        take(1)
+      )
+      .subscribe();
   }
 }
