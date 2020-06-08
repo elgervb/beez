@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HiveFormComponent } from './hive-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('HiveFormComponent', () => {
   let component: HiveFormComponent;
@@ -8,9 +9,10 @@ describe('HiveFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HiveFormComponent ]
+      declarations: [HiveFormComponent],
+      imports: [ReactiveFormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

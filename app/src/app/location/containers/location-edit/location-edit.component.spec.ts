@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { LocationFormComponent } from '../../components/location-form/location-form.component';
 
-import { LocationFormComponent } from './location-form.component';
 
 describe('LocationFormComponent', () => {
   let component: LocationFormComponent;
@@ -8,9 +8,9 @@ describe('LocationFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationFormComponent ]
+      declarations: [LocationFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

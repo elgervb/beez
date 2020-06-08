@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmComponent } from './confirm.component';
+import { DialogModule } from '@angular/cdk-experimental/dialog';
 
 describe('ConfirmComponent', () => {
   let component: ConfirmComponent;
@@ -8,9 +9,12 @@ describe('ConfirmComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmComponent ]
+      imports: [
+        DialogModule
+      ],
+      declarations: [ConfirmComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

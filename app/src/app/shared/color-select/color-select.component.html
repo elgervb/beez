@@ -1,0 +1,9 @@
+<ul>
+  <li *ngFor="let c of colors">
+    <button class="color"
+      [style.color]="c"
+      [class.is-selected]="c === color"
+      [disabled]="c === color"
+      (click)="writeValue(c)"></button>
+  </li>
+</ul>

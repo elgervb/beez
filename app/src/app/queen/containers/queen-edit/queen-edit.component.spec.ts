@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { QueenFormComponent } from '../../components/queen-form/queen-form.component';
 
-import { QueenFormComponent } from './queen-form.component';
 
 describe('QueenFormComponent', () => {
   let component: QueenFormComponent;
@@ -8,9 +8,9 @@ describe('QueenFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QueenFormComponent ]
+      declarations: [QueenFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
