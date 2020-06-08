@@ -55,7 +55,9 @@ export class LocationOverviewComponent implements OnInit {
   }
 
   showInGoogleMaps(location: Location) {
-    window.open(`https://www.google.com/maps/@${location.long},${location.lat},16z`, '_blank');
+    const googleLoc = `http://www.google.com/maps/place/${location.long},${location.lat}/@${location.long},${location.lat},17z/data=!3m1!1e3`;
+
+    window.open(googleLoc, '_blank');
   }
 
   trackLocation(_: number, location: Location) {
