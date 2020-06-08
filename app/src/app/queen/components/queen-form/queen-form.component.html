@@ -8,12 +8,12 @@
 
   <div class="formcontrol">
     <label for="color">color</label>
-    <input type="text" formControlName="color" id="color" />
+    <input type="color" formControlName="color" id="color" />
   </div>
 
   <div class="formcontrol">
     <label for="year">year</label>
-    <input type="number" formControlName="year" id="year" />
+    <input type="number" formControlName="year" id="year" [max]="currentYear" />
   </div>
 
   <div class="buttons">

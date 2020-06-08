@@ -5,7 +5,11 @@
 <ul>
   <li *ngFor="let queen of queens$ |async; trackBy: trackQueen"
     (click)="edit(queen)">
-    {{queen.name}}
+    <span>
+      {{queen.name}}
+      <span class="queen-color" [style.backgroundColor]="queen.color"></span>
+    </span>
+
 
     <div (click)="cancelEvent($event)">
       <button (click)="delete(queen)">delete</button>

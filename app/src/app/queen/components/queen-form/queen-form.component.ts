@@ -14,6 +14,7 @@ export class QueenFormComponent implements OnInit, OnChanges {
   @Output() submitEvent = new EventEmitter<Queen>();
 
   form: FormGroup;
+  currentYear = new Date().getFullYear();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,7 +24,7 @@ export class QueenFormComponent implements OnInit, OnChanges {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       color: [''],
-      year: [''],
+      year: [this.currentYear, Validators.max(this.currentYear)],
       active: [true, Validators.required]
     });
   }

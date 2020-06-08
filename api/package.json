@@ -1,9 +1,10 @@
 {
   "name": "beez",
   "version": "0.0.1",
-  "description": "",
+  "description": "Manage your beehives",
   "keywords": [
     "bees",
+    "beehive",
     "beehive administration"
   ],
   "author": "",
