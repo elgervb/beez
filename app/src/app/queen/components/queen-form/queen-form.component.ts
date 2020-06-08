@@ -4,7 +4,6 @@ import { Queen } from '@common/queen';
 import { queenColors, queenColor } from 'src/app/utils/queen-color';
 import { distinctUntilChanged, tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-queen-form',
