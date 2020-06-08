@@ -1,0 +1,14 @@
+
+  <button (click)="close(false)" class="close-button">&times;</button>
+  <header>
+    <h3>{{data?.title}}</h3>
+  </header>
+
+  <main>
+    {{data?.message}}
+  </main>
+
+  <footer>
+    <button (click)="close(false)">cancel</button>
+    <button (click)="close(true)">ok</button>
+  </footer>

@@ -6,6 +6,9 @@
   <li *ngFor="let queen of queens$ |async; trackBy: trackQueen"
     (click)="edit(queen)">
     {{queen.name}}
-    <button (click)="delete(queen)">delete</button>
+
+    <div (click)="cancelEvent($event)">
+      <button (click)="delete(queen)">delete</button>
+    </div>
   </li>
 </ul>

@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+main {
+  padding-bottom: 1rem;
+}
+
+.close-button {
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: -0.5em;
+  font-size: 1.5em;
+  opacity: .5;
+  top: -1.25em;
+}
+
+footer {
+  padding: .5rem 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer button {
+  margin-left: .5rem;
+}

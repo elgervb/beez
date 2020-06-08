@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Queen } from '@common/queen';
 import { QueenService } from '../../services/queen.service';
-import { switchMap, take } from 'rxjs/operators';
+import { switchMap, take, filter, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/shared/dialogs/dialog.service';
 
 @Component({
   selector: 'app-queen',
@@ -16,19 +17,37 @@ export class QueenOverviewComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private queenService: QueenService
+    private queenService: QueenService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
     this.queens$ = this.queenService.findAll();
   }
 
+  cancelEvent(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   delete(queen: Queen) {
-    this.queens$ = this.queenService.delete(queen)
+    const dialogRef = this.dialogService.confirm(
+      {
+        title: 'Delete queen',
+        message: `Are you sure you want to delete queen ${queen.name}?`
+      });
+
+    dialogRef.afterClosed()
       .pipe(
-        switchMap(() => this.queenService.findAll()),
+        filter(data => data),
+        tap(() => this.queens$ = this.queenService.delete(queen)
+          .pipe(
+            switchMap(() => this.queenService.findAll())
+          )
+        ),
         take(1)
-      );
+      ).subscribe();
+
   }
 
   edit(queen: Queen) {

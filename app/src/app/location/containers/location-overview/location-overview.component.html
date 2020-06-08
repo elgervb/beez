@@ -6,7 +6,9 @@
   <li *ngFor="let location of locations$ |async; trackBy: trackLocation"
     (click)="edit(location)">
     {{location.name}}
-    <button *ngIf="location.lat && location.long" (click)="showInGoogleMaps(location)">show -></button>
-    <button (click)="delete(location)">delete</button>
+    <div (click)="cancelEvent($event)">
+      <button *ngIf="location.lat && location.long" (click)="showInGoogleMaps(location)">show -></button>
+      <button (click)="delete(location)">delete</button>
+    </div>
   </li>
 </ul>

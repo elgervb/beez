@@ -37,6 +37,7 @@ export class HiveFormComponent implements OnInit, OnChanges {
       );
     }
   }
+
   compareLocations(l1: Location, l2: Location) {
     return l1 && l2 ? l1.name === l2.name : l1 === l2;
   }
