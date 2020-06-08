@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location as NgLocation } from '@angular/common';
 import { LocationService } from '../../services/location.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { tap, take } from 'rxjs/operators';
 import { Location } from '@common/location';
 import { Observable } from 'rxjs';
@@ -16,7 +17,7 @@ export class LocationEditComponent implements OnInit {
 
   constructor(
     private locationService: LocationService,
-    private router: Router,
+    private history: NgLocation,
     private route: ActivatedRoute
   ) { }
 
@@ -29,7 +30,7 @@ export class LocationEditComponent implements OnInit {
   save(location: Location) {
     this.locationService.save(location)
       .pipe(
-        tap(() => this.router.navigate([this.edit$ ? '../..' : '..'], { relativeTo: this.route })),
+        tap(() => this.history.back()),
         take(1)
       )
       .subscribe();

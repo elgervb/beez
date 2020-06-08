@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location as NgLocation } from '@angular/common';
 import { HiveService } from '../../services/hive.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { tap, take } from 'rxjs/operators';
 import { Location } from '@common/location';
 import { Observable } from 'rxjs';
@@ -20,8 +21,8 @@ export class HiveEditComponent implements OnInit {
   constructor(
     private hiveService: HiveService,
     private locationService: LocationService,
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private history: NgLocation
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +36,7 @@ export class HiveEditComponent implements OnInit {
   save(hive: Hive) {
     this.hiveService.save(hive)
       .pipe(
-        tap(() => this.router.navigate([this.edit$ ? '../..' : '..'], { relativeTo: this.route })),
+        tap(() => this.history.back()),
         take(1)
       )
       .subscribe();

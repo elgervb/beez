@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location as NgLocation } from '@angular/common';
 import { QueenService } from '../../services/queen.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { tap, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Queen } from '@common/queen';
@@ -16,7 +17,7 @@ export class QueenEditComponent implements OnInit {
 
   constructor(
     private queenService: QueenService,
-    private router: Router,
+    private history: NgLocation,
     private route: ActivatedRoute
   ) { }
 
@@ -29,7 +30,7 @@ export class QueenEditComponent implements OnInit {
   save(queen: Queen) {
     this.queenService.save(queen)
       .pipe(
-        tap(() => this.router.navigate([this.edit$ ? '../..' : '..'], { relativeTo: this.route })),
+        tap(() => this.history.back()),
         take(1)
       )
       .subscribe();
