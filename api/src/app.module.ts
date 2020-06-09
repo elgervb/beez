@@ -5,12 +5,14 @@ import { LocationModule } from './location/location.module';
 import { AccessLoggerMiddleware } from './access-logger.middleware';
 import { HiveModule } from './hive/hive.module';
 import { QueenModule } from './queen/queen.module';
+import { CountsModule } from './counts/counts.module';
 
 @Module({
   imports: [
     LocationModule,
     HiveModule,
-    QueenModule
+    QueenModule,
+    CountsModule
   ],
   controllers: [AppController],
   providers: [AppService],

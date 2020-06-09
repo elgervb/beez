@@ -3,7 +3,14 @@ import { HiveService } from './services/hive/hive.service';
 import { HiveController } from './controller/hive/hive.controller';
 
 @Module({
-  providers: [HiveService],
-  controllers: [HiveController]
+  controllers: [
+    HiveController
+  ],
+  exports: [
+    HiveService
+  ],
+  providers: [
+    HiveService
+  ]
 })
-export class HiveModule {}
+export class HiveModule { }
