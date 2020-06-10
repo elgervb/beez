@@ -35,10 +35,14 @@ export class HiveEditComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.history.back();
+  }
+
   save(hive: Hive) {
     this.hiveService.save(hive)
       .pipe(
-        tap(() => this.history.back()),
+        tap(() => this.goBack()),
         take(1)
       )
       .subscribe();

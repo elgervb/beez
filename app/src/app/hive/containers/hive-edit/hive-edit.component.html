@@ -4,5 +4,6 @@
 <app-hive-form
   [edit]="edit$ |async"
   [locations]="locations$ | async"
-  (submitEvent)=save($event)>
+  (cancelEvent)="goBack()"
+  (submitEvent)="save($event)">
 </app-hive-form>

@@ -14,7 +14,8 @@ export class QueenFormComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() edit?: Queen;
 
-  @Output() submitEvent = new EventEmitter<Queen>();
+  @Output() readonly cancelEvent = new EventEmitter<void>();
+  @Output() readonly submitEvent = new EventEmitter<Queen>();
 
   form: FormGroup;
   colors = queenColors;

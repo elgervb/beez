@@ -27,10 +27,14 @@ export class QueenEditComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.history.back();
+  }
+
   save(queen: Queen) {
     this.queenService.save(queen)
       .pipe(
-        tap(() => this.history.back()),
+        tap(() => this.goBack()),
         take(1)
       )
       .subscribe();

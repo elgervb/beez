@@ -1,5 +1,6 @@
 
 <app-queen-form
   [edit]="edit$ | async"
+  (cancelEvent)="goBack()"
   (submitEvent)="save($event)">
 </app-queen-form>

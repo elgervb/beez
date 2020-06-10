@@ -1,5 +1,6 @@
 
 <app-location-form
   [edit]="edit$ | async"
+  (cancelEvent)="goBack()"
   (submitEvent)="save($event)">
 </app-location-form>

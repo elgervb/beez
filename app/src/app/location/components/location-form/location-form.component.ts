@@ -9,7 +9,9 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 export class LocationFormComponent implements OnInit, OnChanges {
 
   @Input() edit?: Location;
-  @Output() submitEvent = new EventEmitter<Location>();
+
+  @Output() readonly cancelEvent = new EventEmitter<void>();
+  @Output() readonly submitEvent = new EventEmitter<Location>();
 
   form: FormGroup;
 

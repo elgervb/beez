@@ -13,6 +13,7 @@ export class HiveFormComponent implements OnInit, OnChanges {
   @Input() locations: Location[];
   @Input() edit?: Hive;
 
+  @Output() readonly cancelEvent = new EventEmitter<void>();
   @Output() readonly submitEvent = new EventEmitter<Location>();
 
   form: FormGroup;
