@@ -1,5 +1,5 @@
 import { Queen } from "src/interfaces/queen";
-import { ObjectIdColumn, Column, Entity, OneToOne } from "typeorm";
+import { ObjectIdColumn, Column, Entity } from "typeorm";
 
 @Entity({ name: 'queen' })
 export class QueenDto implements Queen {
@@ -18,7 +18,7 @@ export class QueenDto implements Queen {
   @Column()
   year: number;
 
-  @OneToOne(() => QueenDto)
+  @Column()
   mother?: Queen;
 
   @Column({ default: false })
@@ -29,4 +29,10 @@ export class QueenDto implements Queen {
 
   @Column({ default: true })
   active: boolean;
+
+  @Column()
+  remarks: string;
+
+  @Column()
+  race: string;
 }

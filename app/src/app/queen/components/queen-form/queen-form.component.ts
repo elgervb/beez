@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 export class QueenFormComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() edit?: Queen;
+  @Input() parents: Queen[];
 
   @Output() readonly cancelEvent = new EventEmitter<void>();
   @Output() readonly submitEvent = new EventEmitter<Queen>();
@@ -33,13 +34,26 @@ export class QueenFormComponent implements OnInit, OnChanges, OnDestroy {
       name: ['', Validators.required],
       color: [queenColor(this.currentYear)],
       year: [this.currentYear, [Validators.min(this.currentYear - 10), Validators.max(this.currentYear)]],
-      active: [true, Validators.required]
+      active: [true, Validators.required],
+      wingsCut: [false],
+      mother: [''],
+      race: [''],
+      bought: [false],
+      boughtFrom: [''],
+      remarks: ['']
     });
 
     this.form.get('year').valueChanges
       .pipe(
         distinctUntilChanged(),
         tap((year: number) => this.form.get('color').setValue(queenColor(year))),
+        takeUntil(this.destroy$)
+      ).subscribe();
+
+    this.form.get('mother').valueChanges
+      .pipe(
+        distinctUntilChanged(),
+        tap((queen: Queen) => this.form.get('race').setValue(queen.race)),
         takeUntil(this.destroy$)
       ).subscribe();
   }
@@ -53,6 +67,14 @@ export class QueenFormComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  compareQueens(q1: Queen, q2: Queen) {
+    return q1 && q2 ? q1.name === q2.name : q1 === q2;
+  }
+
+  trackQueen(queen: Queen) {
+    return queen.name;
   }
 
   save() {

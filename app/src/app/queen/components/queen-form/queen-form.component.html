@@ -18,6 +18,62 @@
     <input type="number" formControlName="year" id="year" [min]="currentYear - 10" [max]="currentYear" />
   </div>
 
+  <div class="formcontrol">
+    <label for="wingsCut">wings cut</label>
+    <label>
+      <input type="radio" [value]="true" formControlName="wingsCut">
+        <span>yes</span>
+    </label>
+    <label>
+      <input type="radio" [value]="false" formControlName="wingsCut">
+        <span>no</span>
+    </label>
+  </div>
+
+  <div class="formcontrol" *ngIf="parents?.length > 0">
+    <label for="mother">mother</label>
+    <select formControlName="mother" [compareWith]="compareQueens">
+      <option>Choose queen</option>
+      <option *ngFor="let mother of parents; trackBy: trackQueen" [ngValue]="mother">
+        {{mother.name}}
+      </option>
+    </select>
+  </div>
+
+  <div class="formcontrol">
+    <label for="race">race</label>
+    <input type="text" formControlName="race" id="race" list="bee-race" />
+
+    <datalist id="bee-race">
+      <option>buckfast</option>
+      <option>carnica</option>
+      <option>hybrid</option>
+      <option>other</option>
+    </datalist>
+  </div>
+
+  <div class="formcontrol">
+    <label for="bought">bought</label>
+    <label>
+      <input type="radio" [value]="true" formControlName="bought">
+        <span>yes</span>
+    </label>
+    <label>
+      <input type="radio" [value]="false" formControlName="bought">
+        <span>no</span>
+    </label>
+  </div>
+
+  <div class="formcontrol" *ngIf="form.controls.bought.value">
+    <label for="boughtFrom">bought from</label>
+    <textarea formControlName="boughtFrom" id="boughtFrom"></textarea>
+  </div>
+
+  <div class="formcontrol">
+    <label for="remarks">Remarks</label>
+    <textarea formControlName="remarks" id="remarks"></textarea>
+  </div>
+
   <div class="buttons">
     <button type="button" (click)="cancelEvent.emit()">cancel</button>
     <button (click)="save()" [disabled]="form.invalid || form.pristine">save</button>
