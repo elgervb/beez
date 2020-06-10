@@ -17,8 +17,8 @@ export class HiveService {
     return this.hiveRepository.save(hive);
   }
 
-  delete(name: string): Promise<DeleteResult> {
-    return this.hiveRepository.delete({ name });
+  delete(name: string, nr: number): Promise<DeleteResult> {
+    return this.hiveRepository.delete({ name, number: nr });
   }
 
   findAll(): Promise<Hive[]> {

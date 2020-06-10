@@ -11,7 +11,7 @@ export class HiveService {
   constructor(private http: HttpClient) { }
 
   delete(hive: Hive) {
-    return this.http.delete(`http://localhost:3000/hive/${hive.name}`);
+    return this.http.delete(`http://localhost:3000/hive/${hive.name}/${hive.number}`);
   }
 
   findAll() {

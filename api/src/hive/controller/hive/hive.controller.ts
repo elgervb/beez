@@ -14,9 +14,9 @@ export class HiveController {
     return this.hiveService.save(dto);
   }
 
-  @Delete(':name')
-  delete(@Param('name') name: string): Promise<DeleteResult> {
-    return this.hiveService.delete(name);
+  @Delete(':name/:nr')
+  delete(@Param('name') name: string, @Param('nr', ParseIntPipe) nr: number): Promise<DeleteResult> {
+    return this.hiveService.delete(name, nr);
   }
 
   @Get()
