@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location as NgLocation } from '@angular/common';
 import { QueenService } from '../../services/queen.service';
 import { ActivatedRoute } from '@angular/router';
-import { tap, take } from 'rxjs/operators';
+import { tap, take, withLatestFrom, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Queen } from '@common/queen';
 
@@ -14,6 +14,7 @@ import { Queen } from '@common/queen';
 export class QueenEditComponent implements OnInit {
 
   edit$?: Observable<Queen>;
+  parents$: Observable<Queen[]>;
 
   constructor(
     private queenService: QueenService,
@@ -25,6 +26,8 @@ export class QueenEditComponent implements OnInit {
     if (this.route.snapshot.params.name) {
       this.edit$ = this.queenService.findOne(this.route.snapshot.params.name);
     }
+
+    this.parents$ = this.queenService.findAll();
   }
 
   goBack() {

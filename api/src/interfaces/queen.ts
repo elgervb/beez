@@ -9,4 +9,6 @@ export interface Queen {
   bought: boolean;
   boughtFrom?: string;
   active: boolean;
+  remarks: string;
+  race: string;
 }
