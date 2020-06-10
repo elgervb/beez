@@ -28,8 +28,10 @@ export class HiveEditComponent implements OnInit {
   ngOnInit(): void {
     this.locations$ = this.locationService.findAll();
 
-    if (this.route.snapshot.params.name) {
-      this.edit$ = this.hiveService.findOne(this.route.snapshot.params.name);
+    const name = this.route.snapshot.params.name;
+    const nr = this.route.snapshot.params.number;
+    if (name && nr) {
+      this.edit$ = this.hiveService.findOne(name, nr);
     }
   }
 

@@ -13,7 +13,7 @@ const routes: Routes = [
     component: HiveEditComponent
   },
   {
-    path: 'edit/:name',
+    path: 'edit/:name/:number',
     component: HiveEditComponent
   }
 ];

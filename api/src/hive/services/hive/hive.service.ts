@@ -32,7 +32,7 @@ export class HiveService {
     });
   }
 
-  findOne(name: string): Promise<Hive> {
-    return this.hiveRepository.findOne({ name });
+  findOne(name: string, nr: number): Promise<Hive> {
+    return this.hiveRepository.findOne({ name, number: nr }, {});
   }
 }

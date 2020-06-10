@@ -1,4 +1,4 @@
-import { Controller, Param, Get, Delete, Body, Post } from '@nestjs/common';
+import { Controller, Param, Get, Delete, Body, Post, ParseIntPipe } from '@nestjs/common';
 import { HiveDto } from '../../dto/hive';
 import { HiveService } from '../../services/hive/hive.service';
 import { Hive } from 'src/interfaces/hive';
@@ -24,9 +24,9 @@ export class HiveController {
     return this.hiveService.findAll();
   }
 
-  @Get(':name')
-  findOne(@Param('name') name: string): Promise<Hive> {
-    return this.hiveService.findOne(name);
+  @Get(':name/:nr')
+  findOne(@Param('name') name: string, @Param('nr', ParseIntPipe) nr: number): Promise<Hive> {
+    return this.hiveService.findOne(name, nr);
   }
 
 }

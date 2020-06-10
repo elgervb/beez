@@ -18,8 +18,8 @@ export class HiveService {
     return this.http.get<Hive[]>('http://localhost:3000/hive');
   }
 
-  findOne(name: string) {
-    return this.http.get<Hive>(`http://localhost:3000/hive/${name}`);
+  findOne(name: string, nr: number) {
+    return this.http.get<Hive>(`http://localhost:3000/hive/${name}/${nr}`);
   }
 
   save(hive: Hive) {
