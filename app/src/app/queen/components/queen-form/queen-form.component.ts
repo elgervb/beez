@@ -28,6 +28,7 @@ export class QueenFormComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      id: [''],
       name: ['', Validators.required],
       color: [queenColor(this.currentYear)],
       year: [this.currentYear, [Validators.min(this.currentYear - 10), Validators.max(this.currentYear)]],

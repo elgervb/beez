@@ -5,14 +5,20 @@ import { LocationModule } from './location/location.module';
 import { AccessLoggerMiddleware } from './access-logger.middleware';
 import { HiveModule } from './hive/hive.module';
 import { QueenModule } from './queen/queen.module';
-import { CountsModule } from './counts/counts.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    LocationModule,
     HiveModule,
+    LocationModule,
     QueenModule,
-    CountsModule
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      host: 'localhost',
+      database: 'beez',
+      autoLoadEntities: true,
+      synchronize: true,
+    })
   ],
   controllers: [AppController],
   providers: [AppService],

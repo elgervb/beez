@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import { CreateLocationDto } from '../dto/location';
+import { LocationDto } from '../dtos/location';
 import { LocationService } from '../services/location.service';
 import { Location } from 'src/interfaces/location';
 
@@ -9,8 +9,8 @@ export class LocationController {
   constructor(private locationService: LocationService) { }
 
   @Post()
-  create(@Body() dto: CreateLocationDto): Location {
-    return this.locationService.create(dto);
+  create(@Body() dto: LocationDto): Promise<Location> {
+    return this.locationService.save(dto);
   }
 
   @Delete(':name')
@@ -19,12 +19,12 @@ export class LocationController {
   }
 
   @Get()
-  findAll(): Location[] {
+  findAll(): Promise<Location[]> {
     return this.locationService.findAll();
   }
 
   @Get(':name')
-  findOne(@Param('name') name: string): Location {
+  findOne(@Param('name') name: string): Promise<Location> {
     return this.locationService.findOne(name);
   }
 }

@@ -1,7 +1,8 @@
 import { Controller, Post, Body, Delete, Param, Get } from '@nestjs/common';
 import { QueenService } from '../../services/queen/queen.service';
-import { CreateQueenDto } from '../../dto/queen';
 import { Queen } from 'src/interfaces/queen';
+import { QueenDto } from 'src/queen/dtos/queen';
+import { DeleteResult } from 'typeorm';
 
 @Controller('queen')
 export class QueenController {
@@ -9,22 +10,22 @@ export class QueenController {
   constructor(private queenService: QueenService) { }
 
   @Post()
-  create(@Body() dto: CreateQueenDto): Queen {
-    return this.queenService.create(dto);
+  create(@Body() dto: QueenDto): Promise<Queen> {
+    return this.queenService.save(dto);
   }
 
   @Delete(':name')
-  delete(@Param('name') name: string): void {
-    this.queenService.delete(name);
+  delete(@Param('name') name: string): Promise<DeleteResult> {
+    return this.queenService.delete(name);
   }
 
   @Get()
-  findAll(): Queen[] {
+  findAll(): Promise<Queen[]> {
     return this.queenService.findAll();
   }
 
   @Get(':name')
-  findOne(@Param('name') name: string): Queen {
+  findOne(@Param('name') name: string): Promise<Queen> {
     return this.queenService.findOne(name);
   }
 }

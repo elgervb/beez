@@ -1,27 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { arrayFrom } from '@elgervb/mock-data';
 import { Queen } from 'src/interfaces/queen';
+import { InjectRepository } from '@nestjs/typeorm';
+import { QueenDto } from 'src/queen/dtos/queen';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class QueenService {
 
-  private data = [...arrayFrom<Queen>('beez.queen', 2)];
+  constructor(@InjectRepository(QueenDto) private queenRepository: Repository<QueenDto>) { }
 
-  create(queen: Queen): Queen {
-    this.data = [...this.data, queen];
-
-    return queen;
+  async save(queen: Queen): Promise<Queen> {
+    if (queen.id) {
+      const existing = await this.queenRepository.findOne(queen.id);
+      return await this.queenRepository.save({ ...queen, id: existing.id });
+    }
+    return this.queenRepository.save(queen);
   }
 
-  delete(queenName: string): void {
-    this.data = this.data.filter(queen => queen.name !== queenName);
+  delete(queenName: string): Promise<DeleteResult> {
+    return this.queenRepository.delete({ name: queenName });
   }
 
-  findAll(): Queen[] {
-    return [...this.data];
+  findAll(): Promise<Queen[]> {
+    return this.queenRepository.find();
   }
 
-  findOne(name: string) {
-    return this.data.find(queen => queen.name === name);
+  findOne(name: string): Promise<Queen> {
+    return this.queenRepository.findOne({ name })
   }
 }

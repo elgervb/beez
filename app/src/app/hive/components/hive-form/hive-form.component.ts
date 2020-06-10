@@ -23,6 +23,7 @@ export class HiveFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      id: [],
       name: ['', Validators.required],
       number: ['', Validators.required],
       type: [''],

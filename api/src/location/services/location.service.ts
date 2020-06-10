@@ -1,27 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { Location } from 'src/interfaces/location';
-import { arrayFrom } from '@elgervb/mock-data';
+import { InjectRepository } from '@nestjs/typeorm';
+import { LocationDto } from '../dtos/location';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class LocationService {
 
-  private data = [...arrayFrom<Location>('beez.location', 10), { name: 'My Hive 1', long: 51.829711, lat: 5.8793828 }];
+  constructor(
+    @InjectRepository(LocationDto)
+    private locationRepository: Repository<LocationDto>
+  ) { }
 
-  create(location: Location): Location {
-    this.data = [...this.data, location];
 
-    return location;
+  async save(location: LocationDto): Promise<LocationDto> {
+    if (location.id) {
+      const existing = await this.locationRepository.findOne(location.id);
+      return await this.locationRepository.save({ ...location, id: existing.id });
+    }
+    return this.locationRepository.save(location);
   }
 
-  delete(locationName: string): void {
-    this.data = this.data.filter(location => location.name !== locationName);
+  delete(name: string): Promise<DeleteResult> {
+    return this.locationRepository.delete({ name })
   }
 
-  findAll(): Location[] {
-    return [...this.data];
+  findAll(): Promise<Location[]> {
+    return this.locationRepository.find();
   }
 
   findOne(name: string) {
-    return this.data.find(location => location.name === name);
+    return this.locationRepository.findOne({ name });
   }
 }

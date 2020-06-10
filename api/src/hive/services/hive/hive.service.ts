@@ -1,27 +1,38 @@
 import { Injectable } from '@nestjs/common';
-import { arrayFrom } from '@elgervb/mock-data';
 import { Hive } from 'src/interfaces/hive';
+import { InjectRepository } from '@nestjs/typeorm';
+import { HiveDto } from 'src/hive/dto/hive';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class HiveService {
 
-  private data = [...arrayFrom<Hive>('beez.hive', 2)];
+  constructor(@InjectRepository(HiveDto) private hiveRepository: Repository<Hive>) { }
 
-  create(hive: Hive): Hive {
-    this.data = [...this.data, hive];
-
-    return hive;
+  async save(hive: Hive): Promise<Hive> {
+    if (hive.id) {
+      const existing = await this.hiveRepository.findOne(hive.id);
+      return await this.hiveRepository.save({ ...hive, id: existing.id });
+    }
+    return this.hiveRepository.save(hive);
   }
 
-  delete(hiveName: string): void {
-    this.data = this.data.filter(hive => hive.name !== hiveName);
+  delete(name: string): Promise<DeleteResult> {
+    return this.hiveRepository.delete({ name });
   }
 
-  findAll(): Hive[] {
-    return [...this.data];
+  findAll(): Promise<Hive[]> {
+    return this.hiveRepository.find({
+      join: {
+        alias: "hive",
+        leftJoinAndSelect: {
+          location: "hive.location"
+        }
+      }
+    });
   }
 
-  findOne(name: string): Hive {
-    return this.data.find(hive => hive.name === name);
+  findOne(name: string): Promise<Hive> {
+    return this.hiveRepository.findOne({ name });
   }
 }

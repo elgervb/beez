@@ -1,7 +1,8 @@
 import { Controller, Param, Get, Delete, Body, Post } from '@nestjs/common';
-import { CreateHiveDto } from '../../dto/hive';
+import { HiveDto } from '../../dto/hive';
 import { HiveService } from '../../services/hive/hive.service';
 import { Hive } from 'src/interfaces/hive';
+import { DeleteResult } from 'typeorm';
 
 @Controller('hive')
 export class HiveController {
@@ -9,22 +10,22 @@ export class HiveController {
   constructor(private hiveService: HiveService) { }
 
   @Post()
-  create(@Body() dto: CreateHiveDto): Hive {
-    return this.hiveService.create(dto);
+  create(@Body() dto: HiveDto): Promise<Hive> {
+    return this.hiveService.save(dto);
   }
 
   @Delete(':name')
-  delete(@Param('name') name: string): void {
-    this.hiveService.delete(name);
+  delete(@Param('name') name: string): Promise<DeleteResult> {
+    return this.hiveService.delete(name);
   }
 
   @Get()
-  findAll(): Hive[] {
+  findAll(): Promise<Hive[]> {
     return this.hiveService.findAll();
   }
 
   @Get(':name')
-  findOne(@Param('name') name: string): Hive {
+  findOne(@Param('name') name: string): Promise<Hive> {
     return this.hiveService.findOne(name);
   }
 
