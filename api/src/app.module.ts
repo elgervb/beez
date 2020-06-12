@@ -6,6 +6,8 @@ import { AccessLoggerMiddleware } from './access-logger.middleware';
 import { HiveModule } from './hive/hive.module';
 import { QueenModule } from './queen/queen.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'beez',
       autoLoadEntities: true,
       synchronize: true,
-    })
+    }),
+    AuthModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

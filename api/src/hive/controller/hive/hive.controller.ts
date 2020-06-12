@@ -1,9 +1,11 @@
-import { Controller, Param, Get, Delete, Body, Post, ParseIntPipe } from '@nestjs/common';
+import { Controller, Param, Get, Delete, Body, Post, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { HiveDto } from '../../dto/hive';
 import { HiveService } from '../../services/hive/hive.service';
 import { Hive } from 'src/interfaces/hive';
 import { DeleteResult } from 'typeorm';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('hive')
 export class HiveController {
 

@@ -1,9 +1,11 @@
-import { Controller, Post, Body, Delete, Param, Get } from '@nestjs/common';
+import { Controller, Post, Body, Delete, Param, Get, UseGuards } from '@nestjs/common';
 import { QueenService } from '../../services/queen/queen.service';
 import { Queen } from 'src/interfaces/queen';
 import { QueenDto } from 'src/queen/dtos/queen';
 import { DeleteResult } from 'typeorm';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('queen')
 export class QueenController {
 
