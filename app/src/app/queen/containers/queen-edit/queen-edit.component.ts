@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location as NgLocation } from '@angular/common';
 import { QueenService } from '../../services/queen.service';
 import { ActivatedRoute } from '@angular/router';
-import { tap, take, withLatestFrom, map } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Queen } from '@common/queen';
 
