@@ -7,21 +7,19 @@ const routes: Routes = [
   {
     path: 'location',
     loadChildren: () => import('./location/location.module').then(m => m.LocationModule),
-    canActivateChild: [AuthGuard],
     canActivate: [AuthGuard]
   },
   {
     path: 'hive',
     loadChildren: () => import('./hive/hive.module').then(m => m.HiveModule),
     canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
   },
   {
     path: 'queen',
     loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule),
     canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
-  }
+  },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) }
 ];
 
 @NgModule({
