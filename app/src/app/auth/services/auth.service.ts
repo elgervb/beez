@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<JwtTokenResponse> {
-    return this.http.post<JwtTokenResponse>(`/api/login`, { username, password })
+    return this.http.post<JwtTokenResponse>(`http://localhost:3000/login`, { username, password })
       .pipe(
         map(token => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes

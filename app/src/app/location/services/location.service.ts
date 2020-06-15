@@ -11,19 +11,19 @@ export class LocationService {
   constructor(private http: HttpClient) { }
 
   delete(location: Location) {
-    return this.http.delete(`/api/location/${location.name}`);
+    return this.http.delete(`http://localhost:3000/location/${location.name}`);
   }
 
   findAll() {
-    return this.http.get<Location[]>('/api/location');
+    return this.http.get<Location[]>('http://localhost:3000/location');
   }
 
   findOne(name: string) {
-    return this.http.get<Location>(`/api/location/${name}`);
+    return this.http.get<Location>(`http://localhost:3000/location/${name}`);
   }
 
   save(location: Location) {
-    return this.http.post<Location>('/api/location', location);
+    return this.http.post<Location>('http://localhost:3000/location', location);
   }
 
 }

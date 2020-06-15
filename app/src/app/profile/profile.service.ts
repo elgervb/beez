@@ -23,7 +23,7 @@ export class ProfileService {
   }
 
   getProfile(username: string, password: string) {
-    return this.http.post<User>(`/api/profile`, { username, password })
+    return this.http.post<User>(`http://localhost:3000/profile`, { username, password })
       .pipe(
         map(user => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes

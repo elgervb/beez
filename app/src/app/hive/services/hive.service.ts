@@ -11,18 +11,18 @@ export class HiveService {
   constructor(private http: HttpClient) { }
 
   delete(hive: Hive) {
-    return this.http.delete(`/api/hive/${hive.name}/${hive.number}`);
+    return this.http.delete(`http://localhost:3000/hive/${hive.name}/${hive.number}`);
   }
 
   findAll() {
-    return this.http.get<Hive[]>('/api/hive');
+    return this.http.get<Hive[]>('http://localhost:3000/hive');
   }
 
   findOne(name: string, nr: number) {
-    return this.http.get<Hive>(`/api/hive/${name}/${nr}`);
+    return this.http.get<Hive>(`http://localhost:3000/hive/${name}/${nr}`);
   }
 
   save(hive: Hive) {
-    return this.http.post<Hive>('/api/hive', hive);
+    return this.http.post<Hive>('http://localhost:3000/hive', hive);
   }
 }

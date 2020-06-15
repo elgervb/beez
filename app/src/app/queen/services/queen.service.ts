@@ -10,18 +10,18 @@ export class QueenService {
   constructor(private http: HttpClient) { }
 
   delete(queen: Queen) {
-    return this.http.delete(`/api/queen/${queen.name}`);
+    return this.http.delete(`http://localhost:3000/queen/${queen.name}`);
   }
 
   findAll() {
-    return this.http.get<Queen[]>('/api/queen');
+    return this.http.get<Queen[]>('http://localhost:3000/queen');
   }
 
   findOne(name: string) {
-    return this.http.get<Queen>(`/api/queen/${name}`);
+    return this.http.get<Queen>(`http://localhost:3000/queen/${name}`);
   }
 
   save(queen: Queen) {
-    return this.http.post<Queen>('/api/queen', queen);
+    return this.http.post<Queen>('http://localhost:3000/queen', queen);
   }
 }

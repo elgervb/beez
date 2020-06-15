@@ -32,5 +32,5 @@ start pwa
 
 ```
 yarn ng build --prod
-http-server -p 4200 -c-1 dist/beez --proxy http://localhost:3000
+http-server -p 4200 -c-1 dist/beez
 ```
