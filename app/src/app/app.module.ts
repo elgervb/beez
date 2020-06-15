@@ -9,6 +9,8 @@ import { DialogModule } from '@angular/cdk-experimental/dialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
 import { HttpErrorInterceptor } from './auth/interceptors/http-error.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { HttpErrorInterceptor } from './auth/interceptors/http-error.interceptor
     BrowserAnimationsModule,
     BrowserModule,
     DialogModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
