@@ -1,10 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --evb-primary-color: #677bd5;
+  --evb-primary-color-darker: #3a4da5;
+  --evb-secondary-color: #b86322;
+  --evb-secondary-color-darker: #96490e;
+  --evb-border-light: #dbdbdb;
+  --evb-background-light: #dbdbdb;
+
+  --evb-text-color: #000;
+  --evb-text-color-invert: #fff;
+}
+
 html {
   box-sizing: border-box;
   font-size: 16px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 *, *:before, *:after {
