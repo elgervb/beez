@@ -3,22 +3,22 @@
 
   <input type="hidden" formControlName="id" />
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="name">name *</label>
     <input type="text" formControlName="name" id="name" />
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="number">hive number *</label>
     <input type="number" formControlName="number" id="number" />
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="type">hive type</label>
     <input type="text" formControlName="type" id="type" />
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="location">location</label>
     <select formControlName="location" [compareWith]="compareLocations">
       <option>Choose location</option>
@@ -26,11 +26,11 @@
         {{location.name}}
       </option>
     </select>
-  </div>
+  </evb-formcontrol>
 
-  <div class="buttons">
-    <button type="button" (click)="cancelEvent.emit()">cancel</button>
-    <button (click)="submit()" [disabled]="form.invalid || form.pristine">save</button>
-  </div>
+  <evb-button-bar>
+    <evb-button type="anchor" (click)="cancelEvent.emit()">cancel</evb-button>
+    <evb-button (click)="submit()" [disabled]="form.invalid || form.pristine">save</evb-button>
+  </evb-button-bar>
 
 </form>

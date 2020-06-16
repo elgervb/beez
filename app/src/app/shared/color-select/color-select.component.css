@@ -16,6 +16,7 @@ ul {
   display: inline-block;
   font-size: inherit;
   height: 1em;
+  padding: .25em;
   margin: 0 .25rem;
   width: 1em;
 }
