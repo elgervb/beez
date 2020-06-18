@@ -1,14 +1,14 @@
 <h1> Locations </h1>
 
-<a routerLink="./create">add</a>
+<evb-button type="link" routerLink="./create">add</evb-button>
 
 <ul>
   <li *ngFor="let location of locations$ |async; trackBy: trackLocation"
     (click)="edit(location)">
     {{location.name}}
     <div (click)="cancelEvent($event)">
-      <button *ngIf="location.lat && location.long" (click)="showInGoogleMaps(location)">show -></button>
-      <button (click)="delete(location)">delete</button>
+      <evb-button *ngIf="location.lat && location.long" pill="true" ghost="true" (click)="showInGoogleMaps(location)">show -></evb-button>
+      <evb-button variant="danger" pill="true" ghost="true" (click)="delete(location)">delete</evb-button>
     </div>
   </li>
 </ul>

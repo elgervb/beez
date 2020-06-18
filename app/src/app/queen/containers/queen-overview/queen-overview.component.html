@@ -1,6 +1,6 @@
 <h1> Queens </h1>
 
-<a routerLink="./create">add</a>
+<evb-button type="link" routerLink="./create">add</evb-button>
 
 <ul>
   <li *ngFor="let queen of queens$ |async; trackBy: trackQueen"
@@ -12,7 +12,7 @@
 
 
     <div (click)="cancelEvent($event)">
-      <button (click)="delete(queen)">delete</button>
+      <evb-button variant="danger" pill="true" ghost="true" (click)="delete(queen)">delete</evb-button>
     </div>
   </li>
 </ul>

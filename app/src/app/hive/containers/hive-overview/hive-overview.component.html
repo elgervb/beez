@@ -1,13 +1,13 @@
 <h1> Hives </h1>
 
-<a routerLink="./create">add</a>
+<evb-button type="link" routerLink="./create">add</evb-button>
 
 <ul>
   <li *ngFor="let hive of hives$ |async; trackBy: trackHive"
     (click)="edit(hive)">
     {{hive.name}} {{hive.number}}
     <div (click)="cancelEvent($event)">
-      <button (click)="delete(hive)">delete</button>
+      <evb-button variant="danger" pill="true" ghost="true" (click)="delete(hive)">delete</evb-button>
     </div>
   </li>
 </ul>

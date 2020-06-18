@@ -18,7 +18,7 @@
   </evb-formcontrol>
 
   <evb-button-bar>
-    <evb-button type="anchor" (click)="cancelEvent.emit()">cancel</evb-button>
+    <evb-button type="link" (click)="cancelEvent.emit()">cancel</evb-button>
     <evb-button (click)="save()" [disabled]="form.invalid || form.pristine">save</evb-button>
   </evb-button-bar>
 
