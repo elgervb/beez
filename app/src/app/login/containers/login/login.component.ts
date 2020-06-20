@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginModel } from '../../login';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, tap } from 'rxjs/operators';
+import { take, tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  cancel() {
 
+  cancel() {
+    this.router.navigate(['/']);
   }
 
   submit(login: LoginModel) {
@@ -36,7 +37,12 @@ export class LoginComponent implements OnInit {
         tap(
           () => this.router.navigate([this.route.snapshot.queryParams.returnUrl || '/']),
           error => { this.error = error; this.loading = false; }
-        )
+        ),
+        catchError(error => {
+          this.error = error;
+          this.loading = false;
+          return error;
+        })
       ).subscribe();
   }
 
