@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Location } from '@common/location';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Hive } from '@common/hive';
+import { Location } from '@common/location';
 
 @Component({
   selector: 'app-hive-form',

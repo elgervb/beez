@@ -1,11 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './/containers/login/login.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 
+import { LoginComponent } from './/containers/login/login.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginRoutingModule } from './login-routing.module';
 
 @NgModule({
   declarations: [

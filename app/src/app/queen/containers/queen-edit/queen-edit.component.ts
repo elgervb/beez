@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { Location as NgLocation } from '@angular/common';
-import { QueenService } from '../../services/queen.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { tap, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Queen } from '@common/queen';
+import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
+
+import { QueenService } from '../../services/queen.service';
 
 @Component({
   selector: 'app-queen-edit',

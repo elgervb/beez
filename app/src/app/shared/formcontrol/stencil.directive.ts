@@ -1,6 +1,7 @@
-import { Directive, forwardRef, ElementRef, Provider, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, forwardRef, OnDestroy, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+import { FormControl } from '@elgervb/stencil-components/dist/types/components/formcontrols/formcontrol';
+import { HTMLStencilElement } from '@elgervb/stencil-components/dist/types/stencil.core';
 
 export const STENCIL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
@@ -15,12 +16,12 @@ export const STENCIL_VALUE_ACCESSOR: Provider = {
 })
 export class StencilDirective implements ControlValueAccessor, OnDestroy {
 
-  value: any;
+  value: unknown;
 
   private changeListener = (event: CustomEvent) => this.propagateChange(event.detail);
   private blurListener = () => this.propagateTouch();
 
-  constructor(private stencilElement: ElementRef<HTMLEvbRangeElement>) {
+  constructor(private stencilElement: ElementRef<HTMLStencilElement & FormControl<unknown>>) {
     const { nativeElement } = this.stencilElement;
     if (!nativeElement.tagName.toLowerCase().startsWith('evb')) {
       console.log('ControlValueAccessor falsely used on', nativeElement);
@@ -40,15 +41,15 @@ export class StencilDirective implements ControlValueAccessor, OnDestroy {
     nativeElement.removeEventListener('evbBlur', this.blurListener);
   }
 
-  propagateChange: (value: any) => void = () => { };
+  propagateChange: (value: unknown) => void = () => { };
 
   propagateTouch: () => void = () => { };
 
-  writeValue(obj: any): void {
+  writeValue(obj: unknown): void {
     this.stencilElement.nativeElement.value = obj;
     this.value = obj;
   }
-  registerOnChange(fn: (value: any) => void): void {
+  registerOnChange(fn: (value: unknown) => void): void {
     this.propagateChange = fn;
   }
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginModel } from '../../login';
-import { AuthService } from 'src/app/auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, tap, catchError } from 'rxjs/operators';
+import { catchError, take, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/services/auth.service';
+
+import { LoginModel } from '../../login';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { }
-
 
   cancel() {
     this.router.navigate(['/']);

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { QueenOverviewComponent, QueenEditComponent } from './containers';
+import { QueenEditComponent, QueenOverviewComponent } from './containers';
 
 const routes: Routes = [
   {

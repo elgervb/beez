@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ConfirmComponent } from './confirm/confirm.component';
 import { Dialog, DialogConfig, DialogRef } from '@angular/cdk-experimental/dialog';
+import { Injectable } from '@angular/core';
+
+import { ConfirmComponent } from './confirm/confirm.component';
 
 const defaultOptions: DialogConfig = {
   disableClose: false,
@@ -30,7 +31,6 @@ export class DialogService {
       disableClose: true,
       data
     });
-
 
     return dialogRef;
   }

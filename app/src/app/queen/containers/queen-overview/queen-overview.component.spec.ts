@@ -1,11 +1,12 @@
+import { DialogModule } from '@angular/cdk-experimental/dialog';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { QueenOverviewComponent } from './queen-overview.component';
-import { QueenService } from '../../services/queen.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { DialogModule } from '@angular/cdk-experimental/dialog';
+
+import { QueenService } from '../../services/queen.service';
+
+import { QueenOverviewComponent } from './queen-overview.component';
 
 describe('QueenOverviewComponent', () => {
   let component: QueenOverviewComponent;

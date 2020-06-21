@@ -1,7 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { HiveService } from './hive.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HiveService', () => {
   let service: HiveService;

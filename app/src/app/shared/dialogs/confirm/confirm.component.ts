@@ -1,5 +1,6 @@
-import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk-experimental/dialog';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
+
 import { ConfirmData } from '../dialog.service';
 
 @Component({

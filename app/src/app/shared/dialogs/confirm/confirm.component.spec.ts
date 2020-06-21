@@ -1,7 +1,7 @@
+import { DialogModule } from '@angular/cdk-experimental/dialog';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmComponent } from './confirm.component';
-import { DialogModule } from '@angular/cdk-experimental/dialog';
 
 describe('ConfirmComponent', () => {
   let component: ConfirmComponent;

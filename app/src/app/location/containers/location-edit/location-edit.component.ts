@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { Location as NgLocation } from '@angular/common';
-import { LocationService } from '../../services/location.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { tap, take } from 'rxjs/operators';
 import { Location } from '@common/location';
 import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
+
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-location-edit',

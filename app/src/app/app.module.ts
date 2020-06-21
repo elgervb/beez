@@ -1,15 +1,16 @@
+import { DialogModule } from '@angular/cdk-experimental/dialog';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DialogModule } from '@angular/cdk-experimental/dialog';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
 import { HttpErrorInterceptor } from './auth/interceptors/http-error.interceptor';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [

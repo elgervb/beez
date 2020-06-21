@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LocationFormComponent } from './location-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 describe('LocationFormComponent', () => {
   let component: LocationFormComponent;
