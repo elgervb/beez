@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
 import { Location as NgLocation } from '@angular/common';
-import { HiveService } from '../../services/hive.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { tap, take } from 'rxjs/operators';
+import { Hive } from '@common/hive';
 import { Location } from '@common/location';
 import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { LocationService } from 'src/app/location/services/location.service';
-import { Hive } from '@common/hive';
+
+import { HiveService } from '../../services/hive.service';
 
 @Component({
   selector: 'app-hive-edit',

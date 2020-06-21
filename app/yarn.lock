@@ -1000,6 +1000,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@elgervb/stencil-components@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@elgervb/stencil-components/-/stencil-components-0.0.9.tgz#3d093e02815de051c3bebfbac639075e5973b6dc"
+  integrity sha512-7pA43xtRr+GI3aVcr/KAqklxrxHYOQVeHQst5/Z4DYA+4PnrO9dIk5hNkNAW7LWQfS4t9OnyFk978yZ01FFFAw==
+
 "@istanbuljs/schema@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"

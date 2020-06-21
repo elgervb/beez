@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { HiveRoutingModule } from './hive-routing.module';
-import { HiveOverviewComponent, HiveEditComponent } from './containers';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HiveFormComponent } from './components/hive-form/hive-form.component';
 
+import { HiveFormComponent } from './components/hive-form/hive-form.component';
+import { HiveEditComponent, HiveOverviewComponent } from './containers';
+import { HiveRoutingModule } from './hive-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +16,9 @@ import { HiveFormComponent } from './components/hive-form/hive-form.component';
     CommonModule,
     HiveRoutingModule,
     ReactiveFormsModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class HiveModule { }

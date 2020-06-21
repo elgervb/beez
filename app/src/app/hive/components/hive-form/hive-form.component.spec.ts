@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HiveFormComponent } from './hive-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 describe('HiveFormComponent', () => {
   let component: HiveFormComponent;

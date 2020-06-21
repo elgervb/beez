@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HiveService } from '../../services/hive.service';
-import { Hive } from '@common/hive';
-import { switchMap, take, filter, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Hive } from '@common/hive';
+import { Observable } from 'rxjs';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { DialogService } from 'src/app/shared/dialogs/dialog.service';
+
+import { HiveService } from '../../services/hive.service';
 
 @Component({
   selector: 'app-hive',

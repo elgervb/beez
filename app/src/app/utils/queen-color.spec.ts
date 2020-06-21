@@ -1,5 +1,6 @@
 import { queenColor } from './queen-color';
 
+// tslint:disable: no-magic-numbers
 describe('queen-color', () => {
 
   it('should return white for year ending in 1 and 6', () => {

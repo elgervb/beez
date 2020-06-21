@@ -1,11 +1,12 @@
+import { DialogModule } from '@angular/cdk-experimental/dialog';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HiveOverviewComponent } from './hive-overview.component';
-import { HiveService } from '../../services/hive.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { DialogModule } from '@angular/cdk-experimental/dialog';
+
+import { HiveService } from '../../services/hive.service';
+
+import { HiveOverviewComponent } from './hive-overview.component';
 
 describe('HiveOverviewComponent', () => {
   let component: HiveOverviewComponent;

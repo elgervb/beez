@@ -3,34 +3,28 @@
 
   <input type="hidden" formControlName="id" />
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="name">name</label>
     <input type="text" formControlName="name" id="name" />
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+
+  <evb-formcontrol>
     <label for="color">color</label>
-    <app-color-select formControlName="color" [colors]="colors"></app-color-select>
-  </div>
+    <evb-colorselect formControlName="color" [colors]="colors" evbStencil></evb-colorselect>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="year">year</label>
     <input type="number" formControlName="year" id="year" [min]="currentYear - 10" [max]="currentYear" />
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="wingsCut">wings cut</label>
-    <label>
-      <input type="radio" [value]="true" formControlName="wingsCut">
-        <span>yes</span>
-    </label>
-    <label>
-      <input type="radio" [value]="false" formControlName="wingsCut">
-        <span>no</span>
-    </label>
-  </div>
+    <evb-toggle labelon="yes" labeloff="no" type="flat" formControlName="wingsCut" evbStencil></evb-toggle>
+  </evb-formcontrol>
 
-  <div class="formcontrol" *ngIf="parents?.length > 0">
+  <evb-formcontrol *ngIf="parents?.length > 0">
     <label for="mother">mother</label>
     <select formControlName="mother" [compareWith]="compareQueens">
       <option>Choose queen</option>
@@ -38,9 +32,9 @@
         {{mother.name}}
       </option>
     </select>
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="race">race</label>
     <input type="text" formControlName="race" id="race" list="bee-race" />
 
@@ -50,33 +44,26 @@
       <option>hybrid</option>
       <option>other</option>
     </datalist>
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="bought">bought</label>
-    <label>
-      <input type="radio" [value]="true" formControlName="bought">
-        <span>yes</span>
-    </label>
-    <label>
-      <input type="radio" [value]="false" formControlName="bought">
-        <span>no</span>
-    </label>
-  </div>
+    <evb-toggle labelon="yes" labeloff="no" type="flat" formControlName="bought" evbStencil></evb-toggle>
+  </evb-formcontrol>
 
-  <div class="formcontrol" *ngIf="form.controls.bought.value">
+  <evb-formcontrol *ngIf="form.controls.bought.value">
     <label for="boughtFrom">bought from</label>
     <textarea formControlName="boughtFrom" id="boughtFrom"></textarea>
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="remarks">Remarks</label>
     <textarea formControlName="remarks" id="remarks"></textarea>
-  </div>
+  </evb-formcontrol>
 
-  <div class="buttons">
-    <button type="button" (click)="cancelEvent.emit()">cancel</button>
-    <button (click)="save()" [disabled]="form.invalid || form.pristine">save</button>
-  </div>
+  <evb-button-bar>
+    <evb-button type="link" (click)="cancelEvent.emit()">cancel</evb-button>
+    <evb-button type="submit" (click)="save()" [disabled]="form.invalid || form.pristine">save</evb-button>
+  </evb-button-bar>
 
 </form>

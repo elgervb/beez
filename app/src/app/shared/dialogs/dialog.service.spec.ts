@@ -1,7 +1,7 @@
+import { DialogModule } from '@angular/cdk-experimental/dialog';
 import { TestBed } from '@angular/core/testing';
 
 import { DialogService } from './dialog.service';
-import { DialogModule } from '@angular/cdk-experimental/dialog';
 
 describe('DialogService', () => {
   let service: DialogService;

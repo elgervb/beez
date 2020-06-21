@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { QueenFormComponent } from './queen-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 describe('QueenFormComponent', () => {
   let component: QueenFormComponent;

@@ -1,12 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ColorSelectComponent } from './color-select/color-select.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
+import { ConfirmComponent } from './dialogs/confirm/confirm.component';
+import { StencilDirective } from './formcontrol/stencil.directive';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [ColorSelectComponent],
-  exports: [ColorSelectComponent]
+  declarations: [
+    ConfirmComponent,
+    StencilDirective
+  ],
+  exports: [
+    ConfirmComponent,
+    StencilDirective
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

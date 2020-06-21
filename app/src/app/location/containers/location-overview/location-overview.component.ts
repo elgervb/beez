@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from '../../services/location.service';
+import { Router } from '@angular/router';
 import { Location } from '@common/location';
 import { Observable } from 'rxjs';
-import { switchMap, take, filter, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { DialogService } from 'src/app/shared/dialogs/dialog.service';
+
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-location-overview',
@@ -51,7 +52,7 @@ export class LocationOverviewComponent implements OnInit {
   }
 
   edit(location: Location) {
-    this.router.navigateByUrl(this.router.url + '/edit/' + location.name);
+    this.router.navigateByUrl(`${this.router.url}/edit/${location.name}`);
   }
 
   showInGoogleMaps(location: Location) {

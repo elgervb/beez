@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Queen } from '@common/queen';
-import { queenColors, queenColor } from 'src/app/utils/queen-color';
-import { distinctUntilChanged, tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
+import { queenColor, queenColors } from 'src/app/utils/queen-color';
 
 @Component({
   selector: 'app-queen-form',

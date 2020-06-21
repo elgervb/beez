@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Queen } from '@common/queen';
-import { QueenService } from '../../services/queen.service';
-import { switchMap, take, filter, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Queen } from '@common/queen';
+import { Observable } from 'rxjs';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { DialogService } from 'src/app/shared/dialogs/dialog.service';
+
+import { QueenService } from '../../services/queen.service';
 
 @Component({
   selector: 'app-queen',
@@ -51,7 +52,7 @@ export class QueenOverviewComponent implements OnInit {
   }
 
   edit(queen: Queen) {
-    this.router.navigateByUrl(this.router.url + '/edit/' + queen.name);
+    this.router.navigateByUrl(`${this.router.url}/edit/${queen.name}`);
   }
 
   trackQueen(_: number, queen: Queen) {

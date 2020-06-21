@@ -1,19 +1,18 @@
-
 <form [formGroup]="form">
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="username">username *</label>
     <input type="text" formControlName="username" id="username" />
-  </div>
+  </evb-formcontrol>
 
-  <div class="formcontrol">
+  <evb-formcontrol>
     <label for="name">password *</label>
     <input type="password" formControlName="password" id="password" />
-  </div>
+  </evb-formcontrol>
 
-  <div class="buttons">
-    <button type="button" (click)="cancel()">cancel</button>
-    <button (click)="submit()" [disabled]="form.invalid || form.pristine">login</button>
-  </div>
+  <evb-button-bar justify="right">
+    <evb-button type="link" (click)="cancel()">cancel</evb-button>
+    <evb-button type="submit" (click)="submit()" [disabled]="form.invalid || form.pristine">login</evb-button>
+  </evb-button-bar>
 
 </form>

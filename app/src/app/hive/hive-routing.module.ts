@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { HiveOverviewComponent, HiveEditComponent } from './containers';
+import { HiveEditComponent, HiveOverviewComponent } from './containers';
 
 const routes: Routes = [
   {

@@ -20,6 +20,10 @@
       "es2018",
       "dom"
     ],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@elgervb/stencil-components/dist/types"
+    ],
     "paths": {
       "@common/*": [
         "../api/src/interfaces/*"
