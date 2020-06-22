@@ -38,7 +38,7 @@
             "request": "launch",
             "args": [
                 "--config",
-                "jest.app.config.js",
+                "./app/jest.config.js",
                 "--runInBand"
             ],
             "console": "integratedTerminal",
@@ -53,7 +53,7 @@
             "program": "${workspaceFolder}/app/node_modules/jest/bin/jest",
             "args": [
                 "--config",
-                "jest.app.config.js",
+                "./app/jest.config.js",
                 "--runTestsByPath",
                 "${relativeFile}"
             ],

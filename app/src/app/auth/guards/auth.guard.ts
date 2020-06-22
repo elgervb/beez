@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(_: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.token) {
+    if (this.authService.token && this.authService.token.access_token) {
       return true;
     }
 
