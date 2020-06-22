@@ -1,4 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LocationFormComponent } from '../../components/location-form/location-form.component';
 
@@ -8,7 +10,15 @@ describe('LocationFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LocationFormComponent]
+      declarations: [
+        LocationFormComponent
+      ],
+      imports: [
+        ReactiveFormsModule
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ]
     })
       .compileComponents();
   }));

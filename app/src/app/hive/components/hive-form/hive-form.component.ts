@@ -35,7 +35,7 @@ export class HiveFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.edit && changes.edit.currentValue) {
       this.form.patchValue(
-        this.edit
+        changes.edit.currentValue
       );
     }
   }

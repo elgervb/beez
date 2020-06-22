@@ -1,7 +1,7 @@
 import { Location } from "./location";
 
 export interface Hive {
-  id: number;
+  id?: number;
   name: string;
   number: number;
   location?: Location;

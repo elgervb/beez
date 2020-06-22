@@ -1,4 +1,5 @@
-import { DialogModule } from '@angular/cdk-experimental/dialog';
+import { DialogModule, DialogRef } from '@angular/cdk-experimental/dialog';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmComponent } from './confirm.component';
@@ -7,12 +8,22 @@ describe('ConfirmComponent', () => {
   let component: ConfirmComponent;
   let fixture: ComponentFixture<ConfirmComponent>;
 
+  const dialogRef = { close: jest.fn() };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         DialogModule
       ],
-      declarations: [ConfirmComponent]
+      declarations: [
+        ConfirmComponent
+      ],
+      providers: [
+        { provide: DialogRef, useValue: dialogRef }
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ]
     })
       .compileComponents();
   }));
@@ -25,5 +36,10 @@ describe('ConfirmComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should close', () => {
+    component.close(true);
+    expect(dialogRef.close).toHaveBeenCalledWith(true);
   });
 });
