@@ -1,10 +1,10 @@
+import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Hive } from '@common/hive';
+import { Location } from '@common/location';
 
 import { HiveFormComponent } from './hive-form.component';
-import { Hive } from '@common/hive';
-import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
-import { Location } from '@common/location';
 
 describe('HiveFormComponent', () => {
   let component: HiveFormComponent;
@@ -64,7 +64,7 @@ describe('HiveFormComponent', () => {
       long: 5
     };
     expect(component.compareLocations(null, null)).toBe(true);
-    expect(component.compareLocations(location, location)).toBe(true)
+    expect(component.compareLocations(location, location)).toBe(true);
     expect(component.compareLocations(location, { ...location })).toBe(true);
     expect(component.compareLocations(location, { ...location, name: 'b' })).toBe(false);
   });

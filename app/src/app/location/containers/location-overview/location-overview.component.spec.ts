@@ -1,3 +1,4 @@
+import { DialogModule } from '@angular/cdk-experimental/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -8,7 +9,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LocationService } from '../../services/location.service';
 
 import { LocationOverviewComponent } from './location-overview.component';
-import { DialogModule } from '@angular/cdk-experimental/dialog';
 
 describe('LocationOverviewComponent', () => {
   let component: LocationOverviewComponent;
