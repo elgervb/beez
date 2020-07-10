@@ -10,6 +10,7 @@ PWA https://angular.io/guide/service-worker-intro
 
 TypeOrm https://typeorm.io/#/entities
 
+Icons https://www.flaticon.com/
 
 
 ## Bron

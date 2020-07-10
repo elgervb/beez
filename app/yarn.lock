@@ -1182,10 +1182,10 @@
   resolved "https://registry.yarnpkg.com/@elgervb/mock-data/-/mock-data-0.0.4.tgz#1c0393183703e8f4689a8f24b671cac294a3f30f"
   integrity sha512-GlJlsnhF/3VBQSH83BbysItFfP2iLrkbGuGBahh5vqSEu/Tb0QU/TYHgL7e5M9Ww3BxtAusLrM/IFVnsczKg+Q==
 
-"@elgervb/stencil-components@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@elgervb/stencil-components/-/stencil-components-0.0.9.tgz#3d093e02815de051c3bebfbac639075e5973b6dc"
-  integrity sha512-7pA43xtRr+GI3aVcr/KAqklxrxHYOQVeHQst5/Z4DYA+4PnrO9dIk5hNkNAW7LWQfS4t9OnyFk978yZ01FFFAw==
+"@elgervb/stencil-components@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@elgervb/stencil-components/-/stencil-components-0.0.11.tgz#23fce61b85347a0a10d7baf1ec44dac87f609ea5"
+  integrity sha512-55TrdXI2/Idp7U0HclGap2UXG6rczj4x35y+keolSivZcOpcyJ01wyr4BoFpFtYvuH5268GqBh3EaHU086irlg==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"

@@ -1,18 +1,22 @@
-<h1> Queens </h1>
+<evb-header heading="1"> <evb-icon name="bee" size="fit"></evb-icon> Queens </evb-header>
 
 <evb-button type="link" routerLink="./create">add</evb-button>
 
-<ul>
-  <li *ngFor="let queen of queens$ |async; trackBy: trackQueen"
-    (click)="edit(queen)">
+<evb-list>
+  <evb-list-item *ngFor="let queen of queens$ |async; trackBy: trackQueen">
     <span>
       {{queen.name}}
       <span class="queen-color" [style.backgroundColor]="queen.color"></span>
     </span>
 
+    <evb-button-bar justify="right">
+      <evb-button type="icon" variant="primary" ghost="true" (click)="edit(queen)">
+        <evb-icon name="edit"></evb-icon>
+      </evb-button>
+      <evb-button type="icon" variant="danger" ghost="true" (click)="delete(queen)">
+        <evb-icon name="delete"></evb-icon>
+      </evb-button>
+    </evb-button-bar>
 
-    <div (click)="cancelEvent($event)">
-      <evb-button variant="danger" pill="true" ghost="true" (click)="delete(queen)">delete</evb-button>
-    </div>
-  </li>
-</ul>
+  </evb-list-item>
+</evb-list>
