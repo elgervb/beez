@@ -13,7 +13,7 @@ script:
   - yarn install
   - yarn lint
   - yarn test  # --coverage
-  - yarn build --prod --base-href beez # base-href needed for github pages
+  - yarn build --prod --base-href /beez/ # base-href needed for github pages
 
 deploy:
   provider: pages
