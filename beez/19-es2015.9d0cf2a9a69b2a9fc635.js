@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{"Ii+I":function(t,e,n){"use strict";n.r(e),n.d(e,"evb_list",(function(){return r}));var s=n("v4rt");const r=class{constructor(t){Object(s.h)(this,t)}render(){return Object(s.g)("div",{role:"list"},Object(s.g)("slot",null))}get el(){return Object(s.d)(this)}static get style(){return":host {\n  display: block;\n}"}}}}]);
