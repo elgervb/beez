@@ -35,7 +35,7 @@ yarn ng build --prod
 http-server -p 4200 -c-1 ./dist/beez -S
 ```
 Open Chrome with following flags:
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://localhost:4200 https://localhost:4200
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/beez --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://localhost:4200 https://localhost:4200
 
 
 > NOTE: if you get the error "Error: Could not find certificate cert.pem", then you should generate a self-signed certificate.
