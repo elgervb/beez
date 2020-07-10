@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { JwtTokenResponse } from '@common/jwt-response';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+const { apiUrl } = environment;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -21,7 +24,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<JwtTokenResponse> {
-    return this.http.post<JwtTokenResponse>(`http://localhost:3000/login`, { username, password })
+    return this.http.post<JwtTokenResponse>(`${apiUrl}/login`, { username, password })
       .pipe(
         map(token => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes

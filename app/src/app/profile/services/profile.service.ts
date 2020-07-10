@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { User } from '@common/user';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+const { apiUrl } = environment;
 
 @Injectable({
   providedIn: 'root'
