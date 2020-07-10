@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1594384982824,
+  "timestamp": 1594385004201,
   "index": "/beez/index.html",
   "assetGroups": [
     {
@@ -70,11 +70,11 @@
         "/beez/common-es5.8d43dcb1dbd9704f65ce.js",
         "/beez/favicon.ico",
         "/beez/index.html",
-        "/beez/main-es2015.a7861d5ded97ac9c1ac4.js",
-        "/beez/main-es5.a7861d5ded97ac9c1ac4.js",
+        "/beez/main-es2015.fff4e02019d72ee362fe.js",
+        "/beez/main-es5.fff4e02019d72ee362fe.js",
         "/beez/manifest.webmanifest",
         "/beez/polyfills-es2015.d1dfdb0238e0df0d1480.js",
-        "/beez/polyfills-es5.13413011ad3c8e22900a.js",
+        "/beez/polyfills-es5.5736e4d10e9157b5ce09.js",
         "/beez/runtime-es2015.f81781a7731c6325164c.js",
         "/beez/runtime-es5.f81781a7731c6325164c.js",
         "/beez/styles.faeb42bd1560ea9f37de.css"
@@ -169,12 +169,12 @@
     "/beez/common-es2015.8d43dcb1dbd9704f65ce.js": "3dc23da3f7e8314c12fb231f24eedb0c0c2eb2ce",
     "/beez/common-es5.8d43dcb1dbd9704f65ce.js": "475324ad40287cbe6f315acc014fe0fd8399da8a",
     "/beez/favicon.ico": "443b6030b0aac68da9f49d3139d32fb5976cca0c",
-    "/beez/index.html": "c10a7824c963235fe6781f9734baeca13b338cc9",
-    "/beez/main-es2015.a7861d5ded97ac9c1ac4.js": "13d22fe1d55078ec1774f976c383d71d30051b03",
-    "/beez/main-es5.a7861d5ded97ac9c1ac4.js": "30fa46b8b1e8aa9bb8df66a0b4167ed3dce3f5c4",
+    "/beez/index.html": "7b07eef71abcc58f1158e8fcede5b9785f6e1040",
+    "/beez/main-es2015.fff4e02019d72ee362fe.js": "13d22fe1d55078ec1774f976c383d71d30051b03",
+    "/beez/main-es5.fff4e02019d72ee362fe.js": "30fa46b8b1e8aa9bb8df66a0b4167ed3dce3f5c4",
     "/beez/manifest.webmanifest": "3f73c02e4bfa75950e80ca25c4beb26270d574df",
     "/beez/polyfills-es2015.d1dfdb0238e0df0d1480.js": "83234bb58fe8ec00843d348a2292cf6e7b61e926",
-    "/beez/polyfills-es5.13413011ad3c8e22900a.js": "995d6d11c2aeebdaacb13de6387e6c80f8f74ec0",
+    "/beez/polyfills-es5.5736e4d10e9157b5ce09.js": "995d6d11c2aeebdaacb13de6387e6c80f8f74ec0",
     "/beez/runtime-es2015.f81781a7731c6325164c.js": "f467fb37ba1600d81b27d3a61aed6a839b49736a",
     "/beez/runtime-es5.f81781a7731c6325164c.js": "d48769a5ce3e9c05df81ae6884c3d145c8784344",
     "/beez/styles.faeb42bd1560ea9f37de.css": "999c36a9eca30cc9062ac684c8729e3c3671f51d"
