@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1594385004201,
+  "timestamp": 1594385440847,
   "index": "/beez/index.html",
   "assetGroups": [
     {
@@ -70,8 +70,8 @@
         "/beez/common-es5.8d43dcb1dbd9704f65ce.js",
         "/beez/favicon.ico",
         "/beez/index.html",
-        "/beez/main-es2015.fff4e02019d72ee362fe.js",
-        "/beez/main-es5.fff4e02019d72ee362fe.js",
+        "/beez/main-es2015.e2db14d434d686c8f5ab.js",
+        "/beez/main-es5.e2db14d434d686c8f5ab.js",
         "/beez/manifest.webmanifest",
         "/beez/polyfills-es2015.d1dfdb0238e0df0d1480.js",
         "/beez/polyfills-es5.5736e4d10e9157b5ce09.js",
@@ -169,9 +169,9 @@
     "/beez/common-es2015.8d43dcb1dbd9704f65ce.js": "3dc23da3f7e8314c12fb231f24eedb0c0c2eb2ce",
     "/beez/common-es5.8d43dcb1dbd9704f65ce.js": "475324ad40287cbe6f315acc014fe0fd8399da8a",
     "/beez/favicon.ico": "443b6030b0aac68da9f49d3139d32fb5976cca0c",
-    "/beez/index.html": "7b07eef71abcc58f1158e8fcede5b9785f6e1040",
-    "/beez/main-es2015.fff4e02019d72ee362fe.js": "13d22fe1d55078ec1774f976c383d71d30051b03",
-    "/beez/main-es5.fff4e02019d72ee362fe.js": "30fa46b8b1e8aa9bb8df66a0b4167ed3dce3f5c4",
+    "/beez/index.html": "a4edcea89c1f7168c617c33ec43a1da8edae3a7c",
+    "/beez/main-es2015.e2db14d434d686c8f5ab.js": "8dffa7492ad3227fc97b86d7d42d8dbec9e9ba3b",
+    "/beez/main-es5.e2db14d434d686c8f5ab.js": "51800bd0f6b09365a3bd648e90fad0cabb62f33b",
     "/beez/manifest.webmanifest": "3f73c02e4bfa75950e80ca25c4beb26270d574df",
     "/beez/polyfills-es2015.d1dfdb0238e0df0d1480.js": "83234bb58fe8ec00843d348a2292cf6e7b61e926",
     "/beez/polyfills-es5.5736e4d10e9157b5ce09.js": "995d6d11c2aeebdaacb13de6387e6c80f8f74ec0",
