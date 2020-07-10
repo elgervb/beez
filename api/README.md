@@ -75,8 +75,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
   Nest is [MIT licensed](LICENSE).
 
 
-# SSL
+## Run in background
+```javascript
+node dist/src/main.js > /dev/null 2>&1 &
+```
 
+## SSL
 Generate keys for ssl: (leave all empty but set FQDN to localhost)
 
 ```
