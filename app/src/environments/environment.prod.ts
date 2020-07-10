@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'http://cloud.elgervanboxtel.nl:3000'
 };
