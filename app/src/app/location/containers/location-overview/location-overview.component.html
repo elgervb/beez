@@ -1,14 +1,22 @@
-<h1> Locations </h1>
+<evb-header heading="1"> <evb-icon name="location-marker" size="fit"></evb-icon> Locations </evb-header>
 
 <evb-button type="link" routerLink="./create">add</evb-button>
 
-<ul>
-  <li *ngFor="let location of locations$ |async; trackBy: trackLocation"
-    (click)="edit(location)">
-    {{location.name}}
-    <div (click)="cancelEvent($event)">
-      <evb-button *ngIf="location.lat && location.long" pill="true" ghost="true" (click)="showInGoogleMaps(location)">show -></evb-button>
-      <evb-button variant="danger" pill="true" ghost="true" (click)="delete(location)">delete</evb-button>
-    </div>
-  </li>
-</ul>
+<evb-list>
+  <evb-list-item *ngFor="let location of locations$ |async; trackBy: trackLocation">
+      {{location.name}}
+
+    <evb-button-bar justify="right">
+      <evb-button type="icon" variant="secondary" *ngIf="location.lat && location.long" ghost="true" (click)="showInGoogleMaps(location)">
+        <evb-icon name="location-marker"></evb-icon>
+      </evb-button>
+      <evb-button type="icon" variant="primary" ghost="true" (click)="edit(location)">
+        <evb-icon name="edit"></evb-icon>
+      </evb-button>
+      <evb-button type="icon" variant="danger" ghost="true" (click)="delete(location)">
+        <evb-icon name="delete"></evb-icon>
+      </evb-button>
+    </evb-button-bar>
+
+  </evb-list-item>
+</evb-list>

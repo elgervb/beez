@@ -1,13 +1,19 @@
-<h1> Hives </h1>
+<evb-header heading="1"> <evb-icon name="hive" size="fit"></evb-icon> <span>Hives</span>  </evb-header>
 
 <evb-button type="link" routerLink="./create">add</evb-button>
 
-<ul>
-  <li *ngFor="let hive of hives$ |async; trackBy: trackHive"
-    (click)="edit(hive)">
+<evb-list>
+  <evb-list-item *ngFor="let hive of hives$ |async; trackBy: trackHive">
     {{hive.name}} {{hive.number}}
-    <div (click)="cancelEvent($event)">
-      <evb-button variant="danger" pill="true" ghost="true" (click)="delete(hive)">delete</evb-button>
-    </div>
-  </li>
-</ul>
+
+    <evb-button-bar justify="right">
+      <evb-button type="icon" variant="primary" ghost="true" (click)="edit(hive)">
+        <evb-icon name="edit"></evb-icon>
+      </evb-button>
+      <evb-button type="icon" variant="danger" ghost="true" (click)="delete(hive)">
+        <evb-icon name="delete"></evb-icon>
+      </evb-button>
+    </evb-button-bar>
+
+  </evb-list-item>
+</evb-list>

@@ -1,5 +1,6 @@
 <h2>Login</h2>
 
+<div *ngIf="error">{{error}}</div>
 <app-login-form
   (cancelEvent)="cancel()"
   (submitEvent)="submit($event)">

@@ -14,6 +14,8 @@
 
   --evb-text-color: #000;
   --evb-text-color-invert: #fff;
+
+  --bee-yellow: #FEE402;
 }
 
 /*
@@ -107,4 +109,14 @@ ul {
 }
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.cdk-overlay-dark-backdrop {
   background: #000;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
 }
