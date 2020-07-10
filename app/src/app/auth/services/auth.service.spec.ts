@@ -38,7 +38,7 @@ describe('AuthService', () => {
     });
 
     const token: JwtTokenResponse = { access_token: 'my-token' };
-    const request = testMock.expectOne('http://localhost:3000/login');
+    const request = testMock.expectOne('https://localhost:3000/login');
     expect(request.request.method).toBe('POST');
 
     request.flush({ token });

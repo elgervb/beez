@@ -41,7 +41,7 @@ describe('ProfileService', () => {
       expect(service.currentUser).toBe(user);
     });
 
-    const request = testMock.expectOne('http://localhost:3000/profile');
+    const request = testMock.expectOne('https://localhost:3000/profile');
     request.flush(user);
   });
 });
