@@ -40,6 +40,13 @@ deploy:
     branch: master
 
 jobs:
+  include: 
+    - stage: backend
+      script: 
+        - cd $dir
+        - yarn install --frozen-lockfile
+        - yarn lint
+
   exclude:
     - node_js: 11
       env: dir=app
