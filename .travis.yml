@@ -16,15 +16,16 @@ cache:
   
 script:
   - cd app
-  - yarn install --frozen-lockfile
-  - yarn lint
-  - yarn test  # --coverage
-  - yarn build --prod --base-href /beez/ # base-href needed for github pages
-  - cd ../api
-  - yarn install --frozen-lockfile
-  - yarn lint
+  - echo "normal script"
+  #- yarn install --frozen-lockfile
+  #- yarn lint
   #- yarn test  # --coverage
-  - yarn build
+  #- yarn build --prod --base-href /beez/ # base-href needed for github pages
+  #- cd ../api
+  #- yarn install --frozen-lockfile
+  #- yarn lint
+  ##- yarn test  # --coverage
+  #- yarn build
 
 deploy:
   provider: pages
@@ -34,3 +35,11 @@ deploy:
   local_dir: app/dist/beez
   on:
     branch: master
+
+
+    jobs:
+      include:
+        - stage: unit tests
+          script: echo test 1
+        - stage: unit tests
+          script: echo test 2
