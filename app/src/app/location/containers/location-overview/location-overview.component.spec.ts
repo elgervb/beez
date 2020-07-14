@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { transform } from '@elgervb/mock-data';
 import { DialogService } from 'src/app/shared/dialogs/dialog.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -42,5 +43,17 @@ describe('LocationOverviewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should cancel an event', () => {
+    const event = {
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn()
+    };
+
+    component.cancelEvent(transform<Event>(event));
+
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(event.stopPropagation).toHaveBeenCalled();
   });
 });
