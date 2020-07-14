@@ -13,9 +13,9 @@ cache:
   cache: yarn
 
 jobs:
-  - include: 
+  - exclude 
     - stage: test 
-      script: skip
+  - include: 
     - stage: api
       before_script: 
         - cd api
