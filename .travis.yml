@@ -13,10 +13,8 @@ cache:
   cache: yarn
 
 jobs:
-  - exclude 
-    - stage: test 
   - include: 
-    - stage: api
+    - stage: test
       before_script: 
         - cd api
         - yarn install --frozen-lockfile
@@ -24,8 +22,7 @@ jobs:
         - yarn lint
       # - yarn test  # --coverage
         - yarn build
-
-    - stage: app
+    - stage: test
       before_script: 
         - cd app
         - yarn install --frozen-lockfile
