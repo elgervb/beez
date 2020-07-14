@@ -26,6 +26,6 @@ export class QueenService {
   }
 
   findOne(name: string): Promise<Queen> {
-    return this.queenRepository.findOne({ name })
+    return this.queenRepository.findOne({ name });
   }
 }

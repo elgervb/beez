@@ -1,5 +1,5 @@
-import { Queen } from "src/interfaces/queen";
-import { ObjectIdColumn, Column, Entity } from "typeorm";
+import { Queen } from 'src/interfaces/queen';
+import { ObjectIdColumn, Column, Entity } from 'typeorm';
 
 @Entity({ name: 'queen' })
 export class QueenDto implements Queen {

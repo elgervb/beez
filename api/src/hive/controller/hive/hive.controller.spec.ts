@@ -46,5 +46,5 @@ describe('Hive Controller', () => {
     const expected = from<Hive>('beez.hive');
     jest.spyOn(hiveService, 'findOne').mockReturnValueOnce(expected);
     expect(controller.findOne('')).toEqual(expected);
-  })
+  });
 });

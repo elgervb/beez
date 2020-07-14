@@ -22,7 +22,7 @@ export class LocationService {
   }
 
   delete(name: string): Promise<DeleteResult> {
-    return this.locationRepository.delete({ name })
+    return this.locationRepository.delete({ name });
   }
 
   findAll(): Promise<Location[]> {

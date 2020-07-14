@@ -1,3 +1,3 @@
-import { registerBlueprints } from "./mock-data";
+import { registerBlueprints } from './mock-data';
 
 registerBlueprints();

@@ -24,9 +24,9 @@ export class HiveService {
   findAll(): Promise<Hive[]> {
     return this.hiveRepository.find({
       join: {
-        alias: "hive",
+        alias: 'hive',
         leftJoinAndSelect: {
-          location: "hive.location"
+          location: 'hive.location'
         }
       }
     });
