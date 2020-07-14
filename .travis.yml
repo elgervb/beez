@@ -42,6 +42,8 @@ deploy:
 jobs:
   include: 
     - stage: backend
+      node_js: {}
+      env: dir=api
       script: 
         - cd $dir
         - yarn install --frozen-lockfile
