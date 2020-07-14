@@ -6,7 +6,6 @@ node_js:
   - "10"
   - "12"
 
-
 cache:
   directories:
     - $HOME/api/node_modules
@@ -14,9 +13,9 @@ cache:
   cache: yarn
 
   
-script:
-  - cd app
-  - echo "normal script"
+#script:
+#  - cd app
+#  - echo "normal script"
   #- yarn install --frozen-lockfile
   #- yarn lint
   #- yarn test  # --coverage
@@ -27,19 +26,19 @@ script:
   ##- yarn test  # --coverage
   #- yarn build
 
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  local_dir: app/dist/beez
-  on:
-    branch: master
+#deploy:
+#  provider: pages
+#  skip_cleanup: true
+#  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+#  keep_history: true
+#  local_dir: app/dist/beez
+#  on:
+#    branch: master
 
 
-    jobs:
-      include:
-        - stage: unit tests
-          script: echo test 1
-        - stage: unit tests
-          script: echo test 2
+jobs:
+  include:
+    - stage: unit tests
+      script: echo test 1
+    - stage: unit tests
+      script: echo test 2
