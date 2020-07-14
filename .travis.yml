@@ -12,9 +12,12 @@ cache:
     - $HOME/app/node_modules
   cache: yarn
 
+script: skip
+
 jobs:
   - include: 
     - stage: test
+      name: API
       before_script: 
         - cd api
         - yarn install --frozen-lockfile
@@ -23,6 +26,7 @@ jobs:
       # - yarn test  # --coverage
         - yarn build
     - stage: test
+      name: APP
       before_script: 
         - cd app
         - yarn install --frozen-lockfile
