@@ -9,46 +9,37 @@ node_js:
 
 cache:
   directories:
+    - $HOME/api/node_modules
     - $HOME/app/node_modules
   cache: yarn
+    
+jobs:
+  - include: 
+    - stage: api
+      before_script: 
+        - cd api
+        - yarn install --frozen-lockfile
+      script:
+        - yarn lint
+      # - yarn test  # --coverage
+        - yarn build
 
-before_script: 
-  - cd app
-  - yarn install --frozen-lockfile
+    - stage: app
+      before_script: 
+        - cd app
+        - yarn install --frozen-lockfile
+      script:
+        - yarn lint
+        - yarn test  # --coverage
+        - yarn build --prod --base-href /beez/ # base-href needed for github pages
 
-script:
-  - yarn lint
-  - yarn test  # --coverage
-  - yarn build --prod --base-href /beez/ # base-href needed for github pages
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  local_dir: app/dist/beez
-  on:
-    branch: master
-
-
-# backend
-language: node_js
-
-node_js:
-  - "10"
-  - "11"
-  - "12"
-
-cache:
-  directories:
-    - $HOME/api/node_modules
-  cache: yarn
-
-before_script: 
-  - cd api
-  - yarn install --frozen-lockfile
-
-script:
-  - yarn lint
- # - yarn test  # --coverage
-  - yarn build
+    - stage: deploy
+      script: skip
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+        keep_history: true
+        local_dir: app/dist/beez
+        on:
+          branch: master
