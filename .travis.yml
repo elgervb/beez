@@ -4,7 +4,12 @@ language: node_js
 
 node_js:
   - "10"
+  - "11"
   - "12"
+
+env:
+  - frontend
+  - backend
 
 cache:
   directories:
@@ -12,12 +17,11 @@ cache:
     - $HOME/app/node_modules
   cache: yarn
 
-script: skip
-
 jobs:
   - include: 
     - stage: test
       name: API
+      env: backend
       before_script: 
         - cd api
         - yarn install --frozen-lockfile
@@ -25,8 +29,10 @@ jobs:
         - yarn lint
       # - yarn test  # --coverage
         - yarn build
+
     - stage: test
       name: APP
+      env: frontend
       before_script: 
         - cd app
         - yarn install --frozen-lockfile
@@ -45,3 +51,6 @@ jobs:
         local_dir: app/dist/beez
         on:
           branch: master
+  - exclude:
+    - node_js: 11
+      env: frontend
