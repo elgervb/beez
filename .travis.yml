@@ -41,6 +41,6 @@ deploy:
 
 jobs:
   exclude:
-    - node_js=11
-      dir=app
+    - node_js: 11
+      env: dir=app
       
