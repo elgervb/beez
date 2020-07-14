@@ -12,6 +12,12 @@ cache:
     - $HOME/api/node_modules
     - $HOME/app/node_modules
   cache: yarn
+
+stages:
+  - api
+  - app
+  - name: deploy
+    if: branch = master
     
 jobs:
   - include: 
