@@ -22,13 +22,8 @@ script:
   - cd $dir
   - yarn install --frozen-lockfile
   - yarn lint
-  # - yarn test  # --coverage
-  # - yarn build --prod --base-href /beez/ # base-href needed for github pages
-  #- cd ../api
-  #- yarn install --frozen-lockfile
-  #- yarn lint
-  ##- yarn test  # --coverage
-  #- yarn build
+  - yarn test  # --coverage
+  - yarn build --prod --base-href /beez/ # base-href needed for github pages
 
 deploy:
   provider: pages
@@ -40,18 +35,6 @@ deploy:
     branch: master
 
 jobs:
-  include: 
-    - stage: backend
-      node_js:
-        - 10
-        - 11
-        - 12
-      env: dir=api
-      script: 
-        - cd $dir
-        - yarn install --frozen-lockfile
-        - yarn lint
-
   exclude:
     - node_js: 11
       env: dir=app
