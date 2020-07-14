@@ -15,10 +15,10 @@ cache:
   directories:
     - $HOME/api/node_modules
     - $HOME/app/node_modules
-  cache: yarn
+  yarn: true
 
   
-#script:
+script:
   - cd $dir
   - yarn install --frozen-lockfile
   - yarn lint
