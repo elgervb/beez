@@ -1,6 +1,5 @@
 dist: xenial
 
-# frontend
 language: node_js
 
 node_js:
@@ -13,14 +12,10 @@ cache:
     - $HOME/app/node_modules
   cache: yarn
 
-stages:
-  - api
-  - app
-  - name: deploy
-    if: branch = master
-    
 jobs:
   - include: 
+    - stage: test 
+      script: skip
     - stage: api
       before_script: 
         - cd api
