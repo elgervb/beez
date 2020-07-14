@@ -1,3 +1,6 @@
+dist: xenial
+
+# frontend
 language: node_js
 
 node_js:
@@ -6,11 +9,14 @@ node_js:
 
 cache:
   directories:
-    - node_modules
+    - $HOME/app/node_modules
+  cache: yarn
 
-before_script: cd app
+before_script: 
+  - cd app
+  - yarn install --frozen-lockfile
+
 script:
-  - yarn install
   - yarn lint
   - yarn test  # --coverage
   - yarn build --prod --base-href /beez/ # base-href needed for github pages
@@ -23,3 +29,26 @@ deploy:
   local_dir: app/dist/beez
   on:
     branch: master
+
+
+# backend
+language: node_js
+
+node_js:
+  - "10"
+  - "11"
+  - "12"
+
+cache:
+  directories:
+    - $HOME/api/node_modules
+  cache: yarn
+
+before_script: 
+  - cd api
+  - yarn install --frozen-lockfile
+
+script:
+  - yarn lint
+ # - yarn test  # --coverage
+  - yarn build

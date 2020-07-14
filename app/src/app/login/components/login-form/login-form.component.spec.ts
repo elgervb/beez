@@ -63,5 +63,5 @@ describe('LoginFormComponent', () => {
     component.cancel();
 
     expect(cancelSpy).toHaveBeenCalled();
-  })
+  });
 });
