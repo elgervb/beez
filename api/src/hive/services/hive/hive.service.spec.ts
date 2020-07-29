@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HiveService } from './hive.service';
 import { arrayFrom, from } from '@elgervb/mock-data';
-import { Hive } from 'src/interfaces/hive';
+import { HiveDto } from 'src/hive/dto/hive';
 
 describe('HiveService', () => {
   let service: HiveService;
@@ -19,23 +19,23 @@ describe('HiveService', () => {
   });
 
   it('should create and find a hive', () => {
-    const expected = from<Hive>('beez.hive');
-    expect(service.create(expected)).toEqual(expected);
-    expect(service.findOne(expected.name)).toEqual(expected);
+    const expected = from<HiveDto>('beez.hive');
+    expect(service.save(expected)).toEqual(expected);
+    expect(service.findOne(expected.name, expected.number)).toEqual(expected);
   });
 
   it('should delete a hive', () => {
-    const expected = from<Hive>('beez.hive');
-    expect(service.create(expected)).toEqual(expected);
+    const expected = from<HiveDto>('beez.hive');
+    expect(service.save(expected)).toEqual(expected);
 
-    service.delete(expected.name);
+    service.delete(expected.name, expected.number);
 
-    expect(service.findOne(expected.name)).toBeFalsy();
+    expect(service.findOne(expected.name, expected.number)).toBeFalsy();
   });
 
   it('should find all hives', () => {
-    const hives = arrayFrom<Hive>('beez.hive', 5);
-    hives.forEach(hive => service.create(hive));
+    const hives = arrayFrom<HiveDto>('beez.hive', 5);
+    hives.forEach(hive => service.save(hive));
 
     expect(service.findAll()).toHaveLength(7);
   });

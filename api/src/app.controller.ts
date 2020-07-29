@@ -10,7 +10,7 @@ export class AppController {
 
   constructor(
     private readonly appService: AppService,
-    private authService: AuthService
+    private readonly authService: AuthService
   ) { }
 
   @Get('details')

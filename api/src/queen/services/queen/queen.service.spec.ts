@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { QueenService } from './queen.service';
-import { Queen } from 'src/interfaces/queen';
 import { arrayFrom, from } from '@elgervb/mock-data';
+import { QueenDto } from 'src/queen/dtos/queen';
 
 describe('QueenService', () => {
   let service: QueenService;
@@ -19,14 +19,14 @@ describe('QueenService', () => {
   });
 
   it('should create and find a queen', () => {
-    const expected = from<Queen>('beez.queen');
-    expect(service.create(expected)).toEqual(expected);
+    const expected = from<QueenDto>('beez.queen');
+    expect(service.save(expected)).toEqual(expected);
     expect(service.findOne(expected.name)).toEqual(expected);
   });
 
   it('should delete a queen', () => {
-    const expected = from<Queen>('beez.queen');
-    expect(service.create(expected)).toEqual(expected);
+    const expected = from<QueenDto>('beez.queen');
+    expect(service.save(expected)).toEqual(expected);
 
     service.delete(expected.name);
 
@@ -34,8 +34,8 @@ describe('QueenService', () => {
   });
 
   it('should find all queens', () => {
-    const queens = arrayFrom<Queen>('beez.queen', 5);
-    queens.forEach(queen => service.create(queen));
+    const queens = arrayFrom<QueenDto>('beez.queen', 5);
+    queens.forEach(queen => service.save(queen));
 
     expect(service.findAll()).toHaveLength(7);
   });
