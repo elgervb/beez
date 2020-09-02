@@ -23,7 +23,7 @@ script:
   - yarn lint
   - yarn test  # --coverage
   - if [ $dir == "app" ];
-    then yarn build --prod --base-href /beez/; # base-href needed for github pages
+    then yarn build --prod --base-href /beez/; 
     else yarn build;
     fi
 
