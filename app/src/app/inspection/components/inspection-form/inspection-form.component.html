@@ -1,0 +1,42 @@
+
+<form [formGroup]="form">
+
+  <input type="hidden" formControlName="id" />
+
+  <evb-formcontrol>
+    <label for="date">date *</label>
+    <input type="datetime-local" formControlName="date" id="date" />
+  </evb-formcontrol>
+
+  <evb-formcontrol>
+    <label for="queenSeen">queen</label>
+    <evb-toggle labelon="yes" labeloff="no" type="flat" formControlName="queenSeen" evbStencil></evb-toggle>
+  </evb-formcontrol>
+
+  <evb-formcontrol>
+    <label for="eggs">eggs</label>
+    <evb-toggle labelon="yes" labeloff="no" type="flat" formControlName="eggs" evbStencil></evb-toggle>
+  </evb-formcontrol>
+
+  <evb-formcontrol>
+    <label for="brias">brias</label>
+    <evb-toggle labelon="yes" labeloff="no" type="flat" formControlName="brias" evbStencil></evb-toggle>
+  </evb-formcontrol>
+
+
+  <evb-formcontrol>
+    <label for="queenPresent">queen present</label>
+    <evb-toggle labelon="yes" labeloff="no" type="flat" formControlName="queenPresent" evbStencil></evb-toggle>
+  </evb-formcontrol>
+
+  <evb-formcontrol>
+    <label for="remarks">Remarks</label>
+    <textarea formControlName="remarks" id="remarks"></textarea>
+  </evb-formcontrol>
+
+  <evb-button-bar>
+    <evb-button type="link" (click)="cancelEvent.emit()">cancel</evb-button>
+    <evb-button (click)="submit()" [disabled]="form.invalid || form.pristine">save</evb-button>
+  </evb-button-bar>
+
+</form>

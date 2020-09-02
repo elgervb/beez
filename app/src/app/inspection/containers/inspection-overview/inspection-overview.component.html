@@ -1,0 +1,22 @@
+<evb-header heading="1"> <evb-icon name="inspection" size="fit"></evb-icon> inspections </evb-header>
+
+<evb-button type="link" routerLink="./create">add</evb-button>
+
+<evb-list>
+  <evb-list-item *ngFor="let inspection of inspections$ |async; trackBy: trackInspection">
+      {{inspection.date | date:'yyyy-M-d H:mm' }}
+
+    <evb-button-bar justify="right">
+      <evb-button type="icon" variant="primary" ghost="true" title="goto hives" (click)="gotoHive(inspection.hiveId)">
+        <evb-icon name="hive"></evb-icon>
+      </evb-button>
+      <evb-button type="icon" variant="primary" ghost="true" (click)="edit(inspection)">
+        <evb-icon name="edit"></evb-icon>
+      </evb-button>
+      <evb-button type="icon" variant="danger" ghost="true" (click)="delete(inspection)">
+        <evb-icon name="delete"></evb-icon>
+      </evb-button>
+    </evb-button-bar>
+
+  </evb-list-item>
+</evb-list>

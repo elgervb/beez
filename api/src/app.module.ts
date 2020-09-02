@@ -8,6 +8,7 @@ import { QueenModule } from './queen/queen.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { InspectionModule } from './inspection/inspection.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { UsersModule } from './users/users.module';
       synchronize: true,
     }),
     AuthModule,
-    UsersModule
+    UsersModule,
+    InspectionModule
   ],
   controllers: [AppController],
   providers: [AppService],
