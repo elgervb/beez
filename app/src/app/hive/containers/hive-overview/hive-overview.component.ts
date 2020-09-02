@@ -55,6 +55,10 @@ export class HiveOverviewComponent implements OnInit {
       ).subscribe();
   }
 
+  gotoInspections(hive: Hive) {
+    this.router.navigate([`inspection/${hive.id}`]);
+  }
+
   trackHive(_: number, location: Hive) {
     return location.name;
   }

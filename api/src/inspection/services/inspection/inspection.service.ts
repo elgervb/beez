@@ -3,7 +3,6 @@ import { InspectionDto } from '../../dto/inspection';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inspection } from 'src/interfaces/inspection';
 import { Repository, ObjectID } from 'typeorm';
-import { Hive } from 'src/interfaces/hive';
 
 @Injectable()
 export class InspectionService {
@@ -24,10 +23,10 @@ export class InspectionService {
   /**
    * Returns all inspections for a hive
    */
-  findAll(hive: Hive): Promise<Inspection[]> {
+  findAll(hiveId: string): Promise<Inspection[]> {
     return this.inspectionRepository.find({
       where: {
-        hiveId: hive.id
+        hiveId
       }
     });
   }

@@ -1,7 +1,7 @@
 
 export interface Inspection {
   id?: number;
-  date: Date;
+  date: string;
   hiveId: string;
   queenPresent: boolean;
   queenSeen?: boolean;

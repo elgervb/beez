@@ -8,7 +8,7 @@ export class InspectionDto implements Inspection {
   id: number;
 
   @Column()
-  date: Date;
+  date: string;
 
   @Column()
   hiveId: string;
