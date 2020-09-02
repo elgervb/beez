@@ -22,7 +22,10 @@ script:
   - yarn install --frozen-lockfile
   - yarn lint
   - yarn test  # --coverage
-  - yarn build --prod --base-href /beez/ # base-href needed for github pages
+  - if [ $dir == "app" ];
+    then yarn build --prod --base-href /beez/; # base-href needed for github pages
+    else yarn build;
+    fi
 
 deploy:
   provider: pages
@@ -34,23 +37,7 @@ deploy:
     branch: master
 
 jobs:
-  include:
-    - if: dir = app
-      script:
-        - cd $dir
-        - yarn install --frozen-lockfile
-        - yarn lint
-        - yarn test  # --coverage
-        - yarn build --prod --base-href /beez/ # base-href needed for github pages
-      - if: dir = api
-        script:
-          - cd $dir
-          - yarn install --frozen-lockfile
-          - yarn lint
-          - yarn test  # --coverage
-          - yarn build # base-href needed for github pages
   exclude:
     - node_js: 11
       env: dir=app
-
       
