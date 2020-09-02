@@ -1,4 +1,11 @@
+import { Dialog, DialogModule } from '@angular/cdk-experimental/dialog';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from 'src/app/shared/shared.module';
+
+import { InspectionService } from '../../services/inspecton.service';
 
 import { InspectionOverviewComponent } from './inspection-overview.component';
 
@@ -8,9 +15,12 @@ describe('InspectionOverviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InspectionOverviewComponent ]
+      declarations: [InspectionOverviewComponent],
+      providers: [InspectionService, Dialog],
+      imports: [RouterTestingModule, SharedModule, HttpClientTestingModule, DialogModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
