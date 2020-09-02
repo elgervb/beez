@@ -7,6 +7,9 @@
     {{hive.name}} {{hive.number}}
 
     <evb-button-bar justify="right">
+      <evb-button type="icon" variant="primary" ghost="true" (click)="gotoInspections(hive)">
+        <evb-icon name="inspection"></evb-icon>
+      </evb-button>
       <evb-button type="icon" variant="primary" ghost="true" (click)="edit(hive)">
         <evb-icon name="edit"></evb-icon>
       </evb-button>

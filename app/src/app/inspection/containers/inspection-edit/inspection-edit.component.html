@@ -1,0 +1,5 @@
+<app-inspection-form
+  [edit]="edit$ | async"
+  (cancelEvent)="goBack()"
+  (submitEvent)="save($event)">
+</app-inspection-form>
