@@ -1,24 +1,28 @@
 dist: xenial
 
+language: node_js
+
+node_js:
+  - 10
+  - 11
+  - 12
+
+env:
+  - dir=app
+  - dir=api
+
 cache:
   directories:
     - $HOME/api/node_modules
     - $HOME/app/node_modules
   yarn: true
   
-jobs:
-  include:
-    - language: 
-        node_js:
-          - 10
-          - 11
-          - 12
-      script:
-        - cd app
-        - yarn install --frozen-lockfile
-        - yarn lint
-        - yarn test  # --coverage
-        - yarn build --prod --base-href /beez/ # base-href needed for github pages
+script:
+  - cd $dir
+  - yarn install --frozen-lockfile
+  - yarn lint
+  - yarn test  # --coverage
+  - yarn build --prod --base-href /beez/ # base-href needed for github pages
 
 deploy:
   provider: pages
@@ -29,3 +33,22 @@ deploy:
   on:
     branch: master
 
+jobs:
+  include:
+    if: branch = master
+    script:
+      - cd $dir
+      - yarn install --frozen-lockfile
+      - yarn lint
+      - yarn test  # --coverage
+      - yarn build --prod --base-href /beez/ # base-href needed for github pages
+  exclude:
+    - node_js: 11
+      env: dir=app
+      script:
+        - cd $dir
+        - yarn install --frozen-lockfile
+        - yarn lint
+        - yarn test  # --coverage
+        - yarn build --prod --base-href /beez/ # base-href needed for github pages
+      
