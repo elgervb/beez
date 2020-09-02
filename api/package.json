@@ -78,7 +78,15 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": "./",
+    "modulePaths": [
+      "<rootDir>",
+      "<rootDir>/src/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/test/",
+      "<rootDir>/node_modules/"
+    ],
     "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -94,7 +102,7 @@
       }
     },
     "setupFilesAfterEnv": [
-      "<rootDir>/setup-jest.ts"
+      "<rootDir>/src/setup-jest.ts"
     ]
   }
 }

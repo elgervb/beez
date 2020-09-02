@@ -3,18 +3,25 @@ import { LocationController } from './location.controller';
 import { LocationService } from '../services/location.service';
 import { arrayFrom, from } from '@elgervb/mock-data/lib/blueprint/blueprint';
 import { LocationDto } from '../dtos/location';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('Location Controller', () => {
   let controller: LocationController;
   let locationService: LocationService;
 
   beforeEach(async () => {
+    const mockRepository = {};
+
     const module: TestingModule = await Test.createTestingModule({
       controllers: [LocationController],
       providers: [
         LocationService,
-        JwtAuthGuard
+        JwtAuthGuard,
+        {
+          provide: getRepositoryToken(LocationDto),
+          useValue: mockRepository,
+        },
       ]
     }).compile();
 
@@ -26,29 +33,29 @@ describe('Location Controller', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should create a location', () => {
+  it('should create a location', async () => {
     const expected = from<LocationDto>('beez.location');
     jest.spyOn(locationService, 'save').mockReturnValueOnce(Promise.resolve(expected));
-    expect(controller.create(expected)).toEqual(expected);
+    expect(await controller.create(expected)).toEqual(expected);
   });
 
-  it('should create a location', () => {
+  it('should delete a location', () => {
     const expected = from<LocationDto>('beez.location');
-    const deleteSpy = jest.spyOn(locationService, 'delete');
+    const deleteSpy = jest.spyOn(locationService, 'delete').mockResolvedValue({ raw: '' });
     controller.delete(expected.name);
 
     expect(deleteSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should find all', () => {
+  it('should find all', async () => {
     const expected = arrayFrom<LocationDto>('beez.location', 2);
-    jest.spyOn(locationService, 'findAll').mockReturnValueOnce(Promise.resolve(expected));
-    expect(controller.findAll()).toEqual(expected);
+    jest.spyOn(locationService, 'findAll').mockResolvedValue(expected);
+    expect(await controller.findAll()).toEqual(expected);
   });
 
-  it('should find one', () => {
+  it('should find one', async () => {
     const expected = from<LocationDto>('beez.location');
-    jest.spyOn(locationService, 'findOne').mockReturnValueOnce(Promise.resolve(expected));
-    expect(controller.findOne('')).toEqual(expected);
+    jest.spyOn(locationService, 'findOne').mockResolvedValue(expected);
+    expect(await controller.findOne('')).toEqual(expected);
   });
 });

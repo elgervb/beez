@@ -16,7 +16,6 @@ cache:
     - $HOME/api/node_modules
     - $HOME/app/node_modules
   yarn: true
-
   
 script:
   - cd $dir
