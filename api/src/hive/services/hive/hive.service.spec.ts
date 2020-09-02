@@ -1,17 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HiveService } from './hive.service';
 import { arrayFrom, from } from '@elgervb/mock-data';
-import { Hive } from 'src/interfaces/hive';
+import { HiveDto } from 'src/hive/dto/hive';
+import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('HiveService', () => {
   let service: HiveService;
+  let mockRepository = {
+    find: jest.fn(),
+    delete: jest.fn(),
+    findOne: jest.fn(),
+    save: jest.fn()
+  };
 
   beforeEach(async () => {
+    mockRepository.find.mockReset();
+    mockRepository.delete.mockReset();
+    mockRepository.findOne.mockReset();
+    mockRepository.save.mockReset();
+
     const module: TestingModule = await Test.createTestingModule({
-      providers: [HiveService],
+      providers: [
+        HiveService,
+        {
+          provide: getRepositoryToken(HiveDto),
+          useValue: mockRepository,
+        },
+      ],
     }).compile();
 
-    service = module.get<HiveService>(HiveService);
+    service = module.get(HiveService);
   });
 
   it('should be defined', () => {
@@ -19,25 +37,28 @@ describe('HiveService', () => {
   });
 
   it('should create and find a hive', () => {
-    const expected = from<Hive>('beez.hive');
-    expect(service.create(expected)).toEqual(expected);
-    expect(service.findOne(expected.name)).toEqual(expected);
+    const expected = from<HiveDto>('beez.hive');
+
+    service.save(expected);
+    expect(mockRepository.save).toHaveBeenCalledWith(expected);
+
+    service.findOne(expected.name, expected.number);
+    expect(mockRepository.findOne).toHaveBeenCalledWith({ name: expected.name, number: expected.number }, {});
   });
 
   it('should delete a hive', () => {
-    const expected = from<Hive>('beez.hive');
-    expect(service.create(expected)).toEqual(expected);
+    const expected = from<HiveDto>('beez.hive');
+    service.delete(expected.name, expected.number);
 
-    service.delete(expected.name);
-
-    expect(service.findOne(expected.name)).toBeFalsy();
+    expect(mockRepository.delete).toHaveBeenCalledWith({ name: expected.name, number: expected.number })
   });
 
   it('should find all hives', () => {
-    const hives = arrayFrom<Hive>('beez.hive', 5);
-    hives.forEach(hive => service.create(hive));
+    const hives = arrayFrom<HiveDto>('beez.hive', 5);
+    mockRepository.find.mockReturnValue(hives);
+    service.findAll();
 
-    expect(service.findAll()).toHaveLength(7);
+    expect(mockRepository.find).toHaveBeenCalled();
   });
 
 });

@@ -3,16 +3,33 @@ import { LocationService } from './location.service';
 import { from, } from '@elgervb/mock-data';
 import { arrayFrom } from '@elgervb/mock-data/lib/blueprint/blueprint';
 import { Location } from 'src/interfaces/location';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { LocationDto } from '../dtos/location';
 
 describe('LocationService', () => {
   let service: LocationService;
+  let mockRepository = {
+    find: jest.fn(),
+    delete: jest.fn(),
+    findOne: jest.fn()
+  };
 
   beforeEach(async () => {
+    mockRepository.find.mockReset();
+    mockRepository.delete.mockReset();
+    mockRepository.findOne.mockReset();
+
     const module: TestingModule = await Test.createTestingModule({
-      providers: [LocationService],
+      providers: [
+        LocationService,
+        {
+          provide: getRepositoryToken(LocationDto),
+          useValue: mockRepository,
+        },
+      ],
     }).compile();
 
-    service = module.get<LocationService>(LocationService);
+    service = module.get(LocationService);
   });
 
   it('should be defined', () => {
@@ -21,24 +38,24 @@ describe('LocationService', () => {
 
   it('should create and find a location', () => {
     const expected = from<Location>('beez.location');
-    expect(service.create(expected)).toEqual(expected);
-    expect(service.findOne(expected.name)).toEqual(expected);
+    service.findOne(expected.name);
+
+    expect(mockRepository.findOne).toHaveBeenCalledWith({ name: expected.name });
   });
 
   it('should delete a location', () => {
     const expected = from<Location>('beez.location');
-    expect(service.create(expected)).toEqual(expected);
-
     service.delete(expected.name);
 
-    expect(service.findOne(expected.name)).toBeFalsy();
+    expect(mockRepository.delete).toHaveBeenCalledWith({ name: expected.name });
   });
 
   it('should find all locations', () => {
     const locations = arrayFrom<Location>('beez.location', 5);
-    locations.forEach(location => service.create(location));
+    mockRepository.find.mockReturnValue(locations);
+    service.findAll();
 
-    expect(service.findAll()).toHaveLength(16);
+    expect(mockRepository.find).toHaveBeenCalled();
   });
 
 });
