@@ -1,6 +1,6 @@
 import { DialogModule, DialogRef } from '@angular/cdk-experimental/dialog';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ConfirmComponent } from './confirm.component';
 
@@ -10,7 +10,7 @@ describe('ConfirmComponent', () => {
 
   const dialogRef = { close: jest.fn() };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         DialogModule
