@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Hive } from '@common/hive';
 import { Location } from '@common/location';
@@ -10,7 +10,7 @@ describe('HiveFormComponent', () => {
   let component: HiveFormComponent;
   let fixture: ComponentFixture<HiveFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [HiveFormComponent],
       imports: [ReactiveFormsModule],

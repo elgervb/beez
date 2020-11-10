@@ -6,6 +6,8 @@ node_js:
   - 10
   - 11
   - 12
+  - 13
+  - 14
 
 env:
   - dir=app
@@ -16,21 +18,21 @@ cache:
     - $HOME/api/node_modules
     - $HOME/app/node_modules
   yarn: true
-  
+
 script:
   - cd $dir
   - yarn install --frozen-lockfile
   - yarn lint
-  - yarn test  # --coverage
+  - yarn test # --coverage
   - if [ $dir == "app" ];
-    then yarn build --prod --base-href /beez/; 
+    then yarn build --prod --base-href /beez/;
     else yarn build;
     fi
 
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
   keep_history: true
   local_dir: app/dist/beez
   on:
@@ -42,4 +44,3 @@ jobs:
   exclude:
     - node_js: 11
       env: dir=app
-      

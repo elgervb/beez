@@ -1,7 +1,7 @@
 import { DialogModule } from '@angular/cdk-experimental/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -13,7 +13,7 @@ describe('QueenOverviewComponent', () => {
   let component: QueenOverviewComponent;
   let fixture: ComponentFixture<QueenOverviewComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [QueenOverviewComponent],
       imports: [
