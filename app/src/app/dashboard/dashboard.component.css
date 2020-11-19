@@ -1,0 +1,57 @@
+:host {
+  background: #F3F7FF;
+  display: flex;
+  height: 100vh;
+  min-width: 100%;
+  overflow: hidden
+}
+
+aside {
+  background: #fff;
+  border-right: 2px solid #F5F5F6;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+aside evb-header {
+  justify-content: center;
+}
+
+main {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+
+header {
+  flex-shrink: 0;
+  padding: 1rem 0;
+}
+
+aside header {
+  display: inline-flex;
+}
+
+.content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+aside .content {
+  display: flex;
+  flex-direction: column;
+}
+
+evb-icon {
+  color: #878A8C;
+}
+.active {
+  border-left: 3px solid var(--evb-primary-color);
+}
+.active evb-icon {
+  color: var(--evb-primary-color);
+  transform: scale(1.5);
+}

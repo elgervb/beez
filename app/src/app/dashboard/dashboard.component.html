@@ -1,0 +1,32 @@
+
+<aside>
+  <evb-header heading="2">menu</evb-header>
+  <div class="content">
+    <evb-button type="link" routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      <evb-icon tabindex="-1" name="dashboard" size="medium"></evb-icon>
+    </evb-button>
+    <evb-button type="link" routerLink="inspection" routerLinkActive="active">
+      <evb-icon name="inspection" size="medium"></evb-icon>
+    </evb-button>
+    <evb-button type="link" routerLink="location" routerLinkActive="active">
+      <evb-icon name="location-marker" size="medium"></evb-icon>
+    </evb-button>
+    <evb-button type="link" routerLink="queen" routerLinkActive="active">
+      <evb-icon name="bee" size="medium"></evb-icon>
+    </evb-button>
+    <evb-button type="link" routerLink="hive" routerLinkActive="active">
+      <evb-icon name="hive" size="medium"></evb-icon>
+    </evb-button>
+  </div>
+</aside>
+
+<main>
+  <evb-header heading="2">
+
+    <evb-icon [name]="(data$ | async)?.icon" size="fit"></evb-icon>
+    <span>{{(data$ | async)?.title}}</span>
+  </evb-header>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</main>

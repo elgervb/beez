@@ -6,27 +6,18 @@ import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'location',
-    loadChildren: () => import('./location/location.module').then(m => m.LocationModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'hive',
-    loadChildren: () => import('./hive/hive.module').then(m => m.HiveModule),
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'queen',
-    loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule),
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard]
   },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
-    path: 'inspection',
-    loadChildren: () => import('./inspection/inspection.module').then(m => m.InspectionModule)
+    path: '**',
+    redirectTo: 'dashboard'
   }
 ];
 
