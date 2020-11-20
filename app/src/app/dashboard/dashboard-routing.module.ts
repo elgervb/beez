@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardComponent } from './containers/dashboard.component';
+import { DashboardComponent } from './containers';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    data: { title: 'dashboard', icon: 'dashboard' },
     children: [
+      {
+        path: '',
+        pathMatch: 'exact',
+        loadChildren: () => import('../dashboard-overview/dashboard-overview.module').then(m => m.DashboardOverviewModule),
+        data: { title: 'dashboard', icon: 'dashboard' },
+      },
       {
         path: 'location',
         loadChildren: () => import('../location/location.module').then(m => m.LocationModule),
@@ -30,7 +35,8 @@ const routes: Routes = [
         data: { title: 'inspection', icon: 'inspection' }
       }
     ]
-  }
+  },
+  { path: 'overview', }
 ];
 
 @NgModule({

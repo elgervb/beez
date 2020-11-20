@@ -24,16 +24,8 @@ main {
   flex: 1 1 auto;
   flex-direction: column;
   height: 100%;
-  padding: 1rem;
-}
+  padding: 0 1rem 1rem 1rem;
 
-header {
-  flex-shrink: 0;
-  padding: 1rem 0;
-}
-
-aside header {
-  display: inline-flex;
 }
 
 .content {
@@ -46,9 +38,12 @@ aside .content {
 }
 
 evb-icon {
-  color: #878A8C;
+  color: var(--evb-text-color);
 }
-.active {
+evb-button {
+  border: 3px solid transparent;
+}
+evb-button.active {
   border-left: 3px solid var(--evb-primary-color);
 }
 .active evb-icon {
