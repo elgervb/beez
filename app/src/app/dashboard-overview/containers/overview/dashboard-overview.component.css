@@ -10,7 +10,6 @@
 app-tile {
   max-width: 18rem;
   min-width: 15rem;
-  text-align: center;
   transition: box-shadow .25s ease-out;
 }
 app-tile:hover {
@@ -23,12 +22,8 @@ app-tile .count {
   font-size: 7em;
   font-weight: bold;
 }
-app-tile .count {
-  margin: 1rem 0;
-}
 app-tile .count.gt-1000 {
   font-size: 5em;
-  margin-bottom: 3rem;
 }
 
 app-tile.location .count {
@@ -39,4 +34,9 @@ app-tile.queen .count {
 }
 app-tile.hive .count {
   color: var(--bee-green);
+}
+
+evb-list {
+  padding: .5rem 1rem;
+  width: 100%;
 }
