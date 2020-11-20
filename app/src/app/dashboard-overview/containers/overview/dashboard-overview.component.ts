@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardOverview } from '@common/dashboard-overview';
+import { Observable } from 'rxjs';
+
+import { OverviewService } from '../../services/overview.service';
 
 @Component({
   selector: 'app-dashboard-overview',
@@ -7,9 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardOverviewComponent implements OnInit {
 
-  constructor() { }
+  overview$: Observable<DashboardOverview>;
+  constructor(private overviewService: OverviewService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.overview$ = this.overviewService.find();
   }
 
 }
