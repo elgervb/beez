@@ -1,3 +1,5 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardOverviewComponent } from './dashboard-overview.component';
@@ -8,9 +10,11 @@ describe('DashboardOverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardOverviewComponent ]
+      declarations: [DashboardOverviewComponent],
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

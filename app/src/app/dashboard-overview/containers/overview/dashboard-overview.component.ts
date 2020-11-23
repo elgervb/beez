@@ -12,6 +12,7 @@ import { OverviewService } from '../../services/overview.service';
 export class DashboardOverviewComponent implements OnInit {
 
   overview$: Observable<DashboardOverview>;
+
   constructor(private overviewService: OverviewService) { }
 
   ngOnInit() {

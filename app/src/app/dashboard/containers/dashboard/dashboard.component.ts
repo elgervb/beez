@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.data$ = merge(
       this.route.firstChild ? this.route.firstChild.data : this.route.data,
       this.router.events.pipe(
