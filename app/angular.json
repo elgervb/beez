@@ -114,5 +114,8 @@
       }
     }
   },
-  "defaultProject": "beez"
+  "defaultProject": "beez",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
