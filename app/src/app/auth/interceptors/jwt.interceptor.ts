@@ -1,26 +1,42 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
-import { AuthService } from '../services/auth.service';
+import * as fromAuth from '../';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) { }
+
+  constructor(private store: Store<fromAuth.State>) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // add authorization header with jwt token if available
-    const token = this.authService.token?.access_token;
-    if (token) {
-      const copy = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+    return this.store.select(fromAuth.getToken)
+      .pipe(
+        map(token => token ? this.addToken(request, token) : undefined),
+        switchMap(copy => next.handle(copy || request))
+      );
+    // const token = this.authService.token?.access_token;
+    // if (token) {
+    //   const copy = request.clone({
+    //     setHeaders: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   });
 
-      return next.handle(copy);
-    }
+    //   return next.handle(copy);
+    // }
 
-    return next.handle(request);
+    // return next.handle(request);
+  }
+
+  private addToken(request: HttpRequest<unknown>, token: string) {
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, take, tap } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { filter, map, take, tap } from 'rxjs/operators';
 
+import * as fromAuth from '../../../auth';
 import { LoginModel } from '../../login';
 
 @Component({
@@ -12,38 +14,32 @@ import { LoginModel } from '../../login';
 })
 export class LoginComponent implements OnInit {
 
-  loading: boolean;
-  error: string;
+  error$: Observable<string>;
 
   constructor(
-    private authService: AuthService,
+    private store: Store<fromAuth.State>,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.store.select(fromAuth.getToken)
+      .pipe(
+        map(token => !!token),
+        filter(hasToken => hasToken),
+        tap(() => this.router.navigate([this.route.snapshot.queryParams.returnUrl || '/'])),
+        take(1)
+      ).subscribe();
+
+    this.error$ = this.store.select(fromAuth.getError);
+  }
 
   cancel() {
     this.router.navigate(['/']);
   }
 
-  submit(login: LoginModel) {
-    delete this.error;
-    this.loading = true;
-
-    this.authService.login(login.username, login.password)
-      .pipe(
-        take(1),
-        tap(
-          () => this.router.navigate([this.route.snapshot.queryParams.returnUrl || '/']),
-          error => { this.error = error; this.loading = false; }
-        ),
-        catchError(error => {
-          this.error = error;
-          this.loading = false;
-          return error;
-        })
-      ).subscribe();
+  submit(loginModel: LoginModel) {
+    this.store.dispatch(fromAuth.login({ ...loginModel }));
   }
 
 }
