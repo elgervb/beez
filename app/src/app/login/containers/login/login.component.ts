@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.select(fromAuth.getToken)
+    this.store.select(fromAuth.selectToken)
       .pipe(
         map(token => !!token),
         filter(hasToken => hasToken),
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         take(1)
       ).subscribe();
 
-    this.error$ = this.store.select(fromAuth.getError);
+    this.error$ = this.store.select(fromAuth.selectError);
   }
 
   cancel() {

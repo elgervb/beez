@@ -18,4 +18,5 @@ export const reducer = createReducer(
   on(AuthActions.login, state => ({ ...state, error: undefined })),
   on(AuthActions.loginSuccess, (state, action) => ({ ...state, token: action.data.access_token })),
   on(AuthActions.loginFailure, (state, action) => ({ ...state, error: action.error })),
+  on(AuthActions.logout, state => ({ ...state, token: undefined }))
 );

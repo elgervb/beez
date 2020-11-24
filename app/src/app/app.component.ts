@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { filter, take, tap } from 'rxjs/operators';
 
-import { AuthService } from './auth/services/auth.service';
+import * as fromAuth from './auth';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +14,19 @@ export class AppComponent implements OnInit {
   title = 'beez';
 
   constructor(
-    private authService: AuthService,
+    private store: Store<fromAuth.State>,
     private router: Router
   ) { }
 
   ngOnInit() { }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.store.select(fromAuth.selectToken)
+      .pipe(
+        filter(token => !token),
+        tap(() => this.router.navigate(['/login'])),
+        take(1)
+      );
+    this.store.dispatch(fromAuth.logout());
   }
 }

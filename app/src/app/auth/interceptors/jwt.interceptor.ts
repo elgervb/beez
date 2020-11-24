@@ -13,23 +13,11 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // add authorization header with jwt token if available
-    return this.store.select(fromAuth.getToken)
+    return this.store.select(fromAuth.selectToken)
       .pipe(
         map(token => token ? this.addToken(request, token) : undefined),
         switchMap(copy => next.handle(copy || request))
       );
-    // const token = this.authService.token?.access_token;
-    // if (token) {
-    //   const copy = request.clone({
-    //     setHeaders: {
-    //       Authorization: `Bearer ${token}`
-    //     }
-    //   });
-
-    //   return next.handle(copy);
-    // }
-
-    // return next.handle(request);
   }
 
   private addToken(request: HttpRequest<unknown>, token: string) {

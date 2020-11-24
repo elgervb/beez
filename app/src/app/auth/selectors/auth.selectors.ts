@@ -6,5 +6,5 @@ export const selectAuthState = createFeatureSelector<fromAuth.State>(
   fromAuth.authFeatureKey
 );
 
-export const getToken = createSelector(selectAuthState, state => state.token);
-export const getError = createSelector(selectAuthState, state => state.error);
+export const selectToken = createSelector(selectAuthState, state => state.token);
+export const selectError = createSelector(selectAuthState, state => state.error);
