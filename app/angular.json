@@ -94,6 +94,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
+            "typeCheck": true,
             "exclude": [
               "**/node_modules/**"
             ]

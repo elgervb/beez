@@ -1,0 +1,34 @@
+:host {
+  background: #fff;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  margin: 1rem;
+}
+
+header.header {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding-top: 2rem;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+}
+
+footer.footer {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+}
