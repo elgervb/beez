@@ -1,0 +1,38 @@
+<ng-container *ngIf="overview$ | async; let overview;">
+  <section class="tiles">
+    <app-tile class="location">
+      <evb-icon class="header" name="location-marker" size="medium"></evb-icon>
+      <div class="count">{{overview.locations}}</div>
+      <evb-button class="footer" ghost pill routerLink="location">locations</evb-button>
+    </app-tile>
+
+    <app-tile class="queen">
+      <evb-icon class="header" name="bee" size="medium"></evb-icon>
+      <div class="count">{{overview.queens}}</div>
+      <evb-button class="footer" ghost pill routerLink="queen">queens</evb-button>
+    </app-tile>
+
+    <app-tile class="hive">
+      <evb-icon class="header" name="hive" size="medium"></evb-icon>
+      <div class="count">{{overview.hives}}</div>
+      <evb-button class="footer" ghost pill routerLink="hive">hives</evb-button>
+    </app-tile>
+
+    <app-tile class="inspection">
+      <evb-icon class="header" name="inspection" size="medium"></evb-icon>
+      <div class="count gt-1000">{{overview.inspections}}</div>
+      <evb-button class="footer" ghost pill routerLink="hive">inspections</evb-button>
+    </app-tile>
+  </section>
+
+  <section class="tiles">
+    <app-tile>
+      <evb-header class="header" heading="2">latest inspections 🐝 </evb-header>
+      <evb-list>
+        <evb-list-item *ngFor="let inspection of overview.lastesInspections; let i = index">
+          {{i+1}}. {{inspection.date |date}} {{inspection.queenPresent ? '👍🏻' : '👎🏻'}}
+        </evb-list-item>
+      </evb-list>
+    </app-tile>
+  </section>
+</ng-container>

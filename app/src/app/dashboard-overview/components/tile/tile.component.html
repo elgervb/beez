@@ -1,0 +1,11 @@
+<header #header [class.header]="hasHeader">
+   <ng-content select=".header"></ng-content>
+</header>
+
+<main>
+  <ng-content></ng-content>
+</main>
+
+<footer #footer [class.footer]="hasFooter">
+  <ng-content select=".footer"></ng-content>
+</footer>
