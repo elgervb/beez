@@ -1184,6 +1184,11 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.2.tgz#8f03a22a04de437254e8ce8cc84ba39689288752"
   integrity sha512-HyYEUDeIj5rRQU2Hk5HTB2uHsbRQpF70nvMhVzi+VJR0X+xNEhjPui4/kBf3VeH/wqD28PT4sVOm8qqLjBrSZg==
 
+"@elgervb/mock-data@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@elgervb/mock-data/-/mock-data-0.0.8.tgz#d5afd23a9e36f001b2e9c0961bd168dfd8d92b90"
+  integrity sha512-s+erkTtphUmhIFJUrkIKHqwQY3Ua3/a/KpOOKL6X2O1poxjrxia+z/nL/BNl2qDzwbPRCkKFksJzMBG322rtnw==
+
 "@firebase/analytics-types@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@firebase/analytics-types/-/analytics-types-0.4.0.tgz#d6716f9fa36a6e340bc0ecfe68af325aa6f60508"
