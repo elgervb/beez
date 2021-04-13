@@ -8,8 +8,13 @@
       "type": "pwa-chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost",
+      "sourceMaps": true,
       "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--user-data-dir=${workspaceFolder}/.vscode/cache",
+        "--remote-debugging-port=9222"
+      ],
     }
   ]
 }
