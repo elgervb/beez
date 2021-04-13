@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login() {
+  login(): void {
     this.authService.signInWithGoogle().subscribe();
   }
 

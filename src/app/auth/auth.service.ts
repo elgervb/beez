@@ -19,15 +19,15 @@ export class AuthService {
       );
   }
 
-  isLoggedIn() {
+  isLoggedIn(): Observable {
     return this.user$
       .pipe(
         map(user => !!user)
-      )
+      );
   }
 
   signInWithGoogle(): Observable<void> {
-    return from(this.angularFireAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()))
+    return from(this.angularFireAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()));
   }
 
   logout(): Observable<void> {
