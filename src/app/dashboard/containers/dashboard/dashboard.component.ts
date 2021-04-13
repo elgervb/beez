@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AuthService } from '../../../auth/auth.service';
 
-import firebase from 'firebase/app';
 import { filter, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { User } from 'src/app/auth/user';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,9 +13,12 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  user$: Observable<firebase.User | null>;
+  user$: Observable<User | null>;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.user$ = this.authService.user$

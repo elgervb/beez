@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth, } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
+import { User } from './user';
 
 import firebase from 'firebase/app';
 
@@ -10,7 +11,7 @@ import firebase from 'firebase/app';
 })
 export class AuthService {
 
-  readonly user$: Observable<firebase.User | null>;
+  readonly user$: Observable<User | null>;
 
   constructor(private angularFireAuth: AngularFireAuth) {
     this.user$ = this.angularFireAuth.authState
@@ -19,7 +20,7 @@ export class AuthService {
       );
   }
 
-  isLoggedIn(): Observable {
+  isLoggedIn(): Observable<boolean> {
     return this.user$
       .pipe(
         map(user => !!user)
