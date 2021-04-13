@@ -9,19 +9,23 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    EffectsModule.forRoot([]),
+    SharedModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
-    AngularFireModule.initializeApp(environment.firebase),
-    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

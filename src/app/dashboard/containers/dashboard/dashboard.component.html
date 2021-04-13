@@ -1,0 +1,8 @@
+<ng-container *ngIf="user$ | async; let user">
+
+  <img [src]="user.photoURL"> {{user.displayName}}
+
+  <p>
+    <button (click)="logout()">Logout</button>
+  </p>
+</ng-container>

@@ -8,5 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
  - https://material.angular.io/components/categories
  - https://ngrx.io/guide/store
  - https://firebase.google.com/
- - - https://github.com/angular/angularfire
+   - https://github.com/angular/angularfire
+   - auth guards: https://github.com/angular/angularfire/blob/master/docs/auth/router-guards.md
+
  
