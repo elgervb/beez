@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth, } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
-import { map, share } from 'rxjs/operators';
-import { User } from './user';
+import { map, share, switchMap } from 'rxjs/operators';
+import { User } from '../models/user';
 
 import firebase from 'firebase/app';
 
@@ -27,8 +27,11 @@ export class AuthService {
       );
   }
 
-  signInWithGoogle(): Observable<void> {
-    return from(this.angularFireAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()));
+  signInWithGoogle(): Observable<User | null> {
+    return from(this.angularFireAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()))
+      .pipe(
+        switchMap(() => this.user$)
+      );
   }
 
   logout(): Observable<void> {
