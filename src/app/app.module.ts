@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AppRoutingModule,
+    AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
     EffectsModule.forRoot([]),

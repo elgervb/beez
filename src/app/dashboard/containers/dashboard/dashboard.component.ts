@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
 
-import { filter, tap } from 'rxjs/operators';
+import { filter, first, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { User } from 'src/app/auth/user';
+import { Store } from '@ngrx/store';
+import { UserInfo } from 'src/app/auth';
+import * as fromAuth from 'src/app/auth';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -13,25 +16,25 @@ import { User } from 'src/app/auth/user';
 })
 export class DashboardComponent implements OnInit {
 
-  user$: Observable<User | null>;
+  user$: Observable<UserInfo | null>;
 
   constructor(
-    private authService: AuthService,
+    private store: Store<fromAuth.State>,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.user$ = this.authService.user$
-      .pipe(
-        filter(user => !!user),
-      );
+    this.user$ = this.store.select(fromAuth.selectUser);
   }
 
   logout(): void {
-    this.authService.logout()
-      .pipe(
-        tap(() => this.router.navigate(['/login']))
-      ).subscribe();
+    this.store.dispatch(fromAuth.logout());
+
+    this.user$.pipe(
+      filter(user => !user),
+      tap(() => this.router.navigate(['/login'])),
+      first()
+    ).subscribe();
   }
 
 }
