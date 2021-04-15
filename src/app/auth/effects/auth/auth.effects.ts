@@ -1,26 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { concatMap, map, tap } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
 
 import * as AuthActions from '../../actions/auth/auth.actions';
-import { UserInfo, User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
-
-function convertUserToUserInfo(user: User | null): UserInfo | null {
-  if (!user) {
-    return null;
-  }
-
-  const { displayName, uid, photoURL } = user;
-
-  return {
-    displayName,
-    uid,
-    photoURL
-  };
-
-}
 
 @Injectable()
 export class AuthEffects {
@@ -28,11 +12,8 @@ export class AuthEffects {
   checkLogin$ = createEffect(() => {
     return this.actions$.pipe(
 
-      () => this.authService.user$
-        .pipe(
-          tap(user => console.log('EFFECT', user)),
-          map(user => AuthActions.loginSuccess({ user: convertUserToUserInfo(user) }))
-        )
+      ofType(AuthActions.checkLogin),
+      map(action => AuthActions.loginSuccess({ user: action.user }))
     );
   });
 

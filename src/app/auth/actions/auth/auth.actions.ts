@@ -2,7 +2,8 @@ import { createAction, props } from '@ngrx/store';
 import { UserInfo } from '../../models/user';
 
 export const checkLogin = createAction(
-  '[Auth] CheckLogin'
+  '[Auth] CheckLogin',
+  props<{ user: UserInfo | null }>()
 );
 
 export const login = createAction(
