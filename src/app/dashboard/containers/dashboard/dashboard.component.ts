@@ -5,9 +5,8 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserInfo } from 'src/app/auth';
+
 import * as fromAuth from 'src/app/auth';
-
-
 
 @Component({
   selector: 'app-dashboard',

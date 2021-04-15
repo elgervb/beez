@@ -3,9 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { transform } from '@elgervb/mock-data';
 import { Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { User } from '../models/user';
 
 import { AuthService } from './auth.service';
-import { User } from './user';
 
 describe('AuthService', () => {
   let service: AuthService;
