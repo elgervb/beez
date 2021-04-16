@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
+import { MaterialModule } from './shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AuthModule } from './auth/auth.module';
     BrowserAnimationsModule,
     BrowserModule,
     EffectsModule.forRoot([]),
+    MaterialModule,
     RouterModule,
     SharedModule,
     StoreModule.forRoot({}, {}),
