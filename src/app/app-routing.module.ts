@@ -32,6 +32,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: 'queen', loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule) },
   {
     path: '**',
     redirectTo: 'dashboard'

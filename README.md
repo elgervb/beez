@@ -13,3 +13,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
    - auth guards: https://github.com/angular/angularfire/blob/master/docs/auth/router-guards.md
 
  
+ ### NgRX
+ create feature
+ ```
+ yarn ng g feature queen/Queen -m queen/queen.module --group --flat false --creators --api true
+ ```
+
+ create container
+ ```
+ yarn ng g container queen/containers/queen --state ../store/reducers/queen/queen.reducer.ts --state-interface State
+ ```
