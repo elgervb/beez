@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,20 +13,20 @@ import { LayoutModule } from '@angular/cdk/layout';
   imports: [
     CommonModule,
     MatButtonModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
+    MatCardModule,
     MatIconModule,
     MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
     LayoutModule
   ],
   exports: [
     MatButtonModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
+    MatCardModule,
     MatIconModule,
     MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
     LayoutModule
   ]
 })
