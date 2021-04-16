@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth, } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
-import { map, share, shareReplay, switchMap } from 'rxjs/operators';
+import { map, share, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 
 import firebase from 'firebase/app';
@@ -13,9 +13,16 @@ export class AuthService {
 
   readonly user$: Observable<User | null>;
 
+  get uid(): string | undefined {
+    return this.userId;
+  }
+
+  private userId: string | undefined;
+
   constructor(private angularFireAuth: AngularFireAuth) {
     this.user$ = this.angularFireAuth.authState
       .pipe(
+        tap(user => this.userId = user?.uid),
         shareReplay(1),
         share()
       );
