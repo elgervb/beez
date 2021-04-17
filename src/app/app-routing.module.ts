@@ -9,15 +9,24 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
     component: MainLayoutComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {
-        path: '',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      }
+        path: 'dashboard',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+          }
+        ]
+      },
+      {
+        path: 'queen',
+        loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule)
+      },
     ]
   },
   {
@@ -32,7 +41,6 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'queen', loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule) },
   {
     path: '**',
     redirectTo: 'dashboard'

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { Queen } from '../../models';
 import * as fromQueens from '../../store/';
 
@@ -14,13 +13,12 @@ export class QueenComponent implements OnInit {
 
   queens$: Observable<Queen[]>;
 
+  displayedColumns: string[] = ['name'];
+
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.queens$ = this.store.select(fromQueens.selectQueens)
-      .pipe(
-        tap(queens => console.log(queens))
-      );
+    this.queens$ = this.store.select(fromQueens.selectQueens);
 
     this.store.dispatch(fromQueens.loadQueens());
   }
