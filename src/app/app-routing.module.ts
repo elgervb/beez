@@ -5,7 +5,7 @@ import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.com
 import { CenteredLayoutComponent } from './shared/layout/centered-layout/centered-layout.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
 
 const routes: Routes = [
   {
@@ -15,13 +15,8 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {
-        path: 'dashboard',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-          }
-        ]
+        path: '',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'queen',
@@ -43,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: ''
   }
 ];
 
