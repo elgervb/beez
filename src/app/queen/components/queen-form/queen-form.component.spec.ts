@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 import { QueenFormComponent } from './queen-form.component';
 
@@ -8,9 +11,14 @@ describe('QueenFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QueenFormComponent ]
+      declarations: [QueenFormComponent],
+      imports: [
+        MaterialModule,
+        NoopAnimationsModule,
+        ReactiveFormsModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Queen } from '../../models';
@@ -15,12 +16,20 @@ export class QueenComponent implements OnInit {
 
   displayedColumns: string[] = ['name'];
 
-  constructor(private store: Store) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private store: Store
+  ) { }
 
   ngOnInit(): void {
     this.queens$ = this.store.select(fromQueens.selectQueens);
 
     this.store.dispatch(fromQueens.loadQueens());
+  }
+
+  addQueen(): void {
+    this.router.navigate(['add'], { relativeTo: this.route });
   }
 
 }

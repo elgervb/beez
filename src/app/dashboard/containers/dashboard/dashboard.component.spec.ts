@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 import { DashboardComponent } from './dashboard.component';
-
 import * as fromAuth from 'src/app/auth';
-import { Router } from '@angular/router';
+
 import { UserInfo } from 'src/app/auth';
 
 describe('DashboardComponent', () => {
@@ -23,9 +21,6 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      imports: [
-        RouterTestingModule.withRoutes([{ path: 'login', children: [] }])
-      ],
       providers: [
         provideMockStore(
           {
@@ -49,21 +44,10 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should logout', () => {
-    const dispatchSpy = jest.spyOn(store, 'dispatch');
-    component.logout();
+  it('should get the user', () => {
+    const selectSpy = jest.spyOn(store, 'select');
+    component.ngOnInit();
 
-    expect(dispatchSpy).toHaveBeenCalledWith(fromAuth.logout());
-  });
-
-  it('should navigate on logout', () => {
-
-    store.overrideSelector(fromAuth.selectUser, null);
-    store.refreshState();
-
-    const navigateSpy = jest.spyOn(TestBed.inject(Router), 'navigate');
-    component.logout();
-
-    expect(navigateSpy).toHaveBeenCalledWith(['/login']);
+    expect(selectSpy).toHaveBeenCalledWith(fromAuth.selectUser);
   });
 });

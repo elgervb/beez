@@ -10,11 +10,13 @@ import { QueenComponent } from './containers/queen/queen.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material/material.module';
 import { QueenFormComponent } from './components/queen-form/queen-form.component';
+import { QueenEditComponent } from './containers/queen-edit/queen-edit.component';
 
 @NgModule({
   declarations: [
     QueenComponent,
-    QueenFormComponent
+    QueenFormComponent,
+    QueenEditComponent
   ],
   imports: [
     CommonModule,

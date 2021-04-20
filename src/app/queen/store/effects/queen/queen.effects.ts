@@ -9,6 +9,27 @@ import { QueenService } from 'src/app/queen/services/queen.service';
 @Injectable()
 export class QueenEffects {
 
+  // TODO: rename add to create
+  addQueen$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(QueenActions.addQueen),
+      concatMap(action => this.queenService.createQueen(action.queen).pipe(
+        map(() => QueenActions.addQueenSuccess()),
+        catchError(error => of(QueenActions.addQueenFailure({ error }))))
+      )
+    );
+  });
+
+  deleteQueen$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(QueenActions.deleteQueen),
+      concatMap(action => this.queenService.deleteQueen(action.queen).pipe(
+        map(() => QueenActions.deleteQueenSuccess()),
+        catchError(error => of(QueenActions.deleteQueenFailure({ error }))))
+      )
+    );
+  });
+
   loadQueens$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QueenActions.loadQueens),

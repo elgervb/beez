@@ -1,8 +1,5 @@
 
-
 <h2 class="mat-title">Queens</h2>
-
-<app-queen-form></app-queen-form>
 
 <table mat-table [dataSource]="queens$" class="mat-elevation-z8">
 
@@ -15,3 +12,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+
+<div class="button-bar">
+  <button mat-stroked-button color="primary" type="button" (click)="addQueen()"> Add new </button>
+</div>

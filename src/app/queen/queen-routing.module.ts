@@ -1,8 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QueenComponent } from './containers/queen/queen.component';
+import { QueenComponent, QueenEditComponent } from './containers';
 
-const routes: Routes = [{ path: '', component: QueenComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    component: QueenComponent
+  },
+  {
+    path: 'add',
+    component: QueenEditComponent
+  },
+  {
+    path: 'edit/:queen-id',
+    component: QueenEditComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
