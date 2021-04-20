@@ -25,7 +25,6 @@ describe('AuthEffects', () => {
     signInWithGoogle: jest.fn()
   };
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [

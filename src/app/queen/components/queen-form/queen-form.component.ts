@@ -10,6 +10,7 @@ import { Queen } from '../../models';
 export class QueenFormComponent implements OnInit {
 
   @Output() submitEvent = new EventEmitter<Queen>();
+  @Output() cancelEvent = new EventEmitter<void>();
 
   readonly form = this.formBuilder.group({
     name: ['', Validators.required]
@@ -19,6 +20,10 @@ export class QueenFormComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  cancel(): void {
+    this.cancelEvent.emit();
   }
 
   submit(): void {

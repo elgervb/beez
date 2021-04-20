@@ -9,7 +9,7 @@
 
 
   <div>
-    <button mat-stroked-button type="button">cancel</button>
+    <button mat-stroked-button type="button" (click)="cancel()">cancel</button>
     <button mat-stroked-button type="submit" color="primary" [disabled]="form.invalid || form.pristine">save</button>
   </div>
 
