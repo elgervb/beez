@@ -9,10 +9,12 @@ import { QueenEffects } from './store/effects/queen/queen.effects';
 import { QueenComponent } from './containers/queen/queen.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material/material.module';
+import { QueenFormComponent } from './components/queen-form/queen-form.component';
 
 @NgModule({
   declarations: [
-    QueenComponent
+    QueenComponent,
+    QueenFormComponent
   ],
   imports: [
     CommonModule,
