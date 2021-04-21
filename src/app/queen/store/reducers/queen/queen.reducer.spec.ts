@@ -1,5 +1,7 @@
 import { reducer, initialState } from './queen.reducer';
 import * as queenActions from '../../actions/queen/queen.actions';
+import { arrayFrom } from '@elgervb/mock-data';
+import { Queen } from 'src/app/queen/models';
 
 describe('Queen Reducer', () => {
   describe('an unknown action', () => {
@@ -12,7 +14,7 @@ describe('Queen Reducer', () => {
     });
 
     it('should load queens', () => {
-      const queens = [{ name: 'q1' }];
+      const queens = arrayFrom<Queen>('queen', 3);
       const action = queenActions.loadQueensSuccess({ queens });
       const result = reducer(initialState, action);
 

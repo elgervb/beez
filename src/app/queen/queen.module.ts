@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material/material.module';
 import { QueenFormComponent } from './components/queen-form/queen-form.component';
 import { QueenEditComponent } from './containers/queen-edit/queen-edit.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { QueenEditComponent } from './containers/queen-edit/queen-edit.component
     MaterialModule,
     QueenRoutingModule,
     ReactiveFormsModule,
+    SharedModule,
     StoreModule.forFeature(fromQueen.queenFeatureKey, fromQueen.reducer),
   ]
 })
