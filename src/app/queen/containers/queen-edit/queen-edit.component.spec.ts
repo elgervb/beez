@@ -8,10 +8,10 @@ describe('QueenEditComponent', () => {
   let fixture: ComponentFixture<QueenEditComponent>;
   let store: Store;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [ StoreModule.forRoot({}) ],
-      declarations: [ QueenEditComponent ]
+      imports: [StoreModule.forRoot({})],
+      declarations: [QueenEditComponent]
     });
 
     await TestBed.compileComponents();

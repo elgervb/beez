@@ -4,6 +4,8 @@ import { from, Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/auth';
 import { Queen } from '../models';
 
+import firebase from 'firebase/app';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +20,6 @@ export class QueenService {
     private authService: AuthService
   ) { }
 
-
   createQueen(queen: Queen): Observable<DocumentReference<Queen>> {
     return from(this.angularFirestore.collection<Queen>(this.collectionPath).add(queen));
   }
@@ -30,5 +31,11 @@ export class QueenService {
 
   getQueens(): AngularFirestoreCollection<Queen> {
     return this.angularFirestore.collection<Queen>(this.collectionPath);
+  }
+
+  updateQueen(queen: Queen): Observable<firebase.firestore.DocumentSnapshot<Queen>> {
+    const doc = this.angularFirestore.collection<Queen>(this.collectionPath).doc();
+    doc.update(queen);
+    return doc.get();
   }
 }

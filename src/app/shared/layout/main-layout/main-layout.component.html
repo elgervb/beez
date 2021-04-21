@@ -7,8 +7,8 @@
     <mat-toolbar>Menu</mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item href="/">Dashboard</a>
-      <a mat-list-item href="/queen">Queens</a>
+      <a mat-list-item routerLink="/" routerLinkActive>Dashboard</a>
+      <a mat-list-item routerLink="/queen" routerLinkActive>Queens</a>
       <mat-divider></mat-divider>
       <div mat-list-item class="logout">
         <button mat-stroked-button color="primary" (click)="logout()">Logout</button>

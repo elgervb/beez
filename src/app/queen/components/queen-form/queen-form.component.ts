@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Queen } from '../../models';
 
@@ -9,17 +9,22 @@ import { Queen } from '../../models';
 })
 export class QueenFormComponent implements OnInit {
 
+  @Input() queen?: Queen;
+
   @Output() submitEvent = new EventEmitter<Queen>();
   @Output() cancelEvent = new EventEmitter<void>();
 
   readonly form = this.formBuilder.group({
+    id: [''],
     name: ['', Validators.required]
   });
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-
+    if (this.queen) {
+      this.form.patchValue(this.queen);
+    }
   }
 
   cancel(): void {

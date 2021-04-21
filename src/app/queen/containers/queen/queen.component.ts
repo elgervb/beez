@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { Queen } from '../../models';
 import * as fromQueens from '../../store/';
 
@@ -14,11 +17,12 @@ export class QueenComponent implements OnInit {
 
   queens$: Observable<Queen[]>;
 
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name', 'actions'];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private store: Store
   ) { }
 
@@ -32,4 +36,18 @@ export class QueenComponent implements OnInit {
     this.router.navigate(['add'], { relativeTo: this.route });
   }
 
+  deleteQueen(queen: Queen, event?: MouseEvent): void {
+    event?.stopPropagation();
+    this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(ConfirmComponent, { data: { title: 'Delete queen', content: `Are you sure you want to delete queen ${queen.name}?` } })
+      .afterClosed().pipe(
+        filter(confirm => !!confirm),
+        tap(() => this.store.dispatch(fromQueens.deleteQueen({ queen })))
+      )
+      .subscribe();
+
+  }
+
+  select(queen: Queen): void {
+    this.router.navigate(['edit', queen.id], { relativeTo: this.route });
+  }
 }

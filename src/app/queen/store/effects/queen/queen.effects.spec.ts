@@ -8,14 +8,11 @@ import { QueenEffects } from './queen.effects';
 
 import * as fromQueen from '../../';
 import { cold, hot } from 'jasmine-marbles';
+import { arrayFrom, from } from '@elgervb/mock-data';
 
 describe('QueenEffects', () => {
   let actions$: Observable<any>;
   let effects: QueenEffects;
-
-  const queen: Queen = {
-    name: 'q1',
-  };
 
   const queenService = {
     createQueen: jest.fn(),
@@ -40,6 +37,7 @@ describe('QueenEffects', () => {
   });
 
   it('should create a queen', () => {
+    const queen = from<Queen>('queen');
     const action = fromQueen.addQueen({ queen });
     const result = fromQueen.addQueenSuccess();
 
@@ -52,6 +50,7 @@ describe('QueenEffects', () => {
   });
 
   it('should delete a queen', () => {
+    const queen = from<Queen>('queen');
     const action = fromQueen.deleteQueen({ queen });
     const result = fromQueen.deleteQueenSuccess();
 
@@ -64,7 +63,7 @@ describe('QueenEffects', () => {
   });
 
   it('should load all queens', () => {
-    const queens = [{ ...queen, ...queen }];
+    const queens = arrayFrom<Queen>('queen', 4);
     const action = fromQueen.loadQueens();
     const result = fromQueen.loadQueensSuccess({ queens });
 

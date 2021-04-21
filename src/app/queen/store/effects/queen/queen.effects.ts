@@ -33,7 +33,7 @@ export class QueenEffects {
   loadQueens$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QueenActions.loadQueens),
-      concatMap(() => this.queenService.getQueens().valueChanges().pipe(
+      concatMap(() => this.queenService.getQueens().valueChanges({ idField: 'id' }).pipe(
         map(queens => QueenActions.loadQueensSuccess({ queens })),
         catchError(error => of(QueenActions.loadQueensFailure({ error }))))
       )

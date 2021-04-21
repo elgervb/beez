@@ -30,13 +30,14 @@ export class QueenEditComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  addQueen(queen: Queen): void {
+  edit(queen: Queen): void {
     this.store.select(fromQueen.selectQueens)
       .pipe(
         filter(queens => queens.some(q => q.name === queen.name)),
         tap(() => this.router.navigate(['..'], { relativeTo: this.route })),
         takeUntil(this.destroy$)
       ).subscribe();
+
 
     this.store.dispatch(fromQueen.addQueen({ queen }));
   }
