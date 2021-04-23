@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, shareReplay, filter, first, tap } from 'rxjs/operators';
-import * as fromAuth from 'src/app/auth';
+import { map, shareReplay, first, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth';
 
 @Component({
   selector: 'app-main-layout',
@@ -20,20 +19,16 @@ export class MainLayoutComponent {
     );
 
   constructor(
-    private store: Store<fromAuth.State>,
+    private authService: AuthService,
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) { }
 
   logout(): void {
-    this.store.dispatch(fromAuth.logout());
-
-    const user$ = this.store.select(fromAuth.selectUser);
-
-    user$.pipe(
-      filter(user => !user),
-      tap(() => this.router.navigate(['/login'])),
-      first()
-    ).subscribe();
+    this.authService.logout()
+      .pipe(
+        tap(() => this.router.navigate(['/login'])),
+        first()
+      ).subscribe();
   }
 }

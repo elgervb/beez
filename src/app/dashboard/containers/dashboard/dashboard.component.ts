@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { UserInfo } from 'src/app/auth';
-
-import * as fromAuth from 'src/app/auth';
+import { AuthService, UserInfo } from 'src/app/auth';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,11 +12,11 @@ export class DashboardComponent implements OnInit {
   user$: Observable<UserInfo | null>;
 
   constructor(
-    private store: Store<fromAuth.State>,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.user$ = this.store.select(fromAuth.selectUser);
+    this.user$ = this.authService.user$;
   }
 
 }

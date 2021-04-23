@@ -1,17 +1,27 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { QueenService } from '../../services/queen.service';
 
 import { QueenEditComponent } from './queen-edit.component';
-import { Store, StoreModule } from '@ngrx/store';
 
 describe('QueenEditComponent', () => {
   let component: QueenEditComponent;
   let fixture: ComponentFixture<QueenEditComponent>;
-  let store: Store;
+  let route: ActivatedRoute;
+  const queenService: Partial<QueenService> = {
+    getQueen: jest.fn()
+  };
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
-      declarations: [QueenEditComponent]
+      declarations: [QueenEditComponent],
+      imports: [RouterTestingModule],
+      providers: [
+        { provide: QueenService, useValue: queenService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     });
 
     await TestBed.compileComponents();
@@ -20,13 +30,20 @@ describe('QueenEditComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QueenEditComponent);
     component = fixture.componentInstance;
-    store = TestBed.inject(Store);
 
-    spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
+    route = TestBed.inject(ActivatedRoute);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should load a queen', () => {
+    const queenId = 'qId';
+    jest.spyOn(route.snapshot.paramMap, 'get').mockReturnValue(queenId);
+    component.ngOnInit();
+
+    expect(queenService.getQueen).toHaveBeenCalledWith(queenId);
   });
 });

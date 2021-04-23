@@ -1,7 +1,9 @@
 
-<h2 class="mat-title">Add queen</h2>
+<h2 class="mat-title">{{isEdit ? 'Edit' : 'Add'}} queen</h2>
 
 <app-queen-form
-(cancelEvent)="cancel()"
-(submitEvent)="edit($event)">
+  [queen]="queen$ | async"
+  (cancelEvent)="cancel()"
+  (submitEvent)="edit($event)">
 </app-queen-form>
+

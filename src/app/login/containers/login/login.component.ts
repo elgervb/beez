@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromAuth from 'src/app/auth';
+import { AuthService } from 'src/app/auth';
 
 @Component({
   selector: 'app-login',
@@ -9,14 +8,14 @@ import * as fromAuth from 'src/app/auth';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
 
   }
 
   login(): void {
-    this.store.dispatch(fromAuth.login());
+    this.authService.signInWithGoogle();
   }
 
 }

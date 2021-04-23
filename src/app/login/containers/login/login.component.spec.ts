@@ -1,15 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-
 import { LoginComponent } from './login.component';
-
-import * as fromAuth from 'src/app/auth';
 import { MaterialModule } from 'src/app/shared/material/material.module';
+import { AuthService } from 'src/app/auth';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let store: MockStore;
   let fixture: ComponentFixture<LoginComponent>;
+  const authService = { signInWithGoogle: jest.fn() };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,8 +15,8 @@ describe('LoginComponent', () => {
         MaterialModule
       ],
       providers: [
-        provideMockStore<fromAuth.State>({ initialState: fromAuth.initialState }),
-      ],
+        { provide: AuthService, useValue: authService }
+      ]
     })
       .compileComponents();
   });
@@ -28,8 +25,6 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
-    store = TestBed.inject(MockStore);
   });
 
   it('should create', () => {
@@ -37,9 +32,8 @@ describe('LoginComponent', () => {
   });
 
   it('should login', () => {
-    const dispatchSpy = jest.spyOn(store, 'dispatch');
     component.login();
 
-    expect(dispatchSpy).toHaveBeenCalledWith(fromAuth.login());
+    expect(authService.signInWithGoogle).toHaveBeenCalled();
   });
 });
