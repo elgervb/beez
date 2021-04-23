@@ -9,7 +9,11 @@ import { Queen } from '../../models';
 })
 export class QueenFormComponent implements OnInit {
 
-  @Input() queen?: Queen;
+  @Input() set queen(queen: Queen | null | undefined) {
+    if (queen) {
+      this.form.patchValue(queen);
+    }
+  }
 
   @Output() submitEvent = new EventEmitter<Queen>();
   @Output() cancelEvent = new EventEmitter<void>();
@@ -22,9 +26,7 @@ export class QueenFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    if (this.queen) {
-      this.form.patchValue(this.queen);
-    }
+
   }
 
   cancel(): void {

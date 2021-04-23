@@ -12,7 +12,7 @@ const routes: Routes = [
     component: QueenEditComponent
   },
   {
-    path: 'edit/:queen-id',
+    path: 'edit/:queenId',
     component: QueenEditComponent
   }
 ];

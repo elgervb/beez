@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/auth';
 import { Queen } from '../models';
 
-import firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QueenService {
 
-  get collectionPath(): string {
+  private get collectionPath(): string {
     return `beez/${this.authService.uid}/queens`;
   }
 
@@ -29,13 +29,24 @@ export class QueenService {
     return of();
   }
 
-  getQueens(): AngularFirestoreCollection<Queen> {
-    return this.angularFirestore.collection<Queen>(this.collectionPath);
+  getQueen(queenId: string): Observable<Queen | undefined> {
+    return this.angularFirestore.collection<Queen>(this.collectionPath).doc(queenId).get()
+      .pipe(
+        map(doc => doc.data()),
+        map(queen => queen ? { ...queen, id: queenId } : queen)
+      );
   }
 
-  updateQueen(queen: Queen): Observable<firebase.firestore.DocumentSnapshot<Queen>> {
-    const doc = this.angularFirestore.collection<Queen>(this.collectionPath).doc();
-    doc.update(queen);
-    return doc.get();
+  getQueens(): Observable<Queen[]> {
+    return this.angularFirestore.collection<Queen>(this.collectionPath).valueChanges({ idField: 'id' });
+  }
+
+  updateQueen(queen: Queen): Observable<Queen | undefined> {
+    const document = this.angularFirestore.collection<Queen>(this.collectionPath).doc(queen.id);
+    document.update(queen);
+    return document.get()
+      .pipe(
+        map(doc => doc.data())
+      );
   }
 }

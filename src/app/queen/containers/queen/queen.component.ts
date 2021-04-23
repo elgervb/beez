@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { Queen } from '../../models';
-import * as fromQueens from '../../store/';
+import { QueenService } from '../../services/queen.service';
 
 @Component({
   selector: 'app-queen',
@@ -23,13 +22,11 @@ export class QueenComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private store: Store
+    private queenService: QueenService
   ) { }
 
   ngOnInit(): void {
-    this.queens$ = this.store.select(fromQueens.selectQueens);
-
-    this.store.dispatch(fromQueens.loadQueens());
+    this.queens$ = this.queenService.getQueens();
   }
 
   addQueen(): void {
@@ -41,7 +38,7 @@ export class QueenComponent implements OnInit {
     this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(ConfirmComponent, { data: { title: 'Delete queen', content: `Are you sure you want to delete queen ${queen.name}?` } })
       .afterClosed().pipe(
         filter(confirm => !!confirm),
-        tap(() => this.store.dispatch(fromQueens.deleteQueen({ queen })))
+        tap(() => this.queenService.deleteQueen(queen))
       )
       .subscribe();
 

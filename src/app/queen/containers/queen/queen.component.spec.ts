@@ -1,17 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from 'src/app/shared/material/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { QueenService } from '../../services/queen.service';
 import { QueenComponent } from './queen.component';
-import { Store, StoreModule } from '@ngrx/store';
 
 describe('QueenComponent', () => {
   let component: QueenComponent;
   let fixture: ComponentFixture<QueenComponent>;
-  let store: Store;
+  const queenService = {
+    getQueens: jest.fn(),
+    deleteQueen: jest.fn()
+  };
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [ StoreModule.forRoot({}) ],
-      declarations: [ QueenComponent ]
+      declarations: [QueenComponent],
+      imports: [
+        MaterialModule,
+        RouterTestingModule,
+        SharedModule,
+      ],
+      providers: [
+        { provide: QueenService, useValue: queenService }
+      ]
     });
 
     await TestBed.compileComponents();
@@ -20,9 +32,7 @@ describe('QueenComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QueenComponent);
     component = fixture.componentInstance;
-    store = TestBed.inject(Store);
 
-    spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
 

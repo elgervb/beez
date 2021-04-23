@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DocumentReference } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { first, tap } from 'rxjs/operators';
 import { Queen } from '../../models';
-import * as fromQueen from '../../store';
+import { QueenService } from '../../services/queen.service';
 
 @Component({
   selector: 'app-queen-edit',
@@ -13,16 +13,29 @@ import * as fromQueen from '../../store';
 })
 export class QueenEditComponent implements OnInit, OnDestroy {
 
+  queen$?: Observable<Queen | undefined>;
+
+  get isEdit(): boolean {
+    return !!this.queenId;
+  }
+
+  get queenId(): string | null {
+    return this.route.snapshot.paramMap.get('queenId');
+  }
+
   private destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store
+    private queenService: QueenService
   ) { }
 
   ngOnInit(): void {
-
+    const queenId = this.queenId;
+    if (queenId) {
+      this.queen$ = this.queenService.getQueen(queenId);
+    }
   }
 
   ngOnDestroy(): void {
@@ -31,19 +44,18 @@ export class QueenEditComponent implements OnInit, OnDestroy {
   }
 
   edit(queen: Queen): void {
-    this.store.select(fromQueen.selectQueens)
-      .pipe(
-        filter(queens => queens.some(q => q.name === queen.name)),
-        tap(() => this.router.navigate(['..'], { relativeTo: this.route })),
-        takeUntil(this.destroy$)
-      ).subscribe();
+    const result: Observable<DocumentReference<Queen> | Queen | undefined> =
+      !!queen.id ? this.queenService.updateQueen(queen) : this.queenService.createQueen(queen);
 
-
-    this.store.dispatch(fromQueen.addQueen({ queen }));
+    result.pipe(
+      first(),
+      tap(() => this.cancel())
+    ).subscribe();
   }
 
   cancel(): void {
-    this.router.navigate(['..'], { relativeTo: this.route });
+    const path = this.isEdit ? '../..' : '..';
+    this.router.navigate([path], { relativeTo: this.route });
   }
 
 }
