@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
@@ -12,11 +14,14 @@ import { QueenService } from '../../services/queen.service';
   templateUrl: './queen.component.html',
   styleUrls: ['./queen.component.css']
 })
-export class QueenComponent implements OnInit {
+export class QueenComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  queens$: Observable<Queen[]>;
-
+  dataSource = new MatTableDataSource<Queen>();
   displayedColumns: string[] = ['name', 'actions'];
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -26,7 +31,20 @@ export class QueenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.queens$ = this.queenService.getQueens();
+    this.queenService.getQueens()
+      .pipe(
+        tap(queens => this.dataSource.data = queens),
+        takeUntil(this.destroy$)
+      ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
   }
 
   addQueen(): void {
