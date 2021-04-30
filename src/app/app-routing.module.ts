@@ -19,7 +19,11 @@ const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'queen',
+        path: 'hives',
+        loadChildren: () => import('./hive/hive.module').then(m => m.HiveModule)
+      },
+      {
+        path: 'queens',
         loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule)
       },
     ]
