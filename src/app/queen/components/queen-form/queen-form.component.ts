@@ -11,7 +11,9 @@ export class QueenFormComponent implements OnInit {
 
   @Input() set queen(queen: Queen | null | undefined) {
     if (queen) {
-      this.form.patchValue(queen);
+      const date = queen.date?.toDate();
+      const values = { ...queen, date };
+      this.form.patchValue(values);
     }
   }
 
@@ -20,7 +22,12 @@ export class QueenFormComponent implements OnInit {
 
   readonly form = this.formBuilder.group({
     id: [''],
-    name: ['', Validators.required]
+    name: ['', Validators.required],
+    active: [true],
+    isMarked: [false],
+    color: [''],
+    date: [new Date(), Validators.required],
+    remarks: ['']
   });
 
   constructor(private formBuilder: FormBuilder) { }
@@ -35,7 +42,7 @@ export class QueenFormComponent implements OnInit {
 
   submit(): void {
     if (this.form.valid) {
-      this.submitEvent.emit(this.form.value);
+      this.submitEvent.emit({ ...this.form.value });
     }
   }
 
