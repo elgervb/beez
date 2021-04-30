@@ -7,7 +7,7 @@ import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
 
 @Component({
-  selector: 'app-queen-edit',
+  selector: 'bee-queen-edit',
   templateUrl: './queen-edit.component.html',
   styleUrls: ['./queen-edit.component.css']
 })

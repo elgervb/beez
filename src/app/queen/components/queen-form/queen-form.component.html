@@ -41,9 +41,9 @@
     <mat-slide-toggle formControlName="active">Is active</mat-slide-toggle>
   </div>
 
-  <app-button-bar justify="right">
+  <bee-button-bar justify="right">
     <button mat-stroked-button type="button" (click)="cancel()">cancel</button>
     <button mat-stroked-button type="submit" color="primary" [disabled]="form.invalid || form.pristine">save</button>
-  </app-button-bar>
+  </bee-button-bar>
 
 </form>

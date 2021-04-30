@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AuthService, UserInfo } from 'src/app/auth';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'bee-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

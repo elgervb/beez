@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
 
 @Component({
-  selector: 'app-login',
+  selector: 'bee-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

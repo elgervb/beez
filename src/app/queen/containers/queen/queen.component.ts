@@ -10,7 +10,7 @@ import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
 
 @Component({
-  selector: 'app-queen',
+  selector: 'bee-queen',
   templateUrl: './queen.component.html',
   styleUrls: ['./queen.component.css']
 })
