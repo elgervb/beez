@@ -1,6 +1,6 @@
 import { UserInfo, User } from './models/user';
 
-export function convertUserToUserInfo(user: User | null): UserInfo | null {
+export const convertUserToUserInfo = (user: User | null): UserInfo | null => {
   if (!user) {
     return null;
   }
@@ -13,4 +13,4 @@ export function convertUserToUserInfo(user: User | null): UserInfo | null {
     photoURL
   };
 
-}
+};

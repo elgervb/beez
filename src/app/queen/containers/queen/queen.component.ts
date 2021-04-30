@@ -16,10 +16,10 @@ import { QueenService } from '../../services/queen.service';
 })
 export class QueenComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+
   dataSource = new MatTableDataSource<Queen>();
   displayedColumns: string[] = ['name', 'isActive', 'actions'];
-
-  @ViewChild(MatSort) sort: MatSort;
 
   private destroy$ = new Subject<void>();
 
@@ -53,8 +53,11 @@ export class QueenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   deleteQueen(queen: Queen, event?: MouseEvent): void {
     event?.stopPropagation();
-    this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(ConfirmComponent, { data: { title: 'Delete queen', content: `Are you sure you want to delete queen ${queen.name}?` } })
-      .afterClosed().pipe(
+    this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
+      ConfirmComponent,
+      { data: { title: 'Delete queen', content: `Are you sure you want to delete queen ${queen.name}?` } }
+    ).afterClosed()
+      .pipe(
         filter(confirm => !!confirm),
         tap(() => this.queenService.deleteQueen(queen))
       )

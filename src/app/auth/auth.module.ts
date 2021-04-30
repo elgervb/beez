@@ -4,14 +4,12 @@ import { AuthService } from './services/auth.service';
 import { take } from 'rxjs/operators';
 import { UserInfo } from './models/user';
 
-export function isLoggedInFactory(authService: AuthService): () => Promise<UserInfo | null> {
-  return () => {
-    return authService.user$
-      .pipe(
-        take(1)
-      ).toPromise();
-  };
-}
+export const isLoggedInFactory = (authService: AuthService): () => Promise<UserInfo | null> =>
+  () => authService.user$
+    .pipe(
+      take(1)
+    ).toPromise();
+
 @NgModule({
   declarations: [],
   imports: [
