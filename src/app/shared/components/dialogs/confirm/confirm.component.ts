@@ -7,7 +7,7 @@ export interface ConfirmDialogData {
 }
 
 @Component({
-  selector: 'app-confirm',
+  selector: 'bee-confirm',
   templateUrl: './confirm.component.html',
   styleUrls: ['./confirm.component.css']
 })

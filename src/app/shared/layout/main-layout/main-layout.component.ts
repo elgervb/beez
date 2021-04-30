@@ -6,7 +6,7 @@ import { map, shareReplay, first, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth';
 
 @Component({
-  selector: 'app-main-layout',
+  selector: 'bee-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.css']
 })

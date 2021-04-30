@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Queen } from '../../models';
 
 @Component({
-  selector: 'app-queen-form',
+  selector: 'bee-queen-form',
   templateUrl: './queen-form.component.html',
   styleUrls: ['./queen-form.component.css']
 })
