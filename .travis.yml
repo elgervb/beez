@@ -10,7 +10,8 @@ cache:
 script:
   - yarn lint
   - yarn test --coverage
-  - yarn build --prod
+  - yarn build --prod --base-href /beez/
+  - cp dist/beez/index.html dist/beez/404.html
 
 deploy:
   provider: pages
