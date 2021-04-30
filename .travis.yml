@@ -10,7 +10,7 @@ cache:
 script:
   - yarn lint
   - yarn test --coverage
-  - yarn build --prod --base-href /beez/
+  - yarn build --prod --base-href https://elgervb.github.io/beez/
   - cp dist/beez/index.html dist/beez/404.html
 
 deploy:
