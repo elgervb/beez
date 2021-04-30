@@ -16,10 +16,11 @@ import { HiveService } from '../../services/hive.service';
 })
 export class HiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+
   dataSource = new MatTableDataSource<Hive>();
   displayedColumns: string[] = ['name', 'isActive', 'actions'];
 
-  @ViewChild(MatSort) sort: MatSort;
 
   private destroy$ = new Subject<void>();
 
@@ -53,8 +54,11 @@ export class HiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   deleteHive(hive: Hive, event?: MouseEvent): void {
     event?.stopPropagation();
-    this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(ConfirmComponent, { data: { title: 'Delete hive', content: `Are you sure you want to delete hive ${hive.name}?` } })
-      .afterClosed().pipe(
+    this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
+      ConfirmComponent,
+      { data: { title: 'Delete hive', content: `Are you sure you want to delete hive ${hive.name}?` } }
+    ).afterClosed()
+      .pipe(
         filter(confirm => !!confirm),
         tap(() => this.hiveService.deleteHive(hive))
       )
