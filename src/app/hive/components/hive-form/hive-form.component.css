@@ -1,0 +1,16 @@
+
+.form-field{
+  align-items: center;
+  display: flex;
+  margin: .5rem 0;
+  min-height: 5rem;
+}
+.mat-form-field {
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+
+textarea {
+  min-height: 6rem;
+}
