@@ -1,9 +1,0 @@
-
-<h2 class="mat-title">{{isEdit ? 'Edit' : 'Add'}} queen</h2>
-
-<bee-queen-form
-  [queen]="queen$ | async"
-  (cancelEvent)="cancel()"
-  (submitEvent)="edit($event)">
-</bee-queen-form>
-
