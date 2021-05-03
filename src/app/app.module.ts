@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -12,6 +11,15 @@ import { AuthModule } from './auth/auth.module';
 import { LayoutModule } from './shared/layout/layout.module';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatIconRegistry } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
+
+export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) => () => {
+  iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/google.svg'));
+  iconRegistry.addSvgIcon('beez', sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/beez-transparent.svg'));
+
+  return Promise.resolve();
+};
 @NgModule({
   declarations: [
     AppComponent
@@ -24,6 +32,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule, // needed for mat-icon registry
     RouterModule,
     LayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -33,7 +42,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: registerMaterialIcons, deps: [MatIconRegistry, DomSanitizer], multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
