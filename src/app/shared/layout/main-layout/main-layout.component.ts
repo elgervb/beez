@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, first, tap } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth';
+import { AuthService, UserInfo } from 'src/app/auth';
 
 @Component({
   selector: 'bee-main-layout',
@@ -17,6 +17,8 @@ export class MainLayoutComponent {
       map(result => result.matches),
       shareReplay()
     );
+
+  user$: Observable<UserInfo | null> = this.authService.user$;
 
   constructor(
     private authService: AuthService,

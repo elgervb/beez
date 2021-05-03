@@ -7,13 +7,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { Router } from '@angular/router';
 import { MaterialModule } from '../../material/material.module';
-import { AuthService } from 'src/app/auth';
+import { AuthService, UserInfo } from 'src/app/auth';
 import { of } from 'rxjs';
+import { from } from '@elgervb/mock-data';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
   let fixture: ComponentFixture<MainLayoutComponent>;
+
+  const user = from<UserInfo>('user');
   const authService = {
+    user$: of(user),
     logout: jest.fn().mockReturnValue(of({}))
   };
 
@@ -53,5 +57,9 @@ describe('MainLayoutComponent', () => {
     component.logout();
 
     expect(navigateSpy).toHaveBeenCalledWith(['/login']);
+  });
+
+  it('should get the user', () => {
+    expect(component.user$).toBe(authService.user$);
   });
 });

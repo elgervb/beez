@@ -16,6 +16,16 @@
   z-index: 1;
 }
 
+.mat-toolbar .title {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar img {
+  align-self: end;
+  border-radius: 50%;
+  max-height: 4rem;
+}
+
 .mat-nav-list {
   height: 100%;
 }
