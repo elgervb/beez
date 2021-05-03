@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1620038963445,
+  "timestamp": 1620040786814,
   "index": "/beez/index.html",
   "assetGroups": [
     {
@@ -65,8 +65,8 @@
     "/beez/assets/icons/icon-72x72.png": "3a80eac036d87b26c44a0ed6548d834396ad4a98",
     "/beez/assets/icons/icon-96x96.png": "7b46c214f17c800f0e789176899399936a38a81c",
     "/beez/common.a3157edfa2b7c2709450.js": "a0bdb8e3340dd80bf908c2079db27b8f7cfe43c1",
-    "/beez/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/beez/index.html": "cf80a11410b805662481a62292dcd9718917562d",
+    "/beez/favicon.ico": "58e5cd78b0f2ce4eb695bf3631fd2daac6ac1d12",
+    "/beez/index.html": "b1563c1e4e4ad53ac2e5d6afd789b804c940dae1",
     "/beez/main.4cd70c7fa9320281f496.js": "469c2537bc75b8e8f7e502a03053f86c6039744d",
     "/beez/manifest.webmanifest": "aa42cfc7147f6fe3b806f793aae3143505d6873f",
     "/beez/polyfills.3544d9cb241a5eeaae74.js": "506855517e1835c4f3db5c7d25569b95bee71560",
