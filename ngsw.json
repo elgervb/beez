@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1620040786814,
+  "timestamp": 1620042007106,
   "index": "/beez/index.html",
   "assetGroups": [
     {
@@ -66,7 +66,7 @@
     "/beez/assets/icons/icon-96x96.png": "7b46c214f17c800f0e789176899399936a38a81c",
     "/beez/common.a3157edfa2b7c2709450.js": "a0bdb8e3340dd80bf908c2079db27b8f7cfe43c1",
     "/beez/favicon.ico": "58e5cd78b0f2ce4eb695bf3631fd2daac6ac1d12",
-    "/beez/index.html": "b1563c1e4e4ad53ac2e5d6afd789b804c940dae1",
+    "/beez/index.html": "abfb59b62430b4f1264df5a8aca6aa1e327380a9",
     "/beez/main.4cd70c7fa9320281f496.js": "469c2537bc75b8e8f7e502a03053f86c6039744d",
     "/beez/manifest.webmanifest": "aa42cfc7147f6fe3b806f793aae3143505d6873f",
     "/beez/polyfills.3544d9cb241a5eeaae74.js": "506855517e1835c4f3db5c7d25569b95bee71560",
