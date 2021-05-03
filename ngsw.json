@@ -1,0 +1,95 @@
+{
+  "configVersion": 1,
+  "timestamp": 1620032931893,
+  "index": "/beez/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/beez/5.fe4da80304c8b32a4778.js",
+        "/beez/6.fd49c085c17ad9238010.js",
+        "/beez/7.123e364de7804a37a564.js",
+        "/beez/8.1b23ab98b872fbbda3cf.js",
+        "/beez/9.f6ed3c3138be4d442cfa.js",
+        "/beez/common.a3157edfa2b7c2709450.js",
+        "/beez/favicon.ico",
+        "/beez/index.html",
+        "/beez/main.4cd70c7fa9320281f496.js",
+        "/beez/manifest.webmanifest",
+        "/beez/polyfills.3544d9cb241a5eeaae74.js",
+        "/beez/runtime.7eaa00150eb4a7ac5974.js",
+        "/beez/styles.7b24d4c0c7d7e30102d9.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/beez/assets/icons/google.svg",
+        "/beez/assets/icons/icon-128x128.png",
+        "/beez/assets/icons/icon-144x144.png",
+        "/beez/assets/icons/icon-152x152.png",
+        "/beez/assets/icons/icon-192x192.png",
+        "/beez/assets/icons/icon-384x384.png",
+        "/beez/assets/icons/icon-512x512.png",
+        "/beez/assets/icons/icon-72x72.png",
+        "/beez/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/beez/5.fe4da80304c8b32a4778.js": "2d88f43fbea1aff6dcfdd50bc91436b60c992ffe",
+    "/beez/6.fd49c085c17ad9238010.js": "e13bfadb490fae0d8b1b7c0331e50ed68cea29e0",
+    "/beez/7.123e364de7804a37a564.js": "9d47e93809b176984b4258c0ea85c6503bfd8ce4",
+    "/beez/8.1b23ab98b872fbbda3cf.js": "84cfe1fe4c9f5225bde301d116edfd14d717ee8c",
+    "/beez/9.f6ed3c3138be4d442cfa.js": "446ff8d42f723d2f6d7e04f272c0a410d6b637bd",
+    "/beez/assets/icons/google.svg": "4524589b0dceefb6ae6389f36634441df69152d5",
+    "/beez/assets/icons/icon-128x128.png": "2be9771effe0253e175401dbe2428add52d71c14",
+    "/beez/assets/icons/icon-144x144.png": "86ad518136094f71fc8b1077b719ab130cb8a405",
+    "/beez/assets/icons/icon-152x152.png": "5aa62f19ed5cfd044cdafe53944fd1ccd1b71011",
+    "/beez/assets/icons/icon-192x192.png": "05d6590c3ed1589bb6f6375c314e22b455ae3f2d",
+    "/beez/assets/icons/icon-384x384.png": "2fe746d406b13254c9fc645e48b8a70dd9111816",
+    "/beez/assets/icons/icon-512x512.png": "6d3365c2143f7319673766c7e3bd700f7209739c",
+    "/beez/assets/icons/icon-72x72.png": "3a80eac036d87b26c44a0ed6548d834396ad4a98",
+    "/beez/assets/icons/icon-96x96.png": "7b46c214f17c800f0e789176899399936a38a81c",
+    "/beez/common.a3157edfa2b7c2709450.js": "a0bdb8e3340dd80bf908c2079db27b8f7cfe43c1",
+    "/beez/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/beez/index.html": "44357ad9d808403b0d7a7ca8a15aa605b0c58104",
+    "/beez/main.4cd70c7fa9320281f496.js": "469c2537bc75b8e8f7e502a03053f86c6039744d",
+    "/beez/manifest.webmanifest": "aa42cfc7147f6fe3b806f793aae3143505d6873f",
+    "/beez/polyfills.3544d9cb241a5eeaae74.js": "506855517e1835c4f3db5c7d25569b95bee71560",
+    "/beez/runtime.7eaa00150eb4a7ac5974.js": "68f7d6897445903915d7e7490e4fa4114a899dcd",
+    "/beez/styles.7b24d4c0c7d7e30102d9.css": "5b2b0798d739561e95aebab9c19faccad23d76a7"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
