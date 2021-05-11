@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HiveComponent, HiveEditComponent } from './containers';
+import { HiveListComponent, HiveDetailsComponent, HiveEditComponent } from './containers';
 
 const routes: Routes = [
   {
     path: '',
-    component: HiveComponent
+    component: HiveListComponent
   },
   {
     path: 'add',
     component: HiveEditComponent
+  },
+  {
+    path: 'details/:hiveId',
+    component: HiveDetailsComponent
   },
   {
     path: 'edit/:hiveId',

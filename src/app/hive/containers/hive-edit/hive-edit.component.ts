@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DocumentReference } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
@@ -11,7 +11,7 @@ import { HiveService } from '../../services/hive.service';
   templateUrl: './hive-edit.component.html',
   styleUrls: ['./hive-edit.component.css']
 })
-export class HiveEditComponent implements OnInit, OnDestroy {
+export class HiveEditComponent implements OnInit {
 
   hive$?: Observable<Hive | undefined>;
 
@@ -22,8 +22,6 @@ export class HiveEditComponent implements OnInit, OnDestroy {
   get hiveId(): string | null {
     return this.route.snapshot.paramMap.get('hiveId');
   }
-
-  private destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -36,11 +34,6 @@ export class HiveEditComponent implements OnInit, OnDestroy {
     if (hiveId) {
       this.hive$ = this.hiveService.getHive(hiveId);
     }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   edit(hive: Hive): void {

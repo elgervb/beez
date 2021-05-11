@@ -2,18 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HiveRoutingModule } from './hive-routing.module';
-import { HiveComponent } from './containers/hive/hive.component';
+import { HiveListComponent, HiveEditComponent } from './containers/';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../shared/material/material.module';
-import { HiveFormComponent } from './components/hive-form/hive-form.component';
-import { HiveEditComponent } from './containers/hive-edit/hive-edit.component';
 import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../shared/material/material.module';
+import { HiveFormComponent } from './components';
+import { HiveDetailsComponent } from './containers/hive-details/hive-details.component';
 
 @NgModule({
   declarations: [
-    HiveComponent,
+    HiveEditComponent,
     HiveFormComponent,
-    HiveEditComponent
+    HiveListComponent,
+    HiveDetailsComponent,
   ],
   imports: [
     CommonModule,
