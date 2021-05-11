@@ -24,9 +24,9 @@ export class QueenService {
     return from(this.angularFirestore.collection<Queen>(this.collectionPath).add(queen));
   }
 
-  deleteQueen(queen: Queen): Observable<void> {
+  deleteQueen(queen: Queen): Observable<boolean> {
     this.angularFirestore.doc(`${this.collectionPath}/${queen.id}`).delete();
-    return of();
+    return of(true);
   }
 
   getQueen(queenId: string): Observable<Queen | undefined> {
