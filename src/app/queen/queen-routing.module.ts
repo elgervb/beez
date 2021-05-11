@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QueenComponent, QueenEditComponent } from './containers';
+import { QueenListComponent, QueenEditComponent, QueenDetailsComponent } from './containers';
 
 const routes: Routes = [
   {
     path: '',
-    component: QueenComponent
+    component: QueenListComponent
   },
   {
     path: 'add',
@@ -14,6 +14,11 @@ const routes: Routes = [
   {
     path: 'edit/:queenId',
     component: QueenEditComponent
+  }
+  ,
+  {
+    path: 'details/:queenId',
+    component: QueenDetailsComponent
   }
 ];
 

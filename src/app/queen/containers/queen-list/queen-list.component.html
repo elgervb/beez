@@ -11,17 +11,18 @@
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="isMarked">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Marked </th>
+        <td mat-cell *matCellDef="let element">
+
+          <bee-color-dot *ngIf="element.isMarked" [color]="element.color"></bee-color-dot>
+          <span *ngIf="!element.isMarked" >-</span>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="isActive">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
         <td mat-cell *matCellDef="let element"> <mat-slide-toggle [checked]="element.active" [disabled]="true"></mat-slide-toggle> </td>
-      </ng-container>
-
-
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-stroked-button color="warn" (click)="deleteQueen(element, $event)">delete</button>
-        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

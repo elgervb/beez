@@ -1,32 +1,30 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
-import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
 
 @Component({
-  selector: 'bee-queen',
-  templateUrl: './queen.component.html',
-  styleUrls: ['./queen.component.css']
+  selector: 'bee-queen-list',
+  templateUrl: './queen-list.component.html',
+  styleUrls: ['./queen-list.component.css']
 })
-export class QueenComponent implements OnInit, OnDestroy, AfterViewInit {
+export class QueenListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource = new MatTableDataSource<Queen>();
-  displayedColumns: string[] = ['name', 'isActive', 'actions'];
+  displayedColumns: string[] = ['name', 'isMarked', 'isActive'];
 
   private destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
+
     private queenService: QueenService
   ) { }
 
@@ -51,21 +49,7 @@ export class QueenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['add'], { relativeTo: this.route });
   }
 
-  deleteQueen(queen: Queen, event?: MouseEvent): void {
-    event?.stopPropagation();
-    this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
-      ConfirmComponent,
-      { data: { title: 'Delete queen', content: `Are you sure you want to delete queen ${queen.name}?` } }
-    ).afterClosed()
-      .pipe(
-        filter(confirm => !!confirm),
-        tap(() => this.queenService.deleteQueen(queen))
-      )
-      .subscribe();
-
-  }
-
   select(queen: Queen): void {
-    this.router.navigate(['edit', queen.id], { relativeTo: this.route });
+    this.router.navigate(['details', queen.id], { relativeTo: this.route });
   }
 }

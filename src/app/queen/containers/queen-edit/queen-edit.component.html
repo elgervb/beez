@@ -1,9 +1,15 @@
+<mat-card>
 
-<h2 class="mat-title">{{isEdit ? 'Edit' : 'Add'}} queen</h2>
+  <mat-card-header>
+    <mat-card-title>{{isEdit ? 'Edit' : 'Add'}} queen</mat-card-title>
+  </mat-card-header>
 
-<bee-queen-form
-  [queen]="queen$ | async"
-  (cancelEvent)="cancel()"
-  (submitEvent)="edit($event)">
-</bee-queen-form>
+  <mat-card-content>
+    <bee-queen-form
+      [queen]="queen$ | async"
+      (cancelEvent)="cancel()"
+      (submitEvent)="edit($event)">
+    </bee-queen-form>
+  </mat-card-content>
 
+</mat-card>

@@ -5,11 +5,11 @@ import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QueenService } from '../../services/queen.service';
-import { QueenComponent } from './queen.component';
+import { QueenListComponent } from './queen-list.component';
 
-describe('QueenComponent', () => {
-  let component: QueenComponent;
-  let fixture: ComponentFixture<QueenComponent>;
+describe('QueenListComponent', () => {
+  let component: QueenListComponent;
+  let fixture: ComponentFixture<QueenListComponent>;
   const queenService = {
     getQueens: jest.fn(),
     deleteQueen: jest.fn()
@@ -17,7 +17,7 @@ describe('QueenComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [QueenComponent],
+      declarations: [QueenListComponent],
       imports: [
         MaterialModule,
         NoopAnimationsModule,
@@ -33,16 +33,12 @@ describe('QueenComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QueenComponent);
+    fixture = TestBed.createComponent(QueenListComponent);
     component = fixture.componentInstance;
 
     queenService.getQueens.mockReturnValue(of());
 
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should create', () => {
