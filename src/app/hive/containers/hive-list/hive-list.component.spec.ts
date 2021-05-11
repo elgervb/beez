@@ -5,11 +5,11 @@ import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HiveService } from '../../services/hive.service';
-import { HiveComponent } from './hive.component';
+import { HiveListComponent } from './hive-list.component';
 
-describe('HiveComponent', () => {
-  let component: HiveComponent;
-  let fixture: ComponentFixture<HiveComponent>;
+describe('HiveListComponent', () => {
+  let component: HiveListComponent;
+  let fixture: ComponentFixture<HiveListComponent>;
   const hiveService = {
     getHives: jest.fn(),
     deleteHive: jest.fn()
@@ -17,7 +17,7 @@ describe('HiveComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [HiveComponent],
+      declarations: [HiveListComponent],
       imports: [
         MaterialModule,
         NoopAnimationsModule,
@@ -33,7 +33,7 @@ describe('HiveComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HiveComponent);
+    fixture = TestBed.createComponent(HiveListComponent);
     component = fixture.componentInstance;
 
     hiveService.getHives.mockReturnValue(of());
