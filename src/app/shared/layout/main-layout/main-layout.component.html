@@ -7,9 +7,9 @@
     <mat-toolbar>Menu</mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item routerLink="/" (click)="drawer.toggle()" routerLinkActive>Dashboard</a>
-      <a mat-list-item routerLink="/hives" (click)="drawer.toggle()" routerLinkActive>Hives</a>
-      <a mat-list-item routerLink="/queens" (click)="drawer.toggle()" routerLinkActive>Queens</a>
+      <a mat-list-item routerLink="/" (click)="navigate(drawer)" routerLinkActive>Dashboard</a>
+      <a mat-list-item routerLink="/hives" (click)="navigate(drawer)" routerLinkActive>Hives</a>
+      <a mat-list-item routerLink="/queens" (click)="navigate(drawer)" routerLinkActive>Queens</a>
       <mat-divider></mat-divider>
       <div mat-list-item class="logout">
         <button mat-stroked-button color="primary" (click)="logout()">Logout</button>
