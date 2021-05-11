@@ -24,9 +24,9 @@ export class HiveService {
     return from(this.angularFirestore.collection<Hive>(this.collectionPath).add(hive));
   }
 
-  deleteHive(hive: Hive): Observable<void> {
+  deleteHive(hive: Hive): Observable<boolean> {
     this.angularFirestore.doc(`${this.collectionPath}/${hive.id}`).delete();
-    return of();
+    return of(true);
   }
 
   getHive(hiveId: string): Observable<Hive | undefined> {

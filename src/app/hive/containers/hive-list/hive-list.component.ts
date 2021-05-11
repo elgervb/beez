@@ -1,33 +1,29 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
-import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
 
 @Component({
-  selector: 'bee-hive',
-  templateUrl: './hive.component.html',
-  styleUrls: ['./hive.component.css']
+  selector: 'bee-hive-list',
+  templateUrl: './hive-list.component.html',
+  styleUrls: ['./hive-list.component.css']
 })
-export class HiveComponent implements OnInit, OnDestroy, AfterViewInit {
+export class HiveListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource = new MatTableDataSource<Hive>();
-  displayedColumns: string[] = ['name', 'isActive', 'actions'];
-
+  displayedColumns: string[] = ['name', 'isActive'];
 
   private destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
     private hiveService: HiveService
   ) { }
 
@@ -52,21 +48,7 @@ export class HiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['add'], { relativeTo: this.route });
   }
 
-  deleteHive(hive: Hive, event?: MouseEvent): void {
-    event?.stopPropagation();
-    this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
-      ConfirmComponent,
-      { data: { title: 'Delete hive', content: `Are you sure you want to delete hive ${hive.name}?` } }
-    ).afterClosed()
-      .pipe(
-        filter(confirm => !!confirm),
-        tap(() => this.hiveService.deleteHive(hive))
-      )
-      .subscribe();
-
-  }
-
   select(hive: Hive): void {
-    this.router.navigate(['edit', hive.id], { relativeTo: this.route });
+    this.router.navigate(['details', hive.id], { relativeTo: this.route });
   }
 }
