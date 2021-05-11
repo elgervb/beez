@@ -4,6 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, first, tap } from 'rxjs/operators';
 import { AuthService, UserInfo } from 'src/app/auth';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'bee-main-layout',
@@ -31,6 +32,13 @@ export class MainLayoutComponent {
       .pipe(
         tap(() => this.router.navigate(['/login'])),
         first()
+      ).subscribe();
+  }
+
+  navigate(drawer: MatSidenav): void {
+    this.isHandset$
+      .pipe(
+        tap(isHandset => isHandset ? drawer.close() : '')
       ).subscribe();
   }
 }
