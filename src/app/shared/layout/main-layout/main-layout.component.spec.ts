@@ -62,4 +62,5 @@ describe('MainLayoutComponent', () => {
   it('should get the user', () => {
     expect(component.user$).toBe(authService.user$);
   });
+
 });
