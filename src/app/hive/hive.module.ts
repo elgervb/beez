@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/material/material.module';
 import { HiveFormComponent } from './components';
 import { HiveDetailsComponent } from './containers/hive-details/hive-details.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HiveDetailsComponent } from './containers/hive-details/hive-details.com
     CommonModule,
     MaterialModule,
     HiveRoutingModule,
+    NgxQRCodeModule,
     ReactiveFormsModule,
     SharedModule,
   ]

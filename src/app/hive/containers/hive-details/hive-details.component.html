@@ -17,6 +17,15 @@
           Remarks <br>
           {{hive.remarks}}
         </mat-list-item>
+        <mat-list-item class="qr-code-row">
+          <span>QRcode</span>
+          <ngx-qrcode
+            [elementType]="elementType"
+            [errorCorrectionLevel]="correctionLevel"
+            [value]="qrUrl"
+            cssClass="qr-code">
+          </ngx-qrcode>
+        </mat-list-item>
       </mat-list>
 
     </mat-card-content>
