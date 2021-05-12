@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
@@ -15,6 +16,12 @@ import { HiveService } from '../../services/hive.service';
 export class HiveDetailsComponent implements OnInit {
 
   hive$?: Observable<Hive | undefined>;
+
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  get qrUrl(): string {
+    return window.location.href;
+  }
 
   get hiveId(): string | null {
     return this.route.snapshot.paramMap.get('hiveId');
@@ -61,6 +68,4 @@ export class HiveDetailsComponent implements OnInit {
       this.router.navigate(['../../edit', hiveId], { relativeTo: this.route });
     }
   }
-
-
 }
