@@ -72,7 +72,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "npm run lint -- --fix",
+      "./node_modules/.bin/eslint -- ",
       "jest --bail --findRelatedTests"
     ]
   }
