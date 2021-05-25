@@ -12,12 +12,23 @@ const routes: Routes = [
     component: HiveEditComponent
   },
   {
-    path: 'details/:hiveId',
-    component: HiveDetailsComponent
+    path: ':hiveId',
+    component: HiveDetailsComponent,
   },
   {
-    path: 'edit/:hiveId',
-    component: HiveEditComponent
+    path: ':hiveId',
+    component: HiveDetailsComponent,
+    data: { dense: true },
+    children: [
+      {
+        path: 'edit',
+        component: HiveEditComponent
+      },
+      {
+        path: 'inspections',
+        loadChildren: () => import('../inspection/inspection.module').then(m => m.InspectionModule)
+      }
+    ]
   }
 ];
 

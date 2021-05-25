@@ -35,7 +35,7 @@ export class QueenDetailsComponent implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['../..'], { relativeTo: this.route });
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
   deleteQueen(queen: Queen, event?: MouseEvent): void {
@@ -57,7 +57,7 @@ export class QueenDetailsComponent implements OnInit {
 
   navigateToEdit(queenId: string | null): void {
     if (queenId) {
-      this.router.navigate(['../../edit', queenId], { relativeTo: this.route });
+      this.router.navigate(['../edit', queenId], { relativeTo: this.route });
     }
   }
 

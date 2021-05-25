@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Inspection } from '../../models';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'bee-inspection-form',
@@ -7,8 +6,6 @@ import { Inspection } from '../../models';
   styleUrls: ['./inspection-form.component.css']
 })
 export class InspectionFormComponent implements OnInit {
-
-  @Input() inspection: Inspection;
 
   constructor() { }
 

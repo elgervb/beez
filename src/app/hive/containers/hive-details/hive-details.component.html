@@ -7,13 +7,13 @@
     <mat-card-content>
 
       <mat-list role="list">
-        <mat-list-item role="listitem">
+        <mat-list-item role="listitem" *ngIf="!dense">
           <span>Active</span> <mat-slide-toggle [checked]="hive.active" [disabled]="true"></mat-slide-toggle>
         </mat-list-item>
-        <mat-list-item role="listitem">
+        <mat-list-item role="listitem" *ngIf="!dense">
           <span>Date</span> {{hive.date | timestamp}}
         </mat-list-item>
-        <mat-list-item role="listitem" *ngIf="hive.remarks">
+        <mat-list-item role="listitem" *ngIf="!dense && hive.remarks">
           Remarks <br>
           {{hive.remarks}}
         </mat-list-item>
@@ -29,12 +29,14 @@
       </mat-list>
 
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions  *ngIf="!dense">
       <button mat-stroked-button (click)="back()">back</button>
-      <button mat-stroked-button (click)="navigateToEdit(hiveId)">edit</button>
+      <button mat-stroked-button (click)="navigateToEdit()">edit</button>
+      <button mat-stroked-button (click)="navigateToAddInspection(hiveId)">add inspection</button>
       <button mat-stroked-button color="warn" (click)="deleteHive(hive)">delete</button>
     </mat-card-actions>
   </mat-card>
 
+  <router-outlet></router-outlet>
 
 </ng-container>
