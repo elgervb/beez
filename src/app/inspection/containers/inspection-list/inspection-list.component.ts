@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'bee-inspection-list',
@@ -6,8 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./inspection-list.component.css']
 })
 export class InspectionListComponent implements OnInit {
-
-  @Input() hiveId: string;
 
   constructor() { }
 

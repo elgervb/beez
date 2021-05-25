@@ -1,6 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DocumentReference } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import { Queen } from '../../models';
@@ -24,8 +25,8 @@ export class QueenEditComponent implements OnInit {
   }
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
+    private location: Location,
     private queenService: QueenService
   ) { }
 
@@ -47,8 +48,7 @@ export class QueenEditComponent implements OnInit {
   }
 
   cancel(): void {
-    const path = this.isEdit ? '../..' : '..';
-    this.router.navigate([path], { relativeTo: this.route });
+    this.location.back();
   }
 
 }

@@ -27,6 +27,10 @@ export class HiveDetailsComponent implements OnInit {
     return this.route.snapshot.paramMap.get('hiveId');
   }
 
+  get dense(): string | null {
+    return this.route.snapshot.data.dense;
+  }
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
@@ -42,7 +46,7 @@ export class HiveDetailsComponent implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['../..'], { relativeTo: this.route });
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
   deleteHive(hive: Hive, event?: MouseEvent): void {
@@ -63,9 +67,13 @@ export class HiveDetailsComponent implements OnInit {
       .subscribe();
   }
 
-  navigateToEdit(hiveId: string | null): void {
+  navigateToEdit(): void {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+
+  navigateToAddInspection(hiveId: string | null): void {
     if (hiveId) {
-      this.router.navigate(['../../edit', hiveId], { relativeTo: this.route });
+      this.router.navigate(['inspections/add'], { relativeTo: this.route });
     }
   }
 }

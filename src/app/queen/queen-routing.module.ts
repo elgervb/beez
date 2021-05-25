@@ -17,7 +17,7 @@ const routes: Routes = [
   }
   ,
   {
-    path: 'details/:queenId',
+    path: ':queenId',
     component: QueenDetailsComponent
   }
 ];
