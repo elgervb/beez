@@ -1,1 +1,99 @@
-<p>inspection-add works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Inspection {{timestamp | date: 'MM-dd-yyyy'}}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-vertical-stepper [linear]="true" #stepper>
+
+      <mat-step [stepControl]="honeySuperGroup">
+        <ng-template matStepLabel>Honey super</ng-template>
+        <form [formGroup]="honeySuperGroup">
+          <div class="mat-form-field">
+            <mat-label>Honey</mat-label>
+            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="honey" formControlName="honey"></mat-slider>
+          </div>
+          <div class="mat-form-field">
+            <mat-label>Honey closed</mat-label>
+            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="honey closed" formControlName="honeyClosed"></mat-slider>
+          </div>
+
+          <bee-button-bar>
+            <button mat-stroked-button color="primary" matStepperNext>Next</button>
+          </bee-button-bar>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="hiveBodyGroup">
+        <ng-template matStepLabel>Hive body</ng-template>
+        <form [formGroup]="hiveBodyGroup">
+
+          <div class="form-field">
+            <mat-slide-toggle formControlName="eggs">Eggs</mat-slide-toggle>
+          </div>
+
+          <div class="form-field">
+            <mat-slide-toggle formControlName="larva">Larva</mat-slide-toggle>
+          </div>
+
+          <div class="form-field">
+            <mat-slide-toggle formControlName="closedBrood">Closed brood</mat-slide-toggle>
+          </div>
+
+          <div class="form-field">
+            <mat-slide-toggle formControlName="droneBrood">Drone brood</mat-slide-toggle>
+          </div>
+
+          <div class="form-field">
+            <mat-slide-toggle formControlName="queenBrood">Queen brood</mat-slide-toggle>
+          </div>
+
+          <div class="form-field">
+            <mat-slide-toggle formControlName="drones">Drones</mat-slide-toggle>
+          </div>
+
+          <div class="form-field">
+            <mat-slide-toggle formControlName="queen">Queen</mat-slide-toggle>
+          </div>
+
+          <bee-button-bar>
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-stroked-button matStepperNext color="primary">Next</button>
+          </bee-button-bar>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="overallGroup">
+        <ng-template matStepLabel>Overall</ng-template>
+        <form [formGroup]="overallGroup">
+
+          <div class="mat-form-field">
+            <mat-label>Overall health</mat-label>
+            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="health" formControlName="health"></mat-slider>
+          </div>
+
+          <div class="mat-form-field">
+            <mat-label>Remarks</mat-label>
+            <textarea matInput formControlName="remarks" ></textarea>
+          </div>
+
+          <bee-button-bar>
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-stroked-button matStepperNext color="primary">Next</button>
+          </bee-button-bar>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+
+          <bee-button-bar>
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-stroked-button color="primary" (click)="submit()">Done</button>
+          </bee-button-bar>
+
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-card-content>
+
+</mat-card>

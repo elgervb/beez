@@ -10,8 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -30,8 +32,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatSliderModule,
     MatSlideToggleModule,
     MatSortModule,
+    MatStepperModule,
     MatTableModule,
     MatToolbarModule,
     LayoutModule
@@ -47,8 +51,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatSliderModule,
     MatSlideToggleModule,
     MatSortModule,
+    MatStepperModule,
     MatToolbarModule,
     MatTableModule,
     LayoutModule
