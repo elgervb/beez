@@ -16,3 +16,10 @@ textarea {
   height: 10rem;
   width: 100%;
 }
+.timestamp-input {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  width: 7rem;
+}

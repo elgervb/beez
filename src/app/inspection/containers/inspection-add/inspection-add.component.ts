@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
@@ -11,7 +11,7 @@ import { InspectionService } from '../../services/inspection.service';
 })
 export class InspectionAddComponent implements OnInit {
 
-  timestamp = Date.now();
+  timestamp = new FormControl({ value: new Date(), disabled: true }, Validators.required);
 
   honeySuperGroup = this.formBuilder.group({
     honey: [null],
@@ -40,7 +40,6 @@ export class InspectionAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
   }
 
   formatLabel(value: number): string {
@@ -49,6 +48,7 @@ export class InspectionAddComponent implements OnInit {
 
   submit(): void {
     const inspection: Inspection = {
+      date: this.timestamp.value,
       ...this.honeySuperGroup.value,
       ...this.hiveBodyGroup.value,
       ...this.overallGroup.value
