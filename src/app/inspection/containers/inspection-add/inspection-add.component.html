@@ -1,6 +1,11 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Inspection {{timestamp | date: 'MM-dd-yyyy'}}</mat-card-title>
+    <mat-card-title>
+      Inspection <!--{{timestamp | date: 'MM-dd-yyyy'}} -->
+      <input matInput [formControl]="timestamp" [matDatepicker]="picker" class="timestamp-input">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker touchUi disabled="false"></mat-datepicker>
+    </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
