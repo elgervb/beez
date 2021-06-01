@@ -10,6 +10,7 @@
  - https://material.angular.io/components/categories
    - https://material.angular.io/guide/schematics
    - https://v7.material.angular.io/guide/typography
+   - https://fonts.google.com/icons
  - https://ngrx.io/guide/store
  - https://firebase.google.com/
    - https://github.com/angular/angularfire

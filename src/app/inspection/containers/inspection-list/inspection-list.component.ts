@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
+import { getParam } from 'src/app/shared/utils/route/get-param';
+import { Inspection } from '../../models';
+import { InspectionService } from '../../services/inspection.service';
 
 @Component({
   selector: 'bee-inspection-list',
@@ -7,9 +13,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InspectionListComponent implements OnInit {
 
-  constructor() { }
+  inspections$: Observable<Inspection[]>;
+
+  constructor(
+    public route: ActivatedRoute,
+    private inspectionService: InspectionService
+  ) { }
 
   ngOnInit(): void {
+    const hiveId = getParam(this.route.snapshot.root, 'hiveId');
+    if (hiveId) {
+      this.inspections$ = this.inspectionService.getInspections(hiveId, 5).pipe(share());
+    }
+  }
+
+  queenPresentColor(inspection: Inspection): string {
+    return inspection.queen || inspection.eggs ? 'green' : 'red';
+  }
+
+  honeyString(inspection: Inspection): string {
+    return inspection.honey && inspection.honeyClosed ? `${inspection.honey} / ${inspection.honeyClosed}` : 'n/a';
+  }
+
+  trendingIconName(inspection: Inspection, compareTo?: Inspection): string {
+    if (!inspection || !compareTo) {
+      return 'compare_arrows';
+    }
+    const health1 = inspection.health;
+    const health2 = compareTo.health;
+    return health1 > health2 ? 'trending_up' : health1 < health2 ? 'trending_down' : 'compare_arrows';
   }
 
 }
