@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { from } from 'rxjs';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { from, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth';
 import { Inspection } from '../models';
 
@@ -14,7 +14,7 @@ export class InspectionService {
     private authService: AuthService
   ) { }
 
-  add(inspection: Inspection, hiveId: string) {
+  add(inspection: Inspection, hiveId: string): Observable<DocumentReference<Inspection>> {
     return from(this.angularFirestore.collection<Inspection>(this.collectionPath(hiveId)).add(inspection));
   }
 
