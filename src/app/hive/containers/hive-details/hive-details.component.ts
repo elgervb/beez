@@ -71,7 +71,7 @@ export class HiveDetailsComponent implements OnInit {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
-  navigateToAddInspection(): void {
-    this.router.navigate(['inspections/add'], { relativeTo: this.route });
+  navigateToInspections(): void {
+    this.router.navigate(['inspections'], { relativeTo: this.route });
   }
 }

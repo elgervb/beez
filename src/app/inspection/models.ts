@@ -1,5 +1,7 @@
+import { Timestamp } from '../hive/models';
+
 export interface Inspection {
-  date: Date;
+  date: Timestamp;
   drones: boolean;
   queen: boolean;
   eggs: boolean;

@@ -18,6 +18,13 @@ export class InspectionService {
     return from(this.angularFirestore.collection<Inspection>(this.collectionPath(hiveId)).add(inspection));
   }
 
+  getInspections(hiveId: string, limit = 5): Observable<Inspection[]> {
+    return this.angularFirestore.collection<Inspection>(
+      this.collectionPath(hiveId),
+      ref => ref.limit(limit).orderBy('date', 'desc')
+    ).valueChanges({ idField: 'id' });
+  }
+
   private collectionPath(hiveId: string): string {
     return `beez/${this.authService.uid}/hives/${hiveId}/inspections`;
   }
