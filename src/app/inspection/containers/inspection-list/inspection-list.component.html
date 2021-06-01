@@ -1,11 +1,11 @@
 
 <mat-list *ngIf="inspections$ | async; let inspections">
   <ng-container *ngIf="inspections.length;  else noInspections">
+    <bee-button-bar justify="center"><a mat-raised-button routerLink="add" [relativeTo]="route" >add</a></bee-button-bar>
     <mat-list-item *ngFor="let inspection of inspections; let i = index">
-      -- {{inspections.length}}
       <h3 matLine> {{inspection.date |timestamp}}</h3>
       <p matLine class="line">
-        <span>honey {{inspection.honey}} n/a {{inspection.honeyClosed}}</span>
+        <span>honey {{honeyString(inspection)}}</span>
         <span>queen <bee-color-dot [color]="queenPresentColor(inspection)"></bee-color-dot></span>
         <span>health <mat-icon aria-hidden="false" aria-label="Example home icon">{{trendingIconName(inspection, inspections[i])}}</mat-icon></span>
       </p>
