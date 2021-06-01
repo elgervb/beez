@@ -6,6 +6,9 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InspectionService } from '../../services/inspection.service';
 import { InspectionAddComponent } from './inspection-add.component';
+import * as utilsModule from 'src/app/shared/utils/route/get-param';
+import { Location } from '@angular/common';
+import { of } from 'rxjs';
 
 describe('InspectionAddComponent', () => {
   let component: InspectionAddComponent;
@@ -31,5 +34,28 @@ describe('InspectionAddComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should format label', () => {
+    expect(component.formatLabel(10)).toBe('10%');
+    expect(component.formatLabel(0)).toBe('');
+  });
+
+  it('should not submit without hiveId', () => {
+    component.submit();
+
+    expect(inspectionService.add).not.toHaveBeenCalled();
+  });
+
+  it('should submit and return to previous page', () => {
+    const getParamSpy = jest.spyOn(utilsModule, 'getParam').mockReturnValueOnce('hiveId');
+    inspectionService.add.mockReturnValueOnce(of(''));
+    const backSpy = jest.spyOn(TestBed.inject(Location), 'back');
+
+    component.submit();
+
+    expect(getParamSpy).toHaveBeenCalled();
+    expect(inspectionService.add).toHaveBeenCalled();
+    expect(backSpy).toHaveBeenCalled();
   });
 });

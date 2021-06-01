@@ -1,6 +1,9 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { take, tap } from 'rxjs/operators';
+import { getParam } from 'src/app/shared/utils/route/get-param';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
 
@@ -35,15 +38,15 @@ export class InspectionAddComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private location: Location,
     private formBuilder: FormBuilder,
-    private inspectionService: InspectionService
+    private inspectionService: InspectionService,
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   formatLabel(value: number): string {
-    return value + '%';
+    return value ? value + '%' : '';
   }
 
   submit(): void {
@@ -57,13 +60,14 @@ export class InspectionAddComponent implements OnInit {
     const hiveId = getParam(this.route.snapshot.root, 'hiveId');
 
     if (hiveId) {
-      this.inspectionService.add(inspection, hiveId);
+      this.inspectionService.add(inspection, hiveId)
+        .pipe(
+          take(1),
+          tap(() => this.location.back())
+        ).subscribe();
     }
   }
 }
 
-export const getParam = (route: ActivatedRouteSnapshot, param: string): string | null =>
-  route.children.reduce<string | null>((acc: string | null, child: ActivatedRouteSnapshot) =>
-    acc ? acc : child.paramMap.has(param) ? child.paramMap.get(param) : getParam(child, param)
-    , null);
+
 
