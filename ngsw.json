@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1622751056786,
+  "timestamp": 1622756173386,
   "index": "https://elgervb.github.io/beez/index.html",
   "assetGroups": [
     {
@@ -12,18 +12,18 @@
       },
       "urls": [
         "https://elgervb.github.io/beez/10.112c9136ecddee6e98b6.js",
-        "https://elgervb.github.io/beez/5.25298ce86af2d23992f5.js",
-        "https://elgervb.github.io/beez/6.212513d8606eb58d096c.js",
-        "https://elgervb.github.io/beez/7.9e55c61b9d97b64bf43d.js",
-        "https://elgervb.github.io/beez/8.b25e55d258b2090289e0.js",
-        "https://elgervb.github.io/beez/9.0590c249f84fc61d9f4a.js",
+        "https://elgervb.github.io/beez/5.818b9470b5cc6c1ccdc6.js",
+        "https://elgervb.github.io/beez/6.668d8b450e3ad9b60bf4.js",
+        "https://elgervb.github.io/beez/7.603e650db36ba0fa4639.js",
+        "https://elgervb.github.io/beez/8.a0d8cb4d307f4d9d6364.js",
+        "https://elgervb.github.io/beez/9.e41b1379136a1f2f93bf.js",
         "https://elgervb.github.io/beez/common.e743005b2e5f6f5f9d68.js",
         "https://elgervb.github.io/beez/favicon.ico",
         "https://elgervb.github.io/beez/index.html",
-        "https://elgervb.github.io/beez/main.0d488e539e29d1ee61ce.js",
+        "https://elgervb.github.io/beez/main.49dc4183c780a48a2d14.js",
         "https://elgervb.github.io/beez/manifest.webmanifest",
         "https://elgervb.github.io/beez/polyfills.5439fc1519a568e1a088.js",
-        "https://elgervb.github.io/beez/runtime.2f973fc47d878ef4c5a1.js",
+        "https://elgervb.github.io/beez/runtime.4c0111aee7def845313e.js",
         "https://elgervb.github.io/beez/styles.7b24d4c0c7d7e30102d9.css"
       ],
       "patterns": []
@@ -36,6 +36,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "https://elgervb.github.io/beez/assets/icons/beehive.svg",
         "https://elgervb.github.io/beez/assets/icons/beez-transparent.png",
         "https://elgervb.github.io/beez/assets/icons/beez-transparent.svg",
         "https://elgervb.github.io/beez/assets/icons/google.svg",
@@ -46,7 +47,8 @@
         "https://elgervb.github.io/beez/assets/icons/icon-384x384.png",
         "https://elgervb.github.io/beez/assets/icons/icon-512x512.png",
         "https://elgervb.github.io/beez/assets/icons/icon-72x72.png",
-        "https://elgervb.github.io/beez/assets/icons/icon-96x96.png"
+        "https://elgervb.github.io/beez/assets/icons/icon-96x96.png",
+        "https://elgervb.github.io/beez/assets/icons/queen.svg"
       ],
       "patterns": []
     }
@@ -54,11 +56,12 @@
   "dataGroups": [],
   "hashTable": {
     "https://elgervb.github.io/beez/10.112c9136ecddee6e98b6.js": "a3e06e2c5bf4d66a465f5570b59d9f92bca2b0d6",
-    "https://elgervb.github.io/beez/5.25298ce86af2d23992f5.js": "576368617d07c222d7c88b624affbd4a0c5deecf",
-    "https://elgervb.github.io/beez/6.212513d8606eb58d096c.js": "1099c7a60deed9fc6fa21eaa11acd80d80cc0cad",
-    "https://elgervb.github.io/beez/7.9e55c61b9d97b64bf43d.js": "13d3ca09423dc0caaad028267fee416cc9b3b59e",
-    "https://elgervb.github.io/beez/8.b25e55d258b2090289e0.js": "b58a207219370c425e431687bb70d60300690a88",
-    "https://elgervb.github.io/beez/9.0590c249f84fc61d9f4a.js": "c3ebad27a11ca12a0c9d6190ca3ed9d02c45d649",
+    "https://elgervb.github.io/beez/5.818b9470b5cc6c1ccdc6.js": "25f6bad3cbe73c9d56f18f992110a8b9d56fbebb",
+    "https://elgervb.github.io/beez/6.668d8b450e3ad9b60bf4.js": "887eaf1f295daab9d85224ad5658b5bc77b46331",
+    "https://elgervb.github.io/beez/7.603e650db36ba0fa4639.js": "2d0ba62bea3be0597adc638ccb368626eba8ea05",
+    "https://elgervb.github.io/beez/8.a0d8cb4d307f4d9d6364.js": "90c8652ba25cb9c39668d22fdb052d31cd05ff11",
+    "https://elgervb.github.io/beez/9.e41b1379136a1f2f93bf.js": "1eba65c252cf707f02ce283f2cc8e6c67d929744",
+    "https://elgervb.github.io/beez/assets/icons/beehive.svg": "b300cf39e6b83a14a15e94a18a2b2113e2e552a9",
     "https://elgervb.github.io/beez/assets/icons/beez-transparent.png": "85bd1e4014f3827c5b6db5dd348f4c1046b4b7e8",
     "https://elgervb.github.io/beez/assets/icons/beez-transparent.svg": "f18befdb807a4cadfda5b1a40c2cc3b303fad688",
     "https://elgervb.github.io/beez/assets/icons/google.svg": "4524589b0dceefb6ae6389f36634441df69152d5",
@@ -70,13 +73,14 @@
     "https://elgervb.github.io/beez/assets/icons/icon-512x512.png": "6d3365c2143f7319673766c7e3bd700f7209739c",
     "https://elgervb.github.io/beez/assets/icons/icon-72x72.png": "3a80eac036d87b26c44a0ed6548d834396ad4a98",
     "https://elgervb.github.io/beez/assets/icons/icon-96x96.png": "7b46c214f17c800f0e789176899399936a38a81c",
+    "https://elgervb.github.io/beez/assets/icons/queen.svg": "e82483594135a6cf82595db3dec238e91ed841e9",
     "https://elgervb.github.io/beez/common.e743005b2e5f6f5f9d68.js": "c947546d0c0f6fa10d525445637f5bc581481608",
     "https://elgervb.github.io/beez/favicon.ico": "58e5cd78b0f2ce4eb695bf3631fd2daac6ac1d12",
-    "https://elgervb.github.io/beez/index.html": "9cd8165e7deaa1f7123d8076ad612ddfb0c7afa2",
-    "https://elgervb.github.io/beez/main.0d488e539e29d1ee61ce.js": "276894292f6c1fcd398249e10400fa5257194b93",
+    "https://elgervb.github.io/beez/index.html": "520e7a4ff809d43a18da0afb6c85c81f221a78fd",
+    "https://elgervb.github.io/beez/main.49dc4183c780a48a2d14.js": "0c71dd4f036fd72efc60e94d82e161faee4793ec",
     "https://elgervb.github.io/beez/manifest.webmanifest": "aa42cfc7147f6fe3b806f793aae3143505d6873f",
     "https://elgervb.github.io/beez/polyfills.5439fc1519a568e1a088.js": "4596c7334262a9085d4500e3d6e5df378206aeb6",
-    "https://elgervb.github.io/beez/runtime.2f973fc47d878ef4c5a1.js": "997a972374a20d0d9c37ffdb7865ff37a4ba9f7c",
+    "https://elgervb.github.io/beez/runtime.4c0111aee7def845313e.js": "63420748638b106253162dd802be6021b97686aa",
     "https://elgervb.github.io/beez/styles.7b24d4c0c7d7e30102d9.css": "5b2b0798d739561e95aebab9c19faccad23d76a7"
   },
   "navigationUrls": [
