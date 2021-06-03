@@ -13,17 +13,22 @@ const routes: Routes = [
   },
   {
     path: ':hiveId',
-    component: HiveDetailsComponent,
+    children: [
+      {
+        path: '',
+        component: HiveDetailsComponent,
+      },
+      {
+        path: 'edit',
+        component: HiveEditComponent
+      },
+    ]
   },
   {
     path: ':hiveId',
     component: HiveDetailsComponent,
     data: { dense: true },
     children: [
-      {
-        path: 'edit',
-        component: HiveEditComponent
-      },
       {
         path: 'inspections',
         loadChildren: () => import('../inspection/inspection.module').then(m => m.InspectionModule)
