@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) => () => {
   iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'));
   iconRegistry.addSvgIcon('beez', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beez-transparent.svg'));
+  iconRegistry.addSvgIcon('beehive', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beehive.svg'));
+  iconRegistry.addSvgIcon('queen', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/queen.svg'));
 
   return Promise.resolve();
 };
