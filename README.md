@@ -16,4 +16,5 @@
    - https://github.com/angular/angularfire
    - auth guards: https://github.com/angular/angularfire/blob/master/docs/auth/router-guards.md
 
- 
+ English terms:
+  - https://www.beehives.info/glossary-bee-keeper-terms/
