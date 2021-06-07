@@ -24,6 +24,8 @@ export class HiveFormComponent implements OnInit {
     id: [''],
     name: ['', Validators.required],
     active: [true],
+    color: [],
+    type: [],
     date: [new Date(), Validators.required],
     remarks: ['']
   });

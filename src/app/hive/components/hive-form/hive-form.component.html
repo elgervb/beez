@@ -22,6 +22,21 @@
 
   <div class="form-field">
     <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <input matInput placeholder="Hive's type" formControlName="type">
+      <mat-hint>Hive type, eg. spaarkast</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Color</mat-label>
+      <input matInput placeholder="Hive color" type="color" formControlName="color">
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
       <mat-label>Remarks</mat-label>
       <textarea matInput formControlName="remarks"></textarea>
     </mat-form-field>
