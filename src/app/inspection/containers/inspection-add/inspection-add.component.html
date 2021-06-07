@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      Inspection <!--{{timestamp | date: 'MM-dd-yyyy'}} -->
+      Inspection
       <input matInput [formControl]="timestamp" [matDatepicker]="picker" class="timestamp-input">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker touchUi disabled="false"></mat-datepicker>
@@ -59,6 +59,11 @@
 
           <div class="form-field">
             <mat-slide-toggle formControlName="queen">Queen</mat-slide-toggle>
+          </div>
+
+          <div class="mat-form-field">
+            <mat-label>Food (honey)</mat-label>
+            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="food" formControlName="food"></mat-slider>
           </div>
 
           <bee-button-bar>
