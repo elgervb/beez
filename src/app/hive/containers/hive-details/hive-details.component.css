@@ -6,7 +6,19 @@ span {
 .qr-code-row {
   height: 8rem;
 }
+ngx-qrcode {
+  cursor: pointer;
+}
+
 ::ng-deep .qr-code,  ::ng-deep .qr-code img{
   height: 8rem;
   width: 8rem;
+}
+
+::ng-deep .white-backdrop {
+  background: white;
+}
+
+::ng-deep .qr-dialog .mat-dialog-container {
+  box-shadow: none;
 }
