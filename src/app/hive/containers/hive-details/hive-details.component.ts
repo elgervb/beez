@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { QRBeezModel } from 'src/app/shared/models';
+import { QRDialog, QrDialogComponent } from '../../components/qr-dialog/qr-dialog.component';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
 
@@ -79,5 +80,17 @@ export class HiveDetailsComponent implements OnInit {
 
   navigateToInspections(): void {
     this.router.navigate(['inspections'], { relativeTo: this.route });
+  }
+
+  printQRcode(): void {
+    this.dialog.open<QrDialogComponent, QRDialog, void>(QrDialogComponent, {
+      backdropClass: 'white-backdrop',
+      panelClass: 'qr-dialog',
+      data: {
+        elementType: this.elementType,
+        correctionLevel: this.correctionLevel,
+        qrValue: this.qrValue
+      }
+    });
   }
 }

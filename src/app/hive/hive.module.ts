@@ -9,6 +9,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { HiveFormComponent } from './components';
 import { HiveDetailsComponent } from './containers/hive-details/hive-details.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { QrDialogComponent } from './components/qr-dialog/qr-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     HiveFormComponent,
     HiveListComponent,
     HiveDetailsComponent,
+    QrDialogComponent,
   ],
   imports: [
     CommonModule,
