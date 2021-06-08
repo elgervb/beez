@@ -26,6 +26,10 @@ const routes: Routes = [
         path: 'queens',
         loadChildren: () => import('./queen/queen.module').then(m => m.QueenModule)
       },
+      {
+        path: 'scanner',
+        loadChildren: () => import('./scanner/scanner.module').then(m => m.ScannerModule)
+      },
     ]
   },
   {
