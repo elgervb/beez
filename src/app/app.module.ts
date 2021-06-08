@@ -19,6 +19,7 @@ export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: 
   iconRegistry.addSvgIcon('beez', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beez-transparent.svg'));
   iconRegistry.addSvgIcon('beehive', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beehive.svg'));
   iconRegistry.addSvgIcon('queen', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/queen.svg'));
+  iconRegistry.addSvgIcon('qr-code', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/qr-code.svg'));
 
   return Promise.resolve();
 };

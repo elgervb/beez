@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { DashboardComponent } from './dashboard.component';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -11,7 +12,8 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
       imports: [
-        MaterialModule
+        MaterialModule,
+        MatIconTestingModule
       ]
     })
       .compileComponents();
