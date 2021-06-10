@@ -13,6 +13,12 @@
         <mat-list-item role="listitem" *ngIf="!dense">
           <span>Date</span> {{hive.date | timestamp}}
         </mat-list-item>
+        <mat-list-item role="listitem" *ngIf="!dense">
+          <span>Type</span> {{hive.type}}
+        </mat-list-item>
+        <mat-list-item role="listitem" *ngIf="!dense && hive.color">
+          <span>Color</span> <bee-color-dot [color]="hive.color"></bee-color-dot>
+        </mat-list-item>
         <mat-list-item role="listitem" *ngIf="!dense && hive.remarks">
           Remarks <br>
           {{hive.remarks}}
