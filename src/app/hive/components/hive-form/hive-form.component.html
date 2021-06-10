@@ -23,7 +23,17 @@
   <div class="form-field">
     <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>
-      <input matInput placeholder="Hive's type" formControlName="type">
+      <input matInput placeholder="Hive's type" formControlName="type" list="hive-type">
+      <datalist id="hive-type">
+        <option value="dadant"></option>
+        <option value="golz"></option>
+        <option value="langstroth"></option>
+        <option value="segeberger"></option>
+        <option value="simplex"></option>
+        <option value="spaarkast"></option>
+        <option value="top bar"></option>
+        <option value="warré"></option>
+      </datalist>
       <mat-hint>Hive type, eg. spaarkast</mat-hint>
     </mat-form-field>
   </div>
