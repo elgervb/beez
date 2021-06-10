@@ -28,7 +28,8 @@
           <ngx-qrcode
             [elementType]="elementType"
             [errorCorrectionLevel]="correctionLevel"
-            [value]="qrUrl"
+            [value]="qrValue"
+            (click)="printQRcode()"
             cssClass="qr-code">
           </ngx-qrcode>
         </mat-list-item>
