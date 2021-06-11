@@ -29,7 +29,7 @@ export class InspectionAddComponent implements OnInit {
     closedBrood: [null],
     droneBrood: [null],
     queenBrood: [null],
-    food: [null]
+    honeyFood: [null],
   });
 
   overallGroup = this.formBuilder.group({
