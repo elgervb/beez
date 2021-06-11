@@ -14,13 +14,19 @@
       <mat-step [stepControl]="honeySuperGroup">
         <ng-template matStepLabel>Honey super</ng-template>
         <form [formGroup]="honeySuperGroup">
-          <div class="mat-form-field">
-            <mat-label>Honey</mat-label>
-            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="honey" formControlName="honey"></mat-slider>
+          <div class="form-field">
+            <mat-form-field>
+              <mat-label>Honey</mat-label>
+              <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="honey" formControlName="honey"></mat-slider>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
-          <div class="mat-form-field">
-            <mat-label>Honey closed</mat-label>
-            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="honey closed" formControlName="honeyClosed"></mat-slider>
+          <div class="form-field">
+            <mat-form-field>
+              <mat-label>Honey closed</mat-label>
+              <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="honey closed" formControlName="honeyClosed"></mat-slider>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <bee-button-bar>
@@ -34,36 +40,68 @@
         <form [formGroup]="hiveBodyGroup">
 
           <div class="form-field">
-            <mat-slide-toggle formControlName="eggs">Eggs</mat-slide-toggle>
+            <mat-form-field>
+              <mat-slide-toggle formControlName="eggs">Eggs</mat-slide-toggle>
+              <mat-hint>are there any fresh eggs present? (first 3 days)</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <div class="form-field">
-            <mat-slide-toggle formControlName="larva">Larva</mat-slide-toggle>
+            <mat-form-field>
+              <mat-slide-toggle formControlName="larva">Larva</mat-slide-toggle>
+              <mat-hint>is there open brood with white larva? (day 4 to 7)</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <div class="form-field">
-            <mat-slide-toggle formControlName="closedBrood">Closed brood</mat-slide-toggle>
+            <mat-form-field>
+              <mat-slide-toggle formControlName="closedBrood">Closed brood</mat-slide-toggle>
+              <mat-hint>is there closed brood? (day 8 - 21)</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <div class="form-field">
-            <mat-slide-toggle formControlName="droneBrood">Drone brood</mat-slide-toggle>
+            <mat-form-field>
+              <mat-slide-toggle formControlName="droneBrood">Drone brood</mat-slide-toggle>
+              <mat-hint>is any of it drone brood?</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <div class="form-field">
-            <mat-slide-toggle formControlName="queenBrood">Queen brood</mat-slide-toggle>
+            <mat-form-field>
+              <mat-slide-toggle formControlName="queenBrood">Queen brood</mat-slide-toggle>
+              <mat-hint>did you see qrueen brood?</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <div class="form-field">
-            <mat-slide-toggle formControlName="drones">Drones</mat-slide-toggle>
+            <mat-form-field>
+              <mat-slide-toggle formControlName="drones">Drones</mat-slide-toggle>
+              <mat-hint>did you see any drones?</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <div class="form-field">
-            <mat-slide-toggle formControlName="queen">Queen</mat-slide-toggle>
+            <mat-form-field>
+              <mat-slide-toggle formControlName="queen">Queen</mat-slide-toggle>
+              <mat-hint>did you see the queen?</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
-          <div class="mat-form-field">
-            <mat-label>Food (honey)</mat-label>
-            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="food" formControlName="food"></mat-slider>
+          <div class="form-field">
+            <mat-form-field floatLabel="always">
+              <mat-label>Food (honey)</mat-label>
+              <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="food" formControlName="honeyFood"></mat-slider>
+              <mat-hint>Honey present in the hive body, used as food for the bees.</mat-hint>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
           <bee-button-bar>
@@ -77,14 +115,19 @@
         <ng-template matStepLabel>Overall</ng-template>
         <form [formGroup]="overallGroup">
 
-          <div class="mat-form-field">
-            <mat-label>Overall health</mat-label>
-            <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="health" formControlName="health"></mat-slider>
+          <div class="form-field">
+            <mat-form-field>
+              <mat-label>Overall health</mat-label>
+              <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="health" formControlName="health"></mat-slider>
+              <textarea matInput hidden></textarea>
+            </mat-form-field>
           </div>
 
-          <div class="mat-form-field">
-            <mat-label>Remarks</mat-label>
-            <textarea matInput formControlName="remarks" ></textarea>
+          <div class="form-field">
+            <mat-form-field>
+              <mat-label>Remarks</mat-label>
+              <textarea matInput formControlName="remarks" ></textarea>
+            </mat-form-field>
           </div>
 
           <bee-button-bar>
