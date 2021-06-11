@@ -32,4 +32,19 @@ describe('HiveFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('only submits the form when valid', () => {
+    const submitSpy = jest.spyOn(component.submitEvent, 'emit');
+
+    component.submit();
+    expect(submitSpy).not.toHaveBeenCalled();
+
+    // make valid
+    component.form.patchValue({
+      date: new Date(),
+      name: 'beez'
+    });
+    component.submit();
+    expect(submitSpy).toHaveBeenCalled();
+  });
 });
