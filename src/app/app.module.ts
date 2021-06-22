@@ -1,5 +1,6 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+import { defaultInterpolationFormat, I18NextModule, I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -13,6 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatIconRegistry } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { en } from './locales';
 
 export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) => () => {
   iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'));
@@ -23,6 +25,37 @@ export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: 
 
   return Promise.resolve();
 };
+
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+export function appInit(i18next: ITranslationService) {
+  return () => i18next.init({
+    fallbackLng: 'en',
+    debug: true,
+    returnEmptyString: false,
+    interpolation: { format: I18NextModule.interpolationFormat(defaultInterpolationFormat) },
+  }).then(() => {
+    i18next.addResourceBundle('en', 'translation', en, true, true);
+  });
+}
+
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+export function localeIdFactory(i18next: ITranslationService) {
+  return i18next.language;
+}
+
+export const I18N_PROVIDERS = [
+  {
+    provide: APP_INITIALIZER,
+    useFactory: appInit,
+    deps: [I18NEXT_SERVICE],
+    multi: true
+  },
+  {
+    provide: LOCALE_ID,
+    deps: [I18NEXT_SERVICE],
+    useFactory: localeIdFactory
+  }];
+
 @NgModule({
   declarations: [
     AppComponent
@@ -38,6 +71,7 @@ export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: 
     HttpClientModule, // needed for mat-icon registry
     RouterModule,
     LayoutModule,
+    I18NextModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -47,6 +81,7 @@ export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: 
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: registerMaterialIcons, deps: [MatIconRegistry, DomSanitizer], multi: true },
+    I18N_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })
