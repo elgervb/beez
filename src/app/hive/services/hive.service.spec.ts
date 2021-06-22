@@ -1,12 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { transform } from '@elgervb/mock-data';
 import { AuthService } from 'src/app/auth';
+import { Hive } from '../models';
 
 import { HiveService } from './hive.service';
 
 describe('HiveService', () => {
   let service: HiveService;
-  const angularFirestore = jest.fn();
+  const collection = {
+    add: jest.fn(() => Promise.resolve())
+  };
+  const angularFirestore = {
+    collection: jest.fn(() => collection)
+  };
   const authService = jest.fn();
 
   beforeEach(() => {
@@ -23,4 +30,9 @@ describe('HiveService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should create a hive', () => {
+    service.createHive(transform<Hive>({}));
+
+    expect(collection.add).toHaveBeenCalled();
+  });
 });
