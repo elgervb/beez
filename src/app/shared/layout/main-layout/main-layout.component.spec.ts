@@ -10,6 +10,7 @@ import { MaterialModule } from '../../material/material.module';
 import { AuthService, UserInfo } from 'src/app/auth';
 import { of } from 'rxjs';
 import { from } from '@elgervb/mock-data';
+import { I18nextTestingModule } from '../../testing/i18next/i18next.testing.module';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -25,6 +26,7 @@ describe('MainLayoutComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MainLayoutComponent],
       imports: [
+        I18nextTestingModule,
         LayoutModule,
         MaterialModule,
         NoopAnimationsModule,
