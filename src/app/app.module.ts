@@ -26,22 +26,16 @@ export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: 
   return Promise.resolve();
 };
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-export function appInit(i18next: ITranslationService) {
-  return () => i18next.init({
-    fallbackLng: 'en',
-    debug: true,
-    returnEmptyString: false,
-    interpolation: { format: I18NextModule.interpolationFormat(defaultInterpolationFormat) },
-  }).then(() => {
-    i18next.addResourceBundle('en', 'translation', en, true, true);
-  });
-}
+export const appInit = (i18next: ITranslationService) => () => i18next.init({
+  fallbackLng: 'en',
+  debug: false,
+  returnEmptyString: false,
+  interpolation: { format: I18NextModule.interpolationFormat(defaultInterpolationFormat) },
+}).then(() => {
+  i18next.addResourceBundle('en', 'translation', en, true, true);
+});
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-export function localeIdFactory(i18next: ITranslationService) {
-  return i18next.language;
-}
+export const localeIdFactory = (i18next: ITranslationService) => i18next.language;
 
 export const I18N_PROVIDERS = [
   {
