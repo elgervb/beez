@@ -7,7 +7,7 @@
       <p matLine class="line">
         <span>honey {{honeyString(inspection)}}</span>
         <span>queen <bee-color-dot [color]="queenPresentColor(inspection)"></bee-color-dot></span>
-        <span>health <mat-icon aria-hidden="false" aria-label="Example home icon">{{trendingIconName(inspection, inspections[i])}}</mat-icon></span>
+        <span>health {{inspection.health}} <mat-icon aria-hidden="false" aria-label="health trend">{{trendingIconName(inspection, inspections)}}</mat-icon></span>
       </p>
     </mat-list-item>
   </ng-container>
