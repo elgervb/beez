@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { PwaCheckForUpdateService } from './shared/services/pwa-check-for-update.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -11,6 +12,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        { provide: PwaCheckForUpdateService, useValue: {} }
+      ]
     }).compileComponents();
   });
 
