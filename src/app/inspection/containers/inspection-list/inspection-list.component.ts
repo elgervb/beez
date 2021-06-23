@@ -35,13 +35,21 @@ export class InspectionListComponent implements OnInit {
     return inspection.honey && inspection.honeyClosed ? `${inspection.honey} / ${inspection.honeyClosed}` : 'n/a';
   }
 
-  trendingIconName(inspection: Inspection, compareTo?: Inspection): string {
-    if (!inspection || !compareTo) {
-      return 'compare_arrows';
+  trendingIconName(inspection: Inspection, inspectionList?: Inspection[]): string {
+    const index = inspectionList?.indexOf(inspection);
+    const isLastInspection = index && index + 1 === inspectionList?.length;
+
+    if (inspectionList && index !== undefined && index !== -1 && !isLastInspection) {
+      const compareTo = inspectionList[index + 1];
+
+      if (compareTo) {
+        const health1 = inspection.health;
+        const health2 = compareTo.health;
+        return health1 > health2 ? 'trending_up' : health1 < health2 ? 'trending_down' : 'compare_arrows';
+      }
     }
-    const health1 = inspection.health;
-    const health2 = compareTo.health;
-    return health1 > health2 ? 'trending_up' : health1 < health2 ? 'trending_down' : 'compare_arrows';
+
+    return 'compare_arrows';
   }
 
 }
