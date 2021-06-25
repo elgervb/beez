@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './containers';
 import { MaterialModule } from '../shared/material/material.module';
+import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { MaterialModule } from '../shared/material/material.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    I18NextModule,
     MaterialModule,
   ]
 })

@@ -2,34 +2,34 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Queen {{queen.name}}</mat-card-title>
+      <mat-card-title>{{'queen' | i18nextCap}} {{queen.name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
 
       <mat-list role="list">
         <mat-list-item role="listitem">
-          <span>Active</span> <mat-slide-toggle [checked]="queen.active" [disabled]="true"></mat-slide-toggle>
+          <span>{{'active' | i18nextCap}}</span> <mat-slide-toggle [checked]="queen.active" [disabled]="true"></mat-slide-toggle>
         </mat-list-item>
         <mat-list-item role="listitem" *ngIf="queen.isMarked">
-          <span>Color</span> <bee-color-dot [color]="queen.color"></bee-color-dot>
+          <span>{{'color' | i18nextCap}}</span> <bee-color-dot [color]="queen.color"></bee-color-dot>
         </mat-list-item>
         <mat-list-item role="listitem">
-          <span>Date</span> {{queen.date | timestamp}}
+          <span>{{'date' | i18nextCap}}</span> {{queen.date | timestamp}}
         </mat-list-item>
         <mat-list-item role="listitem">
-          <span>Marked</span> <mat-slide-toggle [checked]="queen.isMarked" [disabled]="true"></mat-slide-toggle>
+          <span>{{'isMarked' | i18nextCap}}</span> <mat-slide-toggle [checked]="queen.isMarked" [disabled]="true"></mat-slide-toggle>
         </mat-list-item>
         <mat-list-item role="listitem" *ngIf="queen.remarks">
-          Remarks <br>
+          {{'remarks' | i18nextCap}} <br>
           {{queen.remarks}}
         </mat-list-item>
       </mat-list>
 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-stroked-button (click)="back()">back</button>
-      <button mat-stroked-button (click)="navigateToEdit(queenId)">edit</button>
-      <button mat-stroked-button color="warn" (click)="deleteQueen(queen)">delete</button>
+      <button mat-stroked-button (click)="back()">{{'back' | i18next}}</button>
+      <button mat-stroked-button (click)="navigateToEdit(queenId)">{{'edit' | i18next}}</button>
+      <button mat-stroked-button color="warn" (click)="deleteQueen(queen)">{{'delete' | i18next}}</button>
     </mat-card-actions>
   </mat-card>
 

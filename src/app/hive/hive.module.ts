@@ -10,6 +10,7 @@ import { HiveFormComponent } from './components';
 import { HiveDetailsComponent } from './containers/hive-details/hive-details.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { QrDialogComponent } from './components/qr-dialog/qr-dialog.component';
+import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { QrDialogComponent } from './components/qr-dialog/qr-dialog.component';
     CommonModule,
     MaterialModule,
     HiveRoutingModule,
+    I18NextModule,
     NgxQRCodeModule,
     ReactiveFormsModule,
     SharedModule,

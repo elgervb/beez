@@ -8,6 +8,7 @@ import { InspectionAddComponent } from './containers/inspection-add/inspection-a
 import { MaterialModule } from '../shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    I18NextModule,
     InspectionRoutingModule,
     ReactiveFormsModule,
     MaterialModule,

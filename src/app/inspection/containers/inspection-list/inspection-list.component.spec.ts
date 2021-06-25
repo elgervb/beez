@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
 
@@ -18,7 +19,7 @@ describe('InspectionListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [InspectionListComponent],
-      imports: [MaterialModule, SharedModule, RouterTestingModule],
+      imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule],
       providers: [
         { provide: InspectionService, useValue: inspectionService }
       ]

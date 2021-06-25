@@ -2,25 +2,25 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Hive {{hive.name}}</mat-card-title>
+      <mat-card-title>{{'hive' | i18nextCap}} {{hive.name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
 
       <mat-list role="list">
         <mat-list-item role="listitem" *ngIf="!dense">
-          <span>Active</span> <mat-slide-toggle [checked]="hive.active" [disabled]="true"></mat-slide-toggle>
+          <span>{{'isActive' | i18nextCap}}</span> <mat-slide-toggle [checked]="hive.active" [disabled]="true"></mat-slide-toggle>
         </mat-list-item>
         <mat-list-item role="listitem" *ngIf="!dense">
-          <span>Date</span> {{hive.date | timestamp}}
+          <span>{{'date' | i18nextCap}}</span> {{hive.date | timestamp}}
         </mat-list-item>
         <mat-list-item role="listitem" *ngIf="!dense">
-          <span>Type</span> {{hive.type}}
+          <span>{{'type' | i18nextCap}}</span> {{hive.type}}
         </mat-list-item>
         <mat-list-item role="listitem" *ngIf="!dense && hive.color">
-          <span>Color</span> <bee-color-dot [color]="hive.color"></bee-color-dot>
+          <span>{{'color' | i18nextCap}}</span> <bee-color-dot [color]="hive.color"></bee-color-dot>
         </mat-list-item>
         <mat-list-item role="listitem" *ngIf="!dense && hive.remarks">
-          Remarks <br>
+          {{'remarks' | i18nextCap}} <br>
           {{hive.remarks}}
         </mat-list-item>
         <mat-list-item class="qr-code-row">
@@ -37,10 +37,10 @@
 
     </mat-card-content>
     <mat-card-actions  *ngIf="!dense">
-      <button mat-stroked-button (click)="back()">back</button>
-      <button mat-stroked-button (click)="navigateToEdit()">edit</button>
-      <button mat-stroked-button (click)="navigateToInspections()">inspections</button>
-      <button mat-stroked-button color="warn" (click)="deleteHive(hive)">delete</button>
+      <button mat-stroked-button (click)="back()">{{'back' | i18next}}</button>
+      <button mat-stroked-button (click)="navigateToEdit()">{{'edit' | i18next}}</button>
+      <button mat-stroked-button (click)="navigateToInspections()">{{'inspection' | i18next: { count: 2 } }}</button>
+      <button mat-stroked-button color="warn" (click)="deleteHive(hive)">{{'delete' | i18next}}</button>
     </mat-card-actions>
   </mat-card>
 

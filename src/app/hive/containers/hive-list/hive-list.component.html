@@ -1,18 +1,18 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Hives</mat-card-title>
+    <mat-card-title>{{'hive' | i18nextCap: {count: 2} }}</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
     <table mat-table matSort [dataSource]="dataSource">
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'name' | i18nextCap}} </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="isActive">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'isActive' | i18nextCap}} </th>
         <td mat-cell *matCellDef="let element"> <mat-slide-toggle [checked]="element.active" [disabled]="true"></mat-slide-toggle> </td>
       </ng-container>
 
@@ -23,7 +23,7 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-stroked-button color="primary" type="button" (click)="addHive()"> Add new </button>
+    <button mat-stroked-button color="primary" type="button" (click)="addHive()"> {{'add' | i18nextCap}} {{'new' | i18next}} </button>
   </mat-card-actions>
 
 </mat-card>

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { Exception, Result } from '@zxing/library';
@@ -7,6 +7,7 @@ import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { QRBeezModel } from 'src/app/shared/models';
+import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 @Component({
   selector: 'bee-scanner',
   templateUrl: './scanner.component.html',
@@ -22,7 +23,8 @@ export class ScannerComponent implements OnInit {
   constructor(
     private location: Location,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
   ngOnInit(): void { }
@@ -66,7 +68,7 @@ export class ScannerComponent implements OnInit {
       this.scanner.scanStop();
       this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
         ConfirmComponent,
-        { data: { title: 'Scanner', content: 'No QR code found yet. Do you want to continue?' } }
+        { data: { title: this.i18NextService.format('scanner', 'cap'), content: this.i18NextService.t('sentence.noQRcode') } }
       ).afterClosed()
         .pipe(
           tap(confirm => confirm ? this.scanner.scanStart() : this.location.back())
