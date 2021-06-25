@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
@@ -24,7 +25,8 @@ export class QueenDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private queenService: QueenService
+    private queenService: QueenService,
+    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +44,12 @@ export class QueenDetailsComponent implements OnInit {
     event?.stopPropagation();
     this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
       ConfirmComponent,
-      { data: { title: 'Delete queen', content: `Are you sure you want to delete queen ${queen.name}?` } }
+      {
+        data: {
+          title: `${this.i18NextService.format('delete', 'cap')} ${this.i18NextService.t('queen')}`,
+          content: this.i18NextService.t('sentence.confirmDelete', { replace: { what: queen.name } })
+        }
+      }
     ).afterClosed()
       .pipe(
         filter(confirm => !!confirm),

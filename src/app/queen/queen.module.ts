@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material/material.module';
 import { QueenFormComponent } from './components';
 import { SharedModule } from '../shared/shared.module';
+import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    I18NextModule,
     MaterialModule,
     QueenRoutingModule,
     ReactiveFormsModule,

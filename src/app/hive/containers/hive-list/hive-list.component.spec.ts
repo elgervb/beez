@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { HiveService } from '../../services/hive.service';
 import { HiveListComponent } from './hive-list.component';
 
@@ -19,6 +20,7 @@ describe('HiveListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HiveListComponent],
       imports: [
+        I18nextTestingModule,
         MaterialModule,
         NoopAnimationsModule,
         RouterTestingModule,

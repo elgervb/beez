@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 
 import { HiveFormComponent } from './hive-form.component';
 
@@ -14,6 +15,7 @@ describe('HiveFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HiveFormComponent],
       imports: [
+        I18nextTestingModule,
         MaterialModule,
         NoopAnimationsModule,
         ReactiveFormsModule,

@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { HiveService } from '../../services/hive.service';
 
 import { HiveDetailsComponent } from './hive-details.component';
@@ -18,9 +19,9 @@ describe('HiveDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HiveDetailsComponent],
-      imports: [RouterTestingModule, MaterialModule, SharedModule, NgxQRCodeModule],
+      imports: [MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule],
       providers: [
-        { provide: HiveService, useValue: hiveService }
+        { provide: HiveService, useValue: hiveService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

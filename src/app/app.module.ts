@@ -14,7 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatIconRegistry } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import { en } from './locales';
+import { en, nl } from './locales';
 
 export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) => () => {
   iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'));
@@ -27,12 +27,13 @@ export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: 
 };
 
 export const appInit = (i18next: ITranslationService) => () => i18next.init({
-  fallbackLng: 'en',
-  debug: false,
+  fallbackLng: 'nl',
+  debug: !environment.production,
   returnEmptyString: false,
   interpolation: { format: I18NextModule.interpolationFormat(defaultInterpolationFormat) },
 }).then(() => {
   i18next.addResourceBundle('en', 'translation', en, true, true);
+  i18next.addResourceBundle('nl', 'translation', nl, true, true);
 });
 
 export const localeIdFactory = (i18next: ITranslationService) => i18next.language;

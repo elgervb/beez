@@ -22,7 +22,16 @@ export const I18N_PROVIDERS = [
     provide: LOCALE_ID,
     deps: [I18NEXT_SERVICE],
     useFactory: localeIdFactory
-  }];
+  },
+  {
+    provide: I18NEXT_SERVICE,
+    useValue: {
+      t: jest.fn().mockImplementation(t => t),
+      format: jest.fn().mockImplementation(t => t),
+      init: jest.fn()
+    }
+  }
+];
 
 @NgModule({
   exports: [

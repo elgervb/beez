@@ -9,6 +9,7 @@ import { InspectionAddComponent } from './inspection-add.component';
 import * as utilsModule from 'src/app/shared/utils/route/get-param';
 import { Location } from '@angular/common';
 import { of } from 'rxjs';
+import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 
 describe('InspectionAddComponent', () => {
   let component: InspectionAddComponent;
@@ -18,7 +19,7 @@ describe('InspectionAddComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [InspectionAddComponent],
-      imports: [MaterialModule, NoopAnimationsModule, RouterTestingModule, ReactiveFormsModule, SharedModule],
+      imports: [I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule],
       providers: [
         { provide: InspectionService, useValue: inspectionService }
       ]

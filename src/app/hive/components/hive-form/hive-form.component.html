@@ -5,15 +5,15 @@
 
   <div class="form-field">
     <mat-form-field appearance="fill">
-      <mat-label>Name*</mat-label>
+      <mat-label>{{'name' | i18nextCap}}*</mat-label>
       <input matInput placeholder="Hive's name" formControlName="name">
-      <mat-hint>Hive name (required)</mat-hint>
+      <mat-hint>{{'hive' | i18nextCap}} {{'name' | i18next}} ({{'required' | i18next}})</mat-hint>
     </mat-form-field>
   </div>
 
   <div class="form-field">
     <mat-form-field appearance="fill">
-      <mat-label>Date</mat-label>
+      <mat-label>{{'date' | i18nextCap}}</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker touchUi></mat-datepicker>
@@ -22,7 +22,7 @@
 
   <div class="form-field">
     <mat-form-field appearance="fill">
-      <mat-label>Type</mat-label>
+      <mat-label>{{'type' | i18nextCap}}</mat-label>
       <input matInput placeholder="Hive's type" formControlName="type" list="hive-type">
       <datalist id="hive-type">
         <option value="dadant"></option>
@@ -34,31 +34,31 @@
         <option value="top bar"></option>
         <option value="warré"></option>
       </datalist>
-      <mat-hint>Hive type, eg. spaarkast</mat-hint>
+      <mat-hint>{{'hive' | i18nextCap}} {{'type' | i18next}}, {{'eg' | i18nextCap}} spaarkast</mat-hint>
     </mat-form-field>
   </div>
 
   <div class="form-field">
     <mat-form-field appearance="fill">
-      <mat-label>Color</mat-label>
+      <mat-label>{{'color' | i18nextCap}}</mat-label>
       <input matInput placeholder="Hive color" type="color" formControlName="color">
     </mat-form-field>
   </div>
 
   <div class="form-field">
     <mat-form-field appearance="fill">
-      <mat-label>Remarks</mat-label>
+      <mat-label>{{'remarks' | i18nextCap}}</mat-label>
       <textarea matInput formControlName="remarks"></textarea>
     </mat-form-field>
   </div>
 
   <div class="form-field">
-    <mat-slide-toggle formControlName="active">Is active</mat-slide-toggle>
+    <mat-slide-toggle formControlName="active">{{'isActive' | i18nextCap}}</mat-slide-toggle>
   </div>
 
   <bee-button-bar justify="right">
-    <button mat-stroked-button type="button" (click)="cancel()">cancel</button>
-    <button mat-stroked-button type="submit" color="primary" [disabled]="form.invalid || form.pristine">save</button>
+    <button mat-stroked-button type="button" (click)="cancel()">{{'cancel' | i18nextCap}}</button>
+    <button mat-stroked-button type="submit" color="primary" [disabled]="form.invalid || form.pristine">{{'save' | i18nextCap}}</button>
   </bee-button-bar>
 
 </form>

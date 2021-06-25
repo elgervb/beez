@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
@@ -42,7 +43,8 @@ export class HiveDetailsComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private hiveService: HiveService
+    private hiveService: HiveService,
+    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +62,12 @@ export class HiveDetailsComponent implements OnInit {
     event?.stopPropagation();
     this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
       ConfirmComponent,
-      { data: { title: 'Delete hive', content: `Are you sure you want to delete hive ${hive.name}?` } }
+      {
+        data: {
+          title: `${this.i18NextService.format('delete', 'cap')} ${this.i18NextService.t('hive')}`,
+          content: this.i18NextService.t('sentence.confirmDelete', { replace: { what: hive.name } })
+        }
+      }
     ).afterClosed()
       .pipe(
         filter(confirm => !!confirm),

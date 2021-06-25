@@ -2,6 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { HiveService } from '../../services/hive.service';
 
 import { HiveEditComponent } from './hive-edit.component';
@@ -17,7 +18,9 @@ describe('HiveEditComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [HiveEditComponent],
-      imports: [RouterTestingModule],
+      imports: [
+        I18nextTestingModule,
+        RouterTestingModule],
       providers: [
         { provide: HiveService, useValue: hiveService }
       ],

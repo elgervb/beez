@@ -5,6 +5,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { QRBeezModel } from 'src/app/shared/models';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 
 import { ScannerComponent } from './scanner.component';
 
@@ -15,7 +16,7 @@ describe('ScannerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ScannerComponent],
-      imports: [MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule]
+      imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule],
     })
       .compileComponents();
   });
