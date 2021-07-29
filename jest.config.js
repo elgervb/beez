@@ -33,9 +33,6 @@ module.exports = {
       lines: 50
     }
   },
-  moduleNameMapper: {
-    '^@core/(.*)': '<rootDir>/src/app/core/$1',
-  },
   "globals": {
     "ts-jest": {
       "tsconfig": "<rootDir>/tsconfig.spec.json",
