@@ -39,7 +39,7 @@
     <mat-card-actions  *ngIf="!dense">
       <button mat-stroked-button (click)="back()">{{'back' | i18next}}</button>
       <button mat-stroked-button (click)="navigateToEdit()">{{'edit' | i18next}}</button>
-      <button mat-stroked-button (click)="navigateToInspections()">{{'inspection' | i18next: { count: 2 } }}</button>
+      <button mat-stroked-button (click)="navigateToInspections()" [disabled]="!hive.active">{{'inspection' | i18next: { count: 2 } }}</button>
       <button mat-stroked-button color="warn" (click)="deleteHive(hive)">{{'delete' | i18next}}</button>
     </mat-card-actions>
   </mat-card>
