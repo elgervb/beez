@@ -21,9 +21,6 @@ export class PwaCheckForUpdateService {
           .subscribe(() => {
             swUpdate.activateUpdate().then(() => document.location.reload());
           });
-
-        // eslint-disable-next-line no-underscore-dangle
-        snack._dismissAfter(5000);
       });
 
       // check for update

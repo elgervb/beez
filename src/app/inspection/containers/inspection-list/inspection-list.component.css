@@ -4,9 +4,17 @@ mat-list-item .line {
   justify-content: space-between;
 }
 mat-list-item .line span {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
+  flex: 1 1 33.333%;
 }
+mat-list-item .line span:nth-child(2) {
+  justify-content: center;
+}
+mat-list-item .line span:nth-child(3) {
+  justify-content: flex-end;
+}
+
 bee-color-dot, mat-icon {
   margin-left: .5rem;
 }
