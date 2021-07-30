@@ -10,6 +10,7 @@ import * as utilsModule from 'src/app/shared/utils/route/get-param';
 import { Location } from '@angular/common';
 import { of } from 'rxjs';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('InspectionAddComponent', () => {
   let component: InspectionAddComponent;
@@ -22,7 +23,8 @@ describe('InspectionAddComponent', () => {
       imports: [I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule],
       providers: [
         { provide: InspectionService, useValue: inspectionService }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   });

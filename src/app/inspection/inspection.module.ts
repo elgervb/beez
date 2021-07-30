@@ -9,6 +9,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { I18NextModule } from 'angular-i18next';
+import { ComponentsModule } from 'components';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { I18NextModule } from 'angular-i18next';
   ],
   imports: [
     CommonModule,
+    ComponentsModule,
     I18NextModule,
     InspectionRoutingModule,
     ReactiveFormsModule,

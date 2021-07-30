@@ -11,6 +11,7 @@ import { HiveDetailsComponent } from './containers/hive-details/hive-details.com
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { QrDialogComponent } from './components/qr-dialog/qr-dialog.component';
 import { I18NextModule } from 'angular-i18next';
+import { ComponentsModule } from 'components';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { I18NextModule } from 'angular-i18next';
   ],
   imports: [
     CommonModule,
+    ComponentsModule,
     MaterialModule,
     HiveRoutingModule,
     I18NextModule,

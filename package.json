@@ -2,9 +2,11 @@
   "name": "beez",
   "version": "0.0.0",
   "scripts": {
+    "postinstall": "ngcc",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:projects": "ng build components",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -71,6 +73,7 @@
     "jest": "^26.6.3",
     "jest-preset-angular": "^8.4.0",
     "lint-staged": "^11.0.0",
+    "ng-packagr": "^11.0.0",
     "open": "^7.0.3",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
@@ -78,8 +81,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "./node_modules/.bin/eslint --fix --",
-      "jest --bail --findRelatedTests"
+      "./node_modules/.bin/eslint --fix --"
     ]
   }
 }

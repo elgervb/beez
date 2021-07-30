@@ -16,7 +16,7 @@ describe('ScannerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ScannerComponent],
-      imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule],
+      imports: [MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule, I18nextTestingModule],
     })
       .compileComponents();
   });

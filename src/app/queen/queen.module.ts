@@ -8,6 +8,8 @@ import { MaterialModule } from '../shared/material/material.module';
 import { QueenFormComponent } from './components';
 import { SharedModule } from '../shared/shared.module';
 import { I18NextModule } from 'angular-i18next';
+import { } from 'projects/components/src/public-api';
+import { ComponentsModule } from 'components';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { I18NextModule } from 'angular-i18next';
   ],
   imports: [
     CommonModule,
+    ComponentsModule,
     I18NextModule,
     MaterialModule,
     QueenRoutingModule,
