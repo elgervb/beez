@@ -1,10 +1,12 @@
 module.exports = {
-  "preset": "jest-preset-angular",
-  "displayName": 'BEEZ APP',
-  "setupFilesAfterEnv": [
+  preset: "jest-preset-angular",
+  displayName: 'BEEZ APP',
+  setupFilesAfterEnv: [
     "<rootDir>/src/setup-jest.ts"
   ],
-  "testPathIgnorePatterns": [
+  roots: ['<rootDir>/src'],
+  modulePaths: ['<rootDir>/dist'],
+  testPathIgnorePatterns: [
     "<rootDir>/node_modules/",
     "<rootDir>/dist/",
     "<rootDir>/coverage/",
@@ -34,10 +36,10 @@ module.exports = {
       lines: 50
     }
   },
-  "globals": {
+  globals: {
     "ts-jest": {
-      "tsconfig": "<rootDir>/tsconfig.spec.json",
-      "stringifyContentPathRegex": "\\.html$"
+      tsconfig: "<rootDir>/tsconfig.spec.json",
+      stringifyContentPathRegex: "\\.html$"
     }
   }
 }

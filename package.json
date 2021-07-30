@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:projects": "ng build components",
+    "build:projects": "ng build auth && ng build components",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

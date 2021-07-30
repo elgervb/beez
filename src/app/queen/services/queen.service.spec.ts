@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthService } from 'src/app/auth';
+import { AuthService } from 'auth';
 
 import { QueenService } from './queen.service';
 

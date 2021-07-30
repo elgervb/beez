@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, first, tap } from 'rxjs/operators';
-import { AuthService, UserInfo } from 'src/app/auth';
+import { AuthService, UserInfo } from 'auth';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
