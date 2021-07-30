@@ -49,7 +49,7 @@
 
           <div class="form-field">
             <mat-form-field>
-              <mat-slide-toggle formControlName="larva">{{'larva' | i18nextCap}}</mat-slide-toggle>
+              <mat-slide-toggle formControlName="larva">{{'larva' | i18nextCap: {count:2} }}</mat-slide-toggle>
               <mat-hint>{{'sentence.openBrood' | i18next}}</mat-hint>
               <textarea matInput hidden></textarea>
             </mat-form-field>
@@ -65,7 +65,7 @@
 
           <div class="form-field">
             <mat-form-field>
-              <mat-slide-toggle formControlName="droneBrood">{{'drone' | i18nextCap}} {{'brood' | i18next}}</mat-slide-toggle>
+              <mat-slide-toggle formControlName="droneBrood">{{'droneBrood' | i18nextCap}}</mat-slide-toggle>
               <mat-hint>{{'sentence.droneBroodPresent' | i18next}}</mat-hint>
               <textarea matInput hidden></textarea>
             </mat-form-field>
@@ -73,7 +73,7 @@
 
           <div class="form-field">
             <mat-form-field>
-              <mat-slide-toggle formControlName="queenBrood">{{'queen' | i18nextCap}} {{'brood' | i18next}}</mat-slide-toggle>
+              <mat-slide-toggle formControlName="queenBrood">{{'queenBrood' | i18nextCap}}</mat-slide-toggle>
               <mat-hint>{{'sentence.queenBroodPresent' | i18next}}</mat-hint>
               <textarea matInput hidden></textarea>
             </mat-form-field>
@@ -97,9 +97,9 @@
 
           <div class="form-field">
             <mat-form-field floatLabel="always">
-              <mat-label>Food ({{'honey' | i18next}})</mat-label>
+              <mat-label>{{'food' | i18nextCap}} ({{'honey' | i18next}})</mat-label>
               <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="food" formControlName="honeyFood"></mat-slider>
-              <mat-hint>Honey present in the hive body, used as food for the bees.</mat-hint>
+              <mat-hint>{{'sentence.hiveBodyFood' | i18next}}.</mat-hint>
               <textarea matInput hidden></textarea>
             </mat-form-field>
           </div>
@@ -117,7 +117,7 @@
 
           <div class="form-field">
             <mat-form-field>
-              <mat-label>{{'overall' | i18nextCap}} {{'health' | i18nextCap}}</mat-label>
+              <mat-label>{{'overall' | i18nextCap}} {{'health' | i18next}}</mat-label>
               <mat-slider max="100" min="0" step="5" tickInterval="5" thumbLabel="true" [displayWith]="formatLabel" aria-label="health" formControlName="health"></mat-slider>
               <textarea matInput hidden></textarea>
             </mat-form-field>

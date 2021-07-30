@@ -28,10 +28,11 @@ export class InspectionListComponent implements OnInit {
   }
 
   queenPresentColor(inspection: Inspection): string {
-    return inspection.queen || inspection.eggs ? 'green' : 'red';
+    return inspection.queen || inspection.eggs ? 'green' :
+      inspection.larva ? 'orange' : 'red';
   }
 
-  honeyString(inspection: Inspection): string {
+  honeyProgress(inspection: Inspection): string {
     return inspection.honey && inspection.honeyClosed ? `${inspection.honey} / ${inspection.honeyClosed}` : 'n/a';
   }
 

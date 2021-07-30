@@ -5,9 +5,9 @@
     <mat-list-item *ngFor="let inspection of inspections; let i = index">
       <h3 matLine> {{inspection.date |timestamp}}</h3>
       <p matLine class="line">
-        <span>{{'honey' | i18next}} {{honeyString(inspection)}}</span>
-        <span>{{'queen' | i18next}} <bee-color-dot [color]="queenPresentColor(inspection)"></bee-color-dot></span>
-        <span>{{'health' | i18next}} {{inspection.health}} <mat-icon aria-hidden="false" aria-label="health trend">{{trendingIconName(inspection, inspections)}}</mat-icon></span>
+        <span>{{'honey' | i18next}} {{honeyProgress(inspection)}}</span>
+        <span> <mat-icon svgIcon="queen"></mat-icon> <bee-color-dot [color]="queenPresentColor(inspection)"></bee-color-dot></span>
+        <span> <mat-icon aria-hidden="false" aria-label="health trend">favorite_border</mat-icon> <mat-icon aria-hidden="false" aria-label="health trend">{{trendingIconName(inspection, inspections)}}</mat-icon></span>
       </p>
     </mat-list-item>
   </ng-container>
