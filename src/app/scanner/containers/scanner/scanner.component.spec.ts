@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MaterialModule } from 'components';
 import { QRBeezModel } from 'src/app/shared/models';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';

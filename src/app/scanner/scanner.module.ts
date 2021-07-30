@@ -4,7 +4,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ScannerRoutingModule } from './scanner-routing.module';
 import { ScannerComponent } from './containers/scanner/scanner.component';
 import { SharedModule } from '../shared/shared.module';
-import { MaterialModule } from '../shared/material/material.module';
+import { MaterialModule } from 'components';
 
 
 @NgModule({

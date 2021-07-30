@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MaterialModule } from 'components';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 

@@ -6,11 +6,11 @@ import { MainLayoutComponent } from './main-layout.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { Router } from '@angular/router';
-import { MaterialModule } from '../../material/material.module';
 import { AuthService, UserInfo } from 'auth';
 import { of } from 'rxjs';
 import { from } from '@elgervb/mock-data';
 import { I18nextTestingModule } from '../../testing/i18next/i18next.testing.module';
+import { MaterialModule } from 'components';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;

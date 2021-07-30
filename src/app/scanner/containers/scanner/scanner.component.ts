@@ -1,13 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { Exception, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { QRBeezModel } from 'src/app/shared/models';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
+import { ConfirmDialogData, ConfirmComponent } from 'components';
 @Component({
   selector: 'bee-scanner',
   templateUrl: './scanner.component.html',

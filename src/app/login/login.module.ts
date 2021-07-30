@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './containers';
-import { MaterialModule } from '../shared/material/material.module';
+import { MaterialModule } from 'components';
 
 @NgModule({
   declarations: [

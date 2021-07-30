@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './containers';
-import { MaterialModule } from '../shared/material/material.module';
+import { MaterialModule } from 'components';
 import { I18NextModule } from 'angular-i18next';
 
 @NgModule({

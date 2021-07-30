@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
-import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
+import { ConfirmComponent, ConfirmDialogData } from 'components';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
 
