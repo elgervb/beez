@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
-import { getParam } from 'src/app/shared/utils/route/get-param';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
 
@@ -58,7 +57,7 @@ export class InspectionAddComponent implements OnInit {
       ...this.overallGroup.value
     };
 
-    const hiveId = getParam(this.route.snapshot.root, 'hiveId');
+    const hiveId = this.route.snapshot.paramMap.get('hiveId');
 
     if (hiveId) {
       this.inspectionService.add(inspection, hiveId)

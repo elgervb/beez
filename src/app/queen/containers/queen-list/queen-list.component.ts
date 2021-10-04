@@ -24,7 +24,6 @@ export class QueenListComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-
     private queenService: QueenService
   ) { }
 

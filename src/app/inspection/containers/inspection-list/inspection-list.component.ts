@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { getParam } from 'src/app/shared/utils/route/get-param';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
 
@@ -21,7 +20,7 @@ export class InspectionListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const hiveId = getParam(this.route.snapshot.root, 'hiveId');
+    const hiveId = this.route.snapshot.paramMap.get('hiveId');
     if (hiveId) {
       this.inspections$ = this.inspectionService.getInspections(hiveId, 5).pipe(share());
     }
