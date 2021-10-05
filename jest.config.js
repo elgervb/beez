@@ -16,7 +16,6 @@ module.exports = {
     '!**/src/main.ts',
     '!**/src/polyfills.ts',
     '!**/src/setup-jest.ts',
-    '!**/e2e/**',
     '!**/src/**/index.ts',
     '!**/src/**/*.module.ts'
   ],
