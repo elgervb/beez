@@ -5,9 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "jest",
+    "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "lint-staged": "lint-staged"
   },
   "repository": {
@@ -43,6 +42,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^12.1.2",
     "@angular-devkit/architect": "0.1202.8",
     "@angular-devkit/build-angular": "~12.2.8",
     "@angular-eslint/builder": "12.5.0",
@@ -71,7 +71,6 @@
     "jest-preset-angular": "^10.0.1",
     "lint-staged": "^11.2.0",
     "open": "^8.2.1",
-    "protractor": "~7.0.0",
     "ts-node": "~10.2.1",
     "typescript": "~4.3.5"
   },
