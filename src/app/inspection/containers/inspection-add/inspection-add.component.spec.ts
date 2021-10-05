@@ -6,10 +6,10 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InspectionService } from '../../services/inspection.service';
 import { InspectionAddComponent } from './inspection-add.component';
-import * as utilsModule from 'src/app/shared/utils/route/get-param';
 import { Location } from '@angular/common';
 import { of } from 'rxjs';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { ActivatedRoute } from '@angular/router';
 
 describe('InspectionAddComponent', () => {
   let component: InspectionAddComponent;
@@ -49,7 +49,8 @@ describe('InspectionAddComponent', () => {
   });
 
   it('should submit and return to previous page', () => {
-    const getParamSpy = jest.spyOn(utilsModule, 'getParam').mockReturnValueOnce('hiveId');
+    const route = TestBed.inject(ActivatedRoute);
+    const getParamSpy = jest.spyOn(route.snapshot.paramMap, 'get').mockReturnValueOnce('hiveId');
     inspectionService.add.mockReturnValueOnce(of(''));
     const backSpy = jest.spyOn(TestBed.inject(Location), 'back');
 
