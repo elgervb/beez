@@ -1,4 +1,3 @@
-import 'jest-preset-angular/setup-jest';
 import { randomString, register } from '@elgervb/mock-data';
 import { Queen } from './app/queen/models';
 import { UserInfo } from './app/auth';
