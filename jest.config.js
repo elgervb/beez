@@ -1,4 +1,7 @@
 module.exports = {
+  "modulePaths": [
+    "<rootDir>",
+  ],
   "preset": "jest-preset-angular",
   "setupFilesAfterEnv": [
     "<rootDir>/src/setup-jest.ts"
@@ -26,10 +29,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      statements: 74,
+      statements: 73,
       branches: 41,
       functions: 50,
-      lines: 71
+      lines: 70
     }
   },
   moduleNameMapper: {

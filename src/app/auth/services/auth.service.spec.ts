@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 describe('AuthService', () => {
   let service: AuthService;
   let angularFireAuth: AngularFireAuth;
-  const userSubject = new Subject<User>();
+  const userSubject = new Subject<User | null>();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -33,7 +33,7 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should state that a user is logged on', async done => {
+  it('should state that a user is logged on', done => {
     service.isLoggedIn().pipe(take(1)).subscribe({
       next: loggedIn => {
         expect(loggedIn).toBeTruthy();
@@ -43,14 +43,14 @@ describe('AuthService', () => {
     userSubject.next(transform<User>({}));
   });
 
-  it('should state that a user is not logged on', async done => {
+  it('should state that a user is not logged on', done => {
     service.isLoggedIn().pipe(take(1)).subscribe({
       next: loggedIn => {
         expect(loggedIn).toBeFalsy();
         done();
       }
     });
-    userSubject.next(undefined);
+    userSubject.next(null);
   });
 
   it('should sign in with google', () => {
