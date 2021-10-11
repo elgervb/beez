@@ -15,8 +15,8 @@ describe('ScannerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ScannerComponent],
-      imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule],
+      declarations: [ ScannerComponent ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule ],
     })
       .compileComponents();
   });
@@ -43,7 +43,7 @@ describe('ScannerComponent', () => {
 
     component.scanSuccessHandler(JSON.stringify(result));
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/hives', result.id]);
+    expect(navigateSpy).toHaveBeenCalledWith([ '/hives', result.id ]);
   });
 
   it('should navigate on success queen', () => {
@@ -55,7 +55,7 @@ describe('ScannerComponent', () => {
 
     component.scanSuccessHandler(JSON.stringify(result));
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/queens', result.id]);
+    expect(navigateSpy).toHaveBeenCalledWith([ '/queens', result.id ]);
   });
 
   it('should throw when type is unexpected', () => {

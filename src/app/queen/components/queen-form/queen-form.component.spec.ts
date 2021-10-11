@@ -12,7 +12,7 @@ describe('QueenFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [QueenFormComponent],
+      declarations: [ QueenFormComponent ],
       imports: [
         MaterialModule,
         NoopAnimationsModule,

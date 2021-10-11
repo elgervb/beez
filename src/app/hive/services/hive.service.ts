@@ -45,8 +45,6 @@ export class HiveService {
     const document = this.angularFirestore.collection<Hive>(this.collectionPath).doc(hive.id);
     document.update(hive);
     return document.get()
-      .pipe(
-        map(doc => doc.data())
-      );
+      .pipe(map(doc => doc.data()));
   }
 }

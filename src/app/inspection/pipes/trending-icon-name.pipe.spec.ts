@@ -16,28 +16,28 @@ describe('TrendingIconNamePipe', () => {
     const pipe = new TrendingIconNamePipe();
     const inspection = transform<Inspection>({ health: 50 });
 
-    expect(pipe.transform(inspection, [inspection, { ...inspection, health: 40 }])).toBe(TrendingIconName.up);
+    expect(pipe.transform(inspection, [ inspection, { ...inspection, health: 40 } ])).toBe(TrendingIconName.up);
   });
 
   it('goes down', () => {
     const pipe = new TrendingIconNamePipe();
     const inspection = transform<Inspection>({ health: 50 });
 
-    expect(pipe.transform(inspection, [inspection, { ...inspection, health: 60 }])).toBe(TrendingIconName.down);
+    expect(pipe.transform(inspection, [ inspection, { ...inspection, health: 60 } ])).toBe(TrendingIconName.down);
   });
 
   it('is the same', () => {
     const pipe = new TrendingIconNamePipe();
     const inspection = transform<Inspection>({ health: 50 });
 
-    expect(pipe.transform(inspection, [inspection, { ...inspection, health: 50 }])).toBe(TrendingIconName.equal);
+    expect(pipe.transform(inspection, [ inspection, { ...inspection, health: 50 } ])).toBe(TrendingIconName.equal);
   });
 
   it('is last', () => {
     const pipe = new TrendingIconNamePipe();
     const inspection = transform<Inspection>({ health: 50 });
 
-    expect(pipe.transform(inspection, [inspection])).toBe(TrendingIconName.equal);
+    expect(pipe.transform(inspection, [ inspection ])).toBe(TrendingIconName.equal);
   });
 
   it('with empty list', () => {
@@ -58,6 +58,6 @@ describe('TrendingIconNamePipe', () => {
     const pipe = new TrendingIconNamePipe();
     const inspection = transform<Inspection>({ health: 50 });
 
-    expect(pipe.transform(inspection, [{ ...inspection }, { ...inspection }])).toBe(TrendingIconName.equal);
+    expect(pipe.transform(inspection, [ { ...inspection }, { ...inspection } ])).toBe(TrendingIconName.equal);
   });
 });

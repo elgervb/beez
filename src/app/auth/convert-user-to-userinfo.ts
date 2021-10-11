@@ -1,4 +1,4 @@
-import { UserInfo, User } from './models/user';
+import { User, UserInfo } from './models/user';
 
 export const convertUserToUserInfo = (user: User | null): UserInfo | null => {
   if (!user) {

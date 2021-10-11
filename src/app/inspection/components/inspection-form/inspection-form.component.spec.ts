@@ -10,7 +10,7 @@ describe('InspectionFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ InspectionFormComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

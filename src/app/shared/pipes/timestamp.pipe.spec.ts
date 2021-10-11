@@ -11,9 +11,7 @@ describe('TimestampPipe', () => {
 
   it('transforms a timestamp into a date string', () => {
     const pipe = new TimestampPipe();
-    const timestamp = transform<any, firebase.firestore.Timestamp>(
-      { seconds: 1620766153, nanoseconds: 0 }
-    );
+    const timestamp = transform<any, firebase.firestore.Timestamp>({ seconds: 1620766153, nanoseconds: 0 });
     expect(pipe.transform(timestamp)).toBe('05-11-2021');
   });
 });

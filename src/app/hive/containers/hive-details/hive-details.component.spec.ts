@@ -18,12 +18,10 @@ describe('HiveDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HiveDetailsComponent],
-      imports: [MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule],
-      providers: [
-        { provide: HiveService, useValue: hiveService },
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [ HiveDetailsComponent ],
+      imports: [ MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule ],
+      providers: [ { provide: HiveService, useValue: hiveService }, ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });

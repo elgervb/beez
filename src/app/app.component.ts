@@ -4,7 +4,7 @@ import { PwaCheckForUpdateService } from './shared/services/pwa-check-for-update
 @Component({
   selector: 'bee-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: [ './app.component.css' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {

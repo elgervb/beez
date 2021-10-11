@@ -11,7 +11,7 @@ import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 @Component({
   selector: 'bee-scanner',
   templateUrl: './scanner.component.html',
-  styleUrls: ['./scanner.component.css']
+  styleUrls: [ './scanner.component.css' ]
 })
 export class ScannerComponent implements OnInit {
 
@@ -44,14 +44,14 @@ export class ScannerComponent implements OnInit {
     let route: string[];
 
     switch (result.type) {
-      case 'hive':
-        route = ['/hives', result.id];
-        break;
-      case 'queen':
-        route = ['/queens', result.id];
-        break;
-      default:
-        throw new Error('no such type found ' + result.type);
+    case 'hive':
+      route = [ '/hives', result.id ];
+      break;
+    case 'queen':
+      route = [ '/queens', result.id ];
+      break;
+    default:
+      throw new Error(`no such type found ${result.type}`);
     }
 
     this.router.navigate(route);
@@ -70,9 +70,7 @@ export class ScannerComponent implements OnInit {
         ConfirmComponent,
         { data: { title: this.i18NextService.format('scanner', 'cap'), content: this.i18NextService.t('sentence.noQRcode') } }
       ).afterClosed()
-        .pipe(
-          tap(confirm => confirm ? this.scanner.scanStart() : this.location.back())
-        )
+        .pipe(tap(confirm => confirm ? this.scanner.scanStart() : this.location.back()))
         .subscribe();
     }
   }

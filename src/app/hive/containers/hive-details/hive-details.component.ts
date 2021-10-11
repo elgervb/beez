@@ -14,7 +14,7 @@ import { HiveService } from '../../services/hive.service';
 @Component({
   selector: 'bee-hive-details',
   templateUrl: './hive-details.component.html',
-  styleUrls: ['./hive-details.component.css']
+  styleUrls: [ './hive-details.component.css' ]
 })
 export class HiveDetailsComponent implements OnInit {
 
@@ -48,14 +48,14 @@ export class HiveDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const hiveId = this.hiveId;
+    const {hiveId} = this;
     if (hiveId) {
       this.hive$ = this.hiveService.getHive(hiveId);
     }
   }
 
   back(): void {
-    this.router.navigate(['..'], { relativeTo: this.route });
+    this.router.navigate([ '..' ], { relativeTo: this.route });
   }
 
   deleteHive(hive: Hive, event?: MouseEvent): void {
@@ -71,22 +71,18 @@ export class HiveDetailsComponent implements OnInit {
     ).afterClosed()
       .pipe(
         filter(confirm => !!confirm),
-        switchMap(
-          () => this.hiveService.deleteHive(hive)
-            .pipe(
-              tap(() => this.back())
-            )
-        )
+        switchMap(() => this.hiveService.deleteHive(hive)
+          .pipe(tap(() => this.back())))
       )
       .subscribe();
   }
 
   navigateToEdit(): void {
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    this.router.navigate([ 'edit' ], { relativeTo: this.route });
   }
 
   navigateToInspections(): void {
-    this.router.navigate(['inspections'], { relativeTo: this.route });
+    this.router.navigate([ 'inspections' ], { relativeTo: this.route });
   }
 
   printQRcode(): void {

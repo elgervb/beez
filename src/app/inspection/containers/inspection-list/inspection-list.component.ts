@@ -8,7 +8,7 @@ import { InspectionService } from '../../services/inspection.service';
 @Component({
   selector: 'bee-inspection-list',
   templateUrl: './inspection-list.component.html',
-  styleUrls: ['./inspection-list.component.css']
+  styleUrls: [ './inspection-list.component.css' ]
 })
 export class InspectionListComponent implements OnInit {
 

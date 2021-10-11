@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { QueenRoutingModule } from './queen-routing.module';
-import { QueenListComponent, QueenEditComponent, QueenDetailsComponent } from './containers';
+import { QueenDetailsComponent, QueenEditComponent, QueenListComponent } from './containers';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material/material.module';
 import { QueenFormComponent } from './components';

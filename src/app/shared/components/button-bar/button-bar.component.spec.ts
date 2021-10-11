@@ -10,7 +10,7 @@ describe('ButtonBarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ButtonBarComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

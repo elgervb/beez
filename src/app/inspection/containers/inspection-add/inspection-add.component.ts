@@ -9,31 +9,31 @@ import { InspectionService } from '../../services/inspection.service';
 @Component({
   selector: 'bee-inspection-add',
   templateUrl: './inspection-add.component.html',
-  styleUrls: ['./inspection-add.component.css']
+  styleUrls: [ './inspection-add.component.css' ]
 })
 export class InspectionAddComponent implements OnInit {
 
   timestamp = new FormControl({ value: new Date(), disabled: true }, Validators.required);
 
   honeySuperGroup = this.formBuilder.group({
-    honey: [null],
-    honeyClosed: [null]
+    honey: [ null ],
+    honeyClosed: [ null ]
   });
 
   hiveBodyGroup = this.formBuilder.group({
-    drones: [null],
-    queen: [null],
-    eggs: [null],
-    larva: [null],
-    closedBrood: [null],
-    droneBrood: [null],
-    queenBrood: [null],
-    honeyFood: [null],
+    drones: [ null ],
+    queen: [ null ],
+    eggs: [ null ],
+    larva: [ null ],
+    closedBrood: [ null ],
+    droneBrood: [ null ],
+    queenBrood: [ null ],
+    honeyFood: [ null ],
   });
 
   overallGroup = this.formBuilder.group({
-    health: [null, Validators.required],
-    remarks: [null]
+    health: [ null, Validators.required ],
+    remarks: [ null ]
   });
 
   constructor(
@@ -46,7 +46,7 @@ export class InspectionAddComponent implements OnInit {
   ngOnInit(): void { }
 
   formatLabel(value: number): string {
-    return value ? value + '%' : '';
+    return value ? `${value}%` : '';
   }
 
   submit(): void {
@@ -68,6 +68,3 @@ export class InspectionAddComponent implements OnInit {
     }
   }
 }
-
-
-

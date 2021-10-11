@@ -18,7 +18,7 @@ describe('HiveListComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [HiveListComponent],
+      declarations: [ HiveListComponent ],
       imports: [
         I18nextTestingModule,
         MaterialModule,
@@ -26,9 +26,7 @@ describe('HiveListComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      providers: [
-        { provide: HiveService, useValue: hiveService }
-      ]
+      providers: [ { provide: HiveService, useValue: hiveService } ]
     });
 
     await TestBed.compileComponents();

@@ -9,8 +9,8 @@ describe('CenteredLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CenteredLayoutComponent],
-      imports: [RouterTestingModule]
+      declarations: [ CenteredLayoutComponent ],
+      imports: [ RouterTestingModule ]
     })
       .compileComponents();
   });

@@ -18,11 +18,9 @@ describe('InspectionAddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InspectionAddComponent],
-      imports: [I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule],
-      providers: [
-        { provide: InspectionService, useValue: inspectionService }
-      ]
+      declarations: [ InspectionAddComponent ],
+      imports: [ I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule ],
+      providers: [ { provide: InspectionService, useValue: inspectionService } ]
     })
       .compileComponents();
   });

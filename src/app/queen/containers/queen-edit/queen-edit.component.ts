@@ -10,7 +10,7 @@ import { QueenService } from '../../services/queen.service';
 @Component({
   selector: 'bee-queen-edit',
   templateUrl: './queen-edit.component.html',
-  styleUrls: ['./queen-edit.component.css']
+  styleUrls: [ './queen-edit.component.css' ]
 })
 export class QueenEditComponent implements OnInit {
 
@@ -31,7 +31,7 @@ export class QueenEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const queenId = this.queenId;
+    const {queenId} = this;
     if (queenId) {
       this.queen$ = this.queenService.getQueen(queenId);
     }

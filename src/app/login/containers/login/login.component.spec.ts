@@ -11,14 +11,12 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [ LoginComponent ],
       imports: [
         MaterialModule,
         MatIconTestingModule
       ],
-      providers: [
-        { provide: AuthService, useValue: authService }
-      ]
+      providers: [ { provide: AuthService, useValue: authService } ]
     })
       .compileComponents();
   });

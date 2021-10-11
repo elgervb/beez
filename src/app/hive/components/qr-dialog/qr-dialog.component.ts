@@ -11,7 +11,7 @@ export interface QRDialog {
 @Component({
   selector: 'bee-qr-dialog',
   templateUrl: './qr-dialog.component.html',
-  styleUrls: ['./qr-dialog.component.css']
+  styleUrls: [ './qr-dialog.component.css' ]
 })
 export class QrDialogComponent implements OnInit {
 

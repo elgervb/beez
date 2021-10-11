@@ -11,7 +11,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardComponent],
+      declarations: [ DashboardComponent ],
       imports: [
         I18nextTestingModule,
         MaterialModule,

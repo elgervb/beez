@@ -10,14 +10,14 @@ import { HiveService } from '../../services/hive.service';
 @Component({
   selector: 'bee-hive-list',
   templateUrl: './hive-list.component.html',
-  styleUrls: ['./hive-list.component.css']
+  styleUrls: [ './hive-list.component.css' ]
 })
 export class HiveListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource = new MatTableDataSource<Hive>();
-  displayedColumns: string[] = ['name', 'isActive'];
+  displayedColumns: string[] = [ 'name', 'isActive' ];
 
   private destroy$ = new Subject<void>();
 
@@ -45,10 +45,10 @@ export class HiveListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addHive(): void {
-    this.router.navigate(['add'], { relativeTo: this.route });
+    this.router.navigate([ 'add' ], { relativeTo: this.route });
   }
 
   select(hive: Hive): void {
-    this.router.navigate([hive.id], { relativeTo: this.route });
+    this.router.navigate([ hive.id ], { relativeTo: this.route });
   }
 }

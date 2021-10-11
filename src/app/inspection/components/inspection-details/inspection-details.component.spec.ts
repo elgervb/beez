@@ -11,8 +11,8 @@ describe('InspectionDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InspectionDetailsComponent],
-      imports: [I18nextTestingModule],
+      declarations: [ InspectionDetailsComponent ],
+      imports: [ I18nextTestingModule ],
     })
       .compileComponents();
   });

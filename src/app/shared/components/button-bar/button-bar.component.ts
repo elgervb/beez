@@ -3,7 +3,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'bee-button-bar',
   templateUrl: './button-bar.component.html',
-  styleUrls: ['./button-bar.component.css']
+  styleUrls: [ './button-bar.component.css' ]
 })
 export class ButtonBarComponent implements OnInit {
 

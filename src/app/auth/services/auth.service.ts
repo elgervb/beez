@@ -30,16 +30,12 @@ export class AuthService {
 
   isLoggedIn(): Observable<boolean> {
     return this.user$
-      .pipe(
-        map(user => !!user)
-      );
+      .pipe(map(user => !!user));
   }
 
   signInWithGoogle(): Observable<User | null> {
     return from(this.angularFireAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()))
-      .pipe(
-        switchMap(() => this.user$)
-      );
+      .pipe(switchMap(() => this.user$));
   }
 
   logout(): Observable<void> {
