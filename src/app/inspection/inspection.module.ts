@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { I18NextModule } from 'angular-i18next';
 
 import { InspectionRoutingModule } from './inspection-routing.module';
-import { InspectionListComponent } from './containers';
+import { InspectionListComponent, InspectionAddComponent } from './containers';
 import { InspectionDetailsComponent, InspectionFormComponent } from './components';
-import { InspectionAddComponent } from './containers/inspection-add/inspection-add.component';
-import { MaterialModule } from '../shared/material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { QueenPresentColorPipe, HoneyProgressPipe } from './pipes';
 import { SharedModule } from '../shared/shared.module';
-import { I18NextModule } from 'angular-i18next';
+import { MaterialModule } from '../shared/material/material.module';
+import { TrendingIconNamePipe } from './pipes/trending-icon-name.pipe';
 
 @NgModule({
   declarations: [
     InspectionListComponent,
     InspectionFormComponent,
     InspectionDetailsComponent,
-    InspectionAddComponent
+    InspectionAddComponent,
+    QueenPresentColorPipe,
+    HoneyProgressPipe,
+    TrendingIconNamePipe
   ],
   imports: [
     CommonModule,

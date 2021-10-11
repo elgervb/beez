@@ -76,8 +76,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "./node_modules/.bin/eslint --fix --",
-      "jest --bail --findRelatedTests"
+      "./node_modules/.bin/eslint --fix --"
     ]
   }
 }

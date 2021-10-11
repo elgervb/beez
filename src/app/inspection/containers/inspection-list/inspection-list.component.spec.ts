@@ -4,7 +4,9 @@ import { transform } from '@elgervb/mock-data';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { InspectionDetailsComponent } from '../../components';
 import { Inspection } from '../../models';
+import { HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe } from '../../pipes';
 import { InspectionService } from '../../services/inspection.service';
 
 import { InspectionListComponent } from './inspection-list.component';
@@ -18,7 +20,7 @@ describe('InspectionListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InspectionListComponent],
+      declarations: [InspectionListComponent, InspectionDetailsComponent, QueenPresentColorPipe, HoneyProgressPipe, TrendingIconNamePipe],
       imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule],
       providers: [
         { provide: InspectionService, useValue: inspectionService }
@@ -37,38 +39,24 @@ describe('InspectionListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('trendingIconName', () => {
+  describe('select', () => {
 
-    it('should go up', () => {
-      const inspections = [
-        transform<Inspection>({ health: 20 }),
-        transform<Inspection>({ health: 10 }),
-      ];
+    it('selects an inspection', () => {
+      const inspection = transform<Inspection>({});
+      expect(component.selected).toBeUndefined();
 
-      expect(component.trendingIconName(inspections[0], inspections)).toBe('trending_up');
+      component.select(inspection);
+      expect(component.selected).toBe(inspection);
     });
 
-    it('should go down', () => {
-      const inspections = [
-        transform<Inspection>({ health: 10 }),
-        transform<Inspection>({ health: 20 }),
-      ];
+    it('deselects an inspection', () => {
+      const inspection = transform<Inspection>({});
 
-      expect(component.trendingIconName(inspections[0], inspections)).toBe('trending_down');
+      component.select(inspection);
+      component.select(inspection);
+      expect(component.selected).toBeUndefined();
     });
 
-    it('should stay the same', () => {
-      const inspections = [
-        transform<Inspection>({ health: 10 }),
-        transform<Inspection>({ health: 10 }),
-      ];
-
-      // no list to compare to
-      expect(component.trendingIconName(inspections[0])).toBe('compare_arrows');
-      // not in the list
-      expect(component.trendingIconName(transform<Inspection>({ health: 10 }), inspections)).toBe('compare_arrows');
-      // stay the same
-      expect(component.trendingIconName(inspections[0], inspections)).toBe('compare_arrows');
-    });
   });
+
 });

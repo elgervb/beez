@@ -9,7 +9,7 @@ export const appInit = (i18next: ITranslationService) => () => i18next.init({
   interpolation: { format: I18NextModule.interpolationFormat(defaultInterpolationFormat) },
 });
 
-export const localeIdFactory = (i18next: ITranslationService) => i18next.language;
+export const localeIdFactory = () => 'en';
 
 export const I18N_PROVIDERS = [
   {
@@ -42,7 +42,7 @@ export const I18N_PROVIDERS = [
     I18NextModule.forRoot(),
   ],
   providers: [
-    I18N_PROVIDERS
+    ...I18N_PROVIDERS
   ]
 })
 export class I18nextTestingModule { }

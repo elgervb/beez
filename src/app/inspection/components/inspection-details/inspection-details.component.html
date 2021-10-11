@@ -1,1 +1,27 @@
-<p>inspection-details works!</p>
+<p>
+  <span>{{'present' | i18nextCap}}: </span>
+  <span *ngIf="inspection.queen">{{'queen' | i18next}} </span>
+  <span *ngIf="inspection.eggs">{{'egg' | i18next: {count: 2} }} </span>
+  <span *ngIf="inspection.larva">{{'larva' | i18next: {count: 2} }} </span>
+  <span *ngIf="inspection.drones">{{'drone' | i18next: {count: 2} }} </span>
+</p>
+
+<p *ngIf="inspection.closedBrood||inspection.queenBrood||inspection.droneBrood">
+  <span>{{'brood' | i18nextCap}}: </span>
+  <span *ngIf="inspection.closedBrood">{{'closed' | i18next}} </span>
+  <span *ngIf="inspection.queenBrood">{{'queen' | i18next}} </span>
+  <span *ngIf="inspection.droneBrood">{{'drone' | i18next: {count: 2} }} </span>
+</p>
+
+<p *ngIf="inspection.honey||inspection.honeyClosed||inspection.honeyFood">
+  <span>{{'honey' | i18nextCap}} </span>
+  <span *ngIf="inspection.honey">{{'honey' | i18next}} {{inspection.honey}}% </span>
+  <span *ngIf="inspection.honeyClosed">{{'closed' | i18next}} {{inspection.honeyClosed}}% </span>
+  <span *ngIf="inspection.honeyFood">{{'food' | i18next}} {{inspection.honeyFood}}%</span>
+</p>
+
+
+<p class="remarks" *ngIf="inspection.remarks">
+  <span class="label">{{'remarks' | i18nextCap}}:</span><br>
+  {{inspection.remarks}}
+</p>

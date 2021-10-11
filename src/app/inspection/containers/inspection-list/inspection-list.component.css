@@ -1,4 +1,7 @@
 
+.mat-list-base mat-list-item.selected {
+  height: auto;
+}
 mat-list-item .line {
   display: flex;
   justify-content: space-between;
