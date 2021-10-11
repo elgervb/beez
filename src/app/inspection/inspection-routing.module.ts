@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InspectionListComponent } from './containers';
-import { InspectionAddComponent } from './containers/inspection-add/inspection-add.component';
+import { InspectionListComponent, InspectionAddComponent } from './containers';
 
 const routes: Routes = [
   {

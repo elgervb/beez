@@ -1,6 +1,7 @@
-import { randomString, register } from '@elgervb/mock-data';
+import { randomDate, randomString, register } from '@elgervb/mock-data';
 import { Queen } from './app/queen/models';
 import { UserInfo } from './app/auth';
+import { Inspection } from './app/inspection/models';
 
 // mocks
 register<UserInfo>('user', {
@@ -12,4 +13,9 @@ register<UserInfo>('user', {
 register<Queen>('queen', {
   id: () => randomString(16),
   name: () => `${randomString(4)} ${randomString(6)}`
+});
+
+register<Inspection>('inspection', {
+  date: () => randomDate(),
+  remarks: () => randomString(15)
 });

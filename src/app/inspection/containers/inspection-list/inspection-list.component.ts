@@ -13,6 +13,7 @@ import { InspectionService } from '../../services/inspection.service';
 export class InspectionListComponent implements OnInit {
 
   inspections$: Observable<Inspection[]>;
+  selected?: Inspection;
 
   constructor(
     public route: ActivatedRoute,
@@ -26,30 +27,8 @@ export class InspectionListComponent implements OnInit {
     }
   }
 
-  queenPresentColor(inspection: Inspection): string {
-    return inspection.queen || inspection.eggs ? 'green' :
-      inspection.larva ? 'orange' : 'red';
-  }
-
-  honeyProgress(inspection: Inspection): string {
-    return inspection.honey && inspection.honeyClosed ? `${inspection.honey} / ${inspection.honeyClosed}` : 'n/a';
-  }
-
-  trendingIconName(inspection: Inspection, inspectionList?: Inspection[]): string {
-    const index = inspectionList?.indexOf(inspection);
-    const isLastInspection = index && index + 1 === inspectionList?.length;
-
-    if (inspectionList && index !== undefined && index !== -1 && !isLastInspection) {
-      const compareTo = inspectionList[index + 1];
-
-      if (compareTo) {
-        const health1 = inspection.health;
-        const health2 = compareTo.health;
-        return health1 > health2 ? 'trending_up' : health1 < health2 ? 'trending_down' : 'compare_arrows';
-      }
-    }
-
-    return 'compare_arrows';
+  select(inspection: Inspection) {
+    this.selected = this.selected === inspection ? undefined : inspection;
   }
 
 }
