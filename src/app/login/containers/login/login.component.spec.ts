@@ -9,7 +9,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   const authService = { signInWithGoogle: jest.fn() };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [

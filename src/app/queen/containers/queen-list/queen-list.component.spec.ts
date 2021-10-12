@@ -16,7 +16,7 @@ describe('QueenListComponent', () => {
     deleteQueen: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ QueenListComponent ],
       imports: [

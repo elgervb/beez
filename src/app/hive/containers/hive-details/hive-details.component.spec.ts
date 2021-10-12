@@ -16,7 +16,7 @@ describe('HiveDetailsComponent', () => {
     getHive: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ HiveDetailsComponent ],
       imports: [ MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule ],

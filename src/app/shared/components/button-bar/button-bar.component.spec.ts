@@ -6,7 +6,7 @@ describe('ButtonBarComponent', () => {
   let component: ButtonBarComponent;
   let fixture: ComponentFixture<ButtonBarComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ ButtonBarComponent ]
     })

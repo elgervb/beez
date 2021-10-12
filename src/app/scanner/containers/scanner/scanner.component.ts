@@ -78,4 +78,5 @@ export class ScannerComponent implements OnInit {
   scanCompleteHandler(_: Result): void {
 
   }
+
 }

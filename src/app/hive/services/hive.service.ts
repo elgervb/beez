@@ -47,4 +47,5 @@ export class HiveService {
     return document.get()
       .pipe(map(doc => doc.data()));
   }
+
 }

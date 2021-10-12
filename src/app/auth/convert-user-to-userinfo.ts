@@ -12,5 +12,4 @@ export const convertUserToUserInfo = (user: User | null): UserInfo | null => {
     uid,
     photoURL
   };
-
 };

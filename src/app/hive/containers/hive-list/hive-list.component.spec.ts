@@ -16,7 +16,7 @@ describe('HiveListComponent', () => {
     deleteHive: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ HiveListComponent ],
       imports: [

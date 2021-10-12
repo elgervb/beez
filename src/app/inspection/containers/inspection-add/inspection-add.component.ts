@@ -67,4 +67,5 @@ export class InspectionAddComponent implements OnInit {
         ).subscribe();
     }
   }
+
 }

@@ -8,6 +8,7 @@ import { PwaCheckForUpdateService } from './shared/services/pwa-check-for-update
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
+
   title = 'beez';
 
   constructor(_: PwaCheckForUpdateService) { }
@@ -15,4 +16,5 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
 }

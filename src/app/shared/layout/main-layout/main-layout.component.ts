@@ -39,4 +39,5 @@ export class MainLayoutComponent {
     this.isHandset$
       .pipe(tap(isHandset => isHandset ? drawer.close() : '')).subscribe();
   }
+
 }

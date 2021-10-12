@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth, } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 import { map, share, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -41,4 +41,5 @@ export class AuthService {
   logout(): Observable<void> {
     return from(this.angularFireAuth.signOut());
   }
+
 }

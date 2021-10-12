@@ -9,4 +9,5 @@ export class HoneyProgressPipe implements PipeTransform {
   transform(inspection: Inspection): string {
     return inspection.honey && inspection.honeyClosed ? `${inspection.honey} / ${inspection.honeyClosed}` : 'n/a';
   }
+
 }

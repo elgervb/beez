@@ -16,7 +16,7 @@ describe('QrDialogComponent', () => {
     qrValue: 'my_string'
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ QrDialogComponent ],
       imports: [

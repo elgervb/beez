@@ -15,7 +15,7 @@ describe('QueenDetailsComponent', () => {
     getQueen: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ QueenDetailsComponent ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],

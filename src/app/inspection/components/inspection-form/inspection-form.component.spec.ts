@@ -6,7 +6,7 @@ describe('InspectionFormComponent', () => {
   let component: InspectionFormComponent;
   let fixture: ComponentFixture<InspectionFormComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ InspectionFormComponent ]
     })

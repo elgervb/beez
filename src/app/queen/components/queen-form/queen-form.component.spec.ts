@@ -10,7 +10,7 @@ describe('QueenFormComponent', () => {
   let component: QueenFormComponent;
   let fixture: ComponentFixture<QueenFormComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ QueenFormComponent ],
       imports: [

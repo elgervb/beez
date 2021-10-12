@@ -30,7 +30,7 @@ export class QueenDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const {queenId} = this;
+    const { queenId } = this;
     if (queenId) {
       this.queen$ = this.queenService.getQueen(queenId);
     }

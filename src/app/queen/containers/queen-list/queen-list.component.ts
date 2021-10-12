@@ -51,4 +51,5 @@ export class QueenListComponent implements OnInit, OnDestroy, AfterViewInit {
   select(queen: Queen): void {
     this.router.navigate([ queen.id ], { relativeTo: this.route });
   }
+
 }

@@ -47,4 +47,5 @@ export class QueenService {
     return document.get()
       .pipe(map(doc => doc.data()));
   }
+
 }

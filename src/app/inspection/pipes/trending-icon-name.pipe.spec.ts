@@ -4,8 +4,6 @@ import { Inspection } from '../models';
 import { TrendingIconNamePipe } from './trending-icon-name.pipe';
 
 describe('TrendingIconNamePipe', () => {
-
-
   it('create an instance', () => {
     const pipe = new TrendingIconNamePipe();
     expect(pipe).toBeTruthy();

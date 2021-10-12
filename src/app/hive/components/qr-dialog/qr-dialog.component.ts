@@ -23,4 +23,5 @@ export class QrDialogComponent implements OnInit {
   print(): void {
     window.print();
   }
+
 }

@@ -13,7 +13,7 @@ describe('ScannerComponent', () => {
   let component: ScannerComponent;
   let fixture: ComponentFixture<ScannerComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ ScannerComponent ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule ],

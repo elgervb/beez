@@ -15,7 +15,7 @@ describe('HiveEditComponent', () => {
     getHive: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ HiveEditComponent ],
       imports: [

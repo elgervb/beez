@@ -48,7 +48,7 @@ export class HiveDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const {hiveId} = this;
+    const { hiveId } = this;
     if (hiveId) {
       this.hive$ = this.hiveService.getHive(hiveId);
     }
@@ -96,4 +96,5 @@ export class HiveDetailsComponent implements OnInit {
       }
     });
   }
+
 }

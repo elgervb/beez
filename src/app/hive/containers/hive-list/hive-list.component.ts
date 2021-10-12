@@ -51,4 +51,5 @@ export class HiveListComponent implements OnInit, OnDestroy, AfterViewInit {
   select(hive: Hive): void {
     this.router.navigate([ hive.id ], { relativeTo: this.route });
   }
+
 }

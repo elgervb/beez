@@ -18,7 +18,7 @@ describe('InspectionListComponent', () => {
     getInspections: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ InspectionListComponent, InspectionDetailsComponent, HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
@@ -38,7 +38,6 @@ describe('InspectionListComponent', () => {
   });
 
   describe('select', () => {
-
     it('selects an inspection', () => {
       const inspection = transform<Inspection>({});
       expect(component.selected).toBeUndefined();
@@ -54,7 +53,5 @@ describe('InspectionListComponent', () => {
       component.select(inspection);
       expect(component.selected).toBeUndefined();
     });
-
   });
-
 });
