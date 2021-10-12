@@ -4,6 +4,7 @@ import { transform } from '@elgervb/mock-data';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { InspectionDetailsComponent } from '../../components';
 import { Inspection } from '../../models';
 import { HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe } from '../../pipes';
 import { InspectionService } from '../../services/inspection.service';
@@ -19,7 +20,7 @@ describe('InspectionListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InspectionListComponent, HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe ],
+      declarations: [ InspectionListComponent, InspectionDetailsComponent, HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
       providers: [ { provide: InspectionService, useValue: inspectionService } ]
     })
