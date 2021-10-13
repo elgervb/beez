@@ -42,6 +42,7 @@ export const nl = {
   overall: 'totaal',
   present: 'aanwezig',
   print: 'print',
+  qrcode: 'QRcode',
   queen: 'moer',
   queen_other: 'moeren',
   queenBrood: 'moer doppen',

@@ -24,6 +24,8 @@
   align-self: end;
   border-radius: 50%;
   max-height: 4rem;
+  transform: scale(1.2);
+  transform-origin: top;
 }
 
 .mat-nav-list {

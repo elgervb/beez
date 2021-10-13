@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
@@ -7,6 +8,7 @@ import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { QRBeezModel } from 'src/app/shared/models';
+import { HiveAction, HiveActionsComponent } from '../../components';
 import { QRDialog, QrDialogComponent } from '../../components/qr-dialog/qr-dialog.component';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
@@ -44,6 +46,7 @@ export class HiveDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private hiveService: HiveService,
+    private bottomSheet: MatBottomSheet,
     @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
@@ -58,8 +61,7 @@ export class HiveDetailsComponent implements OnInit {
     this.router.navigate(['..'], { relativeTo: this.route });
   }
 
-  deleteHive(hive: Hive, event?: MouseEvent): void {
-    event?.stopPropagation();
+  deleteHive(hive: Hive): void {
     this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
       ConfirmComponent,
       {
@@ -73,9 +75,7 @@ export class HiveDetailsComponent implements OnInit {
         filter(confirm => !!confirm),
         switchMap(
           () => this.hiveService.deleteHive(hive)
-            .pipe(
-              tap(() => this.back())
-            )
+            .pipe(tap(() => this.back()))
         )
       )
       .subscribe();
@@ -87,6 +87,28 @@ export class HiveDetailsComponent implements OnInit {
 
   navigateToInspections(): void {
     this.router.navigate(['inspections'], { relativeTo: this.route });
+  }
+
+  openBottomSheet(hive: Hive): void {
+    const sheet = this.bottomSheet.open(HiveActionsComponent, { closeOnNavigation: true });
+    sheet.instance.action$.pipe(
+      tap(action => {
+        switch (action) {
+          case HiveAction.navigateToEdit:
+            this.navigateToEdit();
+            break;
+          case HiveAction.deleteHive:
+              this.deleteHive(hive);
+            break;
+          case HiveAction.printQRCode:
+            this.printQRcode();
+          break;
+          default:
+            throw new Error('no such action');
+        }
+        sheet.dismiss();
+      })
+    ).subscribe();
   }
 
   printQRcode(): void {

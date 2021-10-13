@@ -42,6 +42,7 @@ export const en = {
   overall: 'overall',
   present: 'present',
   print: 'print',
+  qrcode: 'QRcode',
   queen: 'queen',
   queen_other: 'queens',
   queenBrood: 'queen brood',
