@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QueenListComponent, QueenEditComponent, QueenDetailsComponent } from './containers';
+import { QueenDetailsComponent, QueenEditComponent, QueenListComponent } from './containers';
 
 const routes: Routes = [
   {
@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forChild(routes) ],
+  exports: [ RouterModule ]
 })
 export class QueenRoutingModule { }

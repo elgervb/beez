@@ -10,14 +10,14 @@ import { QueenService } from '../../services/queen.service';
 @Component({
   selector: 'bee-queen-list',
   templateUrl: './queen-list.component.html',
-  styleUrls: ['./queen-list.component.css']
+  styleUrls: [ './queen-list.component.css' ]
 })
 export class QueenListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource = new MatTableDataSource<Queen>();
-  displayedColumns: string[] = ['name', 'isMarked', 'isActive'];
+  displayedColumns: string[] = [ 'name', 'isMarked', 'isActive' ];
 
   private destroy$ = new Subject<void>();
 
@@ -45,10 +45,11 @@ export class QueenListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addQueen(): void {
-    this.router.navigate(['add'], { relativeTo: this.route });
+    this.router.navigate([ 'add' ], { relativeTo: this.route });
   }
 
   select(queen: Queen): void {
-    this.router.navigate([queen.id], { relativeTo: this.route });
+    this.router.navigate([ queen.id ], { relativeTo: this.route });
   }
+
 }

@@ -6,11 +6,11 @@ describe('ColorDotComponent', () => {
   let component: ColorDotComponent;
   let fixture: ComponentFixture<ColorDotComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ ColorDotComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

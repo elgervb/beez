@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HiveRoutingModule } from './hive-routing.module';
-import { HiveListComponent, HiveEditComponent } from './containers/';
+import { HiveEditComponent, HiveListComponent } from './containers/';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/material/material.module';

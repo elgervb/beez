@@ -11,9 +11,9 @@ describe('HiveFormComponent', () => {
   let component: HiveFormComponent;
   let fixture: ComponentFixture<HiveFormComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [HiveFormComponent],
+      declarations: [ HiveFormComponent ],
       imports: [
         I18nextTestingModule,
         MaterialModule,

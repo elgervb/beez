@@ -11,7 +11,7 @@ import { QueenService } from '../../services/queen.service';
 @Component({
   selector: 'bee-queen-details',
   templateUrl: './queen-details.component.html',
-  styleUrls: ['./queen-details.component.css']
+  styleUrls: [ './queen-details.component.css' ]
 })
 export class QueenDetailsComponent implements OnInit {
 
@@ -30,14 +30,14 @@ export class QueenDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const queenId = this.queenId;
+    const { queenId } = this;
     if (queenId) {
       this.queen$ = this.queenService.getQueen(queenId);
     }
   }
 
   back(): void {
-    this.router.navigate(['..'], { relativeTo: this.route });
+    this.router.navigate([ '..' ], { relativeTo: this.route });
   }
 
   deleteQueen(queen: Queen, event?: MouseEvent): void {
@@ -53,18 +53,15 @@ export class QueenDetailsComponent implements OnInit {
     ).afterClosed()
       .pipe(
         filter(confirm => !!confirm),
-        switchMap(
-          () => this.queenService.deleteQueen(queen)
-            .pipe(
-              tap(() => this.back()))
-        )
+        switchMap(() => this.queenService.deleteQueen(queen)
+          .pipe(tap(() => this.back())))
       )
       .subscribe();
   }
 
   navigateToEdit(queenId: string | null): void {
     if (queenId) {
-      this.router.navigate(['../edit', queenId], { relativeTo: this.route });
+      this.router.navigate([ '../edit', queenId ], { relativeTo: this.route });
     }
   }
 

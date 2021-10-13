@@ -16,9 +16,9 @@ describe('QueenListComponent', () => {
     deleteQueen: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [QueenListComponent],
+      declarations: [ QueenListComponent ],
       imports: [
         I18nextTestingModule,
         MaterialModule,
@@ -26,9 +26,7 @@ describe('QueenListComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      providers: [
-        { provide: QueenService, useValue: queenService }
-      ]
+      providers: [ { provide: QueenService, useValue: queenService } ]
     });
 
     await TestBed.compileComponents();

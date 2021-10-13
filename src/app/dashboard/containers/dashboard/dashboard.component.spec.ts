@@ -9,9 +9,9 @@ describe('DashboardComponent', () => {
 
   let fixture: ComponentFixture<DashboardComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardComponent],
+      declarations: [ DashboardComponent ],
       imports: [
         I18nextTestingModule,
         MaterialModule,

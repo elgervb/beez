@@ -10,9 +10,7 @@ import { first } from 'rxjs/operators';
 export class PwaCheckForUpdateService {
 
   constructor(appRef: ApplicationRef, swUpdate: SwUpdate, snackbar: MatSnackBar,) {
-
     if (swUpdate.isEnabled) {
-
       // update when needed
       swUpdate.available.subscribe(() => {
         const snack = snackbar.open('Update Available', 'Reload');
@@ -39,4 +37,5 @@ export class PwaCheckForUpdateService {
       });
     }
   }
+
 }
