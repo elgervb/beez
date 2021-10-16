@@ -1,5 +1,3 @@
 <mat-action-list>
-  <button mat-list-item (click)="navigateToEdit()">{{'edit' | i18next}}</button>
-  <button mat-list-item (click)="printQRCode()">{{'print' | i18next}} {{'qrcode' | i18next}}</button>
-  <button mat-list-item class="warn" (click)="deleteHive()">{{'delete' | i18next}}</button>
+  <button *ngFor="let action of actions" mat-list-item (click)="execute(action.type)">{{action.transKey| i18next}}</button>
 </mat-action-list>

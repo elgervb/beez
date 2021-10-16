@@ -5,13 +5,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap, tap, take } from 'rxjs/operators';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { QRBeezModel } from 'src/app/shared/models';
-import { HiveAction, HiveActionsComponent } from '../../components';
-import { QRDialog, QrDialogComponent } from '../../components/qr-dialog/qr-dialog.component';
+import { HiveActionsComponent, SheetActions, QRDialog, QrDialogComponent } from '../../components';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
+
+const sheetActions: SheetActions = {
+  actions: [
+    {type: 'edit', transKey: 'edit'},
+    {type: 'delete', transKey: 'delete'},
+    {type: 'printQR', transKey: 'printQR'}
+  ]
+};
 
 @Component({
   selector: 'bee-hive-details',
@@ -90,25 +97,30 @@ export class HiveDetailsComponent implements OnInit {
   }
 
   openBottomSheet(hive: Hive): void {
-    const sheet = this.bottomSheet.open(HiveActionsComponent, { closeOnNavigation: true });
-    sheet.instance.action$.pipe(
-      tap(action => {
-        switch (action) {
-          case HiveAction.navigateToEdit:
-            this.navigateToEdit();
-            break;
-          case HiveAction.deleteHive:
-              this.deleteHive(hive);
-            break;
-          case HiveAction.printQRCode:
-            this.printQRcode();
-          break;
-          default:
-            throw new Error('no such action');
-        }
-        sheet.dismiss();
-      })
-    ).subscribe();
+    const sheet = this.bottomSheet.open<HiveActionsComponent, SheetActions>(HiveActionsComponent, {
+      data: sheetActions,
+      closeOnNavigation: true
+    });
+    sheet.instance.action$
+      .pipe(
+        tap(action => {
+          switch (action) {
+            case 'edit':
+              this.navigateToEdit();
+              break;
+            case 'delete':
+                this.deleteHive(hive);
+              break;
+            case 'printQR':
+              this.printQRcode();
+              break;
+            default:
+              throw new Error('no such action');
+          }
+          sheet.dismiss();
+        }),
+        take(1)
+      ).subscribe();
   }
 
   printQRcode(): void {

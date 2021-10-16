@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
-import { HiveAction } from '../../components';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
 
@@ -21,10 +20,10 @@ describe('HiveDetailsComponent', () => {
     getHive: jest.fn()
   };
   const sheet = {
-    instance: {action$: new Subject<HiveAction>()}
+    instance: {action$: new Subject<string>()}
   };
   const bottomSheet = {
-    open: jest.fn(() => sheet)
+    open: () => sheet
   };
 
   beforeEach(async () => {
@@ -63,21 +62,21 @@ describe('HiveDetailsComponent', () => {
 
     it('should call delete', () => {
       component.openBottomSheet(transform<Hive>({}));
-      sheet.instance.action$.next(HiveAction.deleteHive);
+      sheet.instance.action$.next('delete');
 
       expect(deleteSpy).toHaveBeenCalled();
     });
 
     it('should call navigate', () => {
       component.openBottomSheet(transform<Hive>({}));
-      sheet.instance.action$.next(HiveAction.navigateToEdit);
+      sheet.instance.action$.next('edit');
 
       expect(navigateSpy).toHaveBeenCalled();
     });
 
     it('should call print', () => {
       component.openBottomSheet(transform<Hive>({}));
-      sheet.instance.action$.next(HiveAction.printQRCode);
+      sheet.instance.action$.next('printQR');
 
       expect(printSpy).toHaveBeenCalled();
     });

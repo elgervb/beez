@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Observable, Subject } from 'rxjs';
 
-export enum HiveAction {
-  deleteHive,
-  navigateToEdit,
-  printQRCode
+export interface SheetActions {
+  readonly actions: SheetAction[];
+}
+
+export interface SheetAction {
+  transKey: string;
+  type: string;
 }
 
 @Component({
@@ -14,25 +18,21 @@ export enum HiveAction {
 })
 export class HiveActionsComponent implements OnInit {
 
-  action$: Observable<HiveAction>;
+  action$: Observable<string>;
 
-  private actionSubject = new Subject<HiveAction>();
+  get actions(): SheetAction[] {
+    return this.data.actions;
+  }
 
-  constructor() { }
+  private actionSubject = new Subject<string>();
+
+  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) private data: SheetActions) { }
 
   ngOnInit(): void {
     this.action$ = this.actionSubject.asObservable();
   }
 
-  deleteHive(): void {
-    this.actionSubject.next(HiveAction.deleteHive);
-  }
-
-  navigateToEdit(): void {
-    this.actionSubject.next(HiveAction.navigateToEdit);
-  }
-
-  printQRCode(): void {
-    this.actionSubject.next(HiveAction.printQRCode);
+  execute(action: string): void {
+    this.actionSubject.next(action);
   }
 }
