@@ -6,9 +6,10 @@ import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiedi
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
 import { filter, switchMap, tap, take } from 'rxjs/operators';
+import { BottomSheetComponent, SheetActions } from 'src/app/shared/components/bottom-sheet/bottom-sheet.component';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { QRBeezModel } from 'src/app/shared/models';
-import { HiveActionsComponent, SheetActions, QRDialog, QrDialogComponent } from '../../components';
+import { QRDialog, QrDialogComponent } from '../../components';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
 
@@ -97,7 +98,7 @@ export class HiveDetailsComponent implements OnInit {
   }
 
   openBottomSheet(hive: Hive): void {
-    const sheet = this.bottomSheet.open<HiveActionsComponent, SheetActions>(HiveActionsComponent, {
+    const sheet = this.bottomSheet.open<BottomSheetComponent, SheetActions>(BottomSheetComponent, {
       data: sheetActions,
       closeOnNavigation: true
     });

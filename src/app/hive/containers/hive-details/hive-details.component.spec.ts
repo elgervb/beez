@@ -1,6 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
@@ -50,35 +51,62 @@ describe('HiveDetailsComponent', () => {
   });
 
   describe('bottom sheet actions', () => {
-    let deleteSpy: jest.SpyInstance;
-    let navigateSpy: jest.SpyInstance;
-    let printSpy: jest.SpyInstance;
+    let navSpy: jest.SpyInstance;
+    let route: ActivatedRoute;
 
     beforeEach(() => {
-      deleteSpy = jest.spyOn(component, 'deleteHive').mockImplementation(() => {});
-      navigateSpy = jest.spyOn(component, 'navigateToEdit').mockImplementation(() => {});
-      printSpy = jest.spyOn(component, 'printQRcode').mockImplementation(() => {});
+      navSpy = jest.spyOn(TestBed.inject(Router), 'navigate').mockImplementationOnce(() => Promise.resolve(true));
+      route = TestBed.inject(ActivatedRoute);
     });
 
-    it('should call delete', () => {
-      component.openBottomSheet(transform<Hive>({}));
-      sheet.instance.action$.next('delete');
+    describe('navigation', () => {
+      it('should navigate to edit', () => {
+        component.navigateToEdit();
+        expect(navSpy).toHaveBeenCalledWith(['edit'], { relativeTo: route });
+      });
 
-      expect(deleteSpy).toHaveBeenCalled();
+      it('should navigate to inspections', () => {
+        component.navigateToInspections();
+        expect(navSpy).toHaveBeenCalledWith(['inspections'], { relativeTo: route });
+      });
+
+      it('should navigate back', () => {
+        component.back();
+        expect(navSpy).toHaveBeenCalledWith(['..'], { relativeTo: route });
+      });
     });
 
-    it('should call navigate', () => {
-      component.openBottomSheet(transform<Hive>({}));
-      sheet.instance.action$.next('edit');
+    describe('bottom sheet actions', () => {
+      let deleteSpy: jest.SpyInstance;
+      let navigateSpy: jest.SpyInstance;
+      let printSpy: jest.SpyInstance;
 
-      expect(navigateSpy).toHaveBeenCalled();
+      beforeEach(() => {
+        deleteSpy = jest.spyOn(component, 'deleteHive').mockImplementation(() => {});
+        navigateSpy = jest.spyOn(component, 'navigateToEdit').mockImplementation(() => {});
+        printSpy = jest.spyOn(component, 'printQRcode').mockImplementation(() => {});
+      });
+
+      it('should call delete', () => {
+        component.openBottomSheet(transform<Hive>({}));
+        sheet.instance.action$.next('delete');
+
+        expect(deleteSpy).toHaveBeenCalled();
+      });
+
+      it('should call navigate', () => {
+        component.openBottomSheet(transform<Hive>({}));
+        sheet.instance.action$.next('edit');
+
+        expect(navigateSpy).toHaveBeenCalled();
+      });
+
+      it('should call print', () => {
+        component.openBottomSheet(transform<Hive>({}));
+        sheet.instance.action$.next('printQR');
+
+        expect(printSpy).toHaveBeenCalled();
+      });
     });
-
-    it('should call print', () => {
-      component.openBottomSheet(transform<Hive>({}));
-      sheet.instance.action$.next('printQR');
-
-      expect(printSpy).toHaveBeenCalled();
     });
-  });
 });

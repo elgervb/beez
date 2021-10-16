@@ -3,15 +3,15 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 
-import { HiveActionsComponent, SheetAction } from './hive-actions.component';
+import { BottomSheetComponent, SheetAction } from './bottom-sheet.component';
 
-describe('HiveActionsComponent', () => {
-  let component: HiveActionsComponent;
-  let fixture: ComponentFixture<HiveActionsComponent>;
+describe('BottomSheetComponent', () => {
+  let component: BottomSheetComponent;
+  let fixture: ComponentFixture<BottomSheetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HiveActionsComponent],
+      declarations: [BottomSheetComponent],
       imports: [I18nextTestingModule, MaterialModule],
       providers: [
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: {}}
@@ -21,7 +21,7 @@ describe('HiveActionsComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HiveActionsComponent);
+    fixture = TestBed.createComponent(BottomSheetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

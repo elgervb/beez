@@ -12,11 +12,11 @@ export interface SheetAction {
 }
 
 @Component({
-  selector: 'bee-hive-actions',
-  templateUrl: './hive-actions.component.html',
-  styleUrls: ['./hive-actions.component.css']
+  selector: 'bee-bottom-sheet',
+  templateUrl: './bottom-sheet.component.html',
+  styleUrls: ['./bottom-sheet.component.css']
 })
-export class HiveActionsComponent implements OnInit {
+export class BottomSheetComponent implements OnInit {
 
   action$: Observable<string>;
 
