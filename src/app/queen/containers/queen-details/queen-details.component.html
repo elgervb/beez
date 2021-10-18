@@ -28,8 +28,9 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-stroked-button (click)="back()">{{'back' | i18next}}</button>
-      <button mat-stroked-button (click)="navigateToEdit(queenId)">{{'edit' | i18next}}</button>
-      <button mat-stroked-button color="warn" (click)="deleteQueen(queen)">{{'delete' | i18next}}</button>
+      <button mat-icon-button (click)="openBottomSheet(queen)">
+        <mat-icon>more_vert</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 

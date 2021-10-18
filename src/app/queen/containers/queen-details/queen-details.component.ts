@@ -1,12 +1,21 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { BottomSheetComponent, SheetActions } from 'src/app/shared/components/bottom-sheet/bottom-sheet.component';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
+
+const sheetActions: SheetActions = {
+  actions: [
+    { type: 'edit', transKey: 'edit' },
+    { type: 'delete', transKey: 'delete' },
+  ]
+};
 
 @Component({
   selector: 'bee-queen-details',
@@ -26,6 +35,7 @@ export class QueenDetailsComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private queenService: QueenService,
+    private bottomSheet: MatBottomSheet,
     @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
@@ -40,8 +50,7 @@ export class QueenDetailsComponent implements OnInit {
     this.router.navigate([ '..' ], { relativeTo: this.route });
   }
 
-  deleteQueen(queen: Queen, event?: MouseEvent): void {
-    event?.stopPropagation();
+  deleteQueen(queen: Queen): void {
     this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
       ConfirmComponent,
       {
@@ -59,7 +68,31 @@ export class QueenDetailsComponent implements OnInit {
       .subscribe();
   }
 
-  navigateToEdit(queenId: string | null): void {
+  openBottomSheet(queen: Queen) {
+    const sheet = this.bottomSheet.open<BottomSheetComponent, SheetActions>(BottomSheetComponent, {
+      data: sheetActions,
+      closeOnNavigation: true
+    });
+    sheet.instance.action$
+      .pipe(
+        tap(action => {
+          switch (action) {
+          case 'edit':
+            this.navigateToEdit(this.queenId);
+            break;
+          case 'delete':
+            this.deleteQueen(queen);
+            break;
+          default:
+            throw new Error('no such action');
+          }
+          sheet.dismiss();
+        }),
+        take(1)
+      ).subscribe();
+  }
+
+  navigateToEdit(queenId?: string | null): void {
     if (queenId) {
       this.router.navigate([ '../edit', queenId ], { relativeTo: this.route });
     }

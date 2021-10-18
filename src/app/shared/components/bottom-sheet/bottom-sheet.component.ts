@@ -14,7 +14,7 @@ export interface SheetAction {
 @Component({
   selector: 'bee-bottom-sheet',
   templateUrl: './bottom-sheet.component.html',
-  styleUrls: ['./bottom-sheet.component.css']
+  styleUrls: [ './bottom-sheet.component.css' ]
 })
 export class BottomSheetComponent implements OnInit {
 
@@ -35,4 +35,5 @@ export class BottomSheetComponent implements OnInit {
   execute(action: string): void {
     this.actionSubject.next(action);
   }
+
 }

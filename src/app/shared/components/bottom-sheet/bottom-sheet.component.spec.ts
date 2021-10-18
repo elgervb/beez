@@ -9,13 +9,11 @@ describe('BottomSheetComponent', () => {
   let component: BottomSheetComponent;
   let fixture: ComponentFixture<BottomSheetComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [BottomSheetComponent],
-      imports: [I18nextTestingModule, MaterialModule],
-      providers: [
-        { provide: MAT_BOTTOM_SHEET_DATA, useValue: {}}
-      ]
+      declarations: [ BottomSheetComponent ],
+      imports: [ I18nextTestingModule, MaterialModule ],
+      providers: [ { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} } ]
     })
       .compileComponents();
   });
@@ -31,7 +29,7 @@ describe('BottomSheetComponent', () => {
   });
 
   it('should emit delete hive action', done => {
-    const sheetAction: SheetAction = {transKey: 'key', type: 'act'};
+    const sheetAction: SheetAction = { transKey: 'key', type: 'act' };
     component.action$.subscribe(action => {
       expect(action).toBe(sheetAction.type);
       done();
