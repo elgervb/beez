@@ -9,7 +9,7 @@ export interface ConfirmDialogData {
 @Component({
   selector: 'bee-confirm',
   templateUrl: './confirm.component.html',
-  styleUrls: ['./confirm.component.css']
+  styleUrls: [ './confirm.component.css' ]
 })
 export class ConfirmComponent implements OnInit {
 

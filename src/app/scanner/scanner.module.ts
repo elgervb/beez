@@ -8,9 +8,7 @@ import { MaterialModule } from '../shared/material/material.module';
 
 
 @NgModule({
-  declarations: [
-    ScannerComponent
-  ],
+  declarations: [ ScannerComponent ],
   imports: [
     CommonModule,
     MaterialModule,

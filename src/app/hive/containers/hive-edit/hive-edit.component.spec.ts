@@ -15,16 +15,15 @@ describe('HiveEditComponent', () => {
     getHive: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [HiveEditComponent],
+      declarations: [ HiveEditComponent ],
       imports: [
         I18nextTestingModule,
-        RouterTestingModule],
-      providers: [
-        { provide: HiveService, useValue: hiveService }
+        RouterTestingModule
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [ { provide: HiveService, useValue: hiveService } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
 
     await TestBed.compileComponents();

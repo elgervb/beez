@@ -9,15 +9,14 @@ describe('ConfirmComponent', () => {
   let component: ConfirmComponent;
   let fixture: ComponentFixture<ConfirmComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ConfirmComponent],
+      declarations: [ ConfirmComponent ],
       imports: [
         I18nextTestingModule,
-        MaterialModule],
-      providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} }
-      ]
+        MaterialModule
+      ],
+      providers: [ { provide: MAT_DIALOG_DATA, useValue: {} } ]
     })
       .compileComponents();
   });

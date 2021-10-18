@@ -21,21 +21,21 @@ describe('HiveDetailsComponent', () => {
     getHive: jest.fn()
   };
   const sheet = {
-    instance: {action$: new Subject<string>()}
+    instance: { action$: new Subject<string>() }
   };
   const bottomSheet = {
     open: () => sheet
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [HiveDetailsComponent],
-      imports: [MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule],
+      declarations: [ HiveDetailsComponent ],
+      imports: [ MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule ],
       providers: [
         { provide: HiveService, useValue: hiveService },
-        { provide: MatBottomSheet, useValue: bottomSheet}
+        { provide: MatBottomSheet, useValue: bottomSheet }
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });
@@ -62,17 +62,17 @@ describe('HiveDetailsComponent', () => {
     describe('navigation', () => {
       it('should navigate to edit', () => {
         component.navigateToEdit();
-        expect(navSpy).toHaveBeenCalledWith(['edit'], { relativeTo: route });
+        expect(navSpy).toHaveBeenCalledWith([ 'edit' ], { relativeTo: route });
       });
 
       it('should navigate to inspections', () => {
         component.navigateToInspections();
-        expect(navSpy).toHaveBeenCalledWith(['inspections'], { relativeTo: route });
+        expect(navSpy).toHaveBeenCalledWith([ 'inspections' ], { relativeTo: route });
       });
 
       it('should navigate back', () => {
         component.back();
-        expect(navSpy).toHaveBeenCalledWith(['..'], { relativeTo: route });
+        expect(navSpy).toHaveBeenCalledWith([ '..' ], { relativeTo: route });
       });
     });
 
@@ -108,5 +108,5 @@ describe('HiveDetailsComponent', () => {
         expect(printSpy).toHaveBeenCalled();
       });
     });
-    });
+  });
 });

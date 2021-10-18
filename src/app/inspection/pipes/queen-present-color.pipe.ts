@@ -16,5 +16,6 @@ export class QueenPresentColorPipe implements PipeTransform {
     return inspection.queen || inspection.eggs ? QueenPresentColors.present :
       inspection.larva ? QueenPresentColors.maybe : QueenPresentColors.missing;
   }
+
 }
 

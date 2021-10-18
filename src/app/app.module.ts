@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
-import { defaultInterpolationFormat, I18NextModule, I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
+import { defaultInterpolationFormat, I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -42,19 +42,18 @@ export const I18N_PROVIDERS = [
   {
     provide: APP_INITIALIZER,
     useFactory: appInit,
-    deps: [I18NEXT_SERVICE],
+    deps: [ I18NEXT_SERVICE ],
     multi: true
   },
   {
     provide: LOCALE_ID,
-    deps: [I18NEXT_SERVICE],
+    deps: [ I18NEXT_SERVICE ],
     useFactory: localeIdFactory
-  }];
+  }
+];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [ AppComponent ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
@@ -75,9 +74,9 @@ export const I18N_PROVIDERS = [
     }),
   ],
   providers: [
-    { provide: APP_INITIALIZER, useFactory: registerMaterialIcons, deps: [MatIconRegistry, DomSanitizer], multi: true },
+    { provide: APP_INITIALIZER, useFactory: registerMaterialIcons, deps: [ MatIconRegistry, DomSanitizer ], multi: true },
     I18N_PROVIDERS
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

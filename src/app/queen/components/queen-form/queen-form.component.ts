@@ -5,7 +5,7 @@ import { Queen } from '../../models';
 @Component({
   selector: 'bee-queen-form',
   templateUrl: './queen-form.component.html',
-  styleUrls: ['./queen-form.component.css']
+  styleUrls: [ './queen-form.component.css' ]
 })
 export class QueenFormComponent implements OnInit {
 
@@ -21,13 +21,13 @@ export class QueenFormComponent implements OnInit {
   @Output() cancelEvent = new EventEmitter<void>();
 
   readonly form = this.formBuilder.group({
-    id: [''],
-    name: ['', Validators.required],
-    active: [true],
-    isMarked: [false],
-    color: [''],
-    date: [new Date(), Validators.required],
-    remarks: ['']
+    id: [ '' ],
+    name: [ '', Validators.required ],
+    active: [ true ],
+    isMarked: [ false ],
+    color: [ '' ],
+    date: [ new Date(), Validators.required ],
+    remarks: [ '' ]
   });
 
   constructor(private formBuilder: FormBuilder) { }

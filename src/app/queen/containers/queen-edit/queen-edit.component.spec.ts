@@ -13,14 +13,12 @@ describe('QueenEditComponent', () => {
     getQueen: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [QueenEditComponent],
-      imports: [RouterTestingModule],
-      providers: [
-        { provide: QueenService, useValue: queenService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [ QueenEditComponent ],
+      imports: [ RouterTestingModule ],
+      providers: [ { provide: QueenService, useValue: queenService } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
 
     await TestBed.compileComponents();

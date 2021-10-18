@@ -4,17 +4,11 @@ import { AppComponent } from './app.component';
 import { PwaCheckForUpdateService } from './shared/services/pwa-check-for-update.service';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-      providers: [
-        { provide: PwaCheckForUpdateService, useValue: {} }
-      ]
+      imports: [ RouterTestingModule ],
+      declarations: [ AppComponent ],
+      providers: [ { provide: PwaCheckForUpdateService, useValue: {} } ]
     }).compileComponents();
   });
 

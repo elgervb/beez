@@ -15,14 +15,12 @@ describe('QueenDetailsComponent', () => {
     getQueen: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [QueenDetailsComponent],
-      imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule],
-      providers: [
-        { provide: QueenService, useValue: queenService },
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [ QueenDetailsComponent ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
+      providers: [ { provide: QueenService, useValue: queenService }, ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });

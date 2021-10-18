@@ -7,10 +7,10 @@ describe('CenteredLayoutComponent', () => {
   let component: CenteredLayoutComponent;
   let fixture: ComponentFixture<CenteredLayoutComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [CenteredLayoutComponent],
-      imports: [RouterTestingModule]
+      declarations: [ CenteredLayoutComponent ],
+      imports: [ RouterTestingModule ]
     })
       .compileComponents();
   });

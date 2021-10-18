@@ -4,14 +4,14 @@ import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from
 import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.component';
 import { CenteredLayoutComponent } from './shared/layout/centered-layout/centered-layout.component';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([ 'login' ]);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo([ '' ]);
 
 const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [AngularFireAuthGuard],
+    canActivate: [ AngularFireAuthGuard ],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {
@@ -34,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    canActivate: [AngularFireAuthGuard],
+    canActivate: [ AngularFireAuthGuard ],
     data: { authGuardPipe: redirectLoggedInToDashboard },
     component: CenteredLayoutComponent,
     children: [
@@ -51,7 +51,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' })],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' }) ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule { }

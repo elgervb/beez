@@ -3,7 +3,6 @@ import { Inspection } from '../models';
 import { HoneyProgressPipe } from './honey-progress.pipe';
 
 describe('HoneyProgressPipe', () => {
-
   it('create an instance', () => {
     const pipe = new HoneyProgressPipe();
     expect(pipe).toBeTruthy();

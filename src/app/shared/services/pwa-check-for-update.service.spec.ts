@@ -9,12 +9,8 @@ describe('PwaCheckForUpdateService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: SwUpdate, useValue: {} },
-      ],
-      imports: [
-        MaterialModule
-      ]
+      providers: [ { provide: SwUpdate, useValue: {} }, ],
+      imports: [ MaterialModule ]
     });
     service = TestBed.inject(PwaCheckForUpdateService);
   });
