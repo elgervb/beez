@@ -6,9 +6,6 @@ span {
 .qr-code-row {
   height: 8rem;
 }
-ngx-qrcode {
-  cursor: pointer;
-}
 
 ::ng-deep .qr-code,  ::ng-deep .qr-code img{
   height: 8rem;

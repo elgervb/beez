@@ -1,15 +1,25 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { BottomSheetComponent, SheetActions } from 'src/app/shared/components/bottom-sheet/bottom-sheet.component';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { QRBeezModel } from 'src/app/shared/models';
-import { QRDialog, QrDialogComponent } from '../../components/qr-dialog/qr-dialog.component';
+import { QRDialog, QrDialogComponent } from '../../components';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
+
+const sheetActions: SheetActions = {
+  actions: [
+    { type: 'edit', transKey: 'edit' },
+    { type: 'delete', transKey: 'delete' },
+    { type: 'printQR', transKey: 'printQR' }
+  ]
+};
 
 @Component({
   selector: 'bee-hive-details',
@@ -44,6 +54,7 @@ export class HiveDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private hiveService: HiveService,
+    private bottomSheet: MatBottomSheet,
     @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
@@ -58,8 +69,7 @@ export class HiveDetailsComponent implements OnInit {
     this.router.navigate([ '..' ], { relativeTo: this.route });
   }
 
-  deleteHive(hive: Hive, event?: MouseEvent): void {
-    event?.stopPropagation();
+  deleteHive(hive: Hive): void {
     this.dialog.open<ConfirmComponent, ConfirmDialogData, boolean>(
       ConfirmComponent,
       {
@@ -83,6 +93,33 @@ export class HiveDetailsComponent implements OnInit {
 
   navigateToInspections(): void {
     this.router.navigate([ 'inspections' ], { relativeTo: this.route });
+  }
+
+  openBottomSheet(hive: Hive): void {
+    const sheet = this.bottomSheet.open<BottomSheetComponent, SheetActions>(BottomSheetComponent, {
+      data: sheetActions,
+      closeOnNavigation: true
+    });
+    sheet.instance.action$
+      .pipe(
+        tap(action => {
+          switch (action) {
+          case 'edit':
+            this.navigateToEdit();
+            break;
+          case 'delete':
+            this.deleteHive(hive);
+            break;
+          case 'printQR':
+            this.printQRcode();
+            break;
+          default:
+            throw new Error('no such action');
+          }
+          sheet.dismiss();
+        }),
+        take(1)
+      ).subscribe();
   }
 
   printQRcode(): void {

@@ -1,0 +1,3 @@
+<mat-action-list>
+  <button *ngFor="let action of actions" mat-list-item (click)="execute(action.type)">{{action.transKey| i18next}}</button>
+</mat-action-list>

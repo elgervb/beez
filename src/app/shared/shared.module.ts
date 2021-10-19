@@ -6,6 +6,7 @@ import { ButtonBarComponent } from './components/button-bar/button-bar.component
 import { TimestampPipe } from './pipes/timestamp.pipe';
 import { ColorDotComponent } from './components/color-dot/color-dot.component';
 import { I18NextModule } from 'angular-i18next';
+import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.component';
 
 @NgModule({
   imports: [
@@ -14,12 +15,14 @@ import { I18NextModule } from 'angular-i18next';
     MaterialModule,
   ],
   declarations: [
+    BottomSheetComponent,
     ButtonBarComponent,
     ColorDotComponent,
     ConfirmComponent,
     TimestampPipe,
   ],
   exports: [
+    BottomSheetComponent,
     ButtonBarComponent,
     ColorDotComponent,
     ConfirmComponent,

@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HiveRoutingModule } from './hive-routing.module';
-import { HiveEditComponent, HiveListComponent } from './containers/';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/material/material.module';
-import { HiveFormComponent } from './components';
-import { HiveDetailsComponent } from './containers/hive-details/hive-details.component';
+import { HiveDetailsComponent, HiveEditComponent, HiveListComponent } from './containers/';
+import { HiveFormComponent, QrDialogComponent } from './components';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-import { QrDialogComponent } from './components/qr-dialog/qr-dialog.component';
 import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
