@@ -26,8 +26,8 @@ export const I18N_PROVIDERS = [
   {
     provide: I18NEXT_SERVICE,
     useValue: {
-      t: jest.fn().mockImplementation(t => t),
-      format: jest.fn().mockImplementation(t => t),
+      t: jest.fn<string, string[]>().mockImplementation(t => t),
+      format: jest.fn<string, string[]>().mockImplementation(t => t),
       init: jest.fn()
     }
   }
