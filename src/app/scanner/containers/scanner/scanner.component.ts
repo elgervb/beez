@@ -1,19 +1,18 @@
 import { Location } from '@angular/common';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Exception, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { QRBeezModel } from 'src/app/shared/models';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
-import { ConfirmDialogData, ConfirmComponent } from 'components';
+import { ConfirmComponent, ConfirmDialogData } from 'components';
 @Component({
   selector: 'bee-scanner',
   templateUrl: './scanner.component.html',
-  styleUrls: ['./scanner.component.css']
+  styleUrls: [ './scanner.component.css' ]
 })
-export class ScannerComponent implements OnInit {
+export class ScannerComponent {
 
   @ViewChild(ZXingScannerComponent)
   scanner: ZXingScannerComponent;
@@ -27,8 +26,6 @@ export class ScannerComponent implements OnInit {
     @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
-  ngOnInit(): void { }
-
   cancel(): void {
     this.location.back();
   }
@@ -40,18 +37,18 @@ export class ScannerComponent implements OnInit {
   scanSuccessHandler(json: string): void {
     this.scanner.scanStop();
 
-    const result: QRBeezModel = JSON.parse(json);
+    const result: QRBeezModel = JSON.parse(json) as QRBeezModel;
     let route: string[];
 
     switch (result.type) {
-      case 'hive':
-        route = ['/hives', result.id];
-        break;
-      case 'queen':
-        route = ['/queens', result.id];
-        break;
-      default:
-        throw new Error('no such type found ' + result.type);
+    case 'hive':
+      route = [ '/hives', result.id ];
+      break;
+    case 'queen':
+      route = [ '/queens', result.id ];
+      break;
+    default:
+      throw new Error(`no such type found ${result.type}`);
     }
 
     this.router.navigate(route);
@@ -61,7 +58,7 @@ export class ScannerComponent implements OnInit {
     console.log('scanErrorHandler', error);
   }
 
-  scanFailureHandler(_: Exception | undefined): void {
+  scanFailureHandler(): void {
     this.nrOfTries++;
 
     if (this.nrOfTries % 25 === 0) {
@@ -70,14 +67,9 @@ export class ScannerComponent implements OnInit {
         ConfirmComponent,
         { data: { title: this.i18NextService.format('scanner', 'cap'), content: this.i18NextService.t('sentence.noQRcode') } }
       ).afterClosed()
-        .pipe(
-          tap(confirm => confirm ? this.scanner.scanStart() : this.location.back())
-        )
+        .pipe(tap(confirm => confirm ? this.scanner.scanStart() : this.location.back()))
         .subscribe();
     }
   }
 
-  scanCompleteHandler(_: Result): void {
-
-  }
 }

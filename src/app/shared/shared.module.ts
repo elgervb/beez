@@ -8,11 +8,7 @@ import { TimestampPipe } from './pipes/timestamp.pipe';
     CommonModule,
     MaterialModule,
   ],
-  declarations: [
-    TimestampPipe,
-  ],
-  exports: [
-    TimestampPipe,
-  ]
+  declarations: [ TimestampPipe, ],
+  exports: [ TimestampPipe, ]
 })
 export class SharedModule { }

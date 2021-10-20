@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Hive } from '../../models';
 
 @Component({
   selector: 'bee-hive-form',
   templateUrl: './hive-form.component.html',
-  styleUrls: ['./hive-form.component.css']
+  styleUrls: [ './hive-form.component.css' ]
 })
-export class HiveFormComponent implements OnInit {
+export class HiveFormComponent {
 
   @Input() set hive(hive: Hive | null | undefined) {
     if (hive) {
@@ -21,20 +21,16 @@ export class HiveFormComponent implements OnInit {
   @Output() cancelEvent = new EventEmitter<void>();
 
   readonly form = this.formBuilder.group({
-    id: [''],
-    name: ['', Validators.required],
-    active: [true],
+    id: [ '' ],
+    name: [ '', Validators.required ],
+    active: [ true ],
     color: [],
     type: [],
-    date: [new Date(), Validators.required],
-    remarks: ['']
+    date: [ new Date(), Validators.required ],
+    remarks: [ '' ]
   });
 
   constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
-
-  }
 
   cancel(): void {
     this.cancelEvent.emit();

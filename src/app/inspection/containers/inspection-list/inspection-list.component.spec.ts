@@ -1,11 +1,11 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
-import { MaterialModule } from 'components';
+import { I18nextTestingModule, MaterialModule } from 'components';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { InspectionDetailsComponent } from '../../components';
 import { Inspection } from '../../models';
+import { HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe } from '../../pipes';
 import { InspectionService } from '../../services/inspection.service';
 
 import { InspectionListComponent } from './inspection-list.component';
@@ -17,14 +17,11 @@ describe('InspectionListComponent', () => {
     getInspections: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [InspectionListComponent],
-      imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule],
-      providers: [
-        { provide: InspectionService, useValue: inspectionService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [ InspectionListComponent, InspectionDetailsComponent, HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
+      providers: [ { provide: InspectionService, useValue: inspectionService } ]
     })
       .compileComponents();
   });
@@ -39,38 +36,21 @@ describe('InspectionListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('trendingIconName', () => {
+  describe('select', () => {
+    it('selects an inspection', () => {
+      const inspection = transform<Inspection>({});
+      expect(component.selected).toBeUndefined();
 
-    it('should go up', () => {
-      const inspections = [
-        transform<Inspection>({ health: 20 }),
-        transform<Inspection>({ health: 10 }),
-      ];
-
-      expect(component.trendingIconName(inspections[0], inspections)).toBe('trending_up');
+      component.select(inspection);
+      expect(component.selected).toBe(inspection);
     });
 
-    it('should go down', () => {
-      const inspections = [
-        transform<Inspection>({ health: 10 }),
-        transform<Inspection>({ health: 20 }),
-      ];
+    it('deselects an inspection', () => {
+      const inspection = transform<Inspection>({});
 
-      expect(component.trendingIconName(inspections[0], inspections)).toBe('trending_down');
-    });
-
-    it('should stay the same', () => {
-      const inspections = [
-        transform<Inspection>({ health: 10 }),
-        transform<Inspection>({ health: 10 }),
-      ];
-
-      // no list to compare to
-      expect(component.trendingIconName(inspections[0])).toBe('compare_arrows');
-      // not in the list
-      expect(component.trendingIconName(transform<Inspection>({ health: 10 }), inspections)).toBe('compare_arrows');
-      // stay the same
-      expect(component.trendingIconName(inspections[0], inspections)).toBe('compare_arrows');
+      component.select(inspection);
+      component.select(inspection);
+      expect(component.selected).toBeUndefined();
     });
   });
 });

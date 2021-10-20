@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { from } from '@elgervb/mock-data';
+import { I18nextTestingModule } from 'components';
+import { Inspection } from '../../models';
 
 import { InspectionDetailsComponent } from './inspection-details.component';
 
@@ -6,16 +9,18 @@ describe('InspectionDetailsComponent', () => {
   let component: InspectionDetailsComponent;
   let fixture: ComponentFixture<InspectionDetailsComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ InspectionDetailsComponent ]
+      declarations: [ InspectionDetailsComponent ],
+      imports: [ I18nextTestingModule ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InspectionDetailsComponent);
     component = fixture.componentInstance;
+    component.inspection = from<Inspection>('inspection');
     fixture.detectChanges();
   });
 

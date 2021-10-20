@@ -1,8 +1,7 @@
 module.exports = {
   preset: "jest-preset-angular",
   displayName: 'BEEZ APP',
-  setupFilesAfterEnv: [
-    "<rootDir>/src/setup-jest.ts"
+  "setupFilesAfterEnv": [
   ],
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/dist'],
@@ -19,7 +18,6 @@ module.exports = {
     '!**/src/main.ts',
     '!**/src/polyfills.ts',
     '!**/src/setup-jest.ts',
-    '!**/e2e/**',
     '!**/src/**/index.ts',
     '!**/src/**/*.module.ts'
   ],
@@ -30,10 +28,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      statements: 50,
-      branches: 20,
-      functions: 50,
-      lines: 50
+      statements: 76,
+      branches: 56,
+      functions: 51,
+      lines: 74
     }
   },
   globals: {

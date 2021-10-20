@@ -11,16 +11,16 @@ describe('QueenFormComponent', () => {
   let component: QueenFormComponent;
   let fixture: ComponentFixture<QueenFormComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [QueenFormComponent],
+      declarations: [ QueenFormComponent ],
       imports: [
         MaterialModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
         SharedModule
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });

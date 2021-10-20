@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from 'components';
+import { I18nextTestingModule, MaterialModule } from 'components';
 import { of } from 'rxjs';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { HiveService } from '../../services/hive.service';
 import { HiveListComponent } from './hive-list.component';
 
@@ -16,9 +15,9 @@ describe('HiveListComponent', () => {
     deleteHive: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [HiveListComponent],
+      declarations: [ HiveListComponent ],
       imports: [
         I18nextTestingModule,
         MaterialModule,
@@ -26,9 +25,7 @@ describe('HiveListComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      providers: [
-        { provide: HiveService, useValue: hiveService }
-      ]
+      providers: [ { provide: HiveService, useValue: hiveService } ]
     });
 
     await TestBed.compileComponents();

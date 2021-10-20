@@ -28,4 +28,5 @@ export class InspectionService {
   private collectionPath(hiveId: string): string {
     return `beez/${this.authService.uid}/hives/${hiveId}/inspections`;
   }
+
 }

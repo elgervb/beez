@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { I18nextTestingModule } from 'components';
 import { HiveService } from '../../services/hive.service';
 
 import { HiveEditComponent } from './hive-edit.component';
@@ -15,16 +15,15 @@ describe('HiveEditComponent', () => {
     getHive: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [HiveEditComponent],
+      declarations: [ HiveEditComponent ],
       imports: [
         I18nextTestingModule,
-        RouterTestingModule],
-      providers: [
-        { provide: HiveService, useValue: hiveService }
+        RouterTestingModule
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [ { provide: HiveService, useValue: hiveService } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
 
     await TestBed.compileComponents();

@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from 'components';
+import { I18nextTestingModule, MaterialModule } from 'components';
 import { of } from 'rxjs';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { QueenService } from '../../services/queen.service';
 import { QueenListComponent } from './queen-list.component';
 
@@ -16,9 +15,9 @@ describe('QueenListComponent', () => {
     deleteQueen: jest.fn()
   };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [QueenListComponent],
+      declarations: [ QueenListComponent ],
       imports: [
         I18nextTestingModule,
         MaterialModule,
@@ -26,9 +25,7 @@ describe('QueenListComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      providers: [
-        { provide: QueenService, useValue: queenService }
-      ]
+      providers: [ { provide: QueenService, useValue: queenService } ]
     });
 
     await TestBed.compileComponents();

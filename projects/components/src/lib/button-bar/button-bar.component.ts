@@ -1,11 +1,11 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'bee-button-bar',
   templateUrl: './button-bar.component.html',
-  styleUrls: ['./button-bar.component.css']
+  styleUrls: [ './button-bar.component.css' ]
 })
-export class ButtonBarComponent implements OnInit {
+export class ButtonBarComponent {
 
   @Input() justify: 'left' | 'center' | 'right';
   @Input() align: 'top' | 'center' | 'bottom';
@@ -15,11 +15,6 @@ export class ButtonBarComponent implements OnInit {
     const align = `align-${this.align || 'center'}`;
     const justify = `justify-${this.justify || 'left'}`;
     return `${align} ${justify}`;
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
 }

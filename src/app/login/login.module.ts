@@ -6,9 +6,7 @@ import { LoginComponent } from './containers';
 import { MaterialModule } from 'components';
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [ LoginComponent ],
   imports: [
     CommonModule,
     LoginRoutingModule,

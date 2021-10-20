@@ -11,7 +11,7 @@ script:
   - yarn lint
   - yarn build:projects
   - yarn test --coverage
-  - yarn build --prod --base-href https://elgervb.github.io/beez/ --deploy-url=https://elgervb.github.io/beez/
+  - yarn build --configuration production --base-href https://elgervb.github.io/beez/ --deploy-url=https://elgervb.github.io/beez/
   - cp dist/beez/index.html dist/beez/404.html
 
 deploy:

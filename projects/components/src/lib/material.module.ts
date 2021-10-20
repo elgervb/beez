@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -24,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   declarations: [],
   imports: [
     CommonModule,
+    MatBottomSheetModule,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,
@@ -45,6 +47,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     LayoutModule
   ],
   exports: [
+    MatBottomSheetModule,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,

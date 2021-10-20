@@ -45,8 +45,7 @@ export class QueenService {
     const document = this.angularFirestore.collection<Queen>(this.collectionPath).doc(queen.id);
     document.update(queen);
     return document.get()
-      .pipe(
-        map(doc => doc.data())
-      );
+      .pipe(map(doc => doc.data()));
   }
+
 }

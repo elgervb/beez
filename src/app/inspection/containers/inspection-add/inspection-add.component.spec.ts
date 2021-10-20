@@ -5,26 +5,23 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InspectionService } from '../../services/inspection.service';
 import { InspectionAddComponent } from './inspection-add.component';
-import * as utilsModule from 'src/app/shared/utils/route/get-param';
 import { Location } from '@angular/common';
 import { of } from 'rxjs';
-import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { I18nextTestingModule, MaterialModule } from 'components';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MaterialModule } from 'components';
+import { ActivatedRoute } from '@angular/router';
 
 describe('InspectionAddComponent', () => {
   let component: InspectionAddComponent;
   let fixture: ComponentFixture<InspectionAddComponent>;
   const inspectionService = { add: jest.fn() };
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [InspectionAddComponent],
-      imports: [I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule],
-      providers: [
-        { provide: InspectionService, useValue: inspectionService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [ InspectionAddComponent ],
+      imports: [ I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule ],
+      providers: [ { provide: InspectionService, useValue: inspectionService } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });
@@ -51,7 +48,8 @@ describe('InspectionAddComponent', () => {
   });
 
   it('should submit and return to previous page', () => {
-    const getParamSpy = jest.spyOn(utilsModule, 'getParam').mockReturnValueOnce('hiveId');
+    const route = TestBed.inject(ActivatedRoute);
+    const getParamSpy = jest.spyOn(route.snapshot.paramMap, 'get').mockReturnValueOnce('hiveId');
     inspectionService.add.mockReturnValueOnce(of(''));
     const backSpy = jest.spyOn(TestBed.inject(Location), 'back');
 

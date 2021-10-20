@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Queen } from '../../models';
 
 @Component({
   selector: 'bee-queen-form',
   templateUrl: './queen-form.component.html',
-  styleUrls: ['./queen-form.component.css']
+  styleUrls: [ './queen-form.component.css' ]
 })
-export class QueenFormComponent implements OnInit {
+export class QueenFormComponent {
 
   @Input() set queen(queen: Queen | null | undefined) {
     if (queen) {
@@ -21,20 +21,16 @@ export class QueenFormComponent implements OnInit {
   @Output() cancelEvent = new EventEmitter<void>();
 
   readonly form = this.formBuilder.group({
-    id: [''],
-    name: ['', Validators.required],
-    active: [true],
-    isMarked: [false],
-    color: [''],
-    date: [new Date(), Validators.required],
-    remarks: ['']
+    id: [ '' ],
+    name: [ '', Validators.required ],
+    active: [ true ],
+    isMarked: [ false ],
+    color: [ '' ],
+    date: [ new Date(), Validators.required ],
+    remarks: [ '' ]
   });
 
   constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
-
-  }
 
   cancel(): void {
     this.cancelEvent.emit();

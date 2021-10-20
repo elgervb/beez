@@ -9,7 +9,7 @@ import { HiveService } from '../../services/hive.service';
 @Component({
   selector: 'bee-hive-edit',
   templateUrl: './hive-edit.component.html',
-  styleUrls: ['./hive-edit.component.css']
+  styleUrls: [ './hive-edit.component.css' ]
 })
 export class HiveEditComponent implements OnInit {
 
@@ -30,7 +30,7 @@ export class HiveEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const hiveId = this.hiveId;
+    const { hiveId } = this;
     if (hiveId) {
       this.hive$ = this.hiveService.getHive(hiveId);
     }
@@ -38,7 +38,7 @@ export class HiveEditComponent implements OnInit {
 
   edit(hive: Hive): void {
     const result: Observable<DocumentReference<Hive> | Hive | undefined> =
-      !!hive.id ? this.hiveService.updateHive(hive) : this.hiveService.createHive(hive);
+      hive.id ? this.hiveService.updateHive(hive) : this.hiveService.createHive(hive);
 
     result.pipe(
       first(),
@@ -48,7 +48,7 @@ export class HiveEditComponent implements OnInit {
 
   cancel(): void {
     const path = this.isEdit ? '../..' : '..';
-    this.router.navigate([path], { relativeTo: this.route });
+    this.router.navigate([ path ], { relativeTo: this.route });
   }
 
 }

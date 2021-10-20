@@ -7,9 +7,7 @@ import { MaterialModule } from 'components';
 import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
+  declarations: [ DashboardComponent ],
   imports: [
     CommonModule,
     DashboardRoutingModule,

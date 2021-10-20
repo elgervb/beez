@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Inspection } from '../../models';
 
 @Component({
   selector: 'bee-inspection-details',
   templateUrl: './inspection-details.component.html',
-  styleUrls: ['./inspection-details.component.css']
+  styleUrls: [ './inspection-details.component.css' ]
 })
-export class InspectionDetailsComponent implements OnInit {
+export class InspectionDetailsComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() inspection: Inspection;
 
 }

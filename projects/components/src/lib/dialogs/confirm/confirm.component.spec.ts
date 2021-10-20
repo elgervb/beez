@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { I18nextTestingModule } from 'components';
 import { MaterialModule } from '../../material.module';
 
 import { ConfirmComponent } from './confirm.component';
@@ -9,16 +9,14 @@ describe('ConfirmComponent', () => {
   let component: ConfirmComponent;
   let fixture: ComponentFixture<ConfirmComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ConfirmComponent],
+      declarations: [ ConfirmComponent ],
       imports: [
         I18nextTestingModule,
-        MaterialModule,
+        MaterialModule
       ],
-      providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} }
-      ]
+      providers: [ { provide: MAT_DIALOG_DATA, useValue: {} } ]
     })
       .compileComponents();
   });

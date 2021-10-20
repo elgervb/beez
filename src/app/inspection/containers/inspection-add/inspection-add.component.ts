@@ -1,40 +1,40 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
-import { getParam } from 'src/app/shared/utils/route/get-param';
+import { Timestamp } from 'src/app/hive/models';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
 
 @Component({
   selector: 'bee-inspection-add',
   templateUrl: './inspection-add.component.html',
-  styleUrls: ['./inspection-add.component.css']
+  styleUrls: [ './inspection-add.component.css' ]
 })
-export class InspectionAddComponent implements OnInit {
+export class InspectionAddComponent {
 
   timestamp = new FormControl({ value: new Date(), disabled: true }, Validators.required);
 
   honeySuperGroup = this.formBuilder.group({
-    honey: [null],
-    honeyClosed: [null]
+    honey: [ null ],
+    honeyClosed: [ null ]
   });
 
   hiveBodyGroup = this.formBuilder.group({
-    drones: [null],
-    queen: [null],
-    eggs: [null],
-    larva: [null],
-    closedBrood: [null],
-    droneBrood: [null],
-    queenBrood: [null],
-    honeyFood: [null],
+    drones: [ null ],
+    queen: [ null ],
+    eggs: [ null ],
+    larva: [ null ],
+    closedBrood: [ null ],
+    droneBrood: [ null ],
+    queenBrood: [ null ],
+    honeyFood: [ null ],
   });
 
   overallGroup = this.formBuilder.group({
-    health: [null, Validators.required],
-    remarks: [null]
+    health: [ null, Validators.required ],
+    remarks: [ null ]
   });
 
   constructor(
@@ -44,21 +44,20 @@ export class InspectionAddComponent implements OnInit {
     private inspectionService: InspectionService,
   ) { }
 
-  ngOnInit(): void { }
-
   formatLabel(value: number): string {
-    return value ? value + '%' : '';
+    return value ? `${value}%` : '';
   }
 
   submit(): void {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const inspection: Inspection = {
-      date: this.timestamp.value,
+      date: this.timestamp.value as Timestamp,
       ...this.honeySuperGroup.value,
       ...this.hiveBodyGroup.value,
       ...this.overallGroup.value
     };
 
-    const hiveId = getParam(this.route.snapshot.root, 'hiveId');
+    const hiveId = this.route.snapshot.paramMap.get('hiveId');
 
     if (hiveId) {
       this.inspectionService.add(inspection, hiveId)
@@ -68,7 +67,5 @@ export class InspectionAddComponent implements OnInit {
         ).subscribe();
     }
   }
+
 }
-
-
-

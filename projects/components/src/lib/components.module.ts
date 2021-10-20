@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { ButtonBarComponent } from './button-bar/button-bar.component';
 import { ColorDotComponent } from './color-dot/color-dot.component';
 import { ConfirmComponent } from './dialogs/confirm/confirm.component';
@@ -11,12 +12,14 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   declarations: [
+    BottomSheetComponent,
     ButtonBarComponent,
     ColorDotComponent,
     ConfirmComponent,
     QrDialogComponent,
   ],
   exports: [
+    BottomSheetComponent,
     ButtonBarComponent,
     ColorDotComponent,
     ConfirmComponent,

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 
@@ -11,16 +11,14 @@ export interface QRDialog {
 @Component({
   selector: 'bee-qr-dialog',
   templateUrl: './qr-dialog.component.html',
-  styleUrls: ['./qr-dialog.component.css']
+  styleUrls: [ './qr-dialog.component.css' ]
 })
-export class QrDialogComponent implements OnInit {
+export class QrDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: QRDialog) { }
-
-  ngOnInit(): void {
-  }
 
   print(): void {
     window.print();
   }
+
 }

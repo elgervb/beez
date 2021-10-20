@@ -1,5 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MainLayoutComponent } from './main-layout.component';
@@ -24,17 +24,15 @@ describe('MainLayoutComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MainLayoutComponent],
+      declarations: [ MainLayoutComponent ],
       imports: [
         I18nextTestingModule,
         LayoutModule,
         MaterialModule,
         NoopAnimationsModule,
-        RouterTestingModule.withRoutes([{ path: 'login', children: [] }]),
+        RouterTestingModule.withRoutes([ { path: 'login', children: [] } ]),
       ],
-      providers: [
-        { provide: AuthService, useValue: authService }
-      ]
+      providers: [ { provide: AuthService, useValue: authService } ]
     }).compileComponents();
   }));
 
@@ -58,11 +56,10 @@ describe('MainLayoutComponent', () => {
     const navigateSpy = jest.spyOn(TestBed.inject(Router), 'navigate');
     component.logout();
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/login']);
+    expect(navigateSpy).toHaveBeenCalledWith([ '/login' ]);
   });
 
   it('should get the user', () => {
     expect(component.user$).toBe(authService.user$);
   });
-
 });

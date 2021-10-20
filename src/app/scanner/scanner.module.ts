@@ -8,9 +8,7 @@ import { MaterialModule } from 'components';
 
 
 @NgModule({
-  declarations: [
-    ScannerComponent
-  ],
+  declarations: [ ScannerComponent ],
   imports: [
     CommonModule,
     MaterialModule,

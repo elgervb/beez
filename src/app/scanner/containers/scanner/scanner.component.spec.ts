@@ -2,10 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { MaterialModule } from 'components';
+import { EMPTY_HANDLER, I18nextTestingModule, MaterialModule } from 'components';
 import { QRBeezModel } from 'src/app/shared/models';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 
 import { ScannerComponent } from './scanner.component';
 
@@ -13,17 +12,17 @@ describe('ScannerComponent', () => {
   let component: ScannerComponent;
   let fixture: ComponentFixture<ScannerComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ScannerComponent],
-      imports: [MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule, I18nextTestingModule],
+      declarations: [ ScannerComponent ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule ],
     })
       .compileComponents();
   });
 
   beforeEach(() => {
     // this is here to catch error '@zxing/ngx-scanner Can't get user media, this is not supported.'
-    jest.spyOn(console, 'error').mockImplementation(() => { });
+    jest.spyOn(console, 'error').mockImplementation(EMPTY_HANDLER);
 
     fixture = TestBed.createComponent(ScannerComponent);
     component = fixture.componentInstance;
@@ -43,7 +42,7 @@ describe('ScannerComponent', () => {
 
     component.scanSuccessHandler(JSON.stringify(result));
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/hives', result.id]);
+    expect(navigateSpy).toHaveBeenCalledWith([ '/hives', result.id ]);
   });
 
   it('should navigate on success queen', () => {
@@ -55,7 +54,7 @@ describe('ScannerComponent', () => {
 
     component.scanSuccessHandler(JSON.stringify(result));
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/queens', result.id]);
+    expect(navigateSpy).toHaveBeenCalledWith([ '/queens', result.id ]);
   });
 
   it('should throw when type is unexpected', () => {
