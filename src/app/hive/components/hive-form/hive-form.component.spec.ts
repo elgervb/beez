@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { I18nextTestingModule, MaterialModule } from 'components';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 import { HiveFormComponent } from './hive-form.component';
 
@@ -19,7 +18,6 @@ describe('HiveFormComponent', () => {
         MaterialModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
-        SharedModule
       ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })

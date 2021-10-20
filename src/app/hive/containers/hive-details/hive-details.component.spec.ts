@@ -7,7 +7,6 @@ import { transform } from '@elgervb/mock-data';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { EMPTY_HANDLER, I18nextTestingModule, MaterialModule } from 'components';
 import { Subject } from 'rxjs';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
 
@@ -29,7 +28,7 @@ describe('HiveDetailsComponent', () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ HiveDetailsComponent ],
-      imports: [ MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule ],
+      imports: [ MaterialModule, NgxQRCodeModule, RouterTestingModule, I18nextTestingModule ],
       providers: [
         { provide: HiveService, useValue: hiveService },
         { provide: MatBottomSheet, useValue: bottomSheet }

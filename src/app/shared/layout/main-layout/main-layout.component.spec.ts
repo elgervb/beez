@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 import { AuthService, UserInfo } from 'auth';
 import { of } from 'rxjs';
 import { from } from '@elgervb/mock-data';
-import { I18nextTestingModule } from '../../testing/i18next/i18next.testing.module';
-import { MaterialModule } from 'components';
+import { I18nextTestingModule, MaterialModule } from 'components';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;

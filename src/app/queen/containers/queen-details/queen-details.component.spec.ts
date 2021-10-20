@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
 import { Subject } from 'rxjs';
 import { EMPTY_HANDLER, I18nextTestingModule, MaterialModule } from 'components';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
 
@@ -27,7 +26,7 @@ describe('QueenDetailsComponent', () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ QueenDetailsComponent ],
-      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule ],
       providers: [
         { provide: QueenService, useValue: queenService },
         { provide: MatBottomSheet, useValue: bottomSheet }

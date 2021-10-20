@@ -3,7 +3,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nextTestingModule, MaterialModule } from 'components';
 import { of } from 'rxjs';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { QueenService } from '../../services/queen.service';
 import { QueenListComponent } from './queen-list.component';
 
@@ -23,7 +22,6 @@ describe('QueenListComponent', () => {
         MaterialModule,
         NoopAnimationsModule,
         RouterTestingModule,
-        SharedModule,
       ],
       providers: [ { provide: QueenService, useValue: queenService } ]
     });

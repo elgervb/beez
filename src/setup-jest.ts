@@ -1,6 +1,6 @@
+import { randomDate, randomString, register } from '@elgervb/mock-data';
 import { Queen } from './app/queen/models';
 import { UserInfo } from 'auth';
-import { randomDate, randomString, register } from '@elgervb/mock-data';
 import { Inspection } from './app/inspection/models';
 
 // mocks

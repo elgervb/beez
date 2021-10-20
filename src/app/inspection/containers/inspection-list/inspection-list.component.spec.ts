@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
 import { I18nextTestingModule, MaterialModule } from 'components';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { InspectionDetailsComponent } from '../../components';
 import { Inspection } from '../../models';
 import { HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe } from '../../pipes';
@@ -20,7 +19,7 @@ describe('InspectionListComponent', () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ InspectionListComponent, InspectionDetailsComponent, HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe ],
-      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule ],
       providers: [ { provide: InspectionService, useValue: inspectionService } ]
     })
       .compileComponents();

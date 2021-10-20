@@ -1,7 +1,8 @@
 module.exports = {
   preset: "jest-preset-angular",
   displayName: 'BEEZ APP',
-  "setupFilesAfterEnv": [
+  setupFilesAfterEnv: [
+    '<rootDir>/src/setup-jest.ts'
   ],
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/dist'],
