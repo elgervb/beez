@@ -38,7 +38,7 @@ export class HiveEditComponent implements OnInit {
 
   edit(hive: Hive): void {
     const result: Observable<DocumentReference<Hive> | Hive | undefined> =
-      !!hive.id ? this.hiveService.updateHive(hive) : this.hiveService.createHive(hive);
+      hive.id ? this.hiveService.updateHive(hive) : this.hiveService.createHive(hive);
 
     result.pipe(
       first(),

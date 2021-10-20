@@ -6,6 +6,7 @@ import { transform } from '@elgervb/mock-data';
 import { Subject } from 'rxjs';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EMPTY_HANDLER } from 'src/app/shared/testing';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
@@ -53,8 +54,8 @@ describe('QueenDetailsComponent', () => {
     let navigateSpy: jest.SpyInstance;
 
     beforeEach(() => {
-      deleteSpy = jest.spyOn(component, 'deleteQueen').mockImplementation(() => {});
-      navigateSpy = jest.spyOn(component, 'navigateToEdit').mockImplementation(() => {});
+      deleteSpy = jest.spyOn(component, 'deleteQueen').mockImplementation(EMPTY_HANDLER);
+      navigateSpy = jest.spyOn(component, 'navigateToEdit').mockImplementation(EMPTY_HANDLER);
     });
 
     it('should call delete', () => {

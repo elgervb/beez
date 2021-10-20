@@ -39,7 +39,7 @@ export class QueenEditComponent implements OnInit {
 
   edit(queen: Queen): void {
     const result: Observable<DocumentReference<Queen> | Queen | undefined> =
-      !!queen.id ? this.queenService.updateQueen(queen) : this.queenService.createQueen(queen);
+      queen.id ? this.queenService.updateQueen(queen) : this.queenService.createQueen(queen);
 
     result?.pipe(
       first(),

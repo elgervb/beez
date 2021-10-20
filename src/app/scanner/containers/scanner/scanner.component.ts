@@ -1,8 +1,7 @@
 import { Location } from '@angular/common';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
-import { Exception, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -13,7 +12,7 @@ import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
   templateUrl: './scanner.component.html',
   styleUrls: [ './scanner.component.css' ]
 })
-export class ScannerComponent implements OnInit {
+export class ScannerComponent {
 
   @ViewChild(ZXingScannerComponent)
   scanner: ZXingScannerComponent;
@@ -27,8 +26,6 @@ export class ScannerComponent implements OnInit {
     @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) { }
 
-  ngOnInit(): void { }
-
   cancel(): void {
     this.location.back();
   }
@@ -40,7 +37,7 @@ export class ScannerComponent implements OnInit {
   scanSuccessHandler(json: string): void {
     this.scanner.scanStop();
 
-    const result: QRBeezModel = JSON.parse(json);
+    const result: QRBeezModel = JSON.parse(json) as QRBeezModel;
     let route: string[];
 
     switch (result.type) {
@@ -61,7 +58,7 @@ export class ScannerComponent implements OnInit {
     console.log('scanErrorHandler', error);
   }
 
-  scanFailureHandler(_: Exception | undefined): void {
+  scanFailureHandler(): void {
     this.nrOfTries++;
 
     if (this.nrOfTries % 25 === 0) {
@@ -73,10 +70,6 @@ export class ScannerComponent implements OnInit {
         .pipe(tap(confirm => confirm ? this.scanner.scanStart() : this.location.back()))
         .subscribe();
     }
-  }
-
-  scanCompleteHandler(_: Result): void {
-
   }
 
 }

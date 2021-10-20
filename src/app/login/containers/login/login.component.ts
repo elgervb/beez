@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth';
 
 @Component({
@@ -6,13 +6,9 @@ import { AuthService } from 'src/app/auth';
   templateUrl: './login.component.html',
   styleUrls: [ './login.component.css' ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
-
-  }
 
   login(): void {
     this.authService.signInWithGoogle();
