@@ -4,8 +4,12 @@ import { LegderComponent } from './containers';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':year',
     component: LegderComponent
+  },
+  {
+    path: '**',
+    redirectTo: new Date().getFullYear().toString()
   }
 ];
 
