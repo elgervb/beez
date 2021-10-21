@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
@@ -22,7 +23,8 @@ describe('InspectionListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ InspectionListComponent, InspectionDetailsComponent, HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
-      providers: [ { provide: InspectionService, useValue: inspectionService } ]
+      providers: [ { provide: InspectionService, useValue: inspectionService } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { QueenRoutingModule } from './queen-routing.module';
 import { QueenDetailsComponent, QueenEditComponent, QueenListComponent } from './containers';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from 'components';
+import { ComponentsModule, MaterialModule } from 'components';
 import { QueenFormComponent } from './components';
 import { SharedModule } from '../shared/shared.module';
 import { I18NextModule } from 'angular-i18next';
@@ -18,6 +18,7 @@ import { I18NextModule } from 'angular-i18next';
   ],
   imports: [
     CommonModule,
+    ComponentsModule,
     I18NextModule,
     MaterialModule,
     QueenRoutingModule,

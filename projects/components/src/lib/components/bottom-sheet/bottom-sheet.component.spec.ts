@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MaterialModule } from '../../../material/material.module';
+import { MaterialModule } from '../../material/material.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 
 import { BottomSheetComponent, SheetAction } from './bottom-sheet.component';

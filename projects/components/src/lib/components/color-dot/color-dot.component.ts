@@ -2,7 +2,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'bee-color-dot',
-  templateUrl: './color-dot.component.html',
+  template: '',
   styleUrls: [ './color-dot.component.css' ]
 })
 export class ColorDotComponent {

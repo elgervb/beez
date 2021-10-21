@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { QueenService } from '../../services/queen.service';
 import { QueenListComponent } from './queen-list.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('QueenListComponent', () => {
   let component: QueenListComponent;
@@ -26,7 +27,8 @@ describe('QueenListComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      providers: [ { provide: QueenService, useValue: queenService } ]
+      providers: [ { provide: QueenService, useValue: queenService } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
 
     await TestBed.compileComponents();

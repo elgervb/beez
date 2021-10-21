@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels, NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
@@ -25,7 +26,8 @@ describe('QrDialogComponent', () => {
         NgxQRCodeModule,
         SharedModule
       ],
-      providers: [ { provide: MAT_DIALOG_DATA, useValue: data } ]
+      providers: [ { provide: MAT_DIALOG_DATA, useValue: data } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });

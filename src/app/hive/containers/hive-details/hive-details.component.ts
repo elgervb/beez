@@ -6,8 +6,7 @@ import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiedi
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
-import { BottomSheetComponent, SheetActions } from 'components';
-import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
+import { BottomSheetComponent, ConfirmComponent, ConfirmDialogData, SheetActions } from 'components';
 import { QRBeezModel } from 'src/app/shared/models';
 import { QRDialog, QrDialogComponent } from '../../components';
 import { Hive } from '../../models';

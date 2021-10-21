@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { of } from 'rxjs';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { ActivatedRoute } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('InspectionAddComponent', () => {
   let component: InspectionAddComponent;
@@ -20,7 +21,8 @@ describe('InspectionAddComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ InspectionAddComponent ],
       imports: [ I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule ],
-      providers: [ { provide: InspectionService, useValue: inspectionService } ]
+      providers: [ { provide: InspectionService, useValue: inspectionService } ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });
