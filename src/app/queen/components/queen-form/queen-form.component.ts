@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Queen } from '../../models';
 
@@ -7,7 +7,7 @@ import { Queen } from '../../models';
   templateUrl: './queen-form.component.html',
   styleUrls: [ './queen-form.component.css' ]
 })
-export class QueenFormComponent implements OnInit {
+export class QueenFormComponent {
 
   @Input() set queen(queen: Queen | null | undefined) {
     if (queen) {
@@ -31,10 +31,6 @@ export class QueenFormComponent implements OnInit {
   });
 
   constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
-
-  }
 
   cancel(): void {
     this.cancelEvent.emit();

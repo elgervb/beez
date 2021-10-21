@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
+import { Timestamp } from 'src/app/hive/models';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
 
@@ -11,7 +12,7 @@ import { InspectionService } from '../../services/inspection.service';
   templateUrl: './inspection-add.component.html',
   styleUrls: [ './inspection-add.component.css' ]
 })
-export class InspectionAddComponent implements OnInit {
+export class InspectionAddComponent {
 
   timestamp = new FormControl({ value: new Date(), disabled: true }, Validators.required);
 
@@ -43,15 +44,14 @@ export class InspectionAddComponent implements OnInit {
     private inspectionService: InspectionService,
   ) { }
 
-  ngOnInit(): void { }
-
   formatLabel(value: number): string {
     return value ? `${value}%` : '';
   }
 
   submit(): void {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const inspection: Inspection = {
-      date: this.timestamp.value,
+      date: this.timestamp.value as Timestamp,
       ...this.honeySuperGroup.value,
       ...this.hiveBodyGroup.value,
       ...this.overallGroup.value

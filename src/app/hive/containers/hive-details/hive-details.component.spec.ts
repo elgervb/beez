@@ -8,6 +8,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { Subject } from 'rxjs';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EMPTY_HANDLER } from 'src/app/shared/testing';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
@@ -82,9 +83,9 @@ describe('HiveDetailsComponent', () => {
       let printSpy: jest.SpyInstance;
 
       beforeEach(() => {
-        deleteSpy = jest.spyOn(component, 'deleteHive').mockImplementation(() => {});
-        navigateSpy = jest.spyOn(component, 'navigateToEdit').mockImplementation(() => {});
-        printSpy = jest.spyOn(component, 'printQRcode').mockImplementation(() => {});
+        deleteSpy = jest.spyOn(component, 'deleteHive').mockImplementation(EMPTY_HANDLER);
+        navigateSpy = jest.spyOn(component, 'navigateToEdit').mockImplementation(EMPTY_HANDLER);
+        printSpy = jest.spyOn(component, 'printQRcode').mockImplementation(EMPTY_HANDLER);
       });
 
       it('should call delete', () => {

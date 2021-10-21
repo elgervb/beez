@@ -46,7 +46,7 @@ export class HiveDetailsComponent implements OnInit {
   }
 
   get dense(): string | null {
-    return this.route.snapshot.data.dense;
+    return this.route.snapshot.data.dense as string;
   }
 
   constructor(

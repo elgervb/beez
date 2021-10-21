@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 import { QRBeezModel } from 'src/app/shared/models';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
+import { EMPTY_HANDLER } from 'src/app/shared/testing';
 
 import { ScannerComponent } from './scanner.component';
 
@@ -23,7 +24,7 @@ describe('ScannerComponent', () => {
 
   beforeEach(() => {
     // this is here to catch error '@zxing/ngx-scanner Can't get user media, this is not supported.'
-    jest.spyOn(console, 'error').mockImplementation(() => { });
+    jest.spyOn(console, 'error').mockImplementation(EMPTY_HANDLER);
 
     fixture = TestBed.createComponent(ScannerComponent);
     component = fixture.componentInstance;

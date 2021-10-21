@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Inspection } from '../../models';
 
 @Component({
@@ -6,12 +6,8 @@ import { Inspection } from '../../models';
   templateUrl: './inspection-details.component.html',
   styleUrls: [ './inspection-details.component.css' ]
 })
-export class InspectionDetailsComponent implements OnInit {
+export class InspectionDetailsComponent {
 
   @Input() inspection: Inspection;
-
-  constructor() { }
-
-  ngOnInit(): void { }
 
 }
