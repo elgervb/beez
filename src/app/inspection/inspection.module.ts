@@ -8,7 +8,7 @@ import { InspectionAddComponent, InspectionListComponent } from './containers';
 import { InspectionDetailsComponent, InspectionFormComponent } from './components';
 import { HoneyProgressPipe, QueenPresentColorPipe } from './pipes';
 import { SharedModule } from '../shared/shared.module';
-import { MaterialModule } from '../shared/material/material.module';
+import { MaterialModule } from 'components';
 import { TrendingIconNamePipe } from './pipes/trending-icon-name.pipe';
 
 @NgModule({

@@ -6,7 +6,7 @@ import { MainLayoutComponent } from './main-layout.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { Router } from '@angular/router';
-import { MaterialModule } from '../../material/material.module';
+import { MaterialModule } from 'components';
 import { AuthService, UserInfo } from 'src/app/auth';
 import { of } from 'rxjs';
 import { from } from '@elgervb/mock-data';

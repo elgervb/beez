@@ -1,15 +1,15 @@
 module.exports = {
   "modulePaths": [
-    "<rootDir>/projects/micro-app/src/",
+    "<rootDir>/projects/components/src/",
   ],
-  roots: ['<rootDir>/projects/micro-app'],
-  "displayName": 'MICRO-APPS',
+  roots: ['<rootDir>/projects/components'],
+  "displayName": 'COMPONENTS',
   "preset": "jest-preset-angular",
   "setupFilesAfterEnv": [
-    "<rootDir>/projects/micro-app/src/setup-jest.ts"
+    "<rootDir>/projects/components/src/setup-jest.ts"
   ],
   "testPathIgnorePatterns": [
-    "<rootDir>/projects/micro-app/setup-jest.ts"
+    "<rootDir>/projects/components/setup-jest.ts"
   ],
   collectCoverageFrom: [
     '**/*.{ts,tsx}'
@@ -28,6 +28,6 @@ module.exports = {
     }
   },
   moduleNameMapper: {
-    '^@components/(.*)': '<rootDir>/projects/components/$1',
+
   }
 }

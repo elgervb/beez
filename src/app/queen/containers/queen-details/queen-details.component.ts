@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { Observable } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
-import { BottomSheetComponent, SheetActions } from 'src/app/shared/components/bottom-sheet/bottom-sheet.component';
+import { BottomSheetComponent, SheetActions } from 'components';
 import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';

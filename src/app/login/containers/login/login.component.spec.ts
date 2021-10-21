@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MaterialModule } from 'components';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { AuthService } from 'src/app/auth';
 

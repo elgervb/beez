@@ -249,6 +249,7 @@
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["error"],
         "@typescript-eslint/restrict-template-expressions": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
         "@typescript-eslint/unbound-method": [
           "error",
           {

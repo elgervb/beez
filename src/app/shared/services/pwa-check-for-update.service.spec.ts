@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { SwUpdate } from '@angular/service-worker';
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from 'components';
 
 import { PwaCheckForUpdateService } from './pwa-check-for-update.service';
 
