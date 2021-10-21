@@ -1,2 +1,2 @@
-export * from './components/components.module';
-export * from './components';
+export * from './components.module';
+export * from './bottom-sheet/bottom-sheet.component';
