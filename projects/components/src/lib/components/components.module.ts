@@ -4,7 +4,8 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { I18NextModule } from 'angular-i18next';
 import { MaterialModule } from '../material/material.module';
 import { ColorDotComponent } from './color-dot/color-dot.component';
-import { ButtonBarComponent, ConfirmComponent } from '.';
+import { ButtonBarComponent } from './button-bar/button-bar.component';
+import { ConfirmComponent } from './dialogs/confirm/confirm.component';
 import { TimestampPipe } from './pipes';
 
 
