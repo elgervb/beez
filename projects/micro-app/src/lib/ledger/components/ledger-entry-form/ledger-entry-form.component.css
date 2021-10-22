@@ -1,0 +1,23 @@
+
+.form-field-group {
+  display: flex;
+  width: 100%;
+}
+
+.amount-eur {
+  text-align: right;
+  width: 8rem;
+}
+
+.amount-cents {
+  margin-right: 1rem;
+  width: 3rem;
+}
+
+.description {
+  width: 9.4rem;
+}
+
+.full-width {
+  width: 100%;
+}

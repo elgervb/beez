@@ -1,18 +1,22 @@
 module.exports = {
-  "modulePaths": [
+  modulePaths: [
     "<rootDir>/projects/components/src/",
   ],
   roots: ['<rootDir>/projects/components'],
-  "displayName": 'COMPONENTS',
-  "preset": "jest-preset-angular",
-  "setupFilesAfterEnv": [
+  displayName: 'COMPONENTS',
+  preset: "jest-preset-angular",
+  setupFilesAfterEnv: [
     "<rootDir>/projects/components/src/setup-jest.ts"
   ],
-  "testPathIgnorePatterns": [
+  testPathIgnorePatterns: [
     "<rootDir>/projects/components/setup-jest.ts"
   ],
   collectCoverageFrom: [
-    '**/*.{ts,tsx}'
+    '**/*.{ts,tsx}',
+    '!**/src/setup-jest.ts',
+    '!**/src/public-api.ts',
+    '!**/src/**/index.ts',
+    '!**/src/**/*.module.ts'
   ],
   coverageReporters: [
     'json',
@@ -21,10 +25,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      statements: 76,
-      branches: 56,
-      functions: 55,
-      lines: 74
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80
     }
   },
   moduleNameMapper: {
