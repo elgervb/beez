@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { Subject } from 'rxjs';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MaterialModule, TimestampPipe } from 'components';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EMPTY_HANDLER } from 'src/app/shared/testing';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
@@ -30,7 +30,7 @@ describe('HiveDetailsComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ HiveDetailsComponent ],
+      declarations: [ HiveDetailsComponent, TimestampPipe ],
       imports: [ MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule ],
       providers: [
         { provide: HiveService, useValue: hiveService },

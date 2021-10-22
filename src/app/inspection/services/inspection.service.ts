@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth';
+import { AuthService } from 'auth';
 import { Inspection } from '../models';
 
 @Injectable({

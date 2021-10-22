@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { transform } from '@elgervb/mock-data';
-import { AuthService } from 'src/app/auth';
+import { AuthService } from 'auth';
 import { Hive } from '../models';
 
 import { HiveService } from './hive.service';

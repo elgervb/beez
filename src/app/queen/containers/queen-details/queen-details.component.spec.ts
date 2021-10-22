@@ -4,7 +4,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
 import { Subject } from 'rxjs';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MaterialModule, TimestampPipe } from 'components';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EMPTY_HANDLER } from 'src/app/shared/testing';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
@@ -28,7 +28,7 @@ describe('QueenDetailsComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ QueenDetailsComponent ],
+      declarations: [ QueenDetailsComponent, TimestampPipe ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
       providers: [
         { provide: QueenService, useValue: queenService },

@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmComponent, ConfirmDialogData } from 'src/app/shared/components/dialogs/confirm/confirm.component';
+import { ConfirmComponent, ConfirmDialogData } from 'components';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 export class ScannerComponent {
 
   @ViewChild(ZXingScannerComponent)
-  scanner: ZXingScannerComponent;
+  scanner!: ZXingScannerComponent;
 
   private nrOfTries = 0;
 

@@ -6,7 +6,6 @@ import { CenteredLayoutComponent } from './shared/layout/centered-layout/centere
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([ 'login' ]);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo([ '' ]);
-
 const routes: Routes = [
   {
     path: '',
@@ -29,6 +28,10 @@ const routes: Routes = [
       {
         path: 'scanner',
         loadChildren: () => import('./scanner/scanner.module').then(m => m.ScannerModule)
+      },
+      {
+        path: 'ledger',
+        loadChildren: () => import('micro-app').then(m => m.LedgerModule)
       },
     ]
   },

@@ -8,6 +8,7 @@ cache:
     - node_modules
 
 script:
+  - yarn build:projects
   - yarn lint
   - yarn test --coverage
   - yarn build --prod --base-href https://elgervb.github.io/beez/ --deploy-url=https://elgervb.github.io/beez/

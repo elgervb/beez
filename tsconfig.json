@@ -9,6 +9,20 @@
     "strictPropertyInitialization": false,
     "noImplicitReturns": true,
     "noImplicitAny": true,
+    "paths": {
+      "auth": [
+        "dist/auth/auth",
+        "dist/auth"
+      ],
+      "components": [
+        "dist/components/components",
+        "dist/components"
+      ],
+      "micro-app": [
+        "dist/micro-app/micro-app",
+        "dist/micro-app"
+      ]
+    },
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
@@ -23,7 +37,7 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

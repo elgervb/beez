@@ -14,7 +14,7 @@ import { HiveService } from '../../services/hive.service';
 })
 export class HiveListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
   dataSource = new MatTableDataSource<Hive>();
   displayedColumns: string[] = [ 'name', 'isActive' ];

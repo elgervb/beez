@@ -1,12 +1,13 @@
 module.exports = {
-  "modulePaths": [
-    "<rootDir>",
-  ],
-  "preset": "jest-preset-angular",
-  "setupFilesAfterEnv": [
+  rootDir: './',
+  roots: ['<rootDir>/src'],
+  modulePaths: ['<rootDir>/dist', '<rootDir>'],
+  displayName: "BEEZ",
+  preset: "jest-preset-angular",
+  setupFilesAfterEnv: [
     "<rootDir>/src/setup-jest.ts"
   ],
-  "testPathIgnorePatterns": [
+  testPathIgnorePatterns: [
     "<rootDir>/node_modules/",
     "<rootDir>/dist/",
     "<rootDir>/coverage/",
@@ -31,14 +32,12 @@ module.exports = {
     global: {
       statements: 76,
       branches: 56,
-      functions: 51,
+      functions: 47,
       lines: 74
     }
   },
-  moduleNameMapper: {
-    '^@core/(.*)': '<rootDir>/src/app/core/$1',
-  },
-  "globals": {
+  moduleNameMapper: {},
+  globals: {
     "ts-jest": {
       "tsconfig": "<rootDir>/tsconfig.spec.json",
       "stringifyContentPathRegex": "\\.html$"
