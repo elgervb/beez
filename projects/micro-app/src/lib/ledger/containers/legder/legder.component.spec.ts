@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DocumentReference } from '@angular/fire/firestore';
 import { RouterTestingModule } from '@angular/router/testing';
 import { from, transform } from '@elgervb/mock-data';
+import { I18NextModule } from 'angular-i18next';
 import { TimestampPipe } from 'components';
 import { LedgerEntry } from 'projects/micro-app/src/public-api';
 import { of } from 'rxjs';
@@ -22,7 +23,7 @@ describe('LegderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ LegderComponent, TimestampPipe ],
       providers: [ { provide: LedgerService, useValue: ledgerService } ],
-      imports: [ RouterTestingModule ],
+      imports: [ RouterTestingModule, I18NextModule.forRoot() ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();

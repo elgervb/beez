@@ -2,6 +2,7 @@
 export const en = {
   active: 'active',
   add: 'add',
+  amount: 'amount',
   back: 'back',
   brood: 'brood',
   cancel: 'cancel',
@@ -11,6 +12,7 @@ export const en = {
   dashboard: 'dashboard',
   date: 'date',
   delete: 'delete',
+  description: 'description',
   done: 'done',
   drone: 'drone',
   drone_other: 'drones',
@@ -63,8 +65,14 @@ export const en = {
     openBrood: 'is there open brood with white larva? (day 4 to 7)',
     queenBroodPresent: 'did you see queen brood?',
     queenPresent: 'did you see the queen?',
+    leaveComment: 'Leave a comment'
   },
   ledger: {
-    ledger: 'ledger'
+    for: 'for',
+    ledger: 'ledger',
+    sale: 'sale',
+    sentence: {
+      addNewEntry: 'Add a new entry'
+    }
   }
 };

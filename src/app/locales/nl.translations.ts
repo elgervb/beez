@@ -2,6 +2,7 @@
 export const nl = {
   active: 'actief',
   add: 'toevoegen',
+  amount: 'bedrag',
   back: 'terug',
   brood: 'broed',
   cancel: 'annuleren',
@@ -11,6 +12,7 @@ export const nl = {
   dashboard: 'dashboard',
   date: 'datum',
   delete: 'verwijderen',
+  description: 'omschrijving',
   done: 'klaar',
   drone: 'dar',
   drone_other: 'darren',
@@ -63,8 +65,14 @@ export const nl = {
     openBrood: 'is er open broed met witte larfjes aanwezig? (dag 4 tot 7)',
     queenBroodPresent: 'zijn er moerdoppen?',
     queenPresent: 'heb je de moer gezien?',
+    leaveComment: 'Commentaar'
   },
   ledger: {
-    ledger: 'kasboek'
+    for: 'voor',
+    ledger: 'kasboek',
+    sale: 'verkoop',
+    sentence: {
+      addNewEntry: 'Voeg een nieuw item toe'
+    }
   }
 };

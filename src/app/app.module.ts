@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { defaultInterpolationFormat, I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatIconRegistry } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { en, nl } from './locales';
+import { registerLocaleData } from '@angular/common';
+import localeNl from '@angular/common/locales/nl';
+
 
 export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) => () => {
   iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'));
@@ -52,6 +55,8 @@ export const I18N_PROVIDERS = [
   }
 ];
 
+registerLocaleData(localeNl, 'nl');
+
 @NgModule({
   declarations: [ AppComponent ],
   imports: [
@@ -71,11 +76,12 @@ export const I18N_PROVIDERS = [
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    }),
+    })
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: registerMaterialIcons, deps: [ MatIconRegistry, DomSanitizer ], multi: true },
-    I18N_PROVIDERS
+    I18N_PROVIDERS,
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' }
   ],
   bootstrap: [ AppComponent ]
 })

@@ -25,6 +25,7 @@ export class LedgerEntryFormComponent {
 
   cancel() {
     this.cancelEvent.emit();
+    this.resetForm();
   }
 
   submit() {
@@ -36,7 +37,15 @@ export class LedgerEntryFormComponent {
       result.amount = parseFloat(`${this.form.get('amountEur')?.value}.${this.form.get('amountCents')?.value}`);
 
       this.submitEvent.emit(result);
+      this.resetForm();
     }
+  }
+
+  private resetForm(): void {
+
+    this.form.reset();
+    this.form.get('date')?.setValue(new Date());
+    this.form.get('type')?.setValue(LedgerEntryType.income);
   }
 
 }

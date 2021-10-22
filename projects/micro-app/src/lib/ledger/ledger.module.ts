@@ -7,9 +7,10 @@ import { ComponentsModule, MaterialModule } from 'components';
 import { LedgerEntryFormComponent } from './components/ledger-entry-form/ledger-entry-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18NextModule } from 'angular-i18next';
+import { EntryListComponent } from './components/entry-list/entry-list.component';
 
 @NgModule({
-  declarations: [ LegderComponent, LedgerEntryFormComponent ],
+  declarations: [ LegderComponent, LedgerEntryFormComponent, EntryListComponent ],
   imports: [
     CommonModule,
     ComponentsModule,

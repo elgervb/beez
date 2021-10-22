@@ -2,17 +2,19 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
 
   <div>
-    <mat-form-field appearance="fill" class="amount-eur">
-      <mat-label>Date</mat-label>
+    <mat-form-field appearance="fill" class="date">
+      <mat-label>{{'date' | i18nextCap}}</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker touchUi></mat-datepicker>
     </mat-form-field>
+
+    <mat-label>{{'sale' | i18nextCap}}</mat-label>
   </div>
 
   <div>
     <mat-form-field appearance="fill" class="amount-eur">
-      <mat-label>Amount</mat-label>
+      <mat-label>{{'amount' |i18nextCap}}</mat-label>
       <span matPrefix>EUR &nbsp;</span>
       <input type="number" matInput formControlName="amountEur" autofocus>
       <span matSuffix>,</span>
@@ -22,7 +24,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="description">
-      <mat-label>Description</mat-label>
+      <mat-label>{{'description' | i18nextCap}}</mat-label>
       <input matInput placeholder="Eg. Honey" formControlName="description" list="sell-list">
     </mat-form-field>
 
@@ -32,7 +34,7 @@
   </div>
 
   <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Leave a comment</mat-label>
+    <mat-label>{{'sentence.leaveComment' | i18nextCap}}</mat-label>
     <textarea matInput placeholder="comment" formControlName="comment"></textarea>
   </mat-form-field>
 

@@ -1,7 +1,7 @@
 
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Legder for {{year}}</mat-card-title>
+    <mat-card-title>{{'ledger.ledger' | i18nextCap}} {{'ledger.for' | i18next}} {{year}}</mat-card-title>
 
 
   </mat-card-header>
@@ -11,22 +11,21 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Add +
+          {{'add' | i18nextCap}} +
         </mat-panel-title>
         <mat-panel-description>
-          Add a new entry
+          {{'ledger.sentence.addNewEntry' | i18nextCap}}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <bee-ledger-entry-form
+        (cancelEvent)="collapse()"
         (submitEvent)="addEntry($event)">
       </bee-ledger-entry-form>
     </mat-expansion-panel>
 
-    <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor="let entry of entries$ | async">
-       {{entry.date | timestamp: "MM-dd-yyyy HH:ss"}} - {{entry.description}} - {{entry.amount}} - {{entry.comment}}
-      </mat-list-item>
-    </mat-list>
+    <bee-entry-list
+      [entries]="entries$ | async">
+    </bee-entry-list>
 
   </mat-card-content>
 </mat-card>

@@ -1,0 +1,13 @@
+
+.mat-line.line {
+  display: flex;
+  justify-content: space-between;
+}
+.comments {
+  font-size: .8em;
+  opacity: .75;
+}
+
+.amount {
+  text-align: right;
+}

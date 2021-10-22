@@ -32,8 +32,12 @@ export class LegderComponent implements OnInit {
     this.ledgerService.createEntry(entry)
       .pipe(
         take(1),
-        tap(() => this.expansionPanel.toggle()),
+        tap(() => this.collapse()),
       ).subscribe();
+  }
+
+  collapse(): void {
+    this.expansionPanel.close();
   }
 
 }

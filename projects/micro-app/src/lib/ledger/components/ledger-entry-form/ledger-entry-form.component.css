@@ -4,18 +4,23 @@
   width: 100%;
 }
 
+.date {
+  margin-right: .5rem;
+}
+
 .amount-eur {
   text-align: right;
-  width: 8rem;
+
+  width: 7rem;
 }
 
 .amount-cents {
-  margin-right: 1rem;
-  width: 3rem;
+  margin-right: .5rem;
+  width: 2.5rem;
 }
 
 .description {
-  width: 9.4rem;
+  width: 8.3rem;
 }
 
 .full-width {
