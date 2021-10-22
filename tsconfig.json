@@ -10,6 +10,10 @@
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "paths": {
+      "auth": [
+        "dist/auth/auth",
+        "dist/auth"
+      ],
       "components": [
         "dist/components/components",
         "dist/components"

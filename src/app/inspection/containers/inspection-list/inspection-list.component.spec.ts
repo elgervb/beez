@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { transform } from '@elgervb/mock-data';
-import { MaterialModule } from 'components';
+import { MaterialModule, TimestampPipe } from 'components';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
 import { InspectionDetailsComponent } from '../../components';
@@ -21,7 +21,14 @@ describe('InspectionListComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ InspectionListComponent, InspectionDetailsComponent, HoneyProgressPipe, QueenPresentColorPipe, TrendingIconNamePipe ],
+      declarations: [
+        InspectionListComponent,
+        InspectionDetailsComponent,
+        HoneyProgressPipe,
+        QueenPresentColorPipe,
+        TrendingIconNamePipe,
+        TimestampPipe
+      ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
       providers: [ { provide: InspectionService, useValue: inspectionService } ],
       schemas: [ NO_ERRORS_SCHEMA ]

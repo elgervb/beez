@@ -10,6 +10,7 @@
       <a mat-list-item routerLink="/" (click)="navigate(drawer)" routerLinkActive>{{'dashboard' | i18nextCap}}</a>
       <a mat-list-item routerLink="/hives" (click)="navigate(drawer)" routerLinkActive>{{'hive' | i18nextCap: {count: 2} }}</a>
       <a mat-list-item routerLink="/queens" (click)="navigate(drawer)" routerLinkActive>{{'queen' | i18nextCap: {count: 2} }}</a>
+      <a mat-list-item routerLink="/ledger" (click)="navigate(drawer)" routerLinkActive>{{'ledger' | i18nextCap: {count: 2} }}</a>
       <mat-divider></mat-divider>
       <div mat-list-item class="logout">
         <button mat-stroked-button color="primary" (click)="logout()">{{'logout' | i18nextCap}}</button>

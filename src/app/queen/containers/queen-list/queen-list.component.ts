@@ -14,7 +14,7 @@ import { QueenService } from '../../services/queen.service';
 })
 export class QueenListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
   dataSource = new MatTableDataSource<Queen>();
   displayedColumns: string[] = [ 'name', 'isMarked', 'isActive' ];

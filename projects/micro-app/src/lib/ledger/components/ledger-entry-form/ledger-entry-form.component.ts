@@ -29,11 +29,8 @@ export class LedgerEntryFormComponent {
 
   submit() {
     if (this.form.valid) {
-      const formValue ={ ...this.form.value };
-      /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-      delete formValue.amountEur;
-      delete formValue.amountCents;
-      /* eslint-enable @typescript-eslint/no-unsafe-member-access */
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { amountEur, amountCents, ...formValue } = this.form.value;
 
       const result: LedgerEntry = formValue;
       result.amount = parseFloat(`${this.form.get('amountEur')?.value}.${this.form.get('amountCents')?.value}`);

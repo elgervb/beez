@@ -1,8 +1,7 @@
 module.exports = {
   rootDir: './',
   modulePaths: [
-    "<rootDir>/projects/micro-app/src/",
-    '<rootDir>/dist'
+    "<rootDir>/projects/micro-app/src/"
   ],
   roots: ['<rootDir>/projects/micro-app'],
   displayName: 'MICRO-APPS',
@@ -35,6 +34,7 @@ module.exports = {
     }
   },
   moduleNameMapper: {
-
-  }
+    '^components$': '<rootDir>/dist/components',
+    '^auth$': '<rootDir>/dist/auth',
+  },
 }

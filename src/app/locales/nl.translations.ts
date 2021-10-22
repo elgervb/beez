@@ -63,5 +63,8 @@ export const nl = {
     openBrood: 'is er open broed met witte larfjes aanwezig? (dag 4 tot 7)',
     queenBroodPresent: 'zijn er moerdoppen?',
     queenPresent: 'heb je de moer gezien?',
+  },
+  ledger: {
+    ledger: 'kasboek'
   }
 };

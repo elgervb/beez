@@ -2,11 +2,31 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>Legder for {{year}}</mat-card-title>
+
+
   </mat-card-header>
 
   <mat-card-content>
 
-    <bee-ledger-entry-form></bee-ledger-entry-form>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Add +
+        </mat-panel-title>
+        <mat-panel-description>
+          Add a new entry
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <bee-ledger-entry-form
+        (submitEvent)="addEntry($event)">
+      </bee-ledger-entry-form>
+    </mat-expansion-panel>
+
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let entry of entries$ | async">
+       {{entry.date | timestamp: "MM-dd-yyyy HH:ss"}} - {{entry.description}} - {{entry.amount}} - {{entry.comment}}
+      </mat-list-item>
+    </mat-list>
 
   </mat-card-content>
 </mat-card>

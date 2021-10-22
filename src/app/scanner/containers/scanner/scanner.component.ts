@@ -15,7 +15,7 @@ import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 export class ScannerComponent {
 
   @ViewChild(ZXingScannerComponent)
-  scanner: ZXingScannerComponent;
+  scanner!: ZXingScannerComponent;
 
   private nrOfTries = 0;
 

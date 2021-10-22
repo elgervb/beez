@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/auth';
+import { AuthService } from 'auth';
 
 @Component({
   selector: 'bee-login',

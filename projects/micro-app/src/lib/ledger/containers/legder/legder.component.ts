@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, take, tap } from 'rxjs';
+import { LedgerEntry } from '../../models';
+import { LedgerService } from '../../services/ledger.service';
 
 @Component({
   selector: 'bee-legder',
@@ -8,12 +12,28 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LegderComponent implements OnInit {
 
-  year: number | null;
+  @ViewChild(MatExpansionPanel) expansionPanel!: MatExpansionPanel;
 
-  constructor(private route: ActivatedRoute) { }
+  year: number | null;
+  entries$: Observable<LedgerEntry[]>;
+
+  constructor(
+    private ledgerService: LedgerService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.year = this.route.snapshot.paramMap.get('year') as number | null;
+
+    this.entries$ = this.ledgerService.getEntries();
+  }
+
+  addEntry(entry: LedgerEntry): void {
+    this.ledgerService.createEntry(entry)
+      .pipe(
+        take(1),
+        tap(() => this.expansionPanel.toggle()),
+      ).subscribe();
   }
 
 }

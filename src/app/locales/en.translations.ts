@@ -63,5 +63,8 @@ export const en = {
     openBrood: 'is there open brood with white larva? (day 4 to 7)',
     queenBroodPresent: 'did you see queen brood?',
     queenPresent: 'did you see the queen?',
+  },
+  ledger: {
+    ledger: 'ledger'
   }
 };
