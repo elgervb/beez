@@ -4,7 +4,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @media print {
-  html, body { height: auto }
+  body { background-color: #fff; }
   .qr-print-class bee-root, .qr-print-class .splash-beez {
     display: none;
   }
