@@ -23,6 +23,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "namedChunks": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -33,6 +34,8 @@
               "src/styles.css"
             ],
             "scripts": [],
+            "sourceMap": true,
+            "optimization": false,
             "allowedCommonJsDependencies": [
               "qrcode"
             ]
