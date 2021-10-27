@@ -8,7 +8,7 @@ export const en = {
   cancel: 'cancel',
   closed: 'closed',
   color: 'color',
-  confirm: 'confirm',
+  confirm: 'ok',
   dashboard: 'dashboard',
   date: 'date',
   delete: 'delete',

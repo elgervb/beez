@@ -8,7 +8,7 @@ export const nl = {
   cancel: 'annuleren',
   closed: 'gesloten',
   color: 'kleur',
-  confirm: 'bevestig',
+  confirm: 'ok',
   dashboard: 'dashboard',
   date: 'datum',
   delete: 'verwijderen',
