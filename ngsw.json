@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1635335350526,
+  "timestamp": 1635336189234,
   "index": "https://elgervb.github.io/beez/index.html",
   "assetGroups": [
     {
@@ -25,8 +25,8 @@
         "https://elgervb.github.io/beez/main.9b411cfd7122fb618798.js",
         "https://elgervb.github.io/beez/manifest.webmanifest",
         "https://elgervb.github.io/beez/polyfills.ba3ed5e0c10207fcf512.js",
-        "https://elgervb.github.io/beez/runtime.4a9063a97389391380bc.js",
-        "https://elgervb.github.io/beez/styles.0a7ebe15940646136da3.css"
+        "https://elgervb.github.io/beez/runtime.4e822a6273ae682e12bc.js",
+        "https://elgervb.github.io/beez/styles.62d2a0128d110ee18415.css"
       ],
       "patterns": []
     },
@@ -86,12 +86,12 @@
     "https://elgervb.github.io/beez/assets/icons/queen.svg": "e82483594135a6cf82595db3dec238e91ed841e9",
     "https://elgervb.github.io/beez/common.0f7a9835eef5c34dcdf4.js": "97d051cf3484d12efa75a34666419e60a08c10c6",
     "https://elgervb.github.io/beez/favicon.ico": "58e5cd78b0f2ce4eb695bf3631fd2daac6ac1d12",
-    "https://elgervb.github.io/beez/index.html": "aac91377c29eef433796074cea550d3953cff75d",
+    "https://elgervb.github.io/beez/index.html": "5a4de38812b4e8300818bb4ee21bed902fc8f6f4",
     "https://elgervb.github.io/beez/main.9b411cfd7122fb618798.js": "d691e7ab2756933eb01e58cd0ff10828931e4894",
     "https://elgervb.github.io/beez/manifest.webmanifest": "aa42cfc7147f6fe3b806f793aae3143505d6873f",
     "https://elgervb.github.io/beez/polyfills.ba3ed5e0c10207fcf512.js": "cbd44d7d7d4763650b64cf8e756a0b98326d0d7c",
-    "https://elgervb.github.io/beez/runtime.4a9063a97389391380bc.js": "4952f20009698e081e70995d0c87e33b946c1450",
-    "https://elgervb.github.io/beez/styles.0a7ebe15940646136da3.css": "5cf048e58448c155908497da20e12cc271e98a47"
+    "https://elgervb.github.io/beez/runtime.4e822a6273ae682e12bc.js": "14c0e878dc37464ed5ebff0fa1385519951037cd",
+    "https://elgervb.github.io/beez/styles.62d2a0128d110ee18415.css": "490bf13e23fa3ba56f647370370d7d0374a1232b"
   },
   "navigationUrls": [
     {
