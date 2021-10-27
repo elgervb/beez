@@ -24,8 +24,6 @@ export class LanguageService {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
         .then(() => {});
       return from(promise);
-
-      // import(`@angular/common/locales/${lang}`).then(locale => registerLocaleData(locale, this.currentLang));
     }
     return of(void 0);
   }
