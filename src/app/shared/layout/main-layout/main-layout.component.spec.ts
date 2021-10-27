@@ -11,12 +11,18 @@ import { AuthService, UserInfo } from 'auth';
 import { of } from 'rxjs';
 import { from } from '@elgervb/mock-data';
 import { I18nextTestingModule } from '../../testing/i18next/i18next.testing.module';
+import { PreferencesService } from '../../services/preferences.service';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
   let fixture: ComponentFixture<MainLayoutComponent>;
 
   const user = from<UserInfo>('user');
+  const preferencesService = {
+    get: jest.fn(),
+    update: jest.fn()
+  };
   const authService = {
     user$: of(user),
     logout: jest.fn().mockReturnValue(of({}))
@@ -30,9 +36,13 @@ describe('MainLayoutComponent', () => {
         LayoutModule,
         MaterialModule,
         NoopAnimationsModule,
+        MatIconTestingModule,
         RouterTestingModule.withRoutes([ { path: 'login', children: [] } ]),
       ],
-      providers: [ { provide: AuthService, useValue: authService } ]
+      providers: [
+        { provide: AuthService, useValue: authService },
+        { provide: PreferencesService, useValue: preferencesService }
+      ]
     }).compileComponents();
   }));
 

@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { first, map, shareReplay, tap } from 'rxjs/operators';
+import { first, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { AuthService, UserInfo } from 'auth';
 import { MatSidenav } from '@angular/material/sidenav';
+import { PreferencesService } from '../../services/preferences.service';
 
 @Component({
   selector: 'bee-main-layout',
@@ -24,7 +25,8 @@ export class MainLayoutComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private preferencesService: PreferencesService,
   ) { }
 
   logout(): void {
@@ -38,6 +40,16 @@ export class MainLayoutComponent {
   navigate(drawer: MatSidenav): void {
     this.isHandset$
       .pipe(tap(isHandset => isHandset ? drawer.close() : '')).subscribe();
+  }
+
+  changeLanguage(lang: string): void {
+    this.preferencesService.get()
+      .pipe(
+        map(prefs => prefs ? { ...prefs, language: lang } : prefs),
+        switchMap(prefs => this.preferencesService.update(prefs)),
+        tap(() => location.reload()),
+        take(1)
+      ).subscribe();
   }
 
 }

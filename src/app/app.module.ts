@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { RouterModule } from '@angular/router';
-import { AuthModule } from 'auth';
+import { AuthModule, AuthService } from 'auth';
 import { LayoutModule } from './shared/layout/layout.module';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -17,20 +17,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { en, nl } from './locales';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
+import { PreferencesService } from './shared/services/preferences.service';
+import { filter, lastValueFrom, switchMap, take, tap } from 'rxjs';
+import { LanguageService } from './shared/services/language.service';
 
 
 export const registerMaterialIcons = (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) => () => {
-  iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'));
-  iconRegistry.addSvgIcon('beez', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beez-transparent.svg'));
-  iconRegistry.addSvgIcon('beehive', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beehive.svg'));
-  iconRegistry.addSvgIcon('queen', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/queen.svg'));
-  iconRegistry.addSvgIcon('qr-code', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/qr-code.svg'));
+  iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'))
+    .addSvgIcon('beez', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beez-transparent.svg'))
+    .addSvgIcon('beehive', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/beehive.svg'))
+    .addSvgIcon('queen', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/queen.svg'))
+    .addSvgIcon('flag-nl', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/flag-nl.svg'))
+    .addSvgIcon('flag-en', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/flag-en.svg'))
+    .addSvgIcon('qr-code', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/qr-code.svg'));
 
   return Promise.resolve();
 };
 
 export const appInit = (i18next: ITranslationService) => () => i18next.init({
-  fallbackLng: 'nl',
+  fallbackLng: 'en',
   debug: !environment.production,
   returnEmptyString: false,
   interpolation: { format: I18NextModule.interpolationFormat(defaultInterpolationFormat) },
@@ -54,6 +59,17 @@ export const I18N_PROVIDERS = [
     useFactory: localeIdFactory
   }
 ];
+
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+export function initializeApp(authService: AuthService, preferencesService: PreferencesService, languageService: LanguageService) {
+  return (): Promise<unknown> => lastValueFrom(authService.user$.pipe(
+    filter(user => !!user),
+    switchMap(() => preferencesService.get().pipe(filter(prefs => !!prefs))),
+    tap(prefs => console.log(prefs)),
+    switchMap(prefs => languageService.changeLanguage(prefs?.language)),
+    take(1)
+  ));
+}
 
 registerLocaleData(localeNl, 'nl');
 
@@ -81,7 +97,8 @@ registerLocaleData(localeNl, 'nl');
   providers: [
     { provide: APP_INITIALIZER, useFactory: registerMaterialIcons, deps: [ MatIconRegistry, DomSanitizer ], multi: true },
     I18N_PROVIDERS,
-    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' }
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+    { provide: APP_INITIALIZER, useFactory: initializeApp, deps: [ AuthService, PreferencesService, LanguageService ], multi: true }
   ],
   bootstrap: [ AppComponent ]
 })

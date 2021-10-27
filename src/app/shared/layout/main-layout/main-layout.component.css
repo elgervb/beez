@@ -36,3 +36,13 @@
   margin-top: 1rem;
   text-align: center;
 }
+
+.language-switch {
+  align-items: center;
+  display: flex;
+  padding: 1rem;
+}
+mat-icon {
+  cursor: pointer;
+  width: 64px;
+}
