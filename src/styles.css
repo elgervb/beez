@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media print {
+  .qr-print-class bee-root, .qr-print-class .splash-beez {
+    display: none;
+  }
+}
