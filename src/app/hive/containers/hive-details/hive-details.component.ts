@@ -15,8 +15,8 @@ import { HiveService } from '../../services/hive.service';
 const sheetActions: SheetActions = {
   actions: [
     { type: 'edit', transKey: 'edit' },
+    { type: 'printQR', transKey: 'printQR' },
     { type: 'delete', transKey: 'delete' },
-    { type: 'printQR', transKey: 'printQR' }
   ]
 };
 
@@ -28,17 +28,6 @@ const sheetActions: SheetActions = {
 export class HiveDetailsComponent implements OnInit {
 
   hive$?: Observable<Hive | undefined>;
-
-  elementType = NgxQrcodeElementTypes.URL;
-  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-
-  get qrValue(): string {
-    const value: QRBeezModel = {
-      type: 'hive',
-      id: this.hiveId || ''
-    };
-    return JSON.stringify(value);
-  }
 
   get hiveId(): string | null {
     return this.route.snapshot.paramMap.get('hiveId');
@@ -122,13 +111,18 @@ export class HiveDetailsComponent implements OnInit {
   }
 
   printQRcode(): void {
+    const value: QRBeezModel = {
+      type: 'hive',
+      id: this.hiveId || ''
+    };
+
     this.dialog.open<QrDialogComponent, QRDialog, void>(QrDialogComponent, {
       backdropClass: 'white-backdrop',
       panelClass: 'qr-dialog',
       data: {
-        elementType: this.elementType,
-        correctionLevel: this.correctionLevel,
-        qrValue: this.qrValue
+        elementType: NgxQrcodeElementTypes.URL,
+        correctionLevel: NgxQrcodeErrorCorrectionLevels.HIGH,
+        qrValue: JSON.stringify(value)
       }
     });
   }
