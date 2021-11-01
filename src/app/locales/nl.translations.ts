@@ -53,6 +53,7 @@ export const nl = {
   required: 'verplicht',
   save: 'opslaan',
   scanner: 'scanner',
+  total: 'totaal',
   type: 'type',
   sentence: {
     closedBrood: 'is er gesloten broed aanwezig? (dag 8 tot 21)',
@@ -70,7 +71,6 @@ export const nl = {
   ledger: {
     for: 'voor',
     ledger: 'kasboek',
-    sale: 'verkoop',
     sentence: {
       addNewEntry: 'Voeg een nieuw item toe'
     }

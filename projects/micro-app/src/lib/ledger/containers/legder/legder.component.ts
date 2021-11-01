@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, take, tap } from 'rxjs';
+import { Observable, share, take, tap } from 'rxjs';
 import { LedgerEntry } from '../../models';
 import { LedgerService } from '../../services/ledger.service';
 
@@ -25,7 +25,7 @@ export class LegderComponent implements OnInit {
   ngOnInit(): void {
     this.year = this.route.snapshot.paramMap.get('year') as number | null;
 
-    this.entries$ = this.ledgerService.getEntries();
+    this.entries$ = this.ledgerService.getEntries().pipe(share());
   }
 
   addEntry(entry: LedgerEntry): void {

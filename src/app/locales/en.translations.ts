@@ -53,6 +53,7 @@ export const en = {
   required: 'required',
   save: 'save',
   scanner: 'scanner',
+  total: 'total',
   type: 'type',
   sentence: {
     closedBrood: 'is there closed brood? (day 8 - 21)',
@@ -70,7 +71,6 @@ export const en = {
   ledger: {
     for: 'for',
     ledger: 'ledger',
-    sale: 'sale',
     sentence: {
       addNewEntry: 'Add a new entry'
     }

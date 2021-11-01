@@ -2,8 +2,6 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{'ledger.ledger' | i18nextCap}} {{'ledger.for' | i18next}} {{year}}</mat-card-title>
-
-
   </mat-card-header>
 
   <mat-card-content>
@@ -28,4 +26,7 @@
     </bee-entry-list>
 
   </mat-card-content>
+  <mat-card-footer>
+    {{'total' | i18nextCap}}: {{(entries$ | async) | sum | currency}}
+  </mat-card-footer>
 </mat-card>
