@@ -4,7 +4,6 @@ import { DocumentReference } from '@angular/fire/firestore';
 import { RouterTestingModule } from '@angular/router/testing';
 import { from, transform } from '@elgervb/mock-data';
 import { I18NextModule } from 'angular-i18next';
-import { TimestampPipe } from 'components';
 import { LedgerEntry } from '../../models';
 import { of } from 'rxjs';
 import { LedgerService } from '../../services/ledger.service';
@@ -22,7 +21,7 @@ describe('LegderComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ LegderComponent, SumPipe, TimestampPipe ],
+      declarations: [ LegderComponent, SumPipe ],
       providers: [ { provide: LedgerService, useValue: ledgerService } ],
       imports: [ RouterTestingModule, I18NextModule.forRoot() ],
       schemas: [ NO_ERRORS_SCHEMA ]
