@@ -23,9 +23,9 @@ export class LegderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.year = this.route.snapshot.paramMap.get('year') as number | null;
+    this.year = this.route.snapshot.paramMap.get('year') as number | null || new Date().getFullYear();
 
-    this.entries$ = this.ledgerService.getEntries();
+    this.entries$ = this.ledgerService.getEntries(this.year);
   }
 
   addEntry(entry: LedgerEntry): void {
