@@ -22,8 +22,11 @@ export class LedgerService {
     return from(this.angularFirestore.collection<LedgerEntry>(this.collectionPath).add(entry));
   }
 
-  getEntries(): Observable<LedgerEntry[]> {
-    return this.angularFirestore.collection<LedgerEntry>(this.collectionPath, ref => ref.orderBy('date', 'desc').limit(250))
+  getEntries(year: number): Observable<LedgerEntry[]> {
+    return this.angularFirestore.collection<LedgerEntry>(this.collectionPath, ref => ref.orderBy('date', 'desc')
+      .startAt(new Date(`12-31-${year}`))
+      .endAt(new Date(`1-1-${year}`))
+      .limit(250))
       .valueChanges({ idField: 'id' });
   }
 
