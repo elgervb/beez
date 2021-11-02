@@ -3,6 +3,7 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { AuthService } from 'auth';
 import { from, Observable } from 'rxjs';
 import { LedgerEntry } from '../models';
+import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class LedgerService {
 
   getEntries(year: number): Observable<LedgerEntry[]> {
     return this.angularFirestore.collection<LedgerEntry>(this.collectionPath, ref => ref.orderBy('date', 'desc')
-      .startAt(new Date(`12-31-${year}`))
-      .endAt(new Date(`1-1-${year}`))
+      .startAt(firebase.firestore.Timestamp.fromDate(new Date(`12-31-${year}`)))
+      .endAt(firebase.firestore.Timestamp.fromDate(new Date(`1-1-${year}`)))
       .limit(250))
       .valueChanges({ idField: 'id' });
   }
