@@ -42,7 +42,8 @@
   display: flex;
   padding: 1rem;
 }
-mat-icon {
+
+.language-switch mat-icon {
   cursor: pointer;
   width: 64px;
 }
