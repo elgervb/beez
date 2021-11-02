@@ -3,7 +3,6 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { AuthService } from 'auth';
 import { from, Observable } from 'rxjs';
 import { LedgerEntry } from '../models';
-import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +22,11 @@ export class LedgerService {
     return from(this.angularFirestore.collection<LedgerEntry>(this.collectionPath).add(entry));
   }
 
-  getEntries(year: number): Observable<LedgerEntry[]> {
+  // TODO: #99 Date filter range on Ledger does not work
+  getEntries(): Observable<LedgerEntry[]> {
     return this.angularFirestore.collection<LedgerEntry>(this.collectionPath, ref => ref.orderBy('date', 'desc')
-      .startAt(firebase.firestore.Timestamp.fromDate(new Date(`12-31-${year}`)))
-      .endAt(firebase.firestore.Timestamp.fromDate(new Date(`1-1-${year}`)))
+      // .startAt(firebase.firestore.Timestamp.fromDate(new Date(`12-31-${year}`)))
+      // .endAt(firebase.firestore.Timestamp.fromDate(new Date(`1-1-${year}`)))
       .limit(250))
       .valueChanges({ idField: 'id' });
   }
