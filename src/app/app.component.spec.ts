@@ -6,11 +6,11 @@ import { PwaCheckForUpdateService } from './shared/services/pwa-check-for-update
 describe('AppComponent', () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent],
-    providers: [{ provide: PwaCheckForUpdateService, useValue: {} }],
-    teardown: { destroyAfterEach: false }
-}).compileComponents();
+      imports: [ RouterTestingModule ],
+      declarations: [ AppComponent ],
+      providers: [ { provide: PwaCheckForUpdateService, useValue: {} } ],
+      teardown: { destroyAfterEach: false }
+    }).compileComponents();
   });
 
   it('should create the app', () => {

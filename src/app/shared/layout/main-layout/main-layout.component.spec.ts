@@ -30,21 +30,21 @@ describe('MainLayoutComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [MainLayoutComponent],
-    imports: [
+      declarations: [ MainLayoutComponent ],
+      imports: [
         I18nextTestingModule,
         LayoutModule,
         MaterialModule,
         NoopAnimationsModule,
         MatIconTestingModule,
-        RouterTestingModule.withRoutes([{ path: 'login', children: [] }]),
-    ],
-    providers: [
+        RouterTestingModule.withRoutes([ { path: 'login', children: [] } ]),
+      ],
+      providers: [
         { provide: AuthService, useValue: authService },
         { provide: PreferencesService, useValue: preferencesService }
-    ],
-    teardown: { destroyAfterEach: false }
-}).compileComponents();
+      ],
+      teardown: { destroyAfterEach: false }
+    }).compileComponents();
   }));
 
   beforeEach(() => {

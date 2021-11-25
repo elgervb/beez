@@ -10,10 +10,10 @@ describe('EntryListComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [EntryListComponent, TimestampPipe],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ EntryListComponent, TimestampPipe ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

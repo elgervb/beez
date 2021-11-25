@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MaterialModule } from 'components';
 import { QRBeezModel } from 'src/app/shared/models';
 import { I18nextTestingModule } from 'src/app/shared/testing/i18next/i18next.testing.module';
@@ -9,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { EMPTY_HANDLER } from 'src/app/shared/testing';
 
 import { ScannerComponent } from './scanner.component';
+import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 
 describe('ScannerComponent', () => {
   let component: ScannerComponent;
@@ -16,10 +16,10 @@ describe('ScannerComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [ScannerComponent],
-    imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule, ZXingScannerModule],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ ScannerComponent, ZXingScannerComponent ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

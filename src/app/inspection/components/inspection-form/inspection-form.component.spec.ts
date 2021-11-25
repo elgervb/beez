@@ -8,9 +8,9 @@ describe('InspectionFormComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [InspectionFormComponent],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ InspectionFormComponent ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

@@ -11,14 +11,14 @@ describe('DashboardComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [DashboardComponent],
-    imports: [
+      declarations: [ DashboardComponent ],
+      imports: [
         I18nextTestingModule,
         MaterialModule,
         MatIconTestingModule
-    ],
-    teardown: { destroyAfterEach: false }
-})
+      ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

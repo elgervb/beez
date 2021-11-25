@@ -28,15 +28,15 @@ describe('QueenDetailsComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [QueenDetailsComponent, TimestampPipe],
-    imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule],
-    providers: [
+      declarations: [ QueenDetailsComponent, TimestampPipe ],
+      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
+      providers: [
         { provide: QueenService, useValue: queenService },
         { provide: MatBottomSheet, useValue: bottomSheet }
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

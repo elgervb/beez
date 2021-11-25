@@ -11,14 +11,14 @@ describe('LoginComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [LoginComponent],
-    imports: [
+      declarations: [ LoginComponent ],
+      imports: [
         MaterialModule,
         MatIconTestingModule
-    ],
-    providers: [{ provide: AuthService, useValue: authService }],
-    teardown: { destroyAfterEach: false }
-})
+      ],
+      providers: [ { provide: AuthService, useValue: authService } ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

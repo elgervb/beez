@@ -2,8 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DocumentReference } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+import { first, Observable, tap } from 'rxjs';
 import { Queen } from '../../models';
 import { QueenService } from '../../services/queen.service';
 

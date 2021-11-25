@@ -8,9 +8,9 @@ describe('ColorDotComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [ColorDotComponent],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ ColorDotComponent ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

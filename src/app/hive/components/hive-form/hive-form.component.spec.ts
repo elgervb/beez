@@ -14,17 +14,17 @@ describe('HiveFormComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [HiveFormComponent],
-    imports: [
+      declarations: [ HiveFormComponent ],
+      imports: [
         I18nextTestingModule,
         MaterialModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
         SharedModule
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

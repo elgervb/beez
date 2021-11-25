@@ -21,12 +21,12 @@ describe('LegderComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [LegderComponent, SumPipe],
-    providers: [{ provide: LedgerService, useValue: ledgerService }],
-    imports: [RouterTestingModule, I18NextModule.forRoot()],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ LegderComponent, SumPipe ],
+      providers: [ { provide: LedgerService, useValue: ledgerService } ],
+      imports: [ RouterTestingModule, I18NextModule.forRoot() ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

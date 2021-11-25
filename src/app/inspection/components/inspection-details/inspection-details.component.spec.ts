@@ -11,10 +11,10 @@ describe('InspectionDetailsComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [InspectionDetailsComponent],
-    imports: [I18nextTestingModule],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ InspectionDetailsComponent ],
+      imports: [ I18nextTestingModule ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

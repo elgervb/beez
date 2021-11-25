@@ -19,12 +19,12 @@ describe('InspectionAddComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [InspectionAddComponent],
-    imports: [I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule],
-    providers: [{ provide: InspectionService, useValue: inspectionService }],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ InspectionAddComponent ],
+      imports: [ I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule ],
+      providers: [ { provide: InspectionService, useValue: inspectionService } ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

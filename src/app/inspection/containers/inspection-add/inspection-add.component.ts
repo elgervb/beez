@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { take, tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs';
 import { Timestamp } from 'src/app/hive/models';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';

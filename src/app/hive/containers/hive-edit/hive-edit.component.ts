@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentReference } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+import { first, Observable, tap } from 'rxjs';
 import { Hive } from '../../models';
 import { HiveService } from '../../services/hive.service';
 

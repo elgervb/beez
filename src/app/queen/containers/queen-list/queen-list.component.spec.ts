@@ -19,18 +19,18 @@ describe('QueenListComponent', () => {
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
-    declarations: [QueenListComponent],
-    imports: [
+      declarations: [ QueenListComponent ],
+      imports: [
         I18nextTestingModule,
         MaterialModule,
         NoopAnimationsModule,
         RouterTestingModule,
         SharedModule,
-    ],
-    providers: [{ provide: QueenService, useValue: queenService }],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-});
+      ],
+      providers: [ { provide: QueenService, useValue: queenService } ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    });
 
     await TestBed.compileComponents();
   });

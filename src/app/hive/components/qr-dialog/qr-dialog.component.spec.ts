@@ -19,17 +19,17 @@ describe('QrDialogComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [QrDialogComponent],
-    imports: [
+      declarations: [ QrDialogComponent ],
+      imports: [
         I18nextTestingModule,
         MaterialModule,
         NgxQRCodeModule,
         SharedModule
-    ],
-    providers: [{ provide: MAT_DIALOG_DATA, useValue: data }],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      ],
+      providers: [ { provide: MAT_DIALOG_DATA, useValue: data } ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

@@ -11,14 +11,14 @@ describe('ConfirmComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [ConfirmComponent],
-    imports: [
+      declarations: [ ConfirmComponent ],
+      imports: [
         I18nextTestingModule,
         MaterialModule
-    ],
-    providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
-    teardown: { destroyAfterEach: false }
-})
+      ],
+      providers: [ { provide: MAT_DIALOG_DATA, useValue: {} } ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

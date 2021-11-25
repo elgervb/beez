@@ -3,10 +3,10 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent, ConfirmDialogData } from 'components';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { QRBeezModel } from 'src/app/shared/models';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
+import { tap } from 'rxjs';
 @Component({
   selector: 'bee-scanner',
   templateUrl: './scanner.component.html',

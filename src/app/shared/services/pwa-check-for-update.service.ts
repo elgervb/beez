@@ -1,8 +1,7 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SwUpdate } from '@angular/service-worker';
-import { concat, interval } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { concat, first, interval } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class PwaCheckForUpdateService {
   constructor(appRef: ApplicationRef, swUpdate: SwUpdate, snackbar: MatSnackBar,) {
     if (swUpdate.isEnabled) {
       // update when needed
-      swUpdate.available.subscribe(() => {
+      swUpdate.versionUpdates.subscribe(() => {
         const snack = snackbar.open('Update Available', 'Reload');
         snack
           .onAction()

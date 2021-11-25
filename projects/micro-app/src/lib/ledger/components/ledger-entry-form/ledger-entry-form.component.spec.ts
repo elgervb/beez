@@ -12,11 +12,11 @@ describe('LedgerEntryFormComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [LedgerEntryFormComponent],
-    imports: [ReactiveFormsModule, I18NextModule.forRoot()],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ LedgerEntryFormComponent ],
+      imports: [ ReactiveFormsModule, I18NextModule.forRoot() ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

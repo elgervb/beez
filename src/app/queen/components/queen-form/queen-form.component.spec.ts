@@ -13,16 +13,16 @@ describe('QueenFormComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [QueenFormComponent],
-    imports: [
+      declarations: [ QueenFormComponent ],
+      imports: [
         MaterialModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
         SharedModule
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    teardown: { destroyAfterEach: false }
-})
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 

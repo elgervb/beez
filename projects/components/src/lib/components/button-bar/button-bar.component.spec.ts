@@ -8,9 +8,9 @@ describe('ButtonBarComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-    declarations: [ButtonBarComponent],
-    teardown: { destroyAfterEach: false }
-})
+      declarations: [ ButtonBarComponent ],
+      teardown: { destroyAfterEach: false }
+    })
       .compileComponents();
   });
 
