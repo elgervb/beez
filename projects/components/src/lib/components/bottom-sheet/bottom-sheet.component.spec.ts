@@ -11,10 +11,11 @@ describe('BottomSheetComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ BottomSheetComponent ],
-      imports: [ I18nextTestingModule, MaterialModule ],
-      providers: [ { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} } ]
-    })
+    declarations: [BottomSheetComponent],
+    imports: [I18nextTestingModule, MaterialModule],
+    providers: [{ provide: MAT_BOTTOM_SHEET_DATA, useValue: {} }],
+    teardown: { destroyAfterEach: false }
+})
       .compileComponents();
   });
 

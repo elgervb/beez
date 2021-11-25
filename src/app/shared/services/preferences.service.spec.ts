@@ -18,11 +18,12 @@ describe('PreferencesService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
+    providers: [
         { provide: AuthService, useValue: authService },
         { provide: AngularFirestore, useValue: angularFirestore },
-      ]
-    });
+    ],
+    teardown: { destroyAfterEach: false }
+});
     service = TestBed.inject(PreferencesService);
   });
 

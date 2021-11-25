@@ -18,16 +18,17 @@ describe('HiveListComponent', () => {
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [ HiveListComponent ],
-      imports: [
+    declarations: [HiveListComponent],
+    imports: [
         I18nextTestingModule,
         MaterialModule,
         NoopAnimationsModule,
         RouterTestingModule,
         SharedModule,
-      ],
-      providers: [ { provide: HiveService, useValue: hiveService } ]
-    });
+    ],
+    providers: [{ provide: HiveService, useValue: hiveService }],
+    teardown: { destroyAfterEach: false }
+});
 
     await TestBed.compileComponents();
   });

@@ -30,14 +30,15 @@ describe('HiveDetailsComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ HiveDetailsComponent, TimestampPipe ],
-      imports: [ MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule ],
-      providers: [
+    declarations: [HiveDetailsComponent, TimestampPipe],
+    imports: [MaterialModule, NgxQRCodeModule, RouterTestingModule, SharedModule, I18nextTestingModule],
+    providers: [
         { provide: HiveService, useValue: hiveService },
         { provide: MatBottomSheet, useValue: bottomSheet }
-      ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    teardown: { destroyAfterEach: false }
+})
       .compileComponents();
   });
 

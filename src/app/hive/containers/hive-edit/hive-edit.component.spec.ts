@@ -17,14 +17,15 @@ describe('HiveEditComponent', () => {
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [ HiveEditComponent ],
-      imports: [
+    declarations: [HiveEditComponent],
+    imports: [
         I18nextTestingModule,
         RouterTestingModule
-      ],
-      providers: [ { provide: HiveService, useValue: hiveService } ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    });
+    ],
+    providers: [{ provide: HiveService, useValue: hiveService }],
+    schemas: [NO_ERRORS_SCHEMA],
+    teardown: { destroyAfterEach: false }
+});
 
     await TestBed.compileComponents();
   });

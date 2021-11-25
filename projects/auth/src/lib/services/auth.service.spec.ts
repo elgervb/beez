@@ -14,17 +14,18 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
+    providers: [
         {
-          provide: AngularFireAuth,
-          useValue: {
-            authState: userSubject,
-            signInWithRedirect: jest.fn(() => Promise.resolve()),
-            signOut: jest.fn(() => Promise.resolve())
-          }
+            provide: AngularFireAuth,
+            useValue: {
+                authState: userSubject,
+                signInWithRedirect: jest.fn(() => Promise.resolve()),
+                signOut: jest.fn(() => Promise.resolve())
+            }
         }
-      ]
-    });
+    ],
+    teardown: { destroyAfterEach: false }
+});
     service = TestBed.inject(AuthService);
     angularFireAuth = TestBed.inject(AngularFireAuth);
   });

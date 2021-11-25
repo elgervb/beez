@@ -21,18 +21,19 @@ describe('InspectionListComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [
+    declarations: [
         InspectionListComponent,
         InspectionDetailsComponent,
         HoneyProgressPipe,
         QueenPresentColorPipe,
         TrendingIconNamePipe,
         TimestampPipe
-      ],
-      imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
-      providers: [ { provide: InspectionService, useValue: inspectionService } ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
+    ],
+    imports: [I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule],
+    providers: [{ provide: InspectionService, useValue: inspectionService }],
+    schemas: [NO_ERRORS_SCHEMA],
+    teardown: { destroyAfterEach: false }
+})
       .compileComponents();
   });
 

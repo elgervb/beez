@@ -11,11 +11,12 @@ describe('InspectionService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
+    providers: [
         { provide: AngularFirestore, useValue: angularFirestore },
         { provide: AuthService, useValue: authService }
-      ]
-    });
+    ],
+    teardown: { destroyAfterEach: false }
+});
     service = TestBed.inject(InspectionService);
   });
 
