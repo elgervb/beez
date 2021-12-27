@@ -9,14 +9,6 @@ import { Queen } from '../../models';
 })
 export class QueenFormComponent {
 
-  @Input() set queen(queen: Queen | null | undefined) {
-    if (queen) {
-      const date = queen.date?.toDate();
-      const values = { ...queen, date };
-      this.form.patchValue(values);
-    }
-  }
-
   @Output() submitEvent = new EventEmitter<Queen>();
   @Output() cancelEvent = new EventEmitter<void>();
 
@@ -29,6 +21,14 @@ export class QueenFormComponent {
     date: [ new Date(), Validators.required ],
     remarks: [ '' ]
   });
+
+  @Input() set queen(queen: Queen | null | undefined) {
+    if (queen) {
+      const date = queen.date?.toDate();
+      const values = { ...queen, date };
+      this.form.patchValue(values);
+    }
+  }
 
   constructor(private formBuilder: FormBuilder) { }
 

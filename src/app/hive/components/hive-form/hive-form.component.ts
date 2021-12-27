@@ -9,14 +9,6 @@ import { Hive } from '../../models';
 })
 export class HiveFormComponent {
 
-  @Input() set hive(hive: Hive | null | undefined) {
-    if (hive) {
-      const date = hive.date?.toDate();
-      const values = { ...hive, date };
-      this.form.patchValue(values);
-    }
-  }
-
   @Output() submitEvent = new EventEmitter<Hive>();
   @Output() cancelEvent = new EventEmitter<void>();
 
@@ -29,6 +21,14 @@ export class HiveFormComponent {
     date: [ new Date(), Validators.required ],
     remarks: [ '' ]
   });
+
+  @Input() set hive(hive: Hive | null | undefined) {
+    if (hive) {
+      const date = hive.date?.toDate();
+      const values = { ...hive, date };
+      this.form.patchValue(values);
+    }
+  }
 
   constructor(private formBuilder: FormBuilder) { }
 
