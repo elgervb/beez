@@ -76,14 +76,14 @@ export class QueenDetailsComponent implements OnInit {
       .pipe(
         tap(action => {
           switch (action) {
-          case 'edit':
-            this.navigateToEdit(this.queenId);
-            break;
-          case 'delete':
-            this.deleteQueen(queen);
-            break;
-          default:
-            throw new Error('no such action');
+            case 'edit':
+              this.navigateToEdit(this.queenId);
+              break;
+            case 'delete':
+              this.deleteQueen(queen);
+              break;
+            default:
+              throw new Error('no such action');
           }
           sheet.dismiss();
         }),

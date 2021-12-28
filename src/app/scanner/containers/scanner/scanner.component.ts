@@ -41,14 +41,14 @@ export class ScannerComponent {
     let route: string[];
 
     switch (result.type) {
-    case 'hive':
-      route = [ '/hives', result.id ];
-      break;
-    case 'queen':
-      route = [ '/queens', result.id ];
-      break;
-    default:
-      throw new Error(`no such type found ${result.type}`);
+      case 'hive':
+        route = [ '/hives', result.id ];
+        break;
+      case 'queen':
+        route = [ '/queens', result.id ];
+        break;
+      default:
+        throw new Error(`no such type found ${result.type}`);
     }
 
     this.router.navigate(route);

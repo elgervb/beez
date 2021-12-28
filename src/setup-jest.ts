@@ -3,6 +3,8 @@ import { Queen } from './app/queen/models';
 import { UserInfo } from 'auth';
 import { Inspection } from './app/inspection/models';
 
+import firebase from 'firebase';
+
 // mocks
 register<UserInfo>('user', {
   displayName: () => randomString(10),
@@ -16,6 +18,6 @@ register<Queen>('queen', {
 });
 
 register<Inspection>('inspection', {
-  date: () => randomDate(),
+  date: () => new firebase.firestore.Timestamp(randomDate().getTime() / 1000, 0),
   remarks: () => randomString(15)
 });
