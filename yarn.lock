@@ -3082,10 +3082,10 @@ ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-angular-i18next@^10.3.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/angular-i18next/-/angular-i18next-10.3.0.tgz#921e3cf9c63e0472b0158ac4cd805062218c148d"
-  integrity sha512-F6hzJzoSOMkdcujGcaSQ4VCKtDq6Tuyfm89JUAJSNBDVxzlEtDPBckUa3zuJnUkkcLXu2nqA52irpR6XQzuS+w==
+angular-i18next@11.0.0-0:
+  version "11.0.0-0"
+  resolved "https://registry.yarnpkg.com/angular-i18next/-/angular-i18next-11.0.0-0.tgz#cb12d8cc9a097f4b8c97257e344026fce1b49c14"
+  integrity sha512-xR1OMJ+qnp7NSyKL9LNZCnFq7DilApiz0RS+vg1S7UiYvsEB+24apE/bnTd2CIswCSQX5U94/UtfS1f1P1xfuw==
   dependencies:
     tslib "^2.2.0"
 
