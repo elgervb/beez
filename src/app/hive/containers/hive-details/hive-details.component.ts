@@ -91,17 +91,17 @@ export class HiveDetailsComponent implements OnInit {
       .pipe(
         tap(action => {
           switch (action) {
-          case 'edit':
-            this.navigateToEdit();
-            break;
-          case 'delete':
-            this.deleteHive(hive);
-            break;
-          case 'printQR':
-            this.printQRcode();
-            break;
-          default:
-            throw new Error('no such action');
+            case 'edit':
+              this.navigateToEdit();
+              break;
+            case 'delete':
+              this.deleteHive(hive);
+              break;
+            case 'printQR':
+              this.printQRcode();
+              break;
+            default:
+              throw new Error('no such action');
           }
           sheet.dismiss();
         }),
