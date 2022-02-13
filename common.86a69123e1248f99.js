@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbeez=self.webpackChunkbeez||[]).push([[592],{1382:(d,e,n)=>{n.d(e,{m:()=>l});var o=n(6019),u=n(25),E=n(1953),a=n(3668);let l=(()=>{class _{}return _.\u0275fac=function(M){return new(M||_)},_.\u0275mod=a.oAB({type:_}),_.\u0275inj=a.cJS({imports:[[o.ez,E.zH,u.qX]]}),_})()}}]);
