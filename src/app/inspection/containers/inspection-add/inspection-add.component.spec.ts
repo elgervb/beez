@@ -22,7 +22,8 @@ describe('InspectionAddComponent', () => {
       declarations: [ InspectionAddComponent ],
       imports: [ I18nextTestingModule, MaterialModule, NoopAnimationsModule, ReactiveFormsModule, RouterTestingModule, SharedModule ],
       providers: [ { provide: InspectionService, useValue: inspectionService } ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

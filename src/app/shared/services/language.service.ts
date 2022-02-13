@@ -16,8 +16,7 @@ export class LanguageService {
       this.currentLang = lang;
 
       this.i18NextService.changeLanguage(lang);
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      const promise = this.i18NextService.loadLanguages(lang, () => {})
+      const promise = this.i18NextService.loadLanguages(lang)
       // eslint-disable-next-line @typescript-eslint/no-empty-function
         .then(() => {});
       return from(promise);

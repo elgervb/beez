@@ -26,7 +26,8 @@ describe('HiveListComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      providers: [ { provide: HiveService, useValue: hiveService } ]
+      providers: [ { provide: HiveService, useValue: hiveService } ],
+      teardown: { destroyAfterEach: false }
     });
 
     await TestBed.compileComponents();

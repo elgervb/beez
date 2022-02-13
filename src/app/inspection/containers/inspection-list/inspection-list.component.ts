@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Observable, share } from 'rxjs';
 import { Inspection } from '../../models';
 import { InspectionService } from '../../services/inspection.service';
 

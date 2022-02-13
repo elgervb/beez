@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { first, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
+import { first, map, Observable, shareReplay, switchMap, take, tap } from 'rxjs';
 import { AuthService, UserInfo } from 'auth';
 import { MatSidenav } from '@angular/material/sidenav';
 import { PreferencesService } from '../../services/preferences.service';

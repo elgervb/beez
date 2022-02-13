@@ -16,7 +16,8 @@ describe('LanguageService', () => {
     jest.clearAllMocks();
 
     TestBed.configureTestingModule({
-      providers: [ { provide: I18NextService, useValue: i18NextService } ]
+      providers: [ { provide: I18NextService, useValue: i18NextService } ],
+      teardown: { destroyAfterEach: false }
     });
     service = TestBed.inject(LanguageService);
   });

@@ -16,7 +16,8 @@ describe('LoginComponent', () => {
         MaterialModule,
         MatIconTestingModule
       ],
-      providers: [ { provide: AuthService, useValue: authService } ]
+      providers: [ { provide: AuthService, useValue: authService } ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

@@ -23,7 +23,8 @@ describe('HiveEditComponent', () => {
         RouterTestingModule
       ],
       providers: [ { provide: HiveService, useValue: hiveService } ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     });
 
     await TestBed.compileComponents();

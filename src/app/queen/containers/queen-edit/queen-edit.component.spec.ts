@@ -18,7 +18,8 @@ describe('QueenEditComponent', () => {
       declarations: [ QueenEditComponent ],
       imports: [ RouterTestingModule ],
       providers: [ { provide: QueenService, useValue: queenService } ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     });
 
     await TestBed.compileComponents();

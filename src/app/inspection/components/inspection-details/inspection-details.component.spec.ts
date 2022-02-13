@@ -13,6 +13,7 @@ describe('InspectionDetailsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ InspectionDetailsComponent ],
       imports: [ I18nextTestingModule ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

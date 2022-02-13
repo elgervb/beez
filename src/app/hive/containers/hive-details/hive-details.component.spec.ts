@@ -36,7 +36,8 @@ describe('HiveDetailsComponent', () => {
         { provide: HiveService, useValue: hiveService },
         { provide: MatBottomSheet, useValue: bottomSheet }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

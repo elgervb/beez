@@ -42,7 +42,8 @@ describe('MainLayoutComponent', () => {
       providers: [
         { provide: AuthService, useValue: authService },
         { provide: PreferencesService, useValue: preferencesService }
-      ]
+      ],
+      teardown: { destroyAfterEach: false }
     }).compileComponents();
   }));
 

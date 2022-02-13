@@ -22,7 +22,8 @@ describe('HiveFormComponent', () => {
         ReactiveFormsModule,
         SharedModule
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

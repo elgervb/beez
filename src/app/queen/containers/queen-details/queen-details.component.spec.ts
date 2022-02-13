@@ -34,7 +34,8 @@ describe('QueenDetailsComponent', () => {
         { provide: QueenService, useValue: queenService },
         { provide: MatBottomSheet, useValue: bottomSheet }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

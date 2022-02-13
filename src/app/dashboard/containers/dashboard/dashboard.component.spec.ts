@@ -16,7 +16,8 @@ describe('DashboardComponent', () => {
         I18nextTestingModule,
         MaterialModule,
         MatIconTestingModule
-      ]
+      ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { transform } from '@elgervb/mock-data';
-import { Observable, Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Observable, Subject, take } from 'rxjs';
 import { User } from '../models/user';
 
 import { AuthService } from './auth.service';
@@ -23,7 +22,8 @@ describe('AuthService', () => {
             signOut: jest.fn(() => Promise.resolve())
           }
         }
-      ]
+      ],
+      teardown: { destroyAfterEach: false }
     });
     service = TestBed.inject(AuthService);
     angularFireAuth = TestBed.inject(AngularFireAuth);

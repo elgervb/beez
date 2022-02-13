@@ -22,7 +22,8 @@ describe('LedgerService', () => {
       providers: [
         { provide: AngularFirestore, useValue: angularFirestore },
         { provide: AuthService, useValue: authService }
-      ]
+      ],
+      teardown: { destroyAfterEach: false }
     });
     service = TestBed.inject(LedgerService);
   });

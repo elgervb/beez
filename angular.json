@@ -24,6 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "namedChunks": true,
+            "preserveSymlinks": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",

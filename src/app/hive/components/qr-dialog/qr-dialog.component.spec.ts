@@ -27,7 +27,8 @@ describe('QrDialogComponent', () => {
         SharedModule
       ],
       providers: [ { provide: MAT_DIALOG_DATA, useValue: data } ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

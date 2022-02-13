@@ -31,7 +31,8 @@ describe('InspectionListComponent', () => {
       ],
       imports: [ I18nextTestingModule, MaterialModule, RouterTestingModule, SharedModule ],
       providers: [ { provide: InspectionService, useValue: inspectionService } ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      teardown: { destroyAfterEach: false }
     })
       .compileComponents();
   });

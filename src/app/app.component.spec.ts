@@ -8,7 +8,8 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ RouterTestingModule ],
       declarations: [ AppComponent ],
-      providers: [ { provide: PwaCheckForUpdateService, useValue: {} } ]
+      providers: [ { provide: PwaCheckForUpdateService, useValue: {} } ],
+      teardown: { destroyAfterEach: false }
     }).compileComponents();
   });
 

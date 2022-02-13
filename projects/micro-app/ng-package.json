@@ -2,12 +2,6 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/micro-app",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "auth": "auth",
-      "angular-i18next": "angular-i18next",
-      "components": "components",
-      "firebase/app": "firebase"
-    }
+    "entryFile": "src/public-api.ts"
   }
 }

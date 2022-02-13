@@ -11,8 +11,9 @@ describe('PreferencesService', () => {
   const authService = jest.fn();
   const getCollection = jest.fn();
   const addCollection = jest.fn();
+  const doc = jest.fn(() => ({ get: jest.fn(() => of()), data: jest.fn() }));
   const angularFirestore = {
-    collection: jest.fn(() => ({ get: getCollection, add: addCollection }))
+    collection: jest.fn(() => ({ get: getCollection, add: addCollection, doc }))
   };
   let service: PreferencesService;
 
@@ -21,7 +22,8 @@ describe('PreferencesService', () => {
       providers: [
         { provide: AuthService, useValue: authService },
         { provide: AngularFirestore, useValue: angularFirestore },
-      ]
+      ],
+      teardown: { destroyAfterEach: false }
     });
     service = TestBed.inject(PreferencesService);
   });

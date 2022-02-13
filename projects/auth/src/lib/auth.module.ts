@@ -1,9 +1,8 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
-import { take } from 'rxjs/operators';
 import { UserInfo } from './models/user';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, take } from 'rxjs';
 
 export const isLoggedInFactory = (authService: AuthService): () => Promise<UserInfo | null> => () => lastValueFrom(authService.user$
   .pipe(take(1)));
