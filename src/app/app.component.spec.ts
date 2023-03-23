@@ -1,15 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { PwaCheckForUpdateService } from './shared/services/pwa-check-for-update.service';
 
 describe('AppComponent', () => {
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule ],
-      declarations: [ AppComponent ],
-      providers: [ { provide: PwaCheckForUpdateService, useValue: {} } ],
-      teardown: { destroyAfterEach: false }
+      imports: [
+        RouterTestingModule
+      ],
+      declarations: [
+        AppComponent
+      ],
     }).compileComponents();
   });
 
@@ -19,11 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should have a router-outlet', () => {
+  it(`should have as title 'beez'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('beez');
+  });
+
+  it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+    expect(compiled.querySelector('.content span')?.textContent).toContain('beez app is running!');
   });
 });
