@@ -1,9 +1,0 @@
-
-<h2 class="mat-title">{{(isEdit ? 'edit' : 'add') | i18nextCap}} {{'hive' | i18next}}</h2>
-
-<bee-hive-form
-  [hive]="hive$ | async"
-  (cancelEvent)="cancel()"
-  (submitEvent)="edit($event)">
-</bee-hive-form>
-

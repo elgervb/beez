@@ -3,16 +3,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
     "types": [
-      "jest"
+      "jasmine"
     ]
   },
-  "files": [
-    "src/setup-jest.ts",
-    "src/polyfills.ts"
-  ],
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
