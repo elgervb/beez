@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AppShellComponent } from './app-shell/app-shell.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [ { path: 'shell', component: AppShellComponent }];
 
@@ -14,6 +15,7 @@ const routes: Routes = [ { path: 'shell', component: AppShellComponent }];
   imports: [
     AppModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     ServerModule,
     RouterModule.forRoot(routes),
   ],
