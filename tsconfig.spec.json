@@ -4,9 +4,8 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jest"
-    ],
-    "esModuleInterop": true
+      "jasmine"
+    ]
   },
   "include": [
     "src/**/*.spec.ts",
