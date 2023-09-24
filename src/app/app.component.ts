@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PwaCheckForUpdateService } from './shared/pwa-check-for-update.service';
 
 @Component({
   selector: 'bee-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'beez';
+
+  constructor(private pwaCheckForUpdate: PwaCheckForUpdateService) {
+    this.pwaCheckForUpdate.enableCheck();
+  }
 }
