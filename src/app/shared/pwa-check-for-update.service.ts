@@ -36,12 +36,12 @@ export class PwaCheckForUpdateService {
 
       // unrecoverable
       this.swUpdate.unrecoverable
-      .pipe() .subscribe(event => {
-        const snack = this.snackbar.open(`Unrecoverable error ${event.reason}`, 'Reload');
-        snack
-          .onAction()
-          .subscribe(() => document.location.reload());
-      });
+        .subscribe(event => {
+          const snack = this.snackbar.open(`Unrecoverable error ${event.reason}`, 'Reload');
+          snack
+            .onAction()
+            .subscribe(() => document.location.reload());
+        });
     }
   }
 }
