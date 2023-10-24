@@ -1,0 +1,25 @@
+language: node_js
+
+node_js:
+  - "18"
+
+cache:
+  directories:
+    - node_modules
+
+script:
+  - yarn build:projects
+#  - yarn lint
+#  - yarn test --coverage
+  - yarn build:prod
+  - yarn build --base-href https://elgervb.github.io/beez/
+  - cp dist/beez/browser/index.html dist/beez/browser/404.html
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  local_dir: dist/beez
+  on:
+    branch: main
