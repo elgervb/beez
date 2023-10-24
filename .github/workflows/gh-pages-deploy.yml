@@ -30,13 +30,13 @@ jobs:
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: List the state of node modules
         continue-on-error: true
-        run: npm list
+        run: yarn list
 
       - name: Install and Build 🔧
         run: |
           yarn install
           yarn build:prod
-          yarn build --base-href https://elgervb.github.io/beez/
+          yarn build --base-href https://elgervb.github.io/beez/browser
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
