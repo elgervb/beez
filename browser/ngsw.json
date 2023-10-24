@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1698175303603,
+  "timestamp": 1698175968168,
   "index": "https://elgervb.github.io/beez/browser/index.html",
   "assetGroups": [
     {
@@ -54,7 +54,7 @@
     "https://elgervb.github.io/beez/browser/assets/icons/icon-72x72.png": "3a80eac036d87b26c44a0ed6548d834396ad4a98",
     "https://elgervb.github.io/beez/browser/assets/icons/icon-96x96.png": "7b46c214f17c800f0e789176899399936a38a81c",
     "https://elgervb.github.io/beez/browser/favicon.ico": "58e5cd78b0f2ce4eb695bf3631fd2daac6ac1d12",
-    "https://elgervb.github.io/beez/browser/index.html": "1a1407baf0f7c355d80d0c6835a05a3211658e12",
+    "https://elgervb.github.io/beez/browser/index.html": "977d0865ee6f657f086d9d35da3e9244dd102410",
     "https://elgervb.github.io/beez/browser/main.525f14c1b372d94b.js": "313d596409f89c980e3e48fb85f33f44abac95d9",
     "https://elgervb.github.io/beez/browser/manifest.webmanifest": "aa42cfc7147f6fe3b806f793aae3143505d6873f",
     "https://elgervb.github.io/beez/browser/polyfills.fcee4e1ce9483f5d.js": "be0012b18c2876e9d6f9bf5d4154c98ea658adf4",
