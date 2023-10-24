@@ -34,8 +34,9 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm run build:prod
-          npm run build --base-href https://elgervb.github.io/beez/
+          yarn install
+          yarn build:prod
+          yarn build --base-href https://elgervb.github.io/beez/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
