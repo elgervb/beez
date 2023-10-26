@@ -36,7 +36,7 @@ jobs:
         run: |
           yarn install
           yarn build:prod
-          yarn build --base-href https://elgervb.github.io/beez
+          yarn build --base-href https://elgervb.github.io/beez/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
