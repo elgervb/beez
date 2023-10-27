@@ -8,7 +8,7 @@ describe('AppShellComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppShellComponent]
+      declarations: [ AppShellComponent ]
     });
     fixture = TestBed.createComponent(AppShellComponent);
     component = fixture.componentInstance;

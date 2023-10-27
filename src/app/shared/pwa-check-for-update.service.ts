@@ -9,7 +9,7 @@ import { concat, filter, first, interval, switchMap, tap } from 'rxjs';
 })
 export class PwaCheckForUpdateService {
 
-  private readonly checkInterval = 6 * 60 * 60 * 1000
+  private readonly checkInterval = 6 * 60 * 60 * 1000;
 
   constructor(private appRef: ApplicationRef, private swUpdate: SwUpdate, private snackbar: MatSnackBar) {}
 
@@ -17,12 +17,12 @@ export class PwaCheckForUpdateService {
     if (this.swUpdate.isEnabled) {
       // update when needed
       this.swUpdate.versionUpdates
-      .pipe(
-        filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
-        switchMap(() => this.snackbar.open('Update Available', 'Reload').onAction()),
-        tap(() => this.swUpdate.activateUpdate().then(() => document.location.reload()))
-      )
-      .subscribe();
+        .pipe(
+          filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
+          switchMap(() => this.snackbar.open('Update Available', 'Reload').onAction()),
+          tap(() => this.swUpdate.activateUpdate().then(() => document.location.reload()))
+        )
+        .subscribe();
 
       // check for update
       const appIsStable$ = this.appRef.isStable.pipe(first(isStable => isStable === true));
@@ -34,10 +34,11 @@ export class PwaCheckForUpdateService {
       // unrecoverable
       this.swUpdate.unrecoverable
         .pipe(
-          switchMap((event) => this.snackbar.open(`Unrecoverable error ${event.reason}`, 'Reload').onAction()),
+          switchMap(event => this.snackbar.open(`Unrecoverable error ${event.reason}`, 'Reload').onAction()),
           tap(() => document.location.reload())
         )
         .subscribe();
     }
   }
+
 }
