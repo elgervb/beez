@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1698348425748,
+  "timestamp": 1699818455435,
   "index": "https://elgervb.github.io/beez/index.html",
   "assetGroups": [
     {
@@ -13,9 +13,9 @@
       "urls": [
         "https://elgervb.github.io/beez/favicon.ico",
         "https://elgervb.github.io/beez/index.html",
-        "https://elgervb.github.io/beez/main.ac44d1397424f7ee.js",
+        "https://elgervb.github.io/beez/main.82941801aa0a8b74.js",
         "https://elgervb.github.io/beez/manifest.webmanifest",
-        "https://elgervb.github.io/beez/polyfills.fcee4e1ce9483f5d.js",
+        "https://elgervb.github.io/beez/polyfills.46dde2965b93ce24.js",
         "https://elgervb.github.io/beez/runtime.6f6c323e3fa5cbca.js",
         "https://elgervb.github.io/beez/styles.de8d4b108e1d4dfb.css"
       ],
@@ -54,10 +54,10 @@
     "https://elgervb.github.io/beez/assets/icons/icon-72x72.png": "3a80eac036d87b26c44a0ed6548d834396ad4a98",
     "https://elgervb.github.io/beez/assets/icons/icon-96x96.png": "7b46c214f17c800f0e789176899399936a38a81c",
     "https://elgervb.github.io/beez/favicon.ico": "58e5cd78b0f2ce4eb695bf3631fd2daac6ac1d12",
-    "https://elgervb.github.io/beez/index.html": "947e97e633c07098c82fa98c922044b43a0f0c72",
-    "https://elgervb.github.io/beez/main.ac44d1397424f7ee.js": "60e3cc4744c1e2f48204cba94c661bc22fa97eff",
+    "https://elgervb.github.io/beez/index.html": "dc52b3f2dc8f408c64cec5a7ec0d788235b3ea49",
+    "https://elgervb.github.io/beez/main.82941801aa0a8b74.js": "546ae53859904a07cc74fbc86d36f1eaefe3590c",
     "https://elgervb.github.io/beez/manifest.webmanifest": "aa42cfc7147f6fe3b806f793aae3143505d6873f",
-    "https://elgervb.github.io/beez/polyfills.fcee4e1ce9483f5d.js": "be0012b18c2876e9d6f9bf5d4154c98ea658adf4",
+    "https://elgervb.github.io/beez/polyfills.46dde2965b93ce24.js": "e57e30959cdd7c126095d5e4217890d3c487b528",
     "https://elgervb.github.io/beez/runtime.6f6c323e3fa5cbca.js": "242d9962fc738a0a4068e8023f251145653938d3",
     "https://elgervb.github.io/beez/styles.de8d4b108e1d4dfb.css": "00f91558414e81371ab8f78903867173d7c5656a"
   },
