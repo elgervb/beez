@@ -44,6 +44,23 @@
             "maxBOF": 0,
             "maxEOF": 0
           }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              "error",
+              {
+                "name": "rxjs/Rx",
+                "message": "Please use imports from 'rxjs' or 'rxjs/operators'."
+              },
+              {
+                "name": "@ngneat/spectator",
+                "message": "Use @ngneat/spectator/jest instead"
+              }
+
+            ]
+          }
         ]
       }
     },
