@@ -1,4 +1,4 @@
-import { isDevMode, NgModule } from '@angular/core';
+import { APP_INITIALIZER, isDevMode, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,35 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
+
+export function appInit(i18next: ITranslationService) {
+  return () => i18next.init({
+    supportedLngs: [ 'en', 'nl' ],
+    fallbackLng: 'en',
+    debug: true,
+    returnEmptyString: false,
+    ns: [ 'translation' ],
+  });
+}
+
+export function localeIdFactory(i18next: ITranslationService) {
+  return i18next.language;
+}
+
+export const I18N_PROVIDERS = [
+  {
+    provide: APP_INITIALIZER,
+    useFactory: appInit,
+    deps: [ I18NEXT_SERVICE ],
+    multi: true
+  },
+  {
+    provide: LOCALE_ID,
+    deps: [ I18NEXT_SERVICE ],
+    useFactory: localeIdFactory
+  }
+];
 
 @NgModule({
   declarations: [ AppComponent ],
@@ -17,6 +46,7 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
     BrowserModule,
     AppRoutingModule,
     MatSnackBarModule,
+    I18NextModule.forRoot(),
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
