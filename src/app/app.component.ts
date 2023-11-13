@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PwaCheckForUpdateService } from './shared/pwa-check-for-update.service';
+import { PwaCheckForUpdateService } from './shared/pwa-check-for-update/pwa-check-for-update.service';
 
 @Component({
   selector: 'bee-root',
