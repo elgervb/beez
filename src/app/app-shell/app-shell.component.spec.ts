@@ -1,21 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
 import { AppShellComponent } from './app-shell.component';
 
 describe('AppShellComponent', () => {
-  let component: AppShellComponent;
-  let fixture: ComponentFixture<AppShellComponent>;
+  let spectator: Spectator<AppShellComponent>;
+  const createComponent = createComponentFactory(AppShellComponent);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AppShellComponent]
-    });
-    fixture = TestBed.createComponent(AppShellComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => spectator = createComponent());
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

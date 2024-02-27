@@ -1,0 +1,78 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "@elgervb",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "bee",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "bee",
+            "style": "kebab-case"
+          }
+        ],
+        "no-multiple-empty-lines": [
+          "error",
+          {
+            "max": 2,
+            "maxBOF": 0,
+            "maxEOF": 0
+          }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              "error",
+              {
+                "name": "rxjs/Rx",
+                "message": "Please use imports from 'rxjs' or 'rxjs/operators'."
+              },
+              {
+                "name": "@ngneat/spectator",
+                "message": "Use @ngneat/spectator/jest instead"
+              }
+
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {}
+    }
+  ]
+}

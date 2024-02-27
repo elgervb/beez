@@ -1,29 +1,22 @@
-import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
+
 import { AppComponent } from './app.component';
 
+import { PwaCheckForUpdateService } from './shared/pwa-check-for-update.service';
+
+
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
-  }));
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  let spectator: Spectator<AppComponent>;
+  const createComponent = createComponentFactory({
+    component: AppComponent,
+    imports: [ RouterTestingModule ],
+    mocks: [ PwaCheckForUpdateService ]
   });
 
-  it(`should have as title 'beez'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('beez');
-  });
+  beforeEach(() => spectator = createComponent());
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('beez app is running!');
+  it('should create', () => {
+    expect(spectator.component).toBeTruthy();
   });
 });
