@@ -107,6 +107,7 @@
   - Settings disables Supabase upload while offline.
   - `BeeStore.exportData()` now uses `structuredClone`, event dispatches use `globalThis`, and `repairIntegrity()` returns `{ before, after }` for clearer reporting.
 - Styled list and form checkboxes to match the dark/yellow visual system; fixed swipe-list checkbox regressions with a controlled toggle pattern in list views: checkbox selection now emits explicit toggles from touch/click/key handlers (instead of relying on native `change` inside swipe rows), action-column touches are excluded from swipe gesture handling in both hive and inspection lists, and removed `preventDefault()` from checkbox handlers on mobile so inputs can still toggle visually (while `stopPropagation()` prevents row-level events).
+- Switched GitHub Pages CI deployment from `actions/deploy-pages` environment flow to classic `gh-pages` branch publishing (`peaceiris/actions-gh-pages`) to align with repository deployment branch restrictions.
 
 ## Quick Health Verdict
 This repository is now beyond scaffolding: it is a functional, installable, mobile-first MVP tailored for apiary and hive inspections. The next step is product hardening (editing flows, richer validation, data portability, and deeper tests).
