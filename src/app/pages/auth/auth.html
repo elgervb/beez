@@ -1,0 +1,26 @@
+<main class="auth-wrap">
+  <section class="auth-card" aria-label="Sign in">
+    <h1>Sign in</h1>
+    <p class="hint">Use your email to request a magic link.</p>
+
+    <label>
+      Email
+      <input
+        type="email"
+        autocomplete="email"
+        placeholder="you@example.com"
+        [value]="email()"
+        (input)="email.set($any($event.target).value)"
+      />
+    </label>
+
+    <div class="actions">
+      <button type="button" (click)="sendMagicLink()" [disabled]="busy()">Send magic link</button>
+      <button type="button" class="secondary" (click)="signInWithGoogle()" [disabled]="busy()">Continue with Google</button>
+    </div>
+
+    @if (message()) {
+      <p class="message" aria-live="polite">{{ message() }}</p>
+    }
+  </section>
+</main>

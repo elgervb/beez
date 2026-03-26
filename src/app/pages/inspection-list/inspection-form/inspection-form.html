@@ -1,0 +1,63 @@
+<section class="panel">
+  <h2>{{ initial() ? 'Edit inspection' : 'Log inspection' }}</h2>
+  <div class="preset-row" aria-label="Quick presets">
+    <button type="button" class="preset-btn" (click)="applyPreset('routine')">Routine</button>
+    <button type="button" class="preset-btn" (click)="applyPreset('low-stores')">Low stores</button>
+    <button type="button" class="preset-btn" (click)="applyPreset('follow-up')">Follow-up</button>
+  </div>
+  <form class="form-grid" (submit)="$event.preventDefault(); submit()">
+    <label>
+      Date
+      <input [value]="form().date" (input)="form.update(f => ({ ...f, date: $any($event.target).value }))" type="date" required />
+    </label>
+    <label>
+      Brood pattern
+      <select (change)="form.update(f => ({ ...f, broodPattern: $any($event.target).value }))">
+        <option value="excellent" [selected]="form().broodPattern === 'excellent'">Excellent</option>
+        <option value="good" [selected]="form().broodPattern === 'good'">Good</option>
+        <option value="poor" [selected]="form().broodPattern === 'poor'">Poor</option>
+      </select>
+    </label>
+    <label>
+      Stores
+      <select (change)="form.update(f => ({ ...f, storesLevel: $any($event.target).value }))">
+        <option value="high" [selected]="form().storesLevel === 'high'">High</option>
+        <option value="medium" [selected]="form().storesLevel === 'medium'">Medium</option>
+        <option value="low" [selected]="form().storesLevel === 'low'">Low</option>
+      </select>
+    </label>
+    <label>
+      Inspector
+      <input autofocus [value]="form().inspector" (input)="form.update(f => ({ ...f, inspector: $any($event.target).value }))" required placeholder="Your name" autocomplete="name" inputmode="text" list="inspectors-list" [class.field-invalid]="submitted() && !form().inspector.trim()" />
+      @if (knownInspectors().length > 0) {
+        <datalist id="inspectors-list">
+          @for (name of knownInspectors(); track name) {
+            <option [value]="name"></option>
+          }
+        </datalist>
+      }
+      @if (submitted() && !form().inspector.trim()) {
+        <span class="field-error">Inspector name is required</span>
+      }
+    </label>
+    <label class="switch-row">
+      <input type="checkbox" [checked]="form().broodSeen"
+        (change)="form.update(f => ({ ...f, broodSeen: $any($event.target).checked, open: $any($event.target).checked ? f.open : false }))" />
+      Brood seen
+    </label>
+    @if (showOpenBrood()) {
+      <label class="switch-row">
+        <input type="checkbox" [checked]="form().open" (change)="form.update(f => ({ ...f, open: $any($event.target).checked }))" />
+        Open brood seen
+      </label>
+    }
+    <label class="full">
+      Notes
+      <textarea [value]="form().notes" (input)="form.update(f => ({ ...f, notes: $any($event.target).value }))" rows="3" placeholder="Temperament, queen sighted, feeding needed..."></textarea>
+    </label>
+    <div class="row-buttons">
+      <button type="button" class="btn-secondary" (click)="dismissed.emit()">Cancel</button>
+      <button type="submit">{{ initial() ? 'Update inspection' : 'Save inspection' }}</button>
+    </div>
+  </form>
+</section>

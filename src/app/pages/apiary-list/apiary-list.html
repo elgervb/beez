@@ -1,0 +1,47 @@
+<bee-app-shell tab="apiaries" eyebrow="Beez Field Log" title="Apiaries">
+  <button shell-header-action class="btn-add" (click)="openAdd()">Add</button>
+
+  <div shell-content class="apiary-content">
+    @if (syncError()) {
+      <p class="sync-chip sync-chip-warn">{{ syncError() }}</p>
+    }
+
+    <div class="search-shell" [class.open]="searchExpanded()">
+      <button
+        type="button"
+        class="search-toggle"
+        aria-label="Toggle search"
+        [attr.aria-expanded]="searchExpanded()"
+        (click)="toggleSearch(searchField)"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10.5 3a7.5 7.5 0 1 0 4.79 13.27l4.22 4.22a1 1 0 1 0 1.41-1.41l-4.22-4.22A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" />
+        </svg>
+      </button>
+      <input
+        #searchField
+        class="search-input"
+        type="search"
+        placeholder="Search apiaries"
+        [value]="search()"
+        (input)="setSearch($any($event.target).value)"
+        (blur)="collapseSearchIfEmpty()"
+      />
+    </div>
+    <bee-apiary-list-view [apiaries]="filteredApiaries()" [hiveCounts]="hiveCountByApiary()"
+      (editApiary)="openEdit($event)" (deleteApiary)="deleteApiary($event)" (addRequested)="openAdd()" />
+
+    @if (pendingDeletedApiary()) {
+      <output class="undo-bar" aria-live="polite">
+        <span>Apiary deleted.</span>
+        <button type="button" (click)="undoDeleteApiary()">Undo</button>
+      </output>
+    }
+  </div>
+</bee-app-shell>
+
+@if (modal.isOpen()) {
+  <bee-modal-sheet [title]="editingApiary() ? 'Edit Apiary' : 'Add Apiary'" (dismiss)="closeModal()">
+    <bee-apiary-form [initial]="editingApiary()" (save)="saveApiary($event)" (dismissed)="closeModal()" />
+  </bee-modal-sheet>
+}

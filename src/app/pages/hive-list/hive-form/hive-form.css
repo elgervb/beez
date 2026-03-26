@@ -1,0 +1,88 @@
+.panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+h2 {
+  margin: 0 0 0.7rem;
+  font-size: 1.06rem;
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 0.6rem 0.65rem;
+  background: #fafafa;
+  font-size: 1rem;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  min-height: 2.4rem;
+  padding: 0.4rem 1rem;
+  background: #353535;
+  color: #f0dc67;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  transition: opacity 120ms ease-out;
+}
+
+button:active {
+  opacity: 0.88;
+}
+
+.btn-secondary {
+  background: #e8e8e8;
+  color: #353535;
+}
+
+.row-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.row-buttons button {
+  flex: 1;
+}
+
+.field-error {
+  font-size: 0.75rem;
+  color: #8f1300;
+  font-weight: 500;
+  margin-top: -0.1rem;
+}
+
+input.field-invalid,
+textarea.field-invalid {
+  border-color: #8f1300;
+  background: #fff5f5;
+}

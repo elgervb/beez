@@ -1,0 +1,85 @@
+<bee-app-shell
+  tab="inspections"
+  [hivesLink]="['/apiary', apiaryId]"
+  [inspectionsLink]="['/apiary', apiaryId, 'hive', hiveId]"
+  [backLink]="['/apiary', apiaryId]"
+  [backLabel]="apiary()?.name ?? 'Apiary'"
+  [eyebrow]="'Hive ' + (hive()?.code ?? '') + ' · ' + (hive()?.status ?? '')"
+  title="Inspections"
+>
+  <button shell-header-action class="btn-share" type="button" (click)="shareReport()" aria-label="Share inspection report" title="Share">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3a1 1 0 0 1 1 1v7.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.42l2.3 2.3V4a1 1 0 0 1 1-1zM7 13a1 1 0 0 1 1 1v5h8v-5a1 1 0 1 1 2 0v5a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-5a1 1 0 0 1 1-1z" />
+    </svg>
+  </button>
+  <button shell-header-action class="btn-add" (click)="openAdd()">Add</button>
+
+  <div shell-content class="inspection-content">
+    @if (syncError()) {
+      <p class="sync-chip sync-chip-warn">{{ syncError() }}</p>
+    }
+
+    <section class="controls-panel" aria-label="Inspection filters">
+      <div class="search-shell" [class.open]="searchExpanded()">
+        <button
+          type="button"
+          class="search-toggle"
+          aria-label="Toggle search"
+          [attr.aria-expanded]="searchExpanded()"
+          (click)="toggleSearch(searchField)"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10.5 3a7.5 7.5 0 1 0 4.79 13.27l4.22 4.22a1 1 0 1 0 1.41-1.41l-4.22-4.22A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" />
+          </svg>
+        </button>
+        <input
+          #searchField
+          class="search-input"
+          type="search"
+          placeholder="Search inspections"
+          [value]="search()"
+          (input)="setSearch($any($event.target).value)"
+          (blur)="collapseSearchIfEmpty()"
+        />
+      </div>
+      <select [value]="broodFilter()" (change)="setBroodFilter($any($event.target).value)">
+        <option value="all">All brood patterns</option>
+        <option value="excellent">Excellent</option>
+        <option value="good">Good</option>
+        <option value="poor">Poor</option>
+      </select>
+      @if (selectedInspectionIds().length > 0) {
+        <div class="bulk-actions">
+          <span>{{ selectedInspectionIds().length }} selected</span>
+          <button type="button" (click)="bulkDeleteInspections()">Delete selected</button>
+        </div>
+      }
+    </section>
+
+    @if (inspections().length >= 2) {
+      <div class="spark-row">
+        <bee-inspection-sparkline [inspections]="filteredInspections()" />
+      </div>
+    }
+    <bee-inspection-list-view [inspections]="filteredInspections()" [selectedIds]="selectedInspectionIds()"
+      (toggleSelected)="toggleInspectionSelection($event)" (addRequested)="openAdd()"
+      (editInspection)="openEdit($event)" (deleteInspection)="deleteInspection($event)" />
+
+    @if (pendingDeletedInspection() || pendingBulkDeletedInspections()) {
+      <output class="undo-bar" aria-live="polite">
+        <span>{{ pendingBulkDeletedInspections() ? (pendingBulkDeletedInspections()!.length + ' inspections deleted.') : 'Inspection deleted.' }}</span>
+        <button type="button" (click)="undoDeleteInspection()">Undo</button>
+      </output>
+    }
+
+    @if (shareMessage()) {
+      <output class="share-message" aria-live="polite">{{ shareMessage() }}</output>
+    }
+  </div>
+</bee-app-shell>
+
+@if (modal.isOpen()) {
+  <bee-modal-sheet [title]="editingInspection() ? 'Edit Inspection' : 'Add Inspection'" (dismiss)="closeModal()">
+    <bee-inspection-form [initial]="editingInspection()" [knownInspectors]="knownInspectors()" (save)="saveInspection($event)" (dismissed)="closeModal()" />
+  </bee-modal-sheet>
+}

@@ -1,59 +1,41 @@
 # Beez
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
+Beez is a mobile-first Angular app for beekeepers to track:
 
-## Development server
+- Apiaries
+- Hives
+- Inspections
 
-To start a local development server, run:
+Data is stored in local browser storage so you can quickly log updates from your phone.
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Run locally
 
 ```bash
-ng generate component component-name
+npm install
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Then open `http://localhost:4200`.
+
+## Build
 
 ```bash
-ng generate --help
+npm run build
 ```
 
-## Building
-
-To build the project run:
+## Test
 
 ```bash
-ng build
+npm test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## PWA usage
 
-## Running unit tests
+The app includes Angular Service Worker support and a web app manifest.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- Production build contains the service worker.
+- Install prompt appears depending on browser heuristics.
+- On Android Chrome, use "Add to Home Screen".
+- On iOS Safari, use Share -> Add to Home Screen.
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For local PWA verification, run a production build and serve the generated output over HTTP.

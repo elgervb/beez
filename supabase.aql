@@ -1,0 +1,133 @@
+-- Optional but recommended
+create extension if not exists pgcrypto;
+
+create table if not exists public.apiaries (
+  id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
+  name text not null check (char_length(trim(name)) > 0),
+  location text not null check (char_length(trim(location)) > 0),
+  notes text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.hives (
+  id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
+  apiary_id uuid not null references public.apiaries(id) on delete cascade,
+  code text not null check (char_length(trim(code)) > 0),
+  queen_year int not null check (queen_year between 1900 and 2100),
+  temperament text not null check (temperament in ('calm','mixed','defensive')),
+  status text not null check (status in ('active','weak','wintering')),
+  notes text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.inspections (
+  id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
+  hive_id uuid not null references public.hives(id) on delete cascade,
+  date date not null,
+  brood_pattern text not null check (brood_pattern in ('excellent','good','poor')),
+  stores_level text not null check (stores_level in ('high','medium','low')),
+  brood_seen boolean not null default false,
+  open boolean not null default false,
+  notes text not null default '',
+  inspector text not null check (char_length(trim(inspector)) > 0),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  check ((brood_seen = true) or (open = false))
+);
+
+create index if not exists idx_apiaries_owner on public.apiaries(owner_id);
+create index if not exists idx_hives_owner on public.hives(owner_id);
+create index if not exists idx_hives_apiary on public.hives(apiary_id);
+create index if not exists idx_inspections_owner on public.inspections(owner_id);
+create index if not exists idx_inspections_hive on public.inspections(hive_id);
+create index if not exists idx_inspections_date on public.inspections(date desc);
+
+
+-- RLS Policies (SQL)
+
+alter table public.apiaries enable row level security;
+alter table public.hives enable row level security;
+alter table public.inspections enable row level security;
+
+-- APIARIES
+create policy "apiaries_select_own"
+on public.apiaries for select
+using (owner_id = auth.uid());
+
+create policy "apiaries_insert_own"
+on public.apiaries for insert
+with check (owner_id = auth.uid());
+
+create policy "apiaries_update_own"
+on public.apiaries for update
+using (owner_id = auth.uid())
+with check (owner_id = auth.uid());
+
+create policy "apiaries_delete_own"
+on public.apiaries for delete
+using (owner_id = auth.uid());
+
+-- HIVES
+create policy "hives_select_own"
+on public.hives for select
+using (owner_id = auth.uid());
+
+create policy "hives_insert_own"
+on public.hives for insert
+with check (
+  owner_id = auth.uid()
+  and exists (
+    select 1 from public.apiaries a
+    where a.id = apiary_id and a.owner_id = auth.uid()
+  )
+);
+
+create policy "hives_update_own"
+on public.hives for update
+using (owner_id = auth.uid())
+with check (
+  owner_id = auth.uid()
+  and exists (
+    select 1 from public.apiaries a
+    where a.id = apiary_id and a.owner_id = auth.uid()
+  )
+);
+
+create policy "hives_delete_own"
+on public.hives for delete
+using (owner_id = auth.uid());
+
+-- INSPECTIONS
+create policy "inspections_select_own"
+on public.inspections for select
+using (owner_id = auth.uid());
+
+create policy "inspections_insert_own"
+on public.inspections for insert
+with check (
+  owner_id = auth.uid()
+  and exists (
+    select 1 from public.hives h
+    where h.id = hive_id and h.owner_id = auth.uid()
+  )
+);
+
+create policy "inspections_update_own"
+on public.inspections for update
+using (owner_id = auth.uid())
+with check (
+  owner_id = auth.uid()
+  and exists (
+    select 1 from public.hives h
+    where h.id = hive_id and h.owner_id = auth.uid()
+  )
+);
+
+create policy "inspections_delete_own"
+on public.inspections for delete
+using (owner_id = auth.uid());

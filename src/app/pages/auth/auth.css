@@ -1,0 +1,84 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: #494949;
+  color: #f6f6f6;
+}
+
+.auth-wrap {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: min(100%, 24rem);
+  border-radius: 14px;
+  background: #f0dc67;
+  border: 1px solid #d8c55e;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 25%);
+  padding: 1rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.auth-card h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #5f4c1e;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #5f4c1e;
+}
+
+input {
+  border: 1px solid #d8c55e;
+  border-radius: 10px;
+  min-height: 2.2rem;
+  padding: 0 0.65rem;
+  background: #fff6cf;
+  color: #2d260f;
+}
+
+.actions {
+  display: grid;
+  gap: 0.45rem;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  min-height: 2.1rem;
+  padding: 0.22rem 0.75rem;
+  background: #2f2f2f;
+  color: #f0dc67;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+button.secondary {
+  background: #d7d7d7;
+  color: #2f2f2f;
+}
+
+button:disabled {
+  opacity: 0.55;
+}
+
+.message {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #5a4a22;
+}
