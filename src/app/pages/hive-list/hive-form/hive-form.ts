@@ -29,12 +29,6 @@ export class HiveFormComponent {
   readonly submitted = signal(false);
   readonly showCodeError = computed(() => this.submitted() && !this.form.code().valid());
   readonly showQueenYearError = computed(() => this.submitted() && !this.form.queenYear().valid());
-  readonly queenYearErrorMessage = computed(() => {
-    const year = this.formModel().queenYear;
-    if (year < 2019) return 'Queen year must be 2019 or later';
-    if (year > 2100) return 'Queen year must be 2100 or earlier';
-    return '';
-  });
 
   constructor() {
     effect(() => {

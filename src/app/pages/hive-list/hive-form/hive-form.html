@@ -12,7 +12,7 @@
       Queen year
       <input [formField]="form.queenYear" type="number" inputmode="numeric" autocomplete="off" [class.field-invalid]="showQueenYearError()" />
       @if (showQueenYearError()) {
-        <span class="field-error">{{ queenYearErrorMessage() }}</span>
+        <span class="field-error">{{ formModel().queenYear < 2019 ? 'Queen year must be 2019 or later' : 'Queen year must be 2100 or earlier' }}</span>
       }
     </label>
     <label>

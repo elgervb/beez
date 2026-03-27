@@ -98,6 +98,7 @@
 ## Changelog (recent)
 - `varroaSeen` field replaced by `broodSeen` + `open` on `Inspection`.
 - `open` field hidden in form until `broodSeen` is checked; auto-reset on uncheck.
+- Validator feedback messages are now defined inline in form templates (HTML) rather than through TypeScript message helper signals.
 - Migrated `apiary-form`, `hive-form`, and `inspection-form` from manual signal-object input/change handlers to Angular Signal Forms (`form()` + `[formField]`), preserving existing submit flows and preset behavior while moving validation into form schemas.
 - Added custom HTML validation message rendering in feature forms while keeping validation rules on Signal Forms schemas (`required/min/max`) and using field validity state for submit guards.
 - All forms converted from Angular template-driven forms (`FormsModule`/`ngModel`) to signal-based forms (`signal()` + `computed()`). `FormsModule` removed entirely.
