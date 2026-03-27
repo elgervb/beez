@@ -1,0 +1,4 @@
+<output class="undo-bar" [attr.aria-live]="ariaLive()">
+  <span>{{ message() }}</span>
+  <button type="button" (click)="action.emit()">{{ actionLabel() }}</button>
+</output>

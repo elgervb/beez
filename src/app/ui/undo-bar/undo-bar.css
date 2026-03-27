@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.undo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-radius: var(--radius-md);
+  background: var(--color-chip-bg);
+  color: var(--color-chip-fg);
+  padding: 0.5rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+.undo-bar button {
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-chip-fg);
+  color: var(--color-chip-button-fg);
+  padding: 0.22rem 0.55rem;
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.undo-bar button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}

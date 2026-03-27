@@ -9,6 +9,9 @@ import { InspectionListViewComponent } from './inspection-list-view/inspection-l
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { InspectionSparklineComponent } from '../../ui/inspection-sparkline/inspection-sparkline';
+import { BadgeComponent } from '../../ui/badge/badge';
+import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
+import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 
 type InspectionFormValue = {
@@ -23,7 +26,7 @@ type InspectionFormValue = {
 
 @Component({
   selector: 'bee-inspection-list',
-  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent],
+  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent],
   templateUrl: './inspection-list.html',
   styleUrl: './inspection-list.css'
 })
@@ -72,6 +75,11 @@ export class InspectionListPage implements OnInit {
   readonly pendingDeletedInspection = signal<Inspection | null>(null);
   readonly pendingBulkDeletedInspections = signal<Inspection[] | null>(null);
   readonly shareMessage = signal<string>('');
+  readonly undoMessage = computed(() => {
+    const bulkDeleted = this.pendingBulkDeletedInspections();
+    if (bulkDeleted?.length) return `${bulkDeleted.length} inspections deleted.`;
+    return 'Inspection deleted.';
+  });
   private shareMessageTimer: ReturnType<typeof setTimeout> | null = null;
 
   private undoDeleteTimer: ReturnType<typeof setTimeout> | null = null;
@@ -126,8 +134,7 @@ export class InspectionListPage implements OnInit {
 
   undoDeleteInspection(): void {
     if (this.remoteReady()) {
-      this.pendingDeletedInspection.set(null);
-      this.pendingBulkDeletedInspections.set(null);
+      void this.restoreDeletedInspectionRemote();
       return;
     }
 
@@ -188,18 +195,6 @@ export class InspectionListPage implements OnInit {
   setSearch(value: string): void {
     this.search.set(value);
     localStorage.setItem(InspectionListPage.SEARCH_KEY, value);
-  }
-
-  toggleSearch(input: HTMLInputElement): void {
-    const next = !this.searchExpanded();
-    this.searchExpanded.set(next);
-    if (!next) return;
-    setTimeout(() => input.focus(), 0);
-  }
-
-  collapseSearchIfEmpty(): void {
-    if (this.search().trim()) return;
-    this.searchExpanded.set(false);
   }
 
   setBroodFilter(value: string): void {
@@ -319,8 +314,9 @@ export class InspectionListPage implements OnInit {
       try {
         await this.remoteStore.deleteInspection(id);
         await this.refreshRemoteData();
-        this.pendingDeletedInspection.set(null);
+        this.pendingDeletedInspection.set(inspection);
         this.pendingBulkDeletedInspections.set(null);
+        this.startUndoDeleteWindow();
         this.syncError.set('');
         if ('vibrate' in navigator) navigator.vibrate(10);
       } catch {
@@ -377,6 +373,35 @@ export class InspectionListPage implements OnInit {
     }
     this.selectedInspectionIds.set([]);
     this.setShareMessage(`${deleted.length} inspections deleted.`);
+  }
+
+  private async restoreDeletedInspectionRemote(): Promise<void> {
+    const pending = this.pendingDeletedInspection();
+    if (!pending) return;
+
+    this.isSyncing.set(true);
+    try {
+      await this.remoteStore.addInspection({
+        hiveId: pending.hiveId,
+        date: pending.date,
+        broodPattern: pending.broodPattern,
+        storesLevel: pending.storesLevel,
+        broodSeen: pending.broodSeen,
+        open: pending.open,
+        notes: pending.notes,
+        inspector: pending.inspector
+      });
+      await this.refreshRemoteData();
+      this.pendingDeletedInspection.set(null);
+      this.pendingBulkDeletedInspections.set(null);
+      this.clearUndoTimer();
+      this.syncError.set('');
+      if ('vibrate' in navigator) navigator.vibrate(10);
+    } catch {
+      this.syncError.set('Undo failed on Supabase.');
+    } finally {
+      this.isSyncing.set(false);
+    }
   }
 
   private setShareMessage(msg: string): void {

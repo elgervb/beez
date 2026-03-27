@@ -7,21 +7,6 @@
   gap: 0.6rem;
 }
 
-.sync-chip {
-  margin: 0;
-  border-radius: 999px;
-  background: #e6f3eb;
-  color: #1f5d33;
-  padding: 0.28rem 0.6rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.sync-chip-warn {
-  background: #f8e8cf;
-  color: #704100;
-}
-
 .controls-panel {
   display: grid;
   gap: 0.4rem;
@@ -34,75 +19,22 @@
     gap: 0.65rem;
   }
 
+  bee-search-filter-bar {
+    --search-open-width: 100%;
+  }
+
   .bulk-actions {
     justify-content: flex-end;
   }
-
-  .search-shell.open {
-    width: 100%;
-  }
-}
-
-.search-shell {
-  width: 2rem;
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid #d8c55e;
-  border-radius: 999px;
-  background: #fff6cf;
-  overflow: hidden;
-  transition: width 180ms ease;
-}
-
-.search-shell.open {
-  width: min(100%, 15rem);
-}
-
-.search-toggle {
-  width: 2rem;
-  min-height: 2rem;
-  border: 0;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: #2d260f;
-}
-
-.search-toggle svg {
-  width: 0.95rem;
-  height: 0.95rem;
-  fill: currentColor;
-}
-
-.search-input {
-  border: 0;
-  outline: 0;
-  min-height: 2rem;
-  width: 0;
-  opacity: 0;
-  pointer-events: none;
-  padding: 0;
-  background: transparent;
-  color: #2d260f;
-  transition: width 180ms ease, opacity 180ms ease, padding 180ms ease;
-}
-
-.search-shell.open .search-input {
-  width: 100%;
-  opacity: 1;
-  pointer-events: auto;
-  padding: 0 0.65rem 0 0.2rem;
 }
 
 .controls-panel select {
-  border: 1px solid #d8c55e;
-  border-radius: 10px;
+  border: 1px solid var(--color-panel-soft-border);
+  border-radius: var(--radius-sm);
   min-height: 2rem;
   padding: 0 0.55rem;
-  background: #fff6cf;
-  color: #2d260f;
+  background: var(--color-panel-soft);
+  color: var(--color-text-soft);
 }
 
 .bulk-actions {
@@ -114,45 +46,36 @@
 
 .bulk-actions button {
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   min-height: 1.8rem;
   padding: 0.12rem 0.55rem;
-  background: #842414;
-  color: #fff5f2;
+  background: var(--color-danger-bg);
+  color: var(--color-danger-fg);
   font-size: 0.7rem;
 }
 
-.search-input:focus-visible,
-.search-toggle:focus-visible,
 .controls-panel select:focus-visible,
 .bulk-actions button:focus-visible,
 .btn-add:focus-visible,
-.btn-share:focus-visible,
-.undo-bar button:focus-visible {
-  outline: 2px solid #9b6500;
+.btn-share:focus-visible {
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
-}
-
-@media (max-width: 520px) {
-  .search-shell.open {
-    width: 100%;
-  }
 }
 
 .spark-row {
   background: var(--panel, #ececec);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 0.6rem 0.8rem;
   box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
 }
 
 .btn-add {
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   min-height: 2rem;
   padding: 0.22rem 0.75rem;
-  background: #2f2f2f;
-  color: #f0dc67;
+  background: var(--color-chip-bg);
+  color: var(--color-chip-fg);
   font-size: 0.8rem;
   font-weight: 600;
   line-height: 1.2;
@@ -165,10 +88,10 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 0.22rem 0.55rem;
-  background: #2f2f2f;
-  color: #f0dc67;
+  background: var(--color-chip-bg);
+  color: var(--color-chip-fg);
   cursor: pointer;
 }
 
@@ -183,32 +106,10 @@
 }
 
 .share-message {
-  border-radius: 12px;
-  background: #2f2f2f;
-  color: #f0dc67;
+  border-radius: var(--radius-md);
+  background: var(--color-chip-bg);
+  color: var(--color-chip-fg);
   padding: 0.5rem 0.7rem;
   font-size: 0.78rem;
   text-align: center;
-}
-
-.undo-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  border-radius: 12px;
-  background: #2f2f2f;
-  color: #f0dc67;
-  padding: 0.5rem 0.7rem;
-  font-size: 0.78rem;
-}
-
-.undo-bar button {
-  border: 0;
-  border-radius: 999px;
-  background: #f0dc67;
-  color: #222;
-  padding: 0.22rem 0.55rem;
-  font-weight: 700;
-  font-size: 0.72rem;
 }

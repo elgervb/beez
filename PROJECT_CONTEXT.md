@@ -16,7 +16,20 @@
   - App config: `src/app/app.config.ts`.
   - Routes: `src/app/app.routes.ts`.
   - Root component: `src/app/app.ts`, template in `src/app/app.html`, styles in `src/app/app.css`.
-  - Shared UI shell: `src/app/ui/app-shell/` with a reusable mobile screen frame, compact flat header, and bottom primary nav strip.
+  - Shared UI components under `src/app/ui/`:
+    - `app-shell/` — reusable mobile screen frame, compact flat header, and bottom primary nav strip.
+    - `modal-sheet/` — modal dialog for forms and overlays.
+    - `inspection-sparkline/` — mini chart for inspection trends.
+    - `search-filter-bar/` — reusable expanding search control (toggle icon + animated input) used by apiary, hive, and inspection pages; emits `valueChange` and `expandedChange`.
+    - `swipe-to-delete-row/` — reusable behavior directive that handles row swipe gestures, applies swipe state classes/transforms, and emits delete requests after threshold-based swipe-out animation.
+    - `undo-bar/` — reusable undo action bar for post-delete feedback; accepts a message and emits a generic action event.
+    - `empty-state/` — reusable empty-list state component with configurable icon, title, hint text, and call-to-action event.
+    - `badge/` — generic badge component with:
+      - **Variants**: default, success, warning, danger, info, neutral
+      - **Sizes**: xs, small, medium, large
+      - **Styles**: solid (default), outline, soft (low emphasis)
+      - **Features**: optional icons (check/warning/error/info/success), circular counter badges, pulse animation for urgency, custom colors (bgColor/textColor), improved ARIA labels for accessibility
+      - **Used throughout app** for status, health scores, trends, inspection metadata, apiary hive counts, hive temperament indicators, sync-error warnings, bulk-selection count chips, and due-now urgency labels
   - Domain models: `src/app/data/models.ts`.
   - Local data store service: `src/app/data/bee-store.ts`.
   - Connectivity service: `src/app/data/connectivity.service.ts` for browser online/offline state and reconnect events.
@@ -40,6 +53,7 @@
   - `provideRouter(routes)`
   - `provideServiceWorker('ngsw-worker.js', ...)` with production-only registration.
 - Root component is now a minimal shell rendering only `RouterOutlet`.
+- Global style tokens are now centralized in `src/styles.css` under `:root` (color, focus, radius, and shared surface/action values) and consumed by page/component styles to reduce duplicated hardcoded CSS values.
 - Forms use Angular Signals exclusively — no `FormsModule`, no `[(ngModel)]`. Each form is a `signal<FormObject>()` on the component, mutated via `.update()`. Conditional fields use `computed()`. Templates use `[value]`/`[checked]` + `(input)`/`(change)` event bindings.
 - **Navigation flow**: Apiary list (`/`) → Hive list (`/apiary/:id`) → Inspection list (`/apiary/:id/hive/:id`). All routes are lazy-loaded.
 - A shared `AppShellComponent` provides the mobile-app layout pattern: compact top header, scrollable content area, and a fixed bottom primary nav strip, with a centered phone-frame presentation on larger screens.
@@ -107,6 +121,18 @@
   - Settings disables Supabase upload while offline.
   - `BeeStore.exportData()` now uses `structuredClone`, event dispatches use `globalThis`, and `repairIntegrity()` returns `{ before, after }` for clearer reporting.
 - Styled list and form checkboxes to match the dark/yellow visual system; fixed swipe-list checkbox regressions with a controlled toggle pattern in list views: checkbox selection now emits explicit toggles from touch/click/key handlers (instead of relying on native `change` inside swipe rows), action-column touches are excluded from swipe gesture handling in both hive and inspection lists, and removed `preventDefault()` from checkbox handlers on mobile so inputs can still toggle visually (while `stopPropagation()` prevents row-level events).
+- Extracted swipe-to-delete touch behavior into a shared `SwipeToDeleteRowDirective` and replaced duplicated per-view touch state/handlers in apiary, hive, and inspection list views with declarative directive bindings.
+- Extended `SwipeToDeleteRowDirective` with pointer-event support so swipe-to-delete also works with desktop mouse/trackpad drags (while keeping existing touch behavior).
+- Fixed desktop navigation regression in `SwipeToDeleteRowDirective` by requiring a small left-drag threshold before activating pointer swipe handling, preserving normal row-link clicks (e.g., apiary to hive navigation).
+- Refined inspection list card layout by moving checkbox/edit/delete controls out of `inspection-header` into a dedicated side action column, keeping header metadata compact and consistent with hive card ergonomics.
+- Improved `SwipeToDeleteRowDirective` reliability for link-based rows (apiary/hive): pointer capture now starts on `pointerdown`, non-drag pointerups release capture without blocking clicks, and native `dragstart` is suppressed to avoid anchor drag interference with swipe gestures.
+- Adjusted `SwipeToDeleteRowDirective` pointer-capture timing to preserve row-link navigation: pointer capture is now attached only after drag activation threshold is crossed (instead of on pointerdown), preventing click target retargeting on normal taps/clicks.
+- Extracted shared `UndoBarComponent` from duplicated inline undo banners and migrated apiary, hive, and inspection pages to use a single reusable undo UI with consistent styles and behavior.
+- Fixed inspection delete UX in remote (Supabase) mode: single-item deletes now surface an undo bar, and undo restores the deleted inspection via remote re-create followed by data refresh.
+- Fixed the same remote-mode undo gap for hive and apiary deletes: both now preserve deleted bundle state for the undo window, show `UndoBar`, and restore records (including related children where applicable) via `SupabaseStore.upsertAll()` before refreshing cache.
+- Cleaned up unused page-level CSS (`sync-chip` / `sync-chip-warn` legacy selectors) in apiary, hive, and inspection pages, and removed a duplicated focus selector in apiary styles.
+- Extracted list-view empty-state markup/styles into shared `EmptyStateComponent` and migrated apiary, hive, and inspection list views to use it.
+- Extracted shared CSS values into global custom-property tokens in `src/styles.css` and migrated apiary/hive/inspection page styles plus shared `undo-bar` and `empty-state` components to consume tokenized colors, radii, and focus styles.
 - Switched GitHub Pages CI deployment from `actions/deploy-pages` environment flow to classic `gh-pages` branch publishing (`peaceiris/actions-gh-pages`) to align with repository deployment branch restrictions.
 
 ## Quick Health Verdict

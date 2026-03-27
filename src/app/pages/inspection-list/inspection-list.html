@@ -16,32 +16,18 @@
 
   <div shell-content class="inspection-content">
     @if (syncError()) {
-      <p class="sync-chip sync-chip-warn">{{ syncError() }}</p>
+      <bee-badge [label]="syncError()" variant="warning" icon="warning" appearance="soft" size="small" />
     }
 
     <section class="controls-panel" aria-label="Inspection filters">
-      <div class="search-shell" [class.open]="searchExpanded()">
-        <button
-          type="button"
-          class="search-toggle"
-          aria-label="Toggle search"
-          [attr.aria-expanded]="searchExpanded()"
-          (click)="toggleSearch(searchField)"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M10.5 3a7.5 7.5 0 1 0 4.79 13.27l4.22 4.22a1 1 0 1 0 1.41-1.41l-4.22-4.22A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" />
-          </svg>
-        </button>
-        <input
-          #searchField
-          class="search-input"
-          type="search"
-          placeholder="Search inspections"
-          [value]="search()"
-          (input)="setSearch($any($event.target).value)"
-          (blur)="collapseSearchIfEmpty()"
-        />
-      </div>
+      <bee-search-filter-bar
+        [value]="search()"
+        [expanded]="searchExpanded()"
+        placeholder="Search inspections"
+        ariaLabel="Toggle search"
+        (valueChange)="setSearch($event)"
+        (expandedChange)="searchExpanded.set($event)"
+      />
       <select [value]="broodFilter()" (change)="setBroodFilter($any($event.target).value)">
         <option value="all">All brood patterns</option>
         <option value="excellent">Excellent</option>
@@ -50,7 +36,7 @@
       </select>
       @if (selectedInspectionIds().length > 0) {
         <div class="bulk-actions">
-          <span>{{ selectedInspectionIds().length }} selected</span>
+          <bee-badge [label]="selectedInspectionIds().length + ' selected'" variant="neutral" appearance="outline" size="small" />
           <button type="button" (click)="bulkDeleteInspections()">Delete selected</button>
         </div>
       }
@@ -66,10 +52,7 @@
       (editInspection)="openEdit($event)" (deleteInspection)="deleteInspection($event)" />
 
     @if (pendingDeletedInspection() || pendingBulkDeletedInspections()) {
-      <output class="undo-bar" aria-live="polite">
-        <span>{{ pendingBulkDeletedInspections() ? (pendingBulkDeletedInspections()!.length + ' inspections deleted.') : 'Inspection deleted.' }}</span>
-        <button type="button" (click)="undoDeleteInspection()">Undo</button>
-      </output>
+      <bee-undo-bar [message]="undoMessage()" (action)="undoDeleteInspection()" />
     }
 
     @if (shareMessage()) {

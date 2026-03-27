@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  fill: var(--color-empty-icon);
+  opacity: 0.7;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-empty-title);
+}
+
+.empty-state .empty-hint {
+  font-size: 0.84rem;
+  font-weight: 400;
+  color: var(--color-empty-hint);
+}
+
+.empty-action {
+  border: 0;
+  border-radius: var(--radius-pill);
+  min-height: 2rem;
+  padding: 0.2rem 0.7rem;
+  background: var(--color-chip-bg);
+  color: var(--color-chip-fg);
+  font-size: 0.74rem;
+  font-weight: 700;
+}

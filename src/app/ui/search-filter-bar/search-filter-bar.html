@@ -1,0 +1,22 @@
+<div class="search-shell" [class.open]="expanded()">
+  <button
+    type="button"
+    class="search-toggle"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-expanded]="expanded()"
+    (click)="toggleSearch()"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M10.5 3a7.5 7.5 0 1 0 4.79 13.27l4.22 4.22a1 1 0 1 0 1.41-1.41l-4.22-4.22A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" />
+    </svg>
+  </button>
+  <input
+    #searchInput
+    class="search-input"
+    type="search"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  />
+</div>

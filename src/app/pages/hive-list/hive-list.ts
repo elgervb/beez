@@ -8,6 +8,9 @@ import { HiveFormComponent } from './hive-form/hive-form';
 import { HiveListViewComponent } from './hive-list-view/hive-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
+import { BadgeComponent } from '../../ui/badge/badge';
+import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
+import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 
 type HiveFormValue = {
@@ -20,7 +23,7 @@ type HiveFormValue = {
 
 @Component({
   selector: 'bee-hive-list',
-  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent],
+  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent],
   templateUrl: './hive-list.html',
   styleUrl: './hive-list.css'
 })
@@ -134,18 +137,6 @@ export class HiveListPage implements OnInit {
     localStorage.setItem(HiveListPage.SEARCH_KEY, value);
   }
 
-  toggleSearch(input: HTMLInputElement): void {
-    const next = !this.searchExpanded();
-    this.searchExpanded.set(next);
-    if (!next) return;
-    setTimeout(() => input.focus(), 0);
-  }
-
-  collapseSearchIfEmpty(): void {
-    if (this.search().trim()) return;
-    this.searchExpanded.set(false);
-  }
-
   setStatusFilter(value: string): void {
     if (value !== 'all' && value !== 'active' && value !== 'weak' && value !== 'wintering') return;
     this.statusFilter.set(value);
@@ -188,7 +179,7 @@ export class HiveListPage implements OnInit {
 
   undoDeleteHive(): void {
     if (this.remoteReady()) {
-      this.pendingDeletedHive.set(null);
+      void this.restoreDeletedHiveRemote();
       return;
     }
 
@@ -333,6 +324,7 @@ export class HiveListPage implements OnInit {
   private async removeHive(id: string): Promise<void> {
     const hive = this.hives().find((h) => h.id === id);
     if (!hive) return;
+    const deletedBundle = this.buildDeletedHiveBundle(id);
     const confirmed = globalThis.confirm(`Delete hive ${hive.code}?`);
     if (!confirmed) return;
 
@@ -341,7 +333,8 @@ export class HiveListPage implements OnInit {
       try {
         await this.remoteStore.deleteHive(id);
         await this.refreshRemoteData();
-        this.pendingDeletedHive.set(null);
+        this.pendingDeletedHive.set(deletedBundle);
+        this.startUndoDeleteWindow();
         this.syncError.set('');
         if ('vibrate' in navigator) navigator.vibrate(10);
       } catch {
@@ -383,6 +376,42 @@ export class HiveListPage implements OnInit {
     if (!this.undoDeleteTimer) return;
     clearTimeout(this.undoDeleteTimer);
     this.undoDeleteTimer = null;
+  }
+
+  private buildDeletedHiveBundle(id: string): DeletedHiveBundle | null {
+    const hive = this.hives().find((h) => h.id === id);
+    if (!hive) return null;
+    const inspections = this.data().inspections.filter((i) => i.hiveId === id);
+    return { hive, inspections };
+  }
+
+  private async restoreDeletedHiveRemote(): Promise<void> {
+    const pending = this.pendingDeletedHive();
+    if (!pending) return;
+
+    const current = this.data();
+    const merged: BeeData = {
+      apiaries: current.apiaries,
+      hives: [pending.hive, ...current.hives.filter((h) => h.id !== pending.hive.id)],
+      inspections: [
+        ...pending.inspections.filter((i) => !current.inspections.some((c) => c.id === i.id)),
+        ...current.inspections
+      ]
+    };
+
+    this.isSyncing.set(true);
+    try {
+      await this.remoteStore.upsertAll(merged);
+      await this.refreshRemoteData();
+      this.pendingDeletedHive.set(null);
+      this.clearUndoTimer();
+      this.syncError.set('');
+      if ('vibrate' in navigator) navigator.vibrate(10);
+    } catch {
+      this.syncError.set('Undo failed on Supabase.');
+    } finally {
+      this.isSyncing.set(false);
+    }
   }
 
   private latestInspectionForHive(hiveId: string) {
