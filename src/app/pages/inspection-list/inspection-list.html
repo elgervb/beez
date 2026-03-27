@@ -16,7 +16,7 @@
 
   <div shell-content class="inspection-content">
     @if (syncError()) {
-      <p class="sync-chip sync-chip-warn">{{ syncError() }}</p>
+      <bee-badge [label]="syncError()" variant="warning" icon="warning" appearance="soft" size="small" />
     }
 
     <section class="controls-panel" aria-label="Inspection filters">
@@ -50,7 +50,7 @@
       </select>
       @if (selectedInspectionIds().length > 0) {
         <div class="bulk-actions">
-          <span>{{ selectedInspectionIds().length }} selected</span>
+          <bee-badge [label]="selectedInspectionIds().length + ' selected'" variant="neutral" appearance="outline" size="small" />
           <button type="button" (click)="bulkDeleteInspections()">Delete selected</button>
         </div>
       }

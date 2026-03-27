@@ -16,7 +16,16 @@
   - App config: `src/app/app.config.ts`.
   - Routes: `src/app/app.routes.ts`.
   - Root component: `src/app/app.ts`, template in `src/app/app.html`, styles in `src/app/app.css`.
-  - Shared UI shell: `src/app/ui/app-shell/` with a reusable mobile screen frame, compact flat header, and bottom primary nav strip.
+  - Shared UI components under `src/app/ui/`:
+    - `app-shell/` — reusable mobile screen frame, compact flat header, and bottom primary nav strip.
+    - `modal-sheet/` — modal dialog for forms and overlays.
+    - `inspection-sparkline/` — mini chart for inspection trends.
+    - `badge/` — generic badge component with:
+      - **Variants**: default, success, warning, danger, info, neutral
+      - **Sizes**: xs, small, medium, large
+      - **Styles**: solid (default), outline, soft (low emphasis)
+      - **Features**: optional icons (check/warning/error/info/success), circular counter badges, pulse animation for urgency, custom colors (bgColor/textColor), improved ARIA labels for accessibility
+      - **Used throughout app** for status, health scores, trends, inspection metadata, apiary hive counts, hive temperament indicators, sync-error warnings, bulk-selection count chips, and due-now urgency labels
   - Domain models: `src/app/data/models.ts`.
   - Local data store service: `src/app/data/bee-store.ts`.
   - Connectivity service: `src/app/data/connectivity.service.ts` for browser online/offline state and reconnect events.

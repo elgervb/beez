@@ -32,13 +32,13 @@
         </div>
         <div class="inspection-body">
           <div class="inspection-tags">
-            <span class="tag">Brood: {{ inspection.broodPattern }}</span>
-            <span class="tag">Stores: {{ inspection.storesLevel }}</span>
+            <bee-badge [label]="'Brood: ' + inspection.broodPattern" [variant]="inspection.broodPattern === 'excellent' ? 'success' : inspection.broodPattern === 'good' ? 'default' : 'warning'" [icon]="inspection.broodPattern === 'excellent' ? 'check' : inspection.broodPattern === 'poor' ? 'warning' : null" appearance="soft" size="small" />
+            <bee-badge [label]="'Stores: ' + inspection.storesLevel" [variant]="inspection.storesLevel === 'high' ? 'success' : inspection.storesLevel === 'medium' ? 'default' : 'danger'" [icon]="inspection.storesLevel === 'low' ? 'warning' : null" appearance="soft" size="small" />
             @if (inspection.broodSeen) {
-              <span class="tag tag-green">Brood seen</span>
+                <bee-badge label="Brood seen" variant="success" icon="check" appearance="soft" size="small" />
             }
             @if (inspection.open) {
-              <span class="tag tag-green">Open brood</span>
+                <bee-badge label="Open brood" variant="success" icon="check" appearance="soft" size="small" />
             }
           </div>
           @if (inspection.notes) {

@@ -139,15 +139,6 @@
   color: #705520;
 }
 
-.badge {
-  font-size: 0.7rem;
-  border-radius: 999px;
-  padding: 0.2rem 0.42rem;
-  background: #2f2f2f;
-  color: #f0dc67;
-  white-space: nowrap;
-}
-
 .empty-state {
   display: grid;
   justify-items: center;

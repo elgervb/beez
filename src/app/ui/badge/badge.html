@@ -1,0 +1,13 @@
+<span
+  [ngClass]="computedClasses()"
+  [ngStyle]="computedStyle()"
+  role="status"
+  [attr.aria-label]="accessibleLabel()"
+>
+  @if (iconPath()) {
+    <svg class="badge-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+      <path [attr.d]="iconPath()" />
+    </svg>
+  }
+  <span class="badge-text">{{ label() }}</span>
+</span>

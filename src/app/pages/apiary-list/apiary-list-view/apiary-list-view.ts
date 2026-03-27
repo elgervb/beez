@@ -1,10 +1,11 @@
 import { Component, ElementRef, input, output, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Apiary } from '../../../data/models';
+import { BadgeComponent } from '../../../ui/badge/badge';
 
 @Component({
   selector: 'bee-apiary-list-view',
-  imports: [RouterLink],
+  imports: [RouterLink, BadgeComponent],
   templateUrl: './apiary-list-view.html',
   styleUrl: './apiary-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }

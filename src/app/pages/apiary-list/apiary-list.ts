@@ -7,11 +7,12 @@ import { ApiaryFormComponent } from './apiary-form/apiary-form';
 import { ApiaryListViewComponent } from './apiary-list-view/apiary-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
+import { BadgeComponent } from '../../ui/badge/badge';
 import { SupabaseStore } from '../../data/supabase-store';
 
 @Component({
   selector: 'bee-apiary-list',
-  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent],
+  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent, BadgeComponent],
   templateUrl: './apiary-list.html',
   styleUrl: './apiary-list.css'
 })

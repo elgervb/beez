@@ -1,10 +1,11 @@
 import { Component, ElementRef, input, output, signal } from '@angular/core';
 import { Inspection } from '../../../data/models';
 import { RelativeDatePipe } from '../../../ui/pipes/relative-date.pipe';
+import { BadgeComponent } from '../../../ui/badge/badge';
 
 @Component({
   selector: 'bee-inspection-list-view',
-  imports: [RelativeDatePipe],
+  imports: [RelativeDatePipe, BadgeComponent],
   templateUrl: './inspection-list-view.html',
   styleUrl: './inspection-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }

@@ -149,19 +149,6 @@
   gap: 0.3rem;
 }
 
-.tag {
-  font-size: 0.68rem;
-  border-radius: 999px;
-  padding: 0.2rem 0.42rem;
-  background: #2f2f2f;
-  color: #f0dc67;
-}
-
-.tag-green {
-  background: #d4edda;
-  color: #1a5c2e;
-}
-
 .inspection-notes {
   margin: 0.25rem 0 0;
   font-size: 0.8rem;

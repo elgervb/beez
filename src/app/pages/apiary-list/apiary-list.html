@@ -3,7 +3,7 @@
 
   <div shell-content class="apiary-content">
     @if (syncError()) {
-      <p class="sync-chip sync-chip-warn">{{ syncError() }}</p>
+      <bee-badge [label]="syncError()" variant="warning" icon="warning" appearance="soft" size="small" />
     }
 
     <div class="search-shell" [class.open]="searchExpanded()">

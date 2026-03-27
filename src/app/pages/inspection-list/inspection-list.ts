@@ -9,6 +9,7 @@ import { InspectionListViewComponent } from './inspection-list-view/inspection-l
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { InspectionSparklineComponent } from '../../ui/inspection-sparkline/inspection-sparkline';
+import { BadgeComponent } from '../../ui/badge/badge';
 import { SupabaseStore } from '../../data/supabase-store';
 
 type InspectionFormValue = {
@@ -23,7 +24,7 @@ type InspectionFormValue = {
 
 @Component({
   selector: 'bee-inspection-list',
-  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent],
+  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent],
   templateUrl: './inspection-list.html',
   styleUrl: './inspection-list.css'
 })

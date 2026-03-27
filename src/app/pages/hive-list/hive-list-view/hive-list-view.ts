@@ -1,10 +1,12 @@
 import { Component, ElementRef, input, output, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TitleCasePipe } from '@angular/common';
 import { Hive } from '../../../data/models';
+import { BadgeComponent } from '../../../ui/badge/badge';
 
 @Component({
   selector: 'bee-hive-list-view',
-  imports: [RouterLink],
+  imports: [RouterLink, BadgeComponent, TitleCasePipe],
   templateUrl: './hive-list-view.html',
   styleUrl: './hive-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }
@@ -24,6 +26,12 @@ export class HiveListViewComponent {
   readonly toggleSelected = output<{ id: string; checked: boolean }>();
 
   constructor(private readonly el: ElementRef<HTMLElement>) {}
+
+  healthVariant(score: number): 'danger' | 'warning' | 'success' {
+    if (score < 50) return 'danger';
+    if (score <= 70) return 'warning';
+    return 'success';
+  }
 
   // ── Swipe-to-delete ─────────────────────────────────────────────────────────
   private swipeStartX: number | null = null;

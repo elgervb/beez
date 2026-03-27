@@ -10,7 +10,7 @@
 
   <div shell-content class="hive-content">
     @if (syncError()) {
-      <p class="sync-chip sync-chip-warn">{{ syncError() }}</p>
+      <bee-badge [label]="syncError()" variant="warning" icon="warning" appearance="soft" size="small" />
     }
 
     @if (hives().length > 4) {
@@ -48,7 +48,7 @@
 
     @if (selectedHiveIds().length > 0) {
       <div class="bulk-actions">
-        <span>{{ selectedHiveIds().length }} selected</span>
+        <bee-badge [label]="selectedHiveIds().length + ' selected'" variant="neutral" appearance="outline" size="small" />
         <button type="button" (click)="applyBulkStatus('active')">Set active</button>
         <button type="button" (click)="applyBulkStatus('weak')">Set weak</button>
         <button type="button" (click)="applyBulkStatus('wintering')">Set wintering</button>
@@ -62,7 +62,7 @@
           @for (hive of dueNowHives(); track hive.id) {
             <button type="button" class="due-item" (click)="openHiveInspections(hive.id)">
               <span>{{ hive.code }}</span>
-              <span>{{ hive.label }}</span>
+              <bee-badge [label]="hive.label" variant="warning" icon="warning" [pulse]="true" appearance="soft" size="small" />
             </button>
           }
         </div>

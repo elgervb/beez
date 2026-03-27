@@ -8,6 +8,7 @@ import { HiveFormComponent } from './hive-form/hive-form';
 import { HiveListViewComponent } from './hive-list-view/hive-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
+import { BadgeComponent } from '../../ui/badge/badge';
 import { SupabaseStore } from '../../data/supabase-store';
 
 type HiveFormValue = {
@@ -20,7 +21,7 @@ type HiveFormValue = {
 
 @Component({
   selector: 'bee-hive-list',
-  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent],
+  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent],
   templateUrl: './hive-list.html',
   styleUrl: './hive-list.css'
 })
