@@ -54,6 +54,7 @@
   - `provideServiceWorker('ngsw-worker.js', ...)` with production-only registration.
 - Root component is now a minimal shell rendering only `RouterOutlet`.
 - Global style tokens are now centralized in `src/styles.css` under `:root` (color, focus, radius, and shared surface/action values) and consumed by page/component styles to reduce duplicated hardcoded CSS values.
+- App base URL is configured as `/beez/` for subpath deployments via both `<base href>` in `src/index.html` and `build.options.baseHref` in `angular.json`.
 - Forms use Angular Signals exclusively — no `FormsModule`, no `[(ngModel)]`. Feature forms now use Angular Signal Forms (`@angular/forms/signals`) with a `signal<FormObject>()` model plus a `form()` field tree, `[formField]` template bindings, and schema validators (`required`, `min`, `max`) for validation state and messages.
 - **Navigation flow**: Apiary list (`/`) → Hive list (`/apiary/:id`) → Inspection list (`/apiary/:id/hive/:id`). All routes are lazy-loaded.
 - A shared `AppShellComponent` provides the mobile-app layout pattern: compact top header, scrollable content area, and a fixed bottom primary nav strip, with a centered phone-frame presentation on larger screens.

@@ -27,6 +27,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
+            "baseHref": "/beez/",
             "tsConfig": "tsconfig.app.json",
             "serviceWorker": "ngsw-config.json",
             "assets": [
