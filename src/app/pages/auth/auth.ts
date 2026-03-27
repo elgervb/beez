@@ -57,7 +57,7 @@ export class AuthPage implements OnInit {
     }
 
     const redirect = this.safeRedirectPath();
-    const redirectTo = `${globalThis.location.origin}/auth?redirect=${encodeURIComponent(redirect)}`;
+    const redirectTo = `${globalThis.location.origin}/beez/auth?redirect=${encodeURIComponent(redirect)}`;
 
     this.busy.set(true);
     this.message.set('');
