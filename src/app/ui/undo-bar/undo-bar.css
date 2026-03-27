@@ -7,24 +7,24 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  border-radius: 12px;
-  background: #2f2f2f;
-  color: #f0dc67;
+  border-radius: var(--radius-md);
+  background: var(--color-chip-bg);
+  color: var(--color-chip-fg);
   padding: 0.5rem 0.7rem;
   font-size: 0.78rem;
 }
 
 .undo-bar button {
   border: 0;
-  border-radius: 999px;
-  background: #f0dc67;
-  color: #222;
+  border-radius: var(--radius-pill);
+  background: var(--color-chip-fg);
+  color: var(--color-chip-button-fg);
   padding: 0.22rem 0.55rem;
   font-weight: 700;
   font-size: 0.72rem;
 }
 
 .undo-bar button:focus-visible {
-  outline: 2px solid #9b6500;
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }

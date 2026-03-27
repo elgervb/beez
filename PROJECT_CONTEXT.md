@@ -53,6 +53,7 @@
   - `provideRouter(routes)`
   - `provideServiceWorker('ngsw-worker.js', ...)` with production-only registration.
 - Root component is now a minimal shell rendering only `RouterOutlet`.
+- Global style tokens are now centralized in `src/styles.css` under `:root` (color, focus, radius, and shared surface/action values) and consumed by page/component styles to reduce duplicated hardcoded CSS values.
 - Forms use Angular Signals exclusively — no `FormsModule`, no `[(ngModel)]`. Each form is a `signal<FormObject>()` on the component, mutated via `.update()`. Conditional fields use `computed()`. Templates use `[value]`/`[checked]` + `(input)`/`(change)` event bindings.
 - **Navigation flow**: Apiary list (`/`) → Hive list (`/apiary/:id`) → Inspection list (`/apiary/:id/hive/:id`). All routes are lazy-loaded.
 - A shared `AppShellComponent` provides the mobile-app layout pattern: compact top header, scrollable content area, and a fixed bottom primary nav strip, with a centered phone-frame presentation on larger screens.
@@ -131,6 +132,7 @@
 - Fixed the same remote-mode undo gap for hive and apiary deletes: both now preserve deleted bundle state for the undo window, show `UndoBar`, and restore records (including related children where applicable) via `SupabaseStore.upsertAll()` before refreshing cache.
 - Cleaned up unused page-level CSS (`sync-chip` / `sync-chip-warn` legacy selectors) in apiary, hive, and inspection pages, and removed a duplicated focus selector in apiary styles.
 - Extracted list-view empty-state markup/styles into shared `EmptyStateComponent` and migrated apiary, hive, and inspection list views to use it.
+- Extracted shared CSS values into global custom-property tokens in `src/styles.css` and migrated apiary/hive/inspection page styles plus shared `undo-bar` and `empty-state` components to consume tokenized colors, radii, and focus styles.
 - Switched GitHub Pages CI deployment from `actions/deploy-pages` environment flow to classic `gh-pages` branch publishing (`peaceiris/actions-gh-pages`) to align with repository deployment branch restrictions.
 
 ## Quick Health Verdict
