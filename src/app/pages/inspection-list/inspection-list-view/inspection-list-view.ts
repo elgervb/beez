@@ -1,11 +1,12 @@
-import { Component, ElementRef, input, output, signal } from '@angular/core';
+import { Component, ElementRef, input, output } from '@angular/core';
 import { Inspection } from '../../../data/models';
 import { RelativeDatePipe } from '../../../ui/pipes/relative-date.pipe';
 import { BadgeComponent } from '../../../ui/badge/badge';
+import { SwipeToDeleteRowDirective } from '../../../ui/swipe-to-delete-row/swipe-to-delete-row.directive';
 
 @Component({
   selector: 'bee-inspection-list-view',
-  imports: [RelativeDatePipe, BadgeComponent],
+  imports: [RelativeDatePipe, BadgeComponent, SwipeToDeleteRowDirective],
   templateUrl: './inspection-list-view.html',
   styleUrl: './inspection-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }
@@ -19,44 +20,6 @@ export class InspectionListViewComponent {
   readonly addRequested = output<void>();
 
   constructor(private readonly el: ElementRef<HTMLElement>) {}
-
-  // ── Swipe-to-delete ─────────────────────────────────────────────────────────
-  private swipeStartX: number | null = null;
-  readonly swipeOffsets = signal<Record<string, number>>({});
-  readonly swipingOutId = signal<string | null>(null);
-
-  onTouchStart(id: string, event: TouchEvent): void {
-    if (this.isActionTouch(event)) return;
-    this.swipeStartX = event.touches[0].clientX;
-  }
-
-  onTouchMove(id: string, event: TouchEvent): void {
-    if (this.isActionTouch(event) || this.swipeStartX === null) return;
-    const delta = Math.min(0, event.touches[0].clientX - this.swipeStartX);
-    this.swipeOffsets.update((o) => ({ ...o, [id]: delta }));
-  }
-
-  onTouchEnd(id: string, inspection: Inspection, event: TouchEvent): void {
-    if (this.isActionTouch(event)) {
-      this.swipeStartX = null;
-      return;
-    }
-
-    const offset = this.swipeOffsets()[id] ?? 0;
-    this.swipeOffsets.update((o) => { const n = { ...o }; delete n[id]; return n; });
-    this.swipeStartX = null;
-    if (offset < -72) {
-      this.swipingOutId.set(id);
-      setTimeout(() => {
-        this.deleteInspection.emit(inspection.id);
-        this.swipingOutId.set(null);
-      }, 240);
-    }
-  }
-
-  swipeOffset(id: string): number {
-    return this.swipeOffsets()[id] ?? 0;
-  }
 
   onSelectionToggle(event: Event, id: string): void {
     event.stopPropagation();
@@ -98,8 +61,4 @@ export class InspectionListViewComponent {
     }
   }
 
-  private isActionTouch(event: TouchEvent): boolean {
-    const target = event.target as Element | null;
-    return !!target?.closest('.card-actions');
-  }
 }

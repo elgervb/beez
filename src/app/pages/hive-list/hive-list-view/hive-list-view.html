@@ -2,12 +2,8 @@
   <ul class="card-list">
     @for (hive of hives(); track hive.id) {
       <li class="card-row"
-          [class.swiping]="swipeOffset(hive.id) < 0"
-          [class.swipe-out]="swipingOutId() === hive.id"
-          [style.transform]="'translateX(' + swipeOffset(hive.id) + 'px)'"
-          (touchstart)="onTouchStart(hive.id, $event)"
-          (touchmove)="onTouchMove(hive.id, $event)"
-          (touchend)="onTouchEnd(hive.id, hive, $event)">
+          [beeSwipeToDeleteRow]="hive.id"
+          (beeSwipeDelete)="deleteHive.emit($event)">
         <div class="swipe-reveal">Delete</div>
         <a [routerLink]="['/apiary', apiaryId(), 'hive', hive.id]" class="card-link">
           <div class="card-body">

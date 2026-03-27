@@ -1,12 +1,13 @@
-import { Component, ElementRef, input, output, signal } from '@angular/core';
+import { Component, ElementRef, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 import { Hive } from '../../../data/models';
 import { BadgeComponent } from '../../../ui/badge/badge';
+import { SwipeToDeleteRowDirective } from '../../../ui/swipe-to-delete-row/swipe-to-delete-row.directive';
 
 @Component({
   selector: 'bee-hive-list-view',
-  imports: [RouterLink, BadgeComponent, TitleCasePipe],
+  imports: [RouterLink, BadgeComponent, TitleCasePipe, SwipeToDeleteRowDirective],
   templateUrl: './hive-list-view.html',
   styleUrl: './hive-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }
@@ -33,40 +34,6 @@ export class HiveListViewComponent {
     return 'success';
   }
 
-  // ── Swipe-to-delete ─────────────────────────────────────────────────────────
-  private swipeStartX: number | null = null;
-  readonly swipeOffsets = signal<Record<string, number>>({});
-  readonly swipingOutId = signal<string | null>(null);
-
-  onTouchStart(id: string, event: TouchEvent): void {
-    if (this.isActionTouch(event)) return;
-    this.swipeStartX = event.touches[0].clientX;
-  }
-
-  onTouchMove(id: string, event: TouchEvent): void {
-    if (this.isActionTouch(event) || this.swipeStartX === null) return;
-    const delta = Math.min(0, event.touches[0].clientX - this.swipeStartX);
-    this.swipeOffsets.update((o) => ({ ...o, [id]: delta }));
-  }
-
-  onTouchEnd(id: string, hive: Hive, event: TouchEvent): void {
-    if (this.isActionTouch(event)) {
-      this.swipeStartX = null;
-      return;
-    }
-
-    const offset = this.swipeOffsets()[id] ?? 0;
-    this.swipeOffsets.update((o) => { const n = { ...o }; delete n[id]; return n; });
-    this.swipeStartX = null;
-    if (offset < -72) {
-      this.swipingOutId.set(id);
-      setTimeout(() => {
-        this.deleteHive.emit(hive.id);
-        this.swipingOutId.set(null);
-      }, 240);
-    }
-  }
-
   onSelectionToggle(event: Event, id: string): void {
     event.stopPropagation();
     this.toggleSelected.emit({ id, checked: !this.selectedIds().includes(id) });
@@ -76,15 +43,6 @@ export class HiveListViewComponent {
     if (event.key !== ' ' && event.key !== 'Enter') return;
     event.preventDefault();
     this.toggleSelected.emit({ id, checked: !this.selectedIds().includes(id) });
-  }
-
-  swipeOffset(id: string): number {
-    return this.swipeOffsets()[id] ?? 0;
-  }
-
-  private isActionTouch(event: TouchEvent): boolean {
-    const target = event.target as Element | null;
-    return !!target?.closest('.card-actions');
   }
 
   onKeydown(event: KeyboardEvent): void {

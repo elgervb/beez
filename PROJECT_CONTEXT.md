@@ -21,6 +21,7 @@
     - `modal-sheet/` — modal dialog for forms and overlays.
     - `inspection-sparkline/` — mini chart for inspection trends.
     - `search-filter-bar/` — reusable expanding search control (toggle icon + animated input) used by apiary, hive, and inspection pages; emits `valueChange` and `expandedChange`.
+    - `swipe-to-delete-row/` — reusable behavior directive that handles row swipe gestures, applies swipe state classes/transforms, and emits delete requests after threshold-based swipe-out animation.
     - `badge/` — generic badge component with:
       - **Variants**: default, success, warning, danger, info, neutral
       - **Sizes**: xs, small, medium, large
@@ -117,6 +118,12 @@
   - Settings disables Supabase upload while offline.
   - `BeeStore.exportData()` now uses `structuredClone`, event dispatches use `globalThis`, and `repairIntegrity()` returns `{ before, after }` for clearer reporting.
 - Styled list and form checkboxes to match the dark/yellow visual system; fixed swipe-list checkbox regressions with a controlled toggle pattern in list views: checkbox selection now emits explicit toggles from touch/click/key handlers (instead of relying on native `change` inside swipe rows), action-column touches are excluded from swipe gesture handling in both hive and inspection lists, and removed `preventDefault()` from checkbox handlers on mobile so inputs can still toggle visually (while `stopPropagation()` prevents row-level events).
+- Extracted swipe-to-delete touch behavior into a shared `SwipeToDeleteRowDirective` and replaced duplicated per-view touch state/handlers in apiary, hive, and inspection list views with declarative directive bindings.
+- Extended `SwipeToDeleteRowDirective` with pointer-event support so swipe-to-delete also works with desktop mouse/trackpad drags (while keeping existing touch behavior).
+- Fixed desktop navigation regression in `SwipeToDeleteRowDirective` by requiring a small left-drag threshold before activating pointer swipe handling, preserving normal row-link clicks (e.g., apiary to hive navigation).
+- Refined inspection list card layout by moving checkbox/edit/delete controls out of `inspection-header` into a dedicated side action column, keeping header metadata compact and consistent with hive card ergonomics.
+- Improved `SwipeToDeleteRowDirective` reliability for link-based rows (apiary/hive): pointer capture now starts on `pointerdown`, non-drag pointerups release capture without blocking clicks, and native `dragstart` is suppressed to avoid anchor drag interference with swipe gestures.
+- Adjusted `SwipeToDeleteRowDirective` pointer-capture timing to preserve row-link navigation: pointer capture is now attached only after drag activation threshold is crossed (instead of on pointerdown), preventing click target retargeting on normal taps/clicks.
 - Switched GitHub Pages CI deployment from `actions/deploy-pages` environment flow to classic `gh-pages` branch publishing (`peaceiris/actions-gh-pages`) to align with repository deployment branch restrictions.
 
 ## Quick Health Verdict

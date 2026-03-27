@@ -2,12 +2,8 @@
   <ul class="card-list">
     @for (apiary of apiaries(); track apiary.id) {
       <li class="card-row"
-          [class.swiping]="swipeOffset(apiary.id) < 0"
-          [class.swipe-out]="swipingOutId() === apiary.id"
-          [style.transform]="'translateX(' + swipeOffset(apiary.id) + 'px)'"
-          (touchstart)="onTouchStart(apiary.id, $event)"
-          (touchmove)="onTouchMove(apiary.id, $event)"
-          (touchend)="onTouchEnd(apiary.id, apiary)">
+          [beeSwipeToDeleteRow]="apiary.id"
+          (beeSwipeDelete)="deleteApiary.emit($event)">
         <div class="swipe-reveal">Delete</div>
         <a [routerLink]="['/apiary', apiary.id]" class="card-link">
           <div class="card-body">
