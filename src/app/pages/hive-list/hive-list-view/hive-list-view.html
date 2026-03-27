@@ -47,12 +47,11 @@
     }
   </ul>
 } @else {
-  <div class="empty-state">
-    <svg class="empty-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 4a2 2 0 0 1 2-2h4.5a2 2 0 0 1 2 2v4.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm9.5 0a2 2 0 0 1 2-2H20a2 2 0 0 1 2 2v4.5a2 2 0 0 1-2 2h-4.5a2 2 0 0 1-2-2zM4 15.5a2 2 0 0 1 2-2h4.5a2 2 0 0 1 2 2V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm9.5 0a2 2 0 0 1 2-2H20a2 2 0 0 1 2 2V20a2 2 0 0 1-2 2h-4.5a2 2 0 0 1-2-2z" />
-    </svg>
-    <p>No hives yet</p>
-    <p class="empty-hint">Tap <strong>Add</strong> to register the first hive.</p>
-    <button type="button" class="empty-action" (click)="addRequested.emit()">Add first hive</button>
-  </div>
+  <bee-empty-state
+    title="No hives yet"
+    hint="Tap Add to register the first hive."
+    actionLabel="Add first hive"
+    iconPath="M4 4a2 2 0 0 1 2-2h4.5a2 2 0 0 1 2 2v4.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm9.5 0a2 2 0 0 1 2-2H20a2 2 0 0 1 2 2v4.5a2 2 0 0 1-2 2h-4.5a2 2 0 0 1-2-2zM4 15.5a2 2 0 0 1 2-2h4.5a2 2 0 0 1 2 2V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm9.5 0a2 2 0 0 1 2-2H20a2 2 0 0 1 2 2V20a2 2 0 0 1-2 2h-4.5a2 2 0 0 1-2-2z"
+    (action)="addRequested.emit()"
+  />
 }

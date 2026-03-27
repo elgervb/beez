@@ -4,10 +4,11 @@ import { TitleCasePipe } from '@angular/common';
 import { Hive } from '../../../data/models';
 import { BadgeComponent } from '../../../ui/badge/badge';
 import { SwipeToDeleteRowDirective } from '../../../ui/swipe-to-delete-row/swipe-to-delete-row.directive';
+import { EmptyStateComponent } from '../../../ui/empty-state/empty-state';
 
 @Component({
   selector: 'bee-hive-list-view',
-  imports: [RouterLink, BadgeComponent, TitleCasePipe, SwipeToDeleteRowDirective],
+  imports: [RouterLink, BadgeComponent, TitleCasePipe, SwipeToDeleteRowDirective, EmptyStateComponent],
   templateUrl: './hive-list-view.html',
   styleUrl: './hive-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }

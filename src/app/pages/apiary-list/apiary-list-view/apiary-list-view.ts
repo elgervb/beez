@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { Apiary } from '../../../data/models';
 import { BadgeComponent } from '../../../ui/badge/badge';
 import { SwipeToDeleteRowDirective } from '../../../ui/swipe-to-delete-row/swipe-to-delete-row.directive';
+import { EmptyStateComponent } from '../../../ui/empty-state/empty-state';
 
 @Component({
   selector: 'bee-apiary-list-view',
-  imports: [RouterLink, BadgeComponent, SwipeToDeleteRowDirective],
+  imports: [RouterLink, BadgeComponent, SwipeToDeleteRowDirective, EmptyStateComponent],
   templateUrl: './apiary-list-view.html',
   styleUrl: './apiary-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }

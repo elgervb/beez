@@ -25,12 +25,11 @@
     }
   </ul>
 } @else {
-  <div class="empty-state">
-    <svg class="empty-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M11.35 3.4a1 1 0 0 1 1.3 0l7 6a1 1 0 0 1-1.3 1.52L18 10.66V19a2 2 0 0 1-2 2h-2.5a1 1 0 0 1-1-1v-4h-1v4a1 1 0 0 1-1 1H8a2 2 0 0 1-2-2v-8.34l-.35.26a1 1 0 0 1-1.3-1.52z" />
-    </svg>
-    <p>No apiaries yet</p>
-    <p class="empty-hint">Tap <strong>Add</strong> to register your first apiary.</p>
-    <button type="button" class="empty-action" (click)="addRequested.emit()">Add first apiary</button>
-  </div>
+  <bee-empty-state
+    title="No apiaries yet"
+    hint="Tap Add to register your first apiary."
+    actionLabel="Add first apiary"
+    iconPath="M11.35 3.4a1 1 0 0 1 1.3 0l7 6a1 1 0 0 1-1.3 1.52L18 10.66V19a2 2 0 0 1-2 2h-2.5a1 1 0 0 1-1-1v-4h-1v4a1 1 0 0 1-1 1H8a2 2 0 0 1-2-2v-8.34l-.35.26a1 1 0 0 1-1.3-1.52z"
+    (action)="addRequested.emit()"
+  />
 }

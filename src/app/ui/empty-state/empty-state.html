@@ -1,0 +1,8 @@
+<div class="empty-state">
+  <svg class="empty-icon" [attr.viewBox]="iconViewBox()" aria-hidden="true">
+    <path [attr.d]="iconPath()" />
+  </svg>
+  <p>{{ title() }}</p>
+  <p class="empty-hint">{{ hint() }}</p>
+  <button type="button" class="empty-action" (click)="action.emit()">{{ actionLabel() }}</button>
+</div>

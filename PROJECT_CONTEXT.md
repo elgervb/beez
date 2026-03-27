@@ -23,6 +23,7 @@
     - `search-filter-bar/` — reusable expanding search control (toggle icon + animated input) used by apiary, hive, and inspection pages; emits `valueChange` and `expandedChange`.
     - `swipe-to-delete-row/` — reusable behavior directive that handles row swipe gestures, applies swipe state classes/transforms, and emits delete requests after threshold-based swipe-out animation.
     - `undo-bar/` — reusable undo action bar for post-delete feedback; accepts a message and emits a generic action event.
+    - `empty-state/` — reusable empty-list state component with configurable icon, title, hint text, and call-to-action event.
     - `badge/` — generic badge component with:
       - **Variants**: default, success, warning, danger, info, neutral
       - **Sizes**: xs, small, medium, large
@@ -128,6 +129,8 @@
 - Extracted shared `UndoBarComponent` from duplicated inline undo banners and migrated apiary, hive, and inspection pages to use a single reusable undo UI with consistent styles and behavior.
 - Fixed inspection delete UX in remote (Supabase) mode: single-item deletes now surface an undo bar, and undo restores the deleted inspection via remote re-create followed by data refresh.
 - Fixed the same remote-mode undo gap for hive and apiary deletes: both now preserve deleted bundle state for the undo window, show `UndoBar`, and restore records (including related children where applicable) via `SupabaseStore.upsertAll()` before refreshing cache.
+- Cleaned up unused page-level CSS (`sync-chip` / `sync-chip-warn` legacy selectors) in apiary, hive, and inspection pages, and removed a duplicated focus selector in apiary styles.
+- Extracted list-view empty-state markup/styles into shared `EmptyStateComponent` and migrated apiary, hive, and inspection list views to use it.
 - Switched GitHub Pages CI deployment from `actions/deploy-pages` environment flow to classic `gh-pages` branch publishing (`peaceiris/actions-gh-pages`) to align with repository deployment branch restrictions.
 
 ## Quick Health Verdict
