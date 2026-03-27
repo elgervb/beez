@@ -72,8 +72,7 @@
 .controls-panel select:focus-visible,
 .bulk-actions button:focus-visible,
 .btn-add:focus-visible,
-.btn-share:focus-visible,
-.undo-bar button:focus-visible {
+.btn-share:focus-visible {
   outline: 2px solid #9b6500;
   outline-offset: 2px;
 }
@@ -128,26 +127,4 @@
   padding: 0.5rem 0.7rem;
   font-size: 0.78rem;
   text-align: center;
-}
-
-.undo-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  border-radius: 12px;
-  background: #2f2f2f;
-  color: #f0dc67;
-  padding: 0.5rem 0.7rem;
-  font-size: 0.78rem;
-}
-
-.undo-bar button {
-  border: 0;
-  border-radius: 999px;
-  background: #f0dc67;
-  color: #222;
-  padding: 0.22rem 0.55rem;
-  font-weight: 700;
-  font-size: 0.72rem;
 }

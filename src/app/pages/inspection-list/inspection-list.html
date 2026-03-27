@@ -52,10 +52,7 @@
       (editInspection)="openEdit($event)" (deleteInspection)="deleteInspection($event)" />
 
     @if (pendingDeletedInspection() || pendingBulkDeletedInspections()) {
-      <output class="undo-bar" aria-live="polite">
-        <span>{{ pendingBulkDeletedInspections() ? (pendingBulkDeletedInspections()!.length + ' inspections deleted.') : 'Inspection deleted.' }}</span>
-        <button type="button" (click)="undoDeleteInspection()">Undo</button>
-      </output>
+      <bee-undo-bar [message]="undoMessage()" (action)="undoDeleteInspection()" />
     }
 
     @if (shareMessage()) {

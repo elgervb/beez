@@ -22,6 +22,7 @@
     - `inspection-sparkline/` — mini chart for inspection trends.
     - `search-filter-bar/` — reusable expanding search control (toggle icon + animated input) used by apiary, hive, and inspection pages; emits `valueChange` and `expandedChange`.
     - `swipe-to-delete-row/` — reusable behavior directive that handles row swipe gestures, applies swipe state classes/transforms, and emits delete requests after threshold-based swipe-out animation.
+    - `undo-bar/` — reusable undo action bar for post-delete feedback; accepts a message and emits a generic action event.
     - `badge/` — generic badge component with:
       - **Variants**: default, success, warning, danger, info, neutral
       - **Sizes**: xs, small, medium, large
@@ -124,6 +125,9 @@
 - Refined inspection list card layout by moving checkbox/edit/delete controls out of `inspection-header` into a dedicated side action column, keeping header metadata compact and consistent with hive card ergonomics.
 - Improved `SwipeToDeleteRowDirective` reliability for link-based rows (apiary/hive): pointer capture now starts on `pointerdown`, non-drag pointerups release capture without blocking clicks, and native `dragstart` is suppressed to avoid anchor drag interference with swipe gestures.
 - Adjusted `SwipeToDeleteRowDirective` pointer-capture timing to preserve row-link navigation: pointer capture is now attached only after drag activation threshold is crossed (instead of on pointerdown), preventing click target retargeting on normal taps/clicks.
+- Extracted shared `UndoBarComponent` from duplicated inline undo banners and migrated apiary, hive, and inspection pages to use a single reusable undo UI with consistent styles and behavior.
+- Fixed inspection delete UX in remote (Supabase) mode: single-item deletes now surface an undo bar, and undo restores the deleted inspection via remote re-create followed by data refresh.
+- Fixed the same remote-mode undo gap for hive and apiary deletes: both now preserve deleted bundle state for the undo window, show `UndoBar`, and restore records (including related children where applicable) via `SupabaseStore.upsertAll()` before refreshing cache.
 - Switched GitHub Pages CI deployment from `actions/deploy-pages` environment flow to classic `gh-pages` branch publishing (`peaceiris/actions-gh-pages`) to align with repository deployment branch restrictions.
 
 ## Quick Health Verdict

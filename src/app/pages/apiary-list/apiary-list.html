@@ -18,10 +18,7 @@
       (editApiary)="openEdit($event)" (deleteApiary)="deleteApiary($event)" (addRequested)="openAdd()" />
 
     @if (pendingDeletedApiary()) {
-      <output class="undo-bar" aria-live="polite">
-        <span>Apiary deleted.</span>
-        <button type="button" (click)="undoDeleteApiary()">Undo</button>
-      </output>
+      <bee-undo-bar message="Apiary deleted." (action)="undoDeleteApiary()" />
     }
   </div>
 </bee-app-shell>

@@ -9,11 +9,12 @@ import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { BadgeComponent } from '../../ui/badge/badge';
 import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
+import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 
 @Component({
   selector: 'bee-apiary-list',
-  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent],
+  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent],
   templateUrl: './apiary-list.html',
   styleUrl: './apiary-list.css'
 })
@@ -95,7 +96,7 @@ export class ApiaryListPage implements OnInit {
 
   undoDeleteApiary(): void {
     if (this.remoteReady()) {
-      this.pendingDeletedApiary.set(null);
+      void this.restoreDeletedApiaryRemote();
       return;
     }
 
@@ -185,6 +186,7 @@ export class ApiaryListPage implements OnInit {
   private async removeApiary(id: string): Promise<void> {
     const apiary = this.data().apiaries.find((a) => a.id === id);
     if (!apiary) return;
+    const deletedBundle = this.buildDeletedApiaryBundle(id);
 
     const typed = globalThis.prompt(
       `Delete ${apiary.name}? This also removes related hives and inspections. Type the apiary name to confirm.`,
@@ -197,7 +199,8 @@ export class ApiaryListPage implements OnInit {
       try {
         await this.remoteStore.deleteApiary(id);
         await this.refreshRemoteData();
-        this.pendingDeletedApiary.set(null);
+        this.pendingDeletedApiary.set(deletedBundle);
+        this.startUndoDeleteWindow();
         this.syncError.set('');
         if ('vibrate' in navigator) navigator.vibrate(10);
       } catch {
@@ -229,5 +232,43 @@ export class ApiaryListPage implements OnInit {
     if (!this.undoDeleteTimer) return;
     clearTimeout(this.undoDeleteTimer);
     this.undoDeleteTimer = null;
+  }
+
+  private buildDeletedApiaryBundle(id: string): DeletedApiaryBundle | null {
+    const apiary = this.data().apiaries.find((a) => a.id === id);
+    if (!apiary) return null;
+    const hives = this.data().hives.filter((h) => h.apiaryId === id);
+    const hiveIds = new Set(hives.map((h) => h.id));
+    const inspections = this.data().inspections.filter((i) => hiveIds.has(i.hiveId));
+    return { apiary, hives, inspections };
+  }
+
+  private async restoreDeletedApiaryRemote(): Promise<void> {
+    const pending = this.pendingDeletedApiary();
+    if (!pending) return;
+
+    const current = this.data();
+    const merged: BeeData = {
+      apiaries: [pending.apiary, ...current.apiaries.filter((a) => a.id !== pending.apiary.id)],
+      hives: [...pending.hives.filter((h) => !current.hives.some((c) => c.id === h.id)), ...current.hives],
+      inspections: [
+        ...pending.inspections.filter((i) => !current.inspections.some((c) => c.id === i.id)),
+        ...current.inspections
+      ]
+    };
+
+    this.isSyncing.set(true);
+    try {
+      await this.remoteStore.upsertAll(merged);
+      await this.refreshRemoteData();
+      this.pendingDeletedApiary.set(null);
+      this.clearUndoTimer();
+      this.syncError.set('');
+      if ('vibrate' in navigator) navigator.vibrate(10);
+    } catch {
+      this.syncError.set('Undo failed on Supabase.');
+    } finally {
+      this.isSyncing.set(false);
+    }
   }
 }

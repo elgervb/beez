@@ -61,10 +61,7 @@
       (editHive)="openEdit($event)" (deleteHive)="deleteHive($event)" (addRequested)="openAdd()" />
 
     @if (pendingDeletedHive()) {
-      <output class="undo-bar" aria-live="polite">
-        <span>Hive deleted.</span>
-        <button type="button" (click)="undoDeleteHive()">Undo</button>
-      </output>
+      <bee-undo-bar message="Hive deleted." (action)="undoDeleteHive()" />
     }
   </div>
 </bee-app-shell>
