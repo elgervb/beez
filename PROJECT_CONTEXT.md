@@ -20,6 +20,7 @@
     - `app-shell/` — reusable mobile screen frame, compact flat header, and bottom primary nav strip.
     - `modal-sheet/` — modal dialog for forms and overlays.
     - `inspection-sparkline/` — mini chart for inspection trends.
+    - `search-filter-bar/` — reusable expanding search control (toggle icon + animated input) used by apiary, hive, and inspection pages; emits `valueChange` and `expandedChange`.
     - `badge/` — generic badge component with:
       - **Variants**: default, success, warning, danger, info, neutral
       - **Sizes**: xs, small, medium, large

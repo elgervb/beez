@@ -9,6 +9,7 @@ import { HiveListViewComponent } from './hive-list-view/hive-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { BadgeComponent } from '../../ui/badge/badge';
+import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 
 type HiveFormValue = {
@@ -21,7 +22,7 @@ type HiveFormValue = {
 
 @Component({
   selector: 'bee-hive-list',
-  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent],
+  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent],
   templateUrl: './hive-list.html',
   styleUrl: './hive-list.css'
 })
@@ -133,18 +134,6 @@ export class HiveListPage implements OnInit {
   setSearch(value: string): void {
     this.search.set(value);
     localStorage.setItem(HiveListPage.SEARCH_KEY, value);
-  }
-
-  toggleSearch(input: HTMLInputElement): void {
-    const next = !this.searchExpanded();
-    this.searchExpanded.set(next);
-    if (!next) return;
-    setTimeout(() => input.focus(), 0);
-  }
-
-  collapseSearchIfEmpty(): void {
-    if (this.search().trim()) return;
-    this.searchExpanded.set(false);
   }
 
   setStatusFilter(value: string): void {

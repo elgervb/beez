@@ -8,11 +8,12 @@ import { ApiaryListViewComponent } from './apiary-list-view/apiary-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { BadgeComponent } from '../../ui/badge/badge';
+import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 
 @Component({
   selector: 'bee-apiary-list',
-  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent, BadgeComponent],
+  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent],
   templateUrl: './apiary-list.html',
   styleUrl: './apiary-list.css'
 })
@@ -67,18 +68,6 @@ export class ApiaryListPage implements OnInit {
   setSearch(value: string): void {
     this.search.set(value);
     localStorage.setItem(ApiaryListPage.SEARCH_KEY, value);
-  }
-
-  toggleSearch(input: HTMLInputElement): void {
-    const next = !this.searchExpanded();
-    this.searchExpanded.set(next);
-    if (!next) return;
-    setTimeout(() => input.focus(), 0);
-  }
-
-  collapseSearchIfEmpty(): void {
-    if (this.search().trim()) return;
-    this.searchExpanded.set(false);
   }
 
   openAdd(): void {

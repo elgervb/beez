@@ -6,28 +6,14 @@
       <bee-badge [label]="syncError()" variant="warning" icon="warning" appearance="soft" size="small" />
     }
 
-    <div class="search-shell" [class.open]="searchExpanded()">
-      <button
-        type="button"
-        class="search-toggle"
-        aria-label="Toggle search"
-        [attr.aria-expanded]="searchExpanded()"
-        (click)="toggleSearch(searchField)"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M10.5 3a7.5 7.5 0 1 0 4.79 13.27l4.22 4.22a1 1 0 1 0 1.41-1.41l-4.22-4.22A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" />
-        </svg>
-      </button>
-      <input
-        #searchField
-        class="search-input"
-        type="search"
-        placeholder="Search apiaries"
-        [value]="search()"
-        (input)="setSearch($any($event.target).value)"
-        (blur)="collapseSearchIfEmpty()"
-      />
-    </div>
+    <bee-search-filter-bar
+      [value]="search()"
+      [expanded]="searchExpanded()"
+      placeholder="Search apiaries"
+      ariaLabel="Toggle search"
+      (valueChange)="setSearch($event)"
+      (expandedChange)="searchExpanded.set($event)"
+    />
     <bee-apiary-list-view [apiaries]="filteredApiaries()" [hiveCounts]="hiveCountByApiary()"
       (editApiary)="openEdit($event)" (deleteApiary)="deleteApiary($event)" (addRequested)="openAdd()" />
 

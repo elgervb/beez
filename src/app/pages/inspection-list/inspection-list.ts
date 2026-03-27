@@ -10,6 +10,7 @@ import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { InspectionSparklineComponent } from '../../ui/inspection-sparkline/inspection-sparkline';
 import { BadgeComponent } from '../../ui/badge/badge';
+import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 
 type InspectionFormValue = {
@@ -24,7 +25,7 @@ type InspectionFormValue = {
 
 @Component({
   selector: 'bee-inspection-list',
-  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent],
+  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, SearchFilterBarComponent],
   templateUrl: './inspection-list.html',
   styleUrl: './inspection-list.css'
 })
@@ -189,18 +190,6 @@ export class InspectionListPage implements OnInit {
   setSearch(value: string): void {
     this.search.set(value);
     localStorage.setItem(InspectionListPage.SEARCH_KEY, value);
-  }
-
-  toggleSearch(input: HTMLInputElement): void {
-    const next = !this.searchExpanded();
-    this.searchExpanded.set(next);
-    if (!next) return;
-    setTimeout(() => input.focus(), 0);
-  }
-
-  collapseSearchIfEmpty(): void {
-    if (this.search().trim()) return;
-    this.searchExpanded.set(false);
   }
 
   setBroodFilter(value: string): void {
