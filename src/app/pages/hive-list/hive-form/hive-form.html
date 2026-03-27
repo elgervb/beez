@@ -1,36 +1,39 @@
 <section class="panel">
   <h2>{{ initial() ? 'Edit hive' : 'New hive' }}</h2>
-  <form class="form-grid" (submit)="$event.preventDefault(); submit()">
+  <form class="form-grid" (submit)="onSubmit($event)">
     <label>
       Hive code
-      <input autofocus [value]="form().code" (input)="form.update(f => ({ ...f, code: $any($event.target).value }))" required placeholder="A-03" autocomplete="off" inputmode="text" [class.field-invalid]="submitted() && !form().code.trim()" />
-      @if (submitted() && !form().code.trim()) {
+      <input autofocus [formField]="form.code" placeholder="A-03" autocomplete="off" inputmode="text" [class.field-invalid]="showCodeError()" />
+      @if (showCodeError()) {
         <span class="field-error">Hive code is required</span>
       }
     </label>
     <label>
       Queen year
-      <input [value]="form().queenYear" (input)="form.update(f => ({ ...f, queenYear: +$any($event.target).value }))" type="number" min="2019" max="2100" required inputmode="numeric" autocomplete="off" />
+      <input [formField]="form.queenYear" type="number" inputmode="numeric" autocomplete="off" [class.field-invalid]="showQueenYearError()" />
+      @if (showQueenYearError()) {
+        <span class="field-error">{{ queenYearErrorMessage() }}</span>
+      }
     </label>
     <label>
       Temperament
-      <select (change)="form.update(f => ({ ...f, temperament: $any($event.target).value }))">
-        <option value="calm" [selected]="form().temperament === 'calm'">Calm</option>
-        <option value="mixed" [selected]="form().temperament === 'mixed'">Mixed</option>
-        <option value="defensive" [selected]="form().temperament === 'defensive'">Defensive</option>
+      <select [formField]="form.temperament">
+        <option value="calm">Calm</option>
+        <option value="mixed">Mixed</option>
+        <option value="defensive">Defensive</option>
       </select>
     </label>
     <label>
       Status
-      <select (change)="form.update(f => ({ ...f, status: $any($event.target).value }))">
-        <option value="active" [selected]="form().status === 'active'">Active</option>
-        <option value="weak" [selected]="form().status === 'weak'">Weak</option>
-        <option value="wintering" [selected]="form().status === 'wintering'">Wintering</option>
+      <select [formField]="form.status">
+        <option value="active">Active</option>
+        <option value="weak">Weak</option>
+        <option value="wintering">Wintering</option>
       </select>
     </label>
     <label class="full">
       Notes
-      <textarea [value]="form().notes" (input)="form.update(f => ({ ...f, notes: $any($event.target).value }))" rows="2" placeholder="Location notes, behaviour, feeding..."></textarea>
+      <textarea [formField]="form.notes" rows="2" placeholder="Location notes, behaviour, feeding..."></textarea>
     </label>
     <div class="row-buttons">
       <button type="button" class="btn-secondary" (click)="dismissed.emit()">Cancel</button>

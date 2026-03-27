@@ -1,8 +1,10 @@
-import { Component, effect, input, output, signal } from '@angular/core';
+import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { form, FormField, max, min, required, submit } from '@angular/forms/signals';
 import { Hive } from '../../../data/models';
 
 @Component({
   selector: 'bee-hive-form',
+  imports: [FormField],
   templateUrl: './hive-form.html',
   styleUrl: './hive-form.css'
 })
@@ -12,35 +14,66 @@ export class HiveFormComponent {
   readonly save = output<Pick<Hive, 'code' | 'queenYear' | 'temperament' | 'status' | 'notes'>>();
   readonly dismissed = output<void>();
 
-  readonly form = signal({
+  readonly formModel = signal({
     code: '',
     queenYear: new Date().getFullYear(),
     temperament: 'calm' as Hive['temperament'],
     status: 'active' as Hive['status'],
     notes: ''
   });
+  readonly form = form(this.formModel, (path) => {
+    required(path.code);
+    min(path.queenYear, 2019);
+    max(path.queenYear, 2100);
+  });
   readonly submitted = signal(false);
+  readonly showCodeError = computed(() => this.submitted() && !this.form.code().valid());
+  readonly showQueenYearError = computed(() => this.submitted() && !this.form.queenYear().valid());
+  readonly queenYearErrorMessage = computed(() => {
+    const year = this.formModel().queenYear;
+    if (year < 2019) return 'Queen year must be 2019 or later';
+    if (year > 2100) return 'Queen year must be 2100 or earlier';
+    return '';
+  });
+
   constructor() {
     effect(() => {
       const init = this.initial();
       if (init) {
-        this.form.set({ code: init.code, queenYear: init.queenYear ?? new Date().getFullYear(), temperament: init.temperament, status: init.status, notes: init.notes ?? '' });
+        this.formModel.set({
+          code: init.code,
+          queenYear: init.queenYear ?? new Date().getFullYear(),
+          temperament: init.temperament,
+          status: init.status,
+          notes: init.notes ?? ''
+        });
       } else {
-        this.form.update((prev) => ({ ...prev, code: '', notes: '' }));
+        this.formModel.set({
+          code: '',
+          queenYear: new Date().getFullYear(),
+          temperament: 'calm',
+          status: 'active',
+          notes: ''
+        });
       }
       this.submitted.set(false);
     });
   }
 
-  submit(): void {
-    const form = this.form();
-    if (!form.code.trim()) {
-      this.submitted.set(true);
-      return;
-    }
-
-    this.save.emit(form);
-    this.form.update((prev) => ({ ...prev, code: '' }));
-    this.submitted.set(false);
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    this.submitted.set(true);
+    void submit(this.form, async () => {
+      const value = this.formModel();
+      this.save.emit({
+        code: value.code.trim(),
+        queenYear: value.queenYear,
+        temperament: value.temperament,
+        status: value.status,
+        notes: value.notes
+      });
+      this.formModel.update((prev) => ({ ...prev, code: '' }));
+      this.submitted.set(false);
+    });
   }
 }

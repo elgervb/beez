@@ -1,8 +1,10 @@
 import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { form, FormField, required, submit } from '@angular/forms/signals';
 import { Inspection } from '../../../data/models';
 
 @Component({
   selector: 'bee-inspection-form',
+  imports: [FormField],
   templateUrl: './inspection-form.html',
   styleUrl: './inspection-form.css'
 })
@@ -13,7 +15,7 @@ export class InspectionFormComponent {
   readonly save = output<Omit<Inspection, 'id' | 'createdAt' | 'hiveId'>>();
   readonly dismissed = output<void>();
 
-  readonly form = signal({
+  readonly formModel = signal({
     date: new Date().toISOString().slice(0, 10),
     broodPattern: 'good' as Inspection['broodPattern'],
     storesLevel: 'medium' as Inspection['storesLevel'],
@@ -22,15 +24,19 @@ export class InspectionFormComponent {
     notes: '',
     inspector: localStorage.getItem('beez-inspector') ?? ''
   });
+  readonly form = form(this.formModel, (path) => {
+    required(path.inspector);
+  });
 
-  readonly showOpenBrood = computed(() => this.form().broodSeen);
+  readonly showOpenBrood = computed(() => this.form.broodSeen().value());
   readonly submitted = signal(false);
+  readonly showInspectorError = computed(() => this.submitted() && !this.form.inspector().valid());
 
   constructor() {
     effect(() => {
       const init = this.initial();
       if (init) {
-        this.form.set({
+        this.formModel.set({
           date: init.date,
           broodPattern: init.broodPattern,
           storesLevel: init.storesLevel,
@@ -40,7 +46,7 @@ export class InspectionFormComponent {
           inspector: init.inspector
         });
       } else {
-        this.form.set({
+        this.formModel.set({
           date: new Date().toISOString().slice(0, 10),
           broodPattern: 'good',
           storesLevel: 'medium',
@@ -55,7 +61,7 @@ export class InspectionFormComponent {
   }
 
   applyPreset(preset: 'routine' | 'low-stores' | 'follow-up'): void {
-    this.form.update((f) => {
+    this.formModel.update((f) => {
       if (preset === 'routine') {
         return {
           ...f,
@@ -87,28 +93,27 @@ export class InspectionFormComponent {
     });
   }
 
-  submit(): void {
-    const form = this.form();
-    if (!form.inspector.trim()) {
-      this.submitted.set(true);
-      return;
-    }
-
-    this.save.emit({
-      ...form,
-      open: this.showOpenBrood() ? form.open : false
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    this.submitted.set(true);
+    void submit(this.form, async () => {
+      const value = this.formModel();
+      this.save.emit({
+        ...value,
+        inspector: value.inspector.trim(),
+        open: this.showOpenBrood() ? value.open : false
+      });
+      localStorage.setItem('beez-inspector', value.inspector.trim());
+      this.formModel.set({
+        date: new Date().toISOString().slice(0, 10),
+        broodPattern: 'good',
+        storesLevel: 'medium',
+        broodSeen: false,
+        open: false,
+        notes: '',
+        inspector: ''
+      });
+      this.submitted.set(false);
     });
-    localStorage.setItem('beez-inspector', form.inspector.trim());
-
-    this.form.set({
-      date: new Date().toISOString().slice(0, 10),
-      broodPattern: 'good',
-      storesLevel: 'medium',
-      broodSeen: false,
-      open: false,
-      notes: '',
-      inspector: ''
-    });
-    this.submitted.set(false);
   }
 }

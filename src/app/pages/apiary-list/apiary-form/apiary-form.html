@@ -1,23 +1,23 @@
 <section class="panel">
   <h2>{{ initial() ? 'Edit apiary' : 'New apiary' }}</h2>
-  <form class="form-grid" (submit)="$event.preventDefault(); submit()">
+  <form class="form-grid" (submit)="onSubmit($event)">
     <label>
       Name
-      <input autofocus [value]="form().name" (input)="form.update(f => ({ ...f, name: $any($event.target).value }))" required placeholder="West Orchard" autocomplete="off" inputmode="text" [class.field-invalid]="submitted() && !form().name.trim()" />
-      @if (submitted() && !form().name.trim()) {
+      <input autofocus [formField]="form.name" placeholder="West Orchard" autocomplete="off" inputmode="text" [class.field-invalid]="showNameError()" />
+      @if (showNameError()) {
         <span class="field-error">Name is required</span>
       }
     </label>
     <label>
       Location
-      <input [value]="form().location" (input)="form.update(f => ({ ...f, location: $any($event.target).value }))" required placeholder="Tilburg North" autocomplete="off" inputmode="text" [class.field-invalid]="submitted() && !form().location.trim()" />
-      @if (submitted() && !form().location.trim()) {
+      <input [formField]="form.location" placeholder="My place" autocomplete="off" inputmode="text" [class.field-invalid]="showLocationError()" />
+      @if (showLocationError()) {
         <span class="field-error">Location is required</span>
       }
     </label>
     <label class="full">
       Notes
-      <textarea [value]="form().notes" (input)="form.update(f => ({ ...f, notes: $any($event.target).value }))" rows="2" placeholder="Access gate code, bloom status..."></textarea>
+      <textarea [formField]="form.notes" rows="2" placeholder="Access gate code, bloom status..."></textarea>
     </label>
     <div class="row-buttons">
       <button type="button" class="btn-secondary" (click)="dismissed.emit()">Cancel</button>

@@ -54,7 +54,7 @@
   - `provideServiceWorker('ngsw-worker.js', ...)` with production-only registration.
 - Root component is now a minimal shell rendering only `RouterOutlet`.
 - Global style tokens are now centralized in `src/styles.css` under `:root` (color, focus, radius, and shared surface/action values) and consumed by page/component styles to reduce duplicated hardcoded CSS values.
-- Forms use Angular Signals exclusively — no `FormsModule`, no `[(ngModel)]`. Each form is a `signal<FormObject>()` on the component, mutated via `.update()`. Conditional fields use `computed()`. Templates use `[value]`/`[checked]` + `(input)`/`(change)` event bindings.
+- Forms use Angular Signals exclusively — no `FormsModule`, no `[(ngModel)]`. Feature forms now use Angular Signal Forms (`@angular/forms/signals`) with a `signal<FormObject>()` model plus a `form()` field tree, `[formField]` template bindings, and schema validators (`required`, `min`, `max`) for validation state and messages.
 - **Navigation flow**: Apiary list (`/`) → Hive list (`/apiary/:id`) → Inspection list (`/apiary/:id/hive/:id`). All routes are lazy-loaded.
 - A shared `AppShellComponent` provides the mobile-app layout pattern: compact top header, scrollable content area, and a fixed bottom primary nav strip, with a centered phone-frame presentation on larger screens.
 - Each route page is now a thin container: it loads store data, derives the relevant slice, and wires outputs from child components into the shared shell.
@@ -98,6 +98,8 @@
 ## Changelog (recent)
 - `varroaSeen` field replaced by `broodSeen` + `open` on `Inspection`.
 - `open` field hidden in form until `broodSeen` is checked; auto-reset on uncheck.
+- Migrated `apiary-form`, `hive-form`, and `inspection-form` from manual signal-object input/change handlers to Angular Signal Forms (`form()` + `[formField]`), preserving existing submit flows and preset behavior while moving validation into form schemas.
+- Added custom HTML validation message rendering in feature forms while keeping validation rules on Signal Forms schemas (`required/min/max`) and using field validity state for submit guards.
 - All forms converted from Angular template-driven forms (`FormsModule`/`ngModel`) to signal-based forms (`signal()` + `computed()`). `FormsModule` removed entirely.
 - Lists and forms split into separate standalone components. Route pages now act as containers rather than mixing rendering and form state directly.
 - Component ownership moved to a feature-based structure: child list/form components now live alongside their route containers under each page folder.

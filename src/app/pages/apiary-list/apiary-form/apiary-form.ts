@@ -1,8 +1,10 @@
-import { Component, effect, input, output, signal } from '@angular/core';
+import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { form, FormField, required, submit } from '@angular/forms/signals';
 import { Apiary } from '../../../data/models';
 
 @Component({
   selector: 'bee-apiary-form',
+  imports: [FormField],
   templateUrl: './apiary-form.html',
   styleUrl: './apiary-form.css'
 })
@@ -12,29 +14,39 @@ export class ApiaryFormComponent {
   readonly save = output<{ name: string; location: string; notes: string }>();
   readonly dismissed = output<void>();
 
-  readonly form = signal({ name: '', location: '', notes: '' });
+  readonly formModel = signal({ name: '', location: '', notes: '' });
+  readonly form = form(this.formModel, (path) => {
+    required(path.name);
+    required(path.location);
+  });
   readonly submitted = signal(false);
+  readonly showNameError = computed(() => this.submitted() && !this.form.name().valid());
+  readonly showLocationError = computed(() => this.submitted() && !this.form.location().valid());
+
   constructor() {
     effect(() => {
       const init = this.initial();
       if (init) {
-        this.form.set({ name: init.name, location: init.location ?? '', notes: init.notes ?? '' });
+        this.formModel.set({ name: init.name, location: init.location ?? '', notes: init.notes ?? '' });
       } else {
-        this.form.set({ name: '', location: '', notes: '' });
+        this.formModel.set({ name: '', location: '', notes: '' });
       }
       this.submitted.set(false);
     });
   }
 
-  submit(): void {
-    const form = this.form();
-    if (!form.name.trim() || !form.location.trim()) {
-      this.submitted.set(true);
-      return;
-    }
-
-    this.save.emit(form);
-    this.form.set({ name: '', location: '', notes: '' });
-    this.submitted.set(false);
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    this.submitted.set(true);
+    void submit(this.form, async () => {
+      const value = this.formModel();
+      this.save.emit({
+        name: value.name.trim(),
+        location: value.location.trim(),
+        notes: value.notes
+      });
+      this.formModel.set({ name: '', location: '', notes: '' });
+      this.submitted.set(false);
+    });
   }
 }
