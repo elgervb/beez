@@ -138,6 +138,7 @@
 - Extracted list-view empty-state markup/styles into shared `EmptyStateComponent` and migrated apiary, hive, and inspection list views to use it.
 - Extracted shared CSS values into global custom-property tokens in `src/styles.css` and migrated apiary/hive/inspection page styles plus shared `undo-bar` and `empty-state` components to consume tokenized colors, radii, and focus styles.
 - Switched GitHub Pages CI deployment from `actions/deploy-pages` environment flow to classic `gh-pages` branch publishing (`peaceiris/actions-gh-pages`) to align with repository deployment branch restrictions.
+- Fixed PWA install target for GitHub Pages subpath hosting by setting `manifest.webmanifest` `id`, `start_url`, and `scope` to `/beez/` (instead of `/`) so installed launches open `https://elgervb.github.io/beez/` and avoid root-path 404s.
 
 ## Quick Health Verdict
 This repository is now beyond scaffolding: it is a functional, installable, mobile-first MVP tailored for apiary and hive inspections. The next step is product hardening (editing flows, richer validation, data portability, and deeper tests).
