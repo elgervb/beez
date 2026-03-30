@@ -2,6 +2,8 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SupabaseStore } from '../../data/supabase-store';
 
+type AuthMode = 'login' | 'register';
+
 @Component({
   selector: 'bee-auth',
   templateUrl: './auth.html',
@@ -13,59 +15,76 @@ export class AuthPage implements OnInit {
   private readonly route = inject(ActivatedRoute);
 
   readonly email = signal(localStorage.getItem('beez-auth-email') ?? '');
+  readonly password = signal('');
   readonly busy = signal(false);
   readonly message = signal('');
   readonly configured = signal(this.supabaseStore.isConfigured());
+  readonly mode = signal<AuthMode>('login');
 
   ngOnInit(): void {
     void this.redirectIfAuthenticated();
   }
 
-  async sendMagicLink(): Promise<void> {
-    const value = this.email().trim();
-    if (!value) {
-      this.message.set('Enter your email first.');
+  setMode(mode: AuthMode): void {
+    this.mode.set(mode);
+    this.message.set('');
+    this.password.set('');
+  }
+
+  async signInWithEmailPassword(): Promise<void> {
+    const email = this.email().trim();
+    const password = this.password();
+    if (!email || !password) {
+      this.message.set('Enter your email and password.');
       return;
     }
-
     if (!this.configured()) {
       this.message.set('Supabase is not configured in this app.');
       return;
     }
 
-    const redirect = this.safeRedirectPath();
-    const redirectTo = `${globalThis.location.origin}/beez/auth?redirect=${encodeURIComponent(redirect)}`;
-
     this.busy.set(true);
     this.message.set('');
     try {
-      await this.supabaseStore.signInWithEmailMagicLink(value, redirectTo);
-      localStorage.setItem('beez-auth-email', value);
-      this.message.set('Magic link sent. Open your email and continue sign-in.');
+      await this.supabaseStore.signInWithEmailPassword(email, password);
+      localStorage.setItem('beez-auth-email', email);
+      const redirect = this.safeRedirectPath();
+      await this.router.navigateByUrl(redirect);
     } catch (error: unknown) {
       const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.message.set(`Could not send magic link: ${reason}`);
+      this.message.set(`Sign-in failed: ${reason}`);
     } finally {
       this.busy.set(false);
     }
   }
 
-  async signInWithGoogle(): Promise<void> {
+  async register(): Promise<void> {
+    const email = this.email().trim();
+    const password = this.password();
+    if (!email || !password) {
+      this.message.set('Enter your email and password.');
+      return;
+    }
+    if (password.length < 6) {
+      this.message.set('Password must be at least 6 characters.');
+      return;
+    }
     if (!this.configured()) {
       this.message.set('Supabase is not configured in this app.');
       return;
     }
 
-    const redirect = this.safeRedirectPath();
-    const redirectTo = `${globalThis.location.origin}/beez/auth?redirect=${encodeURIComponent(redirect)}`;
-
     this.busy.set(true);
     this.message.set('');
     try {
-      await this.supabaseStore.signInWithGoogle(redirectTo);
+      await this.supabaseStore.signUpWithEmailPassword(email, password);
+      localStorage.setItem('beez-auth-email', email);
+      this.message.set('Account created! Check your email to confirm your address, then sign in.');
+      this.setMode('login');
     } catch (error: unknown) {
       const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.message.set(`Google sign-in failed: ${reason}`);
+      this.message.set(`Registration failed: ${reason}`);
+    } finally {
       this.busy.set(false);
     }
   }

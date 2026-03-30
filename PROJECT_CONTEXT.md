@@ -142,3 +142,12 @@
 
 ## Quick Health Verdict
 This repository is now beyond scaffolding: it is a functional, installable, mobile-first MVP tailored for apiary and hive inspections. The next step is product hardening (editing flows, richer validation, data portability, and deeper tests).
+
+## Auth
+
+- Auth page supports three modes: **email + password sign-in**, **magic link**, and **Google OAuth**.
+- Users can **self-register** via the "Register" tab on the auth page (email + password, minimum 6 characters).
+- After successful registration, the user is redirected to the Sign in tab and prompted to confirm their email (if email confirmation is enabled in Supabase).
+- `SupabaseStore` exposes `signInWithEmailPassword(email, password)` and `signUpWithEmailPassword(email, password)` in addition to the existing magic-link and Google methods.
+- The auth page uses a `mode` signal (`'login' | 'register'`) to toggle between forms without routing.
+

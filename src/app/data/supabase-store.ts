@@ -137,6 +137,16 @@ export class SupabaseStore {
     if (error) throw error;
   }
 
+  async signInWithEmailPassword(email: string, password: string): Promise<void> {
+    const { error } = await this.client.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+  }
+
+  async signUpWithEmailPassword(email: string, password: string): Promise<void> {
+    const { error } = await this.client.auth.signUp({ email, password });
+    if (error) throw error;
+  }
+
   async signOut(): Promise<void> {
     const { error } = await this.client.auth.signOut();
     if (error) throw error;

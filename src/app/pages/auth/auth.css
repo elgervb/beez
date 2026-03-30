@@ -57,6 +57,27 @@ input {
   gap: 0.45rem;
 }
 
+.mode-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #d8c55e;
+}
+
+.mode-tabs button {
+  border-radius: 0;
+  background: #fff6cf;
+  color: #7e6633;
+  min-height: 2rem;
+  font-size: 0.78rem;
+}
+
+.mode-tabs button.active {
+  background: #2f2f2f;
+  color: #f0dc67;
+}
+
 button {
   border: 0;
   border-radius: 999px;
