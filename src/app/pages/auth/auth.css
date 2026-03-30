@@ -1,12 +1,13 @@
 :host {
   display: block;
-  min-height: 100dvh;
+  height: 100dvh;
+  overflow: auto;
   background: #494949;
   color: #f6f6f6;
 }
 
 .auth-wrap {
-  min-height: 100dvh;
+  min-height: 100%;
   display: grid;
   place-items: center;
   padding: 1rem;
