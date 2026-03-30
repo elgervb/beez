@@ -34,6 +34,7 @@ type InspectionRow = {
   open: boolean;
   notes: string;
   inspector: string;
+  tasks: string[] | null;
   created_at: string;
 };
 
@@ -71,6 +72,7 @@ function toInspection(row: InspectionRow): Inspection {
     open: row.open,
     notes: row.notes,
     inspector: row.inspector,
+    tasks: Array.isArray(row.tasks) ? row.tasks : [],
     createdAt: row.created_at
   };
 }
@@ -255,7 +257,8 @@ export class SupabaseStore {
         brood_seen: payload.broodSeen,
         open: payload.broodSeen ? payload.open : false,
         notes: payload.notes.trim(),
-        inspector: payload.inspector.trim()
+        inspector: payload.inspector.trim(),
+        tasks: payload.tasks ?? []
       })
       .select()
       .single();
@@ -275,6 +278,7 @@ export class SupabaseStore {
         open: payload.broodSeen ? payload.open : false,
         notes: payload.notes.trim(),
         inspector: payload.inspector.trim(),
+        tasks: payload.tasks ?? [],
         updated_at: new Date().toISOString()
       })
       .eq('id', id);
@@ -333,6 +337,7 @@ export class SupabaseStore {
           open: i.open,
           notes: i.notes,
           inspector: i.inspector,
+          tasks: i.tasks ?? [],
           created_at: i.createdAt
         })),
         { onConflict: 'id' }

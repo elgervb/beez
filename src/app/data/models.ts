@@ -27,6 +27,7 @@ export interface Inspection {
   open: boolean;
   notes: string;
   inspector: string;
+  tasks?: string[];
   createdAt: string;
 }
 

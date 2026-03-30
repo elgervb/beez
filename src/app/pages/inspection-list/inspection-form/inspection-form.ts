@@ -28,6 +28,9 @@ export class InspectionFormComponent {
     required(path.inspector);
   });
 
+  readonly tasks = signal<string[]>([]);
+  readonly newTask = signal('');
+
   readonly showOpenBrood = computed(() => this.form.broodSeen().value());
   readonly submitted = signal(false);
   readonly showInspectorError = computed(() => this.submitted() && !this.form.inspector().valid());
@@ -45,6 +48,7 @@ export class InspectionFormComponent {
           notes: init.notes,
           inspector: init.inspector
         });
+        this.tasks.set([...(init.tasks ?? [])]);
       } else {
         this.formModel.set({
           date: new Date().toISOString().slice(0, 10),
@@ -55,9 +59,33 @@ export class InspectionFormComponent {
           notes: '',
           inspector: localStorage.getItem('beez-inspector') ?? ''
         });
+        this.tasks.set([]);
       }
+      this.newTask.set('');
       this.submitted.set(false);
     });
+  }
+
+  addTask(): void {
+    const text = this.newTask().trim();
+    if (!text) return;
+    if (this.tasks().includes(text)) {
+      this.newTask.set('');
+      return;
+    }
+    this.tasks.update((t) => [...t, text]);
+    this.newTask.set('');
+  }
+
+  addTaskOnEnter(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addTask();
+    }
+  }
+
+  removeTask(index: number): void {
+    this.tasks.update((t) => t.filter((_, i) => i !== index));
   }
 
   applyPreset(preset: 'routine' | 'low-stores' | 'follow-up'): void {
@@ -101,7 +129,8 @@ export class InspectionFormComponent {
       this.save.emit({
         ...value,
         inspector: value.inspector.trim(),
-        open: this.showOpenBrood() ? value.open : false
+        open: this.showOpenBrood() ? value.open : false,
+        tasks: this.tasks()
       });
       localStorage.setItem('beez-inspector', value.inspector.trim());
       this.formModel.set({
@@ -113,6 +142,8 @@ export class InspectionFormComponent {
         notes: '',
         inspector: ''
       });
+      this.tasks.set([]);
+      this.newTask.set('');
       this.submitted.set(false);
     });
   }

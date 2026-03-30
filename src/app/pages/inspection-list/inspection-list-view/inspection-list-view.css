@@ -168,6 +168,29 @@
   color: #2a2315;
 }
 
+.inspection-tasks {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.inspection-task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: #2a2315;
+}
+
+.task-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  fill: #8a6530;
+  flex-shrink: 0;
+}
+
 .inspection-meta {
   margin: 0.2rem 0 0;
   font-size: 0.7rem;

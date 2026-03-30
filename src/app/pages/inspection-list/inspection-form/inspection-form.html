@@ -55,6 +55,32 @@
       Notes
       <textarea [formField]="form.notes" rows="3" placeholder="Temperament, queen sighted, feeding needed..."></textarea>
     </label>
+    <div class="full tasks-section">
+      <span class="tasks-label">Tasks for next inspection</span>
+      @if (tasks().length > 0) {
+        <ul class="task-list">
+          @for (task of tasks(); track $index) {
+            <li class="task-item">
+              <span class="task-text">{{ task }}</span>
+              <button type="button" class="btn-remove-task" (click)="removeTask($index)" aria-label="Remove task">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            </li>
+          }
+        </ul>
+      }
+      <div class="task-input-row">
+        <input
+          type="text"
+          class="task-input"
+          placeholder="Add a task..."
+          [value]="newTask()"
+          (input)="newTask.set($any($event.target).value)"
+          (keydown)="addTaskOnEnter($event)"
+        />
+        <button type="button" class="btn-add-task" (click)="addTask()">Add</button>
+      </div>
+    </div>
     <div class="row-buttons">
       <button type="button" class="btn-secondary" (click)="dismissed.emit()">Cancel</button>
       <button type="submit">{{ initial() ? 'Update inspection' : 'Save inspection' }}</button>

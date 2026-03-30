@@ -23,6 +23,16 @@
             @if (inspection.notes) {
               <p class="inspection-notes">{{ inspection.notes }}</p>
             }
+            @if (inspection.tasks && inspection.tasks.length > 0) {
+              <ul class="inspection-tasks">
+                @for (task of inspection.tasks; track task) {
+                  <li class="inspection-task-item">
+                    <svg class="task-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V5h14v14z"/></svg>
+                    {{ task }}
+                  </li>
+                }
+              </ul>
+            }
             <p class="inspection-meta">By {{ inspection.inspector }}</p>
           </div>
         </div>

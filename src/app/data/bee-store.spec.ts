@@ -116,6 +116,41 @@ describe('BeeStore', () => {
     expect(store.getData().inspections.length).toBe(1);
   });
 
+  it('saves and updates tasks for next inspection', () => {
+    store.addApiary({ name: 'A1', location: 'L1', notes: '' });
+    const apiaryId = store.getData().apiaries[0].id;
+    store.addHive({ apiaryId, code: 'H1', queenYear: 2024, temperament: 'calm', status: 'active' });
+    const hiveId = store.getData().hives[0].id;
+
+    store.addInspection({
+      hiveId,
+      date: '2026-03-10',
+      broodPattern: 'good',
+      storesLevel: 'medium',
+      broodSeen: true,
+      open: false,
+      notes: 'All good.',
+      inspector: 'Alice',
+      tasks: ['Check queen', 'Top up feeder']
+    });
+
+    const inspection = store.getData().inspections[0];
+    expect(inspection.tasks).toEqual(['Check queen', 'Top up feeder']);
+
+    store.updateInspection(inspection.id, {
+      date: inspection.date,
+      broodPattern: inspection.broodPattern,
+      storesLevel: inspection.storesLevel,
+      broodSeen: inspection.broodSeen,
+      open: inspection.open,
+      notes: inspection.notes,
+      inspector: inspection.inspector,
+      tasks: ['Replace old frame']
+    });
+
+    expect(store.getData().inspections[0].tasks).toEqual(['Replace old frame']);
+  });
+
   it('exports deep-copy snapshot', () => {
     store.addApiary({ name: 'A1', location: 'L1', notes: '' });
     const snapshot = store.exportData();
