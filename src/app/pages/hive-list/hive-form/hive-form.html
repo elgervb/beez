@@ -1,43 +1,43 @@
 <section class="panel">
-  <h2>{{ initial() ? 'Edit hive' : 'New hive' }}</h2>
+  <h2>{{ initial() ? ('hive.edit' | i18n) : ('hive.create' | i18n) }}</h2>
   <form class="form-grid" (submit)="onSubmit($event)">
     <label>
-      Hive code
-      <input autofocus [formField]="form.code" placeholder="A-03" autocomplete="off" inputmode="text" [class.field-invalid]="showCodeError()" />
+      {{ 'hive.code' | i18n }}
+      <input autofocus [formField]="form.code" [placeholder]="'hive.codePlaceholder' | i18n" autocomplete="off" inputmode="text" [class.field-invalid]="showCodeError()" />
       @if (showCodeError()) {
-        <span class="field-error">Hive code is required</span>
+        <span class="field-error">{{ 'hive.codeRequired' | i18n }}</span>
       }
     </label>
     <label>
-      Queen year
+      {{ 'hive.queenYear' | i18n }}
       <input [formField]="form.queenYear" type="number" inputmode="numeric" autocomplete="off" [class.field-invalid]="showQueenYearError()" />
       @if (showQueenYearError()) {
-        <span class="field-error">{{ formModel().queenYear < 2019 ? 'Queen year must be 2019 or later' : 'Queen year must be 2100 or earlier' }}</span>
+        <span class="field-error">{{ formModel().queenYear < 2019 ? ('hive.queenYearMin' | i18n) : ('hive.queenYearMax' | i18n) }}</span>
       }
     </label>
     <label>
-      Temperament
+      {{ 'hive.temperament' | i18n }}
       <select [formField]="form.temperament">
-        <option value="calm">Calm</option>
-        <option value="mixed">Mixed</option>
-        <option value="defensive">Defensive</option>
+        <option value="calm">{{ 'hive.temperamentCalm' | i18n }}</option>
+        <option value="mixed">{{ 'hive.temperamentMixed' | i18n }}</option>
+        <option value="defensive">{{ 'hive.temperamentDefensive' | i18n }}</option>
       </select>
     </label>
     <label>
-      Status
+      {{ 'hive.status' | i18n }}
       <select [formField]="form.status">
-        <option value="active">Active</option>
-        <option value="weak">Weak</option>
-        <option value="wintering">Wintering</option>
+        <option value="active">{{ 'hive.statusActive' | i18n }}</option>
+        <option value="weak">{{ 'hive.statusWeak' | i18n }}</option>
+        <option value="wintering">{{ 'hive.statusWintering' | i18n }}</option>
       </select>
     </label>
     <label class="full">
-      Notes
-      <textarea [formField]="form.notes" rows="2" placeholder="Location notes, behaviour, feeding..."></textarea>
+      {{ 'hive.notes' | i18n }}
+      <textarea [formField]="form.notes" rows="2" [placeholder]="'hive.notesPlaceholder' | i18n"></textarea>
     </label>
     <div class="row-buttons">
-      <button type="button" class="btn-secondary" (click)="dismissed.emit()">Cancel</button>
-      <button type="submit">{{ initial() ? 'Update hive' : 'Save hive' }}</button>
+      <button type="button" class="btn-secondary" (click)="dismissed.emit()">{{ 'common.cancel' | i18n }}</button>
+      <button type="submit">{{ initial() ? ('hive.update' | i18n) : ('hive.save' | i18n) }}</button>
     </div>
   </form>
 </section>

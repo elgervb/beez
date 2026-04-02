@@ -1,10 +1,11 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Component, HostListener, input, output } from '@angular/core';
+import { TranslatePipe } from '../pipes/translate.pipe';
 
 @Component({
   selector: 'bee-modal-sheet',
   standalone: true,
-  imports: [CdkTrapFocus],
+  imports: [CdkTrapFocus, TranslatePipe],
   templateUrl: './modal-sheet.html',
   styleUrl: './modal-sheet.css'
 })

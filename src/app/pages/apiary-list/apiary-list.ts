@@ -2,7 +2,9 @@ import { Component, OnInit, computed, effect, inject, signal } from '@angular/co
 import { BeeStore, DeletedApiaryBundle } from '../../data/bee-store';
 import { ConnectivityService } from '../../data/connectivity.service';
 import { ModalService } from '../../data/modal.service';
+import { TranslationService } from '../../data/translation.service';
 import { Apiary, BeeData } from '../../data/models';
+import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 import { ApiaryFormComponent } from './apiary-form/apiary-form';
 import { ApiaryListViewComponent } from './apiary-list-view/apiary-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
@@ -14,7 +16,7 @@ import { SupabaseStore } from '../../data/supabase-store';
 
 @Component({
   selector: 'bee-apiary-list',
-  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent],
+  imports: [AppShellComponent, ApiaryListViewComponent, ApiaryFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent, TranslatePipe],
   templateUrl: './apiary-list.html',
   styleUrl: './apiary-list.css'
 })
@@ -22,6 +24,7 @@ export class ApiaryListPage implements OnInit {
   private readonly connectivity = inject(ConnectivityService);
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
+  readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-apiary-search';
   readonly modal = inject(ModalService);
   readonly data = signal<BeeData>(this.localStore.getData());
@@ -111,7 +114,7 @@ export class ApiaryListPage implements OnInit {
 
   private async initializeData(): Promise<void> {
     if (!this.remoteStore.isConfigured()) {
-      this.syncError.set('Supabase is not configured. Using local storage.');
+      this.syncError.set(this.i18n.t('sync.supabaseNotConfiguredLocal'));
       return;
     }
 
@@ -166,7 +169,7 @@ export class ApiaryListPage implements OnInit {
         if ('vibrate' in navigator) navigator.vibrate(10);
         this.closeModal();
       } catch {
-        this.syncError.set('Save failed on Supabase.');
+        this.syncError.set(this.i18n.t('sync.saveFailedSupabase'));
       } finally {
         this.isSyncing.set(false);
       }
@@ -188,10 +191,7 @@ export class ApiaryListPage implements OnInit {
     if (!apiary) return;
     const deletedBundle = this.buildDeletedApiaryBundle(id);
 
-    const typed = globalThis.prompt(
-      `Delete ${apiary.name}? This also removes related hives and inspections. Type the apiary name to confirm.`,
-      ''
-    );
+    const typed = globalThis.prompt(this.i18n.t('apiary.confirmDeleteWithType', { name: apiary.name }), '');
     if ((typed ?? '').trim() !== apiary.name) return;
 
     if (this.remoteReady()) {
@@ -204,7 +204,7 @@ export class ApiaryListPage implements OnInit {
         this.syncError.set('');
         if ('vibrate' in navigator) navigator.vibrate(10);
       } catch {
-        this.syncError.set('Delete failed on Supabase.');
+        this.syncError.set(this.i18n.t('sync.deleteFailedSupabase'));
       } finally {
         this.isSyncing.set(false);
       }
@@ -266,7 +266,7 @@ export class ApiaryListPage implements OnInit {
       this.syncError.set('');
       if ('vibrate' in navigator) navigator.vibrate(10);
     } catch {
-      this.syncError.set('Undo failed on Supabase.');
+      this.syncError.set(this.i18n.t('sync.undoFailedSupabase'));
     } finally {
       this.isSyncing.set(false);
     }

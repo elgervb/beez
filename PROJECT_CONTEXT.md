@@ -33,6 +33,9 @@
   - Domain models: `src/app/data/models.ts`.
   - Local data store service: `src/app/data/bee-store.ts`.
   - Connectivity service: `src/app/data/connectivity.service.ts` for browser online/offline state and reconnect events.
+  - Translation service: `src/app/data/translation.service.ts` for i18n with auto browser-locale detection.
+  - Translation pipe: `src/app/ui/pipes/translate.pipe.ts` for template translations.
+  - Translation files: `public/assets/i18n/{en,nl}.json` for English and Dutch translations.
   - Feature folders under `src/app/pages/`:
     - `apiary-list/` contains the route container plus `apiary-form/` and `apiary-list-view/` component folders
     - `hive-list/` contains the route container plus `hive-form/` and `hive-list-view/` component folders
@@ -64,6 +67,13 @@
 - Each page uses an inline "Add" affordance toggled by a `showForm` signal, rendered in the header action slot; shell tabs visually track Apiaries/Hives/Inspections context.
 - `Inspection` model fields: `id`, `hiveId`, `date`, `broodPattern` (`excellent|good|poor`), `storesLevel` (`high|medium|low`), `broodSeen` (bool), `open` (bool, only meaningful when `broodSeen` is true), `notes`, `inspector`, `createdAt`.
 - `open` (open brood seen) is conditionally shown in the form only when `broodSeen` is checked; unchecking `broodSeen` resets `open` to `false`.
+- **Internationalization (i18n)**:
+  - Supported languages: English (en, default) and Dutch (nl).
+  - Browser language auto-detected on app init via `navigator.language`; user can override using the header flag toggle.
+  - Language preference persisted in localStorage (`beez-lang`).
+  - Translation service (`TranslationService`) lazily loads JSON files from `/assets/i18n/` on demand.
+  - Translate pipe (`i18n`) used in templates with optional parameter interpolation (e.g., `'message' | i18n:{ count: 5 }`).
+  - All UI strings organized by feature namespace (e.g., `apiaries.title`, `apiary.name`, `common.save`).
 - Persistence strategy:
   - Browser `localStorage` under key `beez-data-v1` (offline/cold-start cache)
   - IDs generated with `crypto.randomUUID()` — same UUIDs reused when records are pushed to Supabase
@@ -78,6 +88,7 @@
 - Prettier is configured for 100 char line width and single quotes.
 - EditorConfig enforces 2-space indentation and UTF-8.
 - Angular production bundle budgets are active in `angular.json`.
+- i18n via lightweight `TranslationService` with JSON-based translation files (no build-time artifacts or locale-specific builds required).
 - Latest verification status:
   - `npm run build`: passed
   - `npm run test`: passed (2/2, watch mode)
@@ -97,6 +108,8 @@
 5. Add PWA update notification UX when a new service worker version is available.
 
 ## Changelog (recent)
+- Completed a broad i18n pass for remaining user-facing strings: localized relative date labels and locale formatting, converted remaining runtime settings/auth/sync messages and delete confirmations to translation keys, and expanded `en.json`/`nl.json` with the new keys.
+- Implemented lightweight i18n system: `TranslationService` with browser-locale auto-detection, language switcher in header, JSON translation files for English (en) and Dutch (nl), and reusable `TranslatePipe` for templates. Users can switch languages anytime; preference persists in localStorage (`beez-lang`). See `TRANSLATION_GUIDE.md` for usage.
 - `varroaSeen` field replaced by `broodSeen` + `open` on `Inspection`.
 - `open` field hidden in form until `broodSeen` is checked; auto-reset on uncheck.
 - Validator feedback messages are now defined inline in form templates (HTML) rather than through TypeScript message helper signals.

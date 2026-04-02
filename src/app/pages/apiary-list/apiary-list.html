@@ -1,5 +1,5 @@
-<bee-app-shell tab="apiaries" eyebrow="Beez Field Log" title="Apiaries">
-  <button shell-header-action class="btn-add" (click)="openAdd()">Add</button>
+<bee-app-shell tab="apiaries" [eyebrow]="'app.title' | i18n" [title]="'apiaries.title' | i18n">
+  <button shell-header-action class="btn-add" (click)="openAdd()">{{ 'common.add' | i18n }}</button>
 
   <div shell-content class="apiary-content">
     @if (syncError()) {
@@ -9,8 +9,8 @@
     <bee-search-filter-bar
       [value]="search()"
       [expanded]="searchExpanded()"
-      placeholder="Search apiaries"
-      ariaLabel="Toggle search"
+      [placeholder]="'apiaries.search' | i18n"
+      [ariaLabel]="'common.search' | i18n"
       (valueChange)="setSearch($event)"
       (expandedChange)="searchExpanded.set($event)"
     />
@@ -18,13 +18,13 @@
       (editApiary)="openEdit($event)" (deleteApiary)="deleteApiary($event)" (addRequested)="openAdd()" />
 
     @if (pendingDeletedApiary()) {
-      <bee-undo-bar message="Apiary deleted." (action)="undoDeleteApiary()" />
+      <bee-undo-bar [message]="'apiary.deleted' | i18n" (action)="undoDeleteApiary()" />
     }
   </div>
 </bee-app-shell>
 
 @if (modal.isOpen()) {
-  <bee-modal-sheet [title]="editingApiary() ? 'Edit Apiary' : 'Add Apiary'" (dismiss)="closeModal()">
+  <bee-modal-sheet [title]="editingApiary() ? ('apiary.edit' | i18n) : ('apiary.add' | i18n)" (dismiss)="closeModal()">
     <bee-apiary-form [initial]="editingApiary()" (save)="saveApiary($event)" (dismissed)="closeModal()" />
   </bee-modal-sheet>
 }

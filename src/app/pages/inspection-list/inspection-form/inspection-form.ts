@@ -1,10 +1,11 @@
 import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { form, FormField, required, submit } from '@angular/forms/signals';
 import { Inspection } from '../../../data/models';
+import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
 
 @Component({
   selector: 'bee-inspection-form',
-  imports: [FormField],
+  imports: [FormField, TranslatePipe],
   templateUrl: './inspection-form.html',
   styleUrl: './inspection-form.css'
 })

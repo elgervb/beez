@@ -4,10 +4,11 @@ import { RelativeDatePipe } from '../../../ui/pipes/relative-date.pipe';
 import { BadgeComponent } from '../../../ui/badge/badge';
 import { SwipeToDeleteRowDirective } from '../../../ui/swipe-to-delete-row/swipe-to-delete-row.directive';
 import { EmptyStateComponent } from '../../../ui/empty-state/empty-state';
+import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
 
 @Component({
   selector: 'bee-inspection-list-view',
-  imports: [RelativeDatePipe, BadgeComponent, SwipeToDeleteRowDirective, EmptyStateComponent],
+  imports: [RelativeDatePipe, BadgeComponent, SwipeToDeleteRowDirective, EmptyStateComponent, TranslatePipe],
   templateUrl: './inspection-list-view.html',
   styleUrl: './inspection-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }

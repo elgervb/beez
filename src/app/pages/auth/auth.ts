@@ -1,11 +1,14 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SupabaseStore } from '../../data/supabase-store';
+import { TranslationService } from '../../data/translation.service';
+import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 
 type AuthMode = 'login' | 'register';
 
 @Component({
   selector: 'bee-auth',
+  imports: [TranslatePipe],
   templateUrl: './auth.html',
   styleUrl: './auth.css'
 })
@@ -13,6 +16,7 @@ export class AuthPage implements OnInit {
   private readonly supabaseStore = inject(SupabaseStore);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly i18n = inject(TranslationService);
 
   readonly email = signal(localStorage.getItem('beez-auth-email') ?? '');
   readonly password = signal('');
@@ -35,11 +39,11 @@ export class AuthPage implements OnInit {
     const email = this.email().trim();
     const password = this.password();
     if (!email || !password) {
-      this.message.set('Enter your email and password.');
+      this.message.set(this.i18n.t('auth.enterCredentials'));
       return;
     }
     if (!this.configured()) {
-      this.message.set('Supabase is not configured in this app.');
+      this.message.set(this.i18n.t('auth.notConfiguredApp'));
       return;
     }
 
@@ -52,7 +56,7 @@ export class AuthPage implements OnInit {
       await this.router.navigateByUrl(redirect);
     } catch (error: unknown) {
       const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.message.set(`Sign-in failed: ${reason}`);
+      this.message.set(this.i18n.t('auth.signInFailed', { reason }));
     } finally {
       this.busy.set(false);
     }
@@ -62,15 +66,15 @@ export class AuthPage implements OnInit {
     const email = this.email().trim();
     const password = this.password();
     if (!email || !password) {
-      this.message.set('Enter your email and password.');
+      this.message.set(this.i18n.t('auth.enterCredentials'));
       return;
     }
     if (password.length < 6) {
-      this.message.set('Password must be at least 6 characters.');
+      this.message.set(this.i18n.t('auth.passwordMinLength'));
       return;
     }
     if (!this.configured()) {
-      this.message.set('Supabase is not configured in this app.');
+      this.message.set(this.i18n.t('auth.notConfiguredApp'));
       return;
     }
 
@@ -79,11 +83,11 @@ export class AuthPage implements OnInit {
     try {
       await this.supabaseStore.signUpWithEmailPassword(email, password);
       localStorage.setItem('beez-auth-email', email);
-      this.message.set('Account created! Check your email to confirm your address, then sign in.');
+      this.message.set(this.i18n.t('auth.accountCreated'));
       this.setMode('login');
     } catch (error: unknown) {
       const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.message.set(`Registration failed: ${reason}`);
+      this.message.set(this.i18n.t('auth.registrationFailed', { reason }));
     } finally {
       this.busy.set(false);
     }

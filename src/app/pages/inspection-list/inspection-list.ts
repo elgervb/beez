@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { BeeStore } from '../../data/bee-store';
 import { ConnectivityService } from '../../data/connectivity.service';
 import { ModalService } from '../../data/modal.service';
+import { TranslationService } from '../../data/translation.service';
 import { BeeData, Inspection } from '../../data/models';
+import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 import { InspectionFormComponent } from './inspection-form/inspection-form';
 import { InspectionListViewComponent } from './inspection-list-view/inspection-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
@@ -26,7 +28,7 @@ type InspectionFormValue = {
 
 @Component({
   selector: 'bee-inspection-list',
-  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent],
+  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent, TranslatePipe],
   templateUrl: './inspection-list.html',
   styleUrl: './inspection-list.css'
 })
@@ -34,6 +36,7 @@ export class InspectionListPage implements OnInit {
   private readonly connectivity = inject(ConnectivityService);
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
+  readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-inspection-search';
   private static readonly BROOD_KEY = 'beez-filter-inspection-brood';
   private readonly route = inject(ActivatedRoute);
@@ -71,14 +74,15 @@ export class InspectionListPage implements OnInit {
     const names = this.data().inspections.map((i) => i.inspector).filter(Boolean);
     return [...new Set(names)].sort((a, b) => a.localeCompare(b));
   });
+
   readonly editingInspection = signal<Inspection | null>(null);
   readonly pendingDeletedInspection = signal<Inspection | null>(null);
   readonly pendingBulkDeletedInspections = signal<Inspection[] | null>(null);
   readonly shareMessage = signal<string>('');
   readonly undoMessage = computed(() => {
     const bulkDeleted = this.pendingBulkDeletedInspections();
-    if (bulkDeleted?.length) return `${bulkDeleted.length} inspections deleted.`;
-    return 'Inspection deleted.';
+    if (bulkDeleted?.length) return this.i18n.t('inspection.deletedMany', { count: bulkDeleted.length });
+    return this.i18n.t('inspection.deleted');
   });
   private shareMessageTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -185,9 +189,9 @@ export class InspectionListPage implements OnInit {
     } else {
       try {
         await navigator.clipboard.writeText(text);
-        this.setShareMessage('Copied to clipboard');
+        this.setShareMessage(this.i18n.t('common.copiedToClipboard'));
       } catch {
-        this.setShareMessage('Sharing not available on this device.');
+        this.setShareMessage(this.i18n.t('inspection.shareUnavailable'));
       }
     }
   }
@@ -205,7 +209,7 @@ export class InspectionListPage implements OnInit {
 
   private async initializeData(): Promise<void> {
     if (!this.remoteStore.isConfigured()) {
-      this.syncError.set('Supabase is not configured. Using local storage.');
+      this.syncError.set(this.i18n.t('sync.supabaseNotConfiguredLocal'));
       return;
     }
 
@@ -277,7 +281,7 @@ export class InspectionListPage implements OnInit {
       if ('vibrate' in navigator) navigator.vibrate(10);
       this.closeModal();
     } catch {
-      this.syncError.set('Save failed on Supabase.');
+      this.syncError.set(this.i18n.t('sync.saveFailedSupabase'));
     } finally {
       this.isSyncing.set(false);
     }
@@ -306,7 +310,7 @@ export class InspectionListPage implements OnInit {
   private async removeInspection(id: string): Promise<void> {
     const inspection = this.inspections().find((i) => i.id === id);
     if (!inspection) return;
-    const confirmed = globalThis.confirm(`Delete inspection from ${inspection.date}?`);
+    const confirmed = globalThis.confirm(this.i18n.t('inspection.confirmDeleteDate', { date: inspection.date }));
     if (!confirmed) return;
 
     if (this.remoteReady()) {
@@ -320,7 +324,7 @@ export class InspectionListPage implements OnInit {
         this.syncError.set('');
         if ('vibrate' in navigator) navigator.vibrate(10);
       } catch {
-        this.syncError.set('Delete failed on Supabase.');
+        this.syncError.set(this.i18n.t('sync.deleteFailedSupabase'));
       } finally {
         this.isSyncing.set(false);
       }
@@ -339,7 +343,7 @@ export class InspectionListPage implements OnInit {
   private async removeSelectedInspections(): Promise<void> {
     const ids = this.selectedInspectionIds();
     if (!ids.length) return;
-    const confirmed = globalThis.confirm(`Delete ${ids.length} selected inspections?`);
+    const confirmed = globalThis.confirm(this.i18n.t('inspection.confirmDeleteSelected', { count: ids.length }));
     if (!confirmed) return;
 
     if (this.remoteReady()) {
@@ -351,9 +355,9 @@ export class InspectionListPage implements OnInit {
         this.pendingBulkDeletedInspections.set(null);
         this.syncError.set('');
         this.selectedInspectionIds.set([]);
-        this.setShareMessage(`${ids.length} inspections deleted.`);
+        this.setShareMessage(this.i18n.t('inspection.deletedMany', { count: ids.length }));
       } catch {
-        this.syncError.set('Bulk delete failed on Supabase.');
+        this.syncError.set(this.i18n.t('sync.bulkDeleteFailedSupabase'));
       } finally {
         this.isSyncing.set(false);
       }
@@ -372,7 +376,7 @@ export class InspectionListPage implements OnInit {
       this.startUndoDeleteWindow();
     }
     this.selectedInspectionIds.set([]);
-    this.setShareMessage(`${deleted.length} inspections deleted.`);
+    this.setShareMessage(this.i18n.t('inspection.deletedMany', { count: deleted.length }));
   }
 
   private async restoreDeletedInspectionRemote(): Promise<void> {
@@ -398,7 +402,7 @@ export class InspectionListPage implements OnInit {
       this.syncError.set('');
       if ('vibrate' in navigator) navigator.vibrate(10);
     } catch {
-      this.syncError.set('Undo failed on Supabase.');
+      this.syncError.set(this.i18n.t('sync.undoFailedSupabase'));
     } finally {
       this.isSyncing.set(false);
     }

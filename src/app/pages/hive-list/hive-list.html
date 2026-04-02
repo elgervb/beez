@@ -2,11 +2,11 @@
   tab="hives"
   [hivesLink]="['/apiary', apiaryId]"
   [backLink]="'/'"
-  backLabel="Apiaries"
+  [backLabel]="'apiaries.title' | i18n"
   [eyebrow]="apiary()?.location ?? ''"
-  [title]="apiary()?.name ?? 'Hives'"
+  [title]="apiary()?.name ?? ('hives.title' | i18n)"
 >
-  <button shell-header-action class="btn-add" (click)="openAdd()">Add</button>
+  <button shell-header-action class="btn-add" (click)="openAdd()">{{ 'common.add' | i18n }}</button>
 
   <div shell-content class="hive-content">
     @if (syncError()) {
@@ -18,16 +18,16 @@
         <bee-search-filter-bar
           [value]="search()"
           [expanded]="searchExpanded()"
-          placeholder="Search hives"
-          ariaLabel="Toggle search"
+          [placeholder]="'hives.search' | i18n"
+          [ariaLabel]="'common.search' | i18n"
           (valueChange)="setSearch($event)"
           (expandedChange)="searchExpanded.set($event)"
         />
         <select [value]="statusFilter()" (change)="setStatusFilter($any($event.target).value)">
-          <option value="all">All statuses</option>
-          <option value="active">Active</option>
-          <option value="weak">Weak</option>
-          <option value="wintering">Wintering</option>
+          <option value="all">{{ 'hive.inspections' | i18n }}</option>
+          <option value="active">{{ 'hive.inspections' | i18n }}</option>
+          <option value="weak">{{ 'hive.inspections' | i18n }}</option>
+          <option value="wintering">{{ 'hive.inspections' | i18n }}</option>
         </select>
       </section>
     }
@@ -35,15 +35,15 @@
     @if (selectedHiveIds().length > 0) {
       <div class="bulk-actions">
         <bee-badge [label]="selectedHiveIds().length + ' selected'" variant="neutral" appearance="outline" size="small" />
-        <button type="button" (click)="applyBulkStatus('active')">Set active</button>
-        <button type="button" (click)="applyBulkStatus('weak')">Set weak</button>
-        <button type="button" (click)="applyBulkStatus('wintering')">Set wintering</button>
+        <button type="button" (click)="applyBulkStatus('active')">{{ 'hive.inspections' | i18n }}</button>
+        <button type="button" (click)="applyBulkStatus('weak')">{{ 'hive.inspections' | i18n }}</button>
+        <button type="button" (click)="applyBulkStatus('wintering')">{{ 'hive.inspections' | i18n }}</button>
       </div>
     }
 
     @if (dueNowHives().length > 0) {
       <section class="due-panel">
-        <h2>Due now</h2>
+        <h2>{{ 'hive.inspections' | i18n }}</h2>
         <div class="due-list">
           @for (hive of dueNowHives(); track hive.id) {
             <button type="button" class="due-item" (click)="openHiveInspections(hive.id)">
@@ -61,13 +61,13 @@
       (editHive)="openEdit($event)" (deleteHive)="deleteHive($event)" (addRequested)="openAdd()" />
 
     @if (pendingDeletedHive()) {
-      <bee-undo-bar message="Hive deleted." (action)="undoDeleteHive()" />
+      <bee-undo-bar [message]="'hive.deleted' | i18n" (action)="undoDeleteHive()" />
     }
   </div>
 </bee-app-shell>
 
 @if (modal.isOpen()) {
-  <bee-modal-sheet [title]="editingHive() ? 'Edit Hive' : 'Add Hive'" (dismiss)="closeModal()">
+  <bee-modal-sheet [title]="editingHive() ? ('hive.edit' | i18n) : ('hive.add' | i18n)" (dismiss)="closeModal()">
     <bee-hive-form [initial]="editingHive()" (save)="saveHive($event)" (dismissed)="closeModal()" />
   </bee-modal-sheet>
 }

@@ -1,34 +1,34 @@
 <section class="panel">
-  <h2>{{ initial() ? 'Edit inspection' : 'Log inspection' }}</h2>
-  <div class="preset-row" aria-label="Quick presets">
-    <button type="button" class="preset-btn" (click)="applyPreset('routine')">Routine</button>
-    <button type="button" class="preset-btn" (click)="applyPreset('low-stores')">Low stores</button>
-    <button type="button" class="preset-btn" (click)="applyPreset('follow-up')">Follow-up</button>
+  <h2>{{ initial() ? ('inspection.edit' | i18n) : ('inspection.log' | i18n) }}</h2>
+  <div class="preset-row" [attr.aria-label]="'inspection.quickPresets' | i18n">
+    <button type="button" class="preset-btn" (click)="applyPreset('routine')">{{ 'inspection.presetRoutine' | i18n }}</button>
+    <button type="button" class="preset-btn" (click)="applyPreset('low-stores')">{{ 'inspection.presetLowStores' | i18n }}</button>
+    <button type="button" class="preset-btn" (click)="applyPreset('follow-up')">{{ 'inspection.presetFollowUp' | i18n }}</button>
   </div>
   <form class="form-grid" (submit)="onSubmit($event)">
     <label>
-      Date
+      {{ 'inspection.date' | i18n }}
       <input [formField]="form.date" type="date" />
     </label>
     <label>
-      Brood pattern
+      {{ 'inspection.broodPattern' | i18n }}
       <select [formField]="form.broodPattern">
-        <option value="excellent">Excellent</option>
-        <option value="good">Good</option>
-        <option value="poor">Poor</option>
+        <option value="excellent">{{ 'inspection.broodPatternExcellent' | i18n }}</option>
+        <option value="good">{{ 'inspection.broodPatternGood' | i18n }}</option>
+        <option value="poor">{{ 'inspection.broodPatternPoor' | i18n }}</option>
       </select>
     </label>
     <label>
-      Stores
+      {{ 'inspection.storesLevel' | i18n }}
       <select [formField]="form.storesLevel">
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
+        <option value="high">{{ 'inspection.storesLevelHigh' | i18n }}</option>
+        <option value="medium">{{ 'inspection.storesLevelMedium' | i18n }}</option>
+        <option value="low">{{ 'inspection.storesLevelLow' | i18n }}</option>
       </select>
     </label>
     <label>
-      Inspector
-      <input autofocus [formField]="form.inspector" placeholder="Your name" autocomplete="off" inputmode="text" list="inspectors-list" [class.field-invalid]="showInspectorError()" />
+      {{ 'inspection.inspector' | i18n }}
+      <input autofocus [formField]="form.inspector" [placeholder]="'inspection.inspectorPlaceholder' | i18n" autocomplete="off" inputmode="text" list="inspectors-list" [class.field-invalid]="showInspectorError()" />
       @if (knownInspectors().length > 0) {
         <datalist id="inspectors-list">
           @for (name of knownInspectors(); track name) {
@@ -37,27 +37,27 @@
         </datalist>
       }
       @if (showInspectorError()) {
-        <span class="field-error">Inspector name is required</span>
+        <span class="field-error">{{ 'inspection.inspectorRequired' | i18n }}</span>
       }
     </label>
     <label class="switch-row">
       <input type="checkbox" [formField]="form.broodSeen"
         (change)="formModel.update(f => ({ ...f, open: $any($event.target).checked ? f.open : false }))" />
-      Brood seen
+      {{ 'inspection.broodSeen' | i18n }}
     </label>
     @if (showOpenBrood()) {
       <label class="switch-row">
         <input type="checkbox" [formField]="form.open" />
-        Open brood seen
+        {{ 'inspection.openBrood' | i18n }}
       </label>
     }
     <label class="full">
-      Notes
-      <textarea [formField]="form.notes" rows="3" placeholder="Temperament, queen sighted, feeding needed..."></textarea>
+      {{ 'inspection.notes' | i18n }}
+      <textarea [formField]="form.notes" rows="3" [placeholder]="'inspection.notesLongPlaceholder' | i18n"></textarea>
     </label>
     <div class="row-buttons">
-      <button type="button" class="btn-secondary" (click)="dismissed.emit()">Cancel</button>
-      <button type="submit">{{ initial() ? 'Update inspection' : 'Save inspection' }}</button>
+      <button type="button" class="btn-secondary" (click)="dismissed.emit()">{{ 'common.cancel' | i18n }}</button>
+      <button type="submit">{{ initial() ? ('inspection.update' | i18n) : ('inspection.save' | i18n) }}</button>
     </div>
   </form>
 </section>

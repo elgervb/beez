@@ -1,10 +1,11 @@
 import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { form, FormField, max, min, required, submit } from '@angular/forms/signals';
 import { Hive } from '../../../data/models';
+import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
 
 @Component({
   selector: 'bee-hive-form',
-  imports: [FormField],
+  imports: [FormField, TranslatePipe],
   templateUrl: './hive-form.html',
   styleUrl: './hive-form.css'
 })

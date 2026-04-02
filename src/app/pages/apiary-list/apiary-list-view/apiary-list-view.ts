@@ -4,10 +4,11 @@ import { Apiary } from '../../../data/models';
 import { BadgeComponent } from '../../../ui/badge/badge';
 import { SwipeToDeleteRowDirective } from '../../../ui/swipe-to-delete-row/swipe-to-delete-row.directive';
 import { EmptyStateComponent } from '../../../ui/empty-state/empty-state';
+import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
 
 @Component({
   selector: 'bee-apiary-list-view',
-  imports: [RouterLink, BadgeComponent, SwipeToDeleteRowDirective, EmptyStateComponent],
+  imports: [RouterLink, BadgeComponent, SwipeToDeleteRowDirective, EmptyStateComponent, TranslatePipe],
   templateUrl: './apiary-list-view.html',
   styleUrl: './apiary-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }
@@ -19,7 +20,7 @@ export class ApiaryListViewComponent {
   readonly deleteApiary = output<string>();
   readonly addRequested = output<void>();
 
-  constructor(private el: ElementRef<HTMLElement>) {}
+  constructor(private readonly el: ElementRef<HTMLElement>) {}
 
   onKeydown(event: KeyboardEvent): void {
     const links = Array.from(

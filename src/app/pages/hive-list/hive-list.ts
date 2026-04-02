@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BeeStore, DeletedHiveBundle } from '../../data/bee-store';
 import { ConnectivityService } from '../../data/connectivity.service';
 import { ModalService } from '../../data/modal.service';
+import { TranslationService } from '../../data/translation.service';
 import { BeeData, Hive } from '../../data/models';
+import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 import { HiveFormComponent } from './hive-form/hive-form';
 import { HiveListViewComponent } from './hive-list-view/hive-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
@@ -23,7 +25,7 @@ type HiveFormValue = {
 
 @Component({
   selector: 'bee-hive-list',
-  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent],
+  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent, TranslatePipe],
   templateUrl: './hive-list.html',
   styleUrl: './hive-list.css'
 })
@@ -31,6 +33,7 @@ export class HiveListPage implements OnInit {
   private readonly connectivity = inject(ConnectivityService);
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
+  readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-hive-search';
   private static readonly STATUS_KEY = 'beez-filter-hive-status';
   private readonly route = inject(ActivatedRoute);
@@ -198,15 +201,15 @@ export class HiveListPage implements OnInit {
 
   lastInspectionLabel(hiveId: string): string {
     const inspections = this.data().inspections.filter((i) => i.hiveId === hiveId);
-    if (!inspections.length) return 'No inspections';
+    if (!inspections.length) return this.i18n.t('hive.noInspections');
     const latest = [...inspections].sort((a, b) => b.date.localeCompare(a.date))[0];
     const days = Math.floor((Date.now() - new Date(latest.date).getTime()) / (1000 * 60 * 60 * 24));
-    return days === 0 ? 'Today' : `${days}d ago`;
+    return days === 0 ? this.i18n.t('common.today') : this.i18n.t('common.daysAgoShort', { days });
   }
 
   private async initializeData(): Promise<void> {
     if (!this.remoteStore.isConfigured()) {
-      this.syncError.set('Supabase is not configured. Using local storage.');
+      this.syncError.set(this.i18n.t('sync.supabaseNotConfiguredLocal'));
       return;
     }
 
@@ -261,7 +264,7 @@ export class HiveListPage implements OnInit {
         if ('vibrate' in navigator) navigator.vibrate(10);
         this.closeModal();
       } catch {
-        this.syncError.set('Save failed on Supabase.');
+        this.syncError.set(this.i18n.t('sync.saveFailedSupabase'));
       } finally {
         this.isSyncing.set(false);
       }
@@ -301,7 +304,7 @@ export class HiveListPage implements OnInit {
         this.syncError.set('');
         this.selectedHiveIds.set([]);
       } catch {
-        this.syncError.set('Bulk update failed on Supabase.');
+        this.syncError.set(this.i18n.t('sync.bulkUpdateFailedSupabase'));
       } finally {
         this.isSyncing.set(false);
       }
@@ -325,7 +328,7 @@ export class HiveListPage implements OnInit {
     const hive = this.hives().find((h) => h.id === id);
     if (!hive) return;
     const deletedBundle = this.buildDeletedHiveBundle(id);
-    const confirmed = globalThis.confirm(`Delete hive ${hive.code}?`);
+    const confirmed = globalThis.confirm(this.i18n.t('hive.confirmDelete', { code: hive.code }));
     if (!confirmed) return;
 
     if (this.remoteReady()) {
@@ -338,7 +341,7 @@ export class HiveListPage implements OnInit {
         this.syncError.set('');
         if ('vibrate' in navigator) navigator.vibrate(10);
       } catch {
-        this.syncError.set('Delete failed on Supabase.');
+        this.syncError.set(this.i18n.t('sync.deleteFailedSupabase'));
       } finally {
         this.isSyncing.set(false);
       }
@@ -408,7 +411,7 @@ export class HiveListPage implements OnInit {
       this.syncError.set('');
       if ('vibrate' in navigator) navigator.vibrate(10);
     } catch {
-      this.syncError.set('Undo failed on Supabase.');
+      this.syncError.set(this.i18n.t('sync.undoFailedSupabase'));
     } finally {
       this.isSyncing.set(false);
     }

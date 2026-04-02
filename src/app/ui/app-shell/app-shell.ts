@@ -2,12 +2,14 @@ import { Component, OnDestroy, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { ConnectivityService } from '../../data/connectivity.service';
+import { TranslationService } from '../../data/translation.service';
+import { TranslatePipe } from '../pipes/translate.pipe';
 
 type AppRouteLink = string | readonly (string | number)[];
 
 @Component({
   selector: 'bee-app-shell',
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe],
   templateUrl: './app-shell.html',
   styleUrl: './app-shell.css',
   host: {
@@ -16,6 +18,7 @@ type AppRouteLink = string | readonly (string | number)[];
 })
 export class AppShellComponent implements OnDestroy {
   private readonly connectivity = inject(ConnectivityService);
+  protected readonly i18n = inject(TranslationService);
   readonly title = input.required<string>();
   readonly eyebrow = input<string>('');
   readonly backLabel = input<string>('');
@@ -94,6 +97,30 @@ export class AppShellComponent implements OnDestroy {
       clearTimeout(this.flashTimer);
       this.flashTimer = null;
     }
+  }
+
+  toggleLanguage(): void {
+    const next = this.i18n.currentLang() === 'en' ? 'nl' : 'en';
+    this.i18n.setLanguage(next);
+  }
+
+  currentLanguageFlag(): string {
+    return this.i18n.currentLang() === 'en' ? 'EN' : 'NL';
+  }
+
+  currentLanguageLabel(): string {
+    return this.i18n.currentLang() === 'en' ? this.i18n.t('language.english') : this.i18n.t('language.dutch');
+  }
+
+  languageSwitchAriaLabel(): string {
+    return this.i18n.t('language.switchCurrent', { language: this.currentLanguageLabel() });
+  }
+
+  pluralSuffix(): string {
+    if (this.i18n.currentLang() === 'nl') {
+      return this.pendingLocalChanges() === 1 ? '' : 'en';
+    }
+    return this.pendingLocalChanges() === 1 ? '' : 's';
   }
 
   private readPendingChanges(): number {

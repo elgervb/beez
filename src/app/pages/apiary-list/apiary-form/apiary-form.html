@@ -1,27 +1,27 @@
 <section class="panel">
-  <h2>{{ initial() ? 'Edit apiary' : 'New apiary' }}</h2>
+  <h2>{{ initial() ? ('apiary.edit' | i18n) : ('apiary.create' | i18n) }}</h2>
   <form class="form-grid" (submit)="onSubmit($event)">
     <label>
-      Name
-      <input autofocus [formField]="form.name" placeholder="West Orchard" autocomplete="off" inputmode="text" [class.field-invalid]="showNameError()" />
+      {{ 'apiary.name' | i18n }}
+      <input autofocus [formField]="form.name" [placeholder]="'apiary.namePlaceholder' | i18n" autocomplete="off" inputmode="text" [class.field-invalid]="showNameError()" />
       @if (showNameError()) {
-        <span class="field-error">Name is required</span>
+        <span class="field-error">{{ 'apiary.nameRequired' | i18n }}</span>
       }
     </label>
     <label>
-      Location
-      <input [formField]="form.location" placeholder="My place" autocomplete="off" inputmode="text" [class.field-invalid]="showLocationError()" />
+      {{ 'apiary.location' | i18n }}
+      <input [formField]="form.location" [placeholder]="'apiary.locationPlaceholder' | i18n" autocomplete="off" inputmode="text" [class.field-invalid]="showLocationError()" />
       @if (showLocationError()) {
-        <span class="field-error">Location is required</span>
+        <span class="field-error">{{ 'apiary.locationRequired' | i18n }}</span>
       }
     </label>
     <label class="full">
-      Notes
-      <textarea [formField]="form.notes" rows="2" placeholder="Access gate code, bloom status..."></textarea>
+      {{ 'apiary.notes' | i18n }}
+      <textarea [formField]="form.notes" rows="2" [placeholder]="'apiary.notesPlaceholder' | i18n"></textarea>
     </label>
     <div class="row-buttons">
-      <button type="button" class="btn-secondary" (click)="dismissed.emit()">Cancel</button>
-      <button type="submit">{{ initial() ? 'Update apiary' : 'Save apiary' }}</button>
+      <button type="button" class="btn-secondary" (click)="dismissed.emit()">{{ 'common.cancel' | i18n }}</button>
+      <button type="submit">{{ initial() ? ('apiary.update' | i18n) : ('apiary.save' | i18n) }}</button>
     </div>
   </form>
 </section>

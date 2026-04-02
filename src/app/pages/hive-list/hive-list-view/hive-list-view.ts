@@ -1,14 +1,14 @@
 import { Component, ElementRef, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TitleCasePipe } from '@angular/common';
 import { Hive } from '../../../data/models';
 import { BadgeComponent } from '../../../ui/badge/badge';
 import { SwipeToDeleteRowDirective } from '../../../ui/swipe-to-delete-row/swipe-to-delete-row.directive';
 import { EmptyStateComponent } from '../../../ui/empty-state/empty-state';
+import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
 
 @Component({
   selector: 'bee-hive-list-view',
-  imports: [RouterLink, BadgeComponent, TitleCasePipe, SwipeToDeleteRowDirective, EmptyStateComponent],
+  imports: [RouterLink, BadgeComponent, SwipeToDeleteRowDirective, EmptyStateComponent, TranslatePipe],
   templateUrl: './hive-list-view.html',
   styleUrl: './hive-list-view.css',
   host: { '(keydown)': 'onKeydown($event)' }

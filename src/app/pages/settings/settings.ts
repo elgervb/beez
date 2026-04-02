@@ -2,12 +2,14 @@ import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, computed, inject, signal, viewChild } from '@angular/core';
 import { BeeStore, DataSnapshot, ImportMode, ImportPreview, IntegrityReport } from '../../data/bee-store';
 import { ConnectivityService } from '../../data/connectivity.service';
+import { TranslationService } from '../../data/translation.service';
 import { SupabaseStore } from '../../data/supabase-store';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
+import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 
 @Component({
   selector: 'bee-settings',
-  imports: [AppShellComponent, DatePipe],
+  imports: [AppShellComponent, DatePipe, TranslatePipe],
   templateUrl: './settings.html',
   styleUrl: './settings.css'
 })
@@ -15,6 +17,7 @@ export class SettingsPage implements OnDestroy, OnInit {
   private readonly store = inject(BeeStore);
   private readonly connectivity = inject(ConnectivityService);
   private readonly supabaseStore = inject(SupabaseStore);
+  readonly i18n = inject(TranslationService);
 
   readonly data = computed(() => this.store.getData());
   readonly importMessage = signal<string>('');
@@ -83,7 +86,7 @@ export class SettingsPage implements OnDestroy, OnInit {
     anchor.download = `beez-backup-${new Date().toISOString().slice(0, 10)}.json`;
     anchor.click();
     URL.revokeObjectURL(url);
-    this.importMessage.set('Backup exported.');
+    this.importMessage.set(this.i18n.t('settings.backupExported'));
   }
 
   openBackupPicker(): void {
@@ -101,14 +104,14 @@ export class SettingsPage implements OnDestroy, OnInit {
       const preview = this.store.previewImport(parsed);
       if (!preview) {
         this.pendingImport.set(null);
-        this.importMessage.set('Invalid backup file.');
+        this.importMessage.set(this.i18n.t('settings.invalidBackupFile'));
         return;
       }
       this.pendingImport.set({ raw: parsed, preview });
-      this.importMessage.set('Review import preview and choose Merge or Replace.');
+      this.importMessage.set(this.i18n.t('settings.reviewImportPreview'));
     } catch {
       this.pendingImport.set(null);
-      this.importMessage.set('Could not read backup file.');
+      this.importMessage.set(this.i18n.t('settings.couldNotReadBackupFile'));
     } finally {
       input.value = '';
     }
@@ -118,7 +121,9 @@ export class SettingsPage implements OnDestroy, OnInit {
     const pending = this.pendingImport();
     if (!pending) return;
     const imported = this.store.importData(pending.raw, mode);
-    this.importMessage.set(imported ? `Backup ${mode} completed.` : 'Import failed.');
+    this.importMessage.set(
+      imported ? this.i18n.t('settings.backupModeCompleted', { mode }) : this.i18n.t('settings.importFailed')
+    );
     if (imported) {
       this.pendingImport.set(null);
       this.snapshots.set(this.store.listSnapshots());
@@ -127,25 +132,25 @@ export class SettingsPage implements OnDestroy, OnInit {
 
   cancelImportPreview(): void {
     this.pendingImport.set(null);
-    this.importMessage.set('Import canceled.');
+    this.importMessage.set(this.i18n.t('settings.importCanceled'));
   }
 
   restoreSnapshot(id: string): void {
     const snapshot = this.snapshots().find((s) => s.id === id);
     if (!snapshot) return;
-    const confirmed = globalThis.confirm('Restore this snapshot and replace current data?');
+    const confirmed = globalThis.confirm(this.i18n.t('settings.confirmRestoreSnapshot'));
     if (!confirmed) return;
     const restored = this.store.restoreSnapshot(id);
-    this.importMessage.set(restored ? 'Snapshot restored.' : 'Snapshot restore failed.');
+    this.importMessage.set(restored ? this.i18n.t('settings.snapshotRestored') : this.i18n.t('settings.snapshotRestoreFailed'));
   }
 
   runIntegrityCheck(): void {
     const report = this.store.getIntegrityReport();
     this.integrityReport.set(report);
     if (report.orphanHives === 0 && report.orphanInspections === 0) {
-      this.importMessage.set('Integrity check passed.');
+      this.importMessage.set(this.i18n.t('settings.integrityCheckPassed'));
     } else {
-      this.importMessage.set('Integrity issues found. You can repair them.');
+      this.importMessage.set(this.i18n.t('settings.integrityIssuesFound'));
     }
   }
 
@@ -153,10 +158,13 @@ export class SettingsPage implements OnDestroy, OnInit {
     const repaired = this.store.repairIntegrity();
     this.integrityReport.set(repaired.after);
     if (repaired.before.orphanHives === 0 && repaired.before.orphanInspections === 0) {
-      this.importMessage.set('No integrity issues to repair.');
+      this.importMessage.set(this.i18n.t('settings.noIntegrityIssuesToRepair'));
     } else {
       this.importMessage.set(
-        `Removed ${repaired.before.orphanHives} orphan hives and ${repaired.before.orphanInspections} orphan inspections.`
+        this.i18n.t('settings.integrityRepairSummary', {
+          orphanHives: repaired.before.orphanHives,
+          orphanInspections: repaired.before.orphanInspections
+        })
       );
     }
   }
@@ -167,15 +175,15 @@ export class SettingsPage implements OnDestroy, OnInit {
 
   async signInWithGoogle(): Promise<void> {
     if (!this.authConfigured()) {
-      this.importMessage.set('Supabase is not configured. Add URL and publishable key first.');
+      this.importMessage.set(this.i18n.t('settings.supabaseNotConfiguredAddKeys'));
       return;
     }
 
     try {
       await this.supabaseStore.signInWithGoogle(globalThis.location.origin);
     } catch (error: unknown) {
-      const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.importMessage.set(`Google sign-in failed: ${reason}`);
+      const reason = error instanceof Error ? error.message : this.i18n.t('common.unknownError');
+      this.importMessage.set(this.i18n.t('settings.googleSignInFailed', { reason }));
     }
   }
 
@@ -184,39 +192,39 @@ export class SettingsPage implements OnDestroy, OnInit {
       await this.supabaseStore.signOut();
       this.authSignedIn.set(false);
       this.authEmail.set('');
-      this.importMessage.set('Signed out from Supabase.');
+      this.importMessage.set(this.i18n.t('settings.signedOutFromSupabase'));
     } catch (error: unknown) {
-      const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.importMessage.set(`Sign-out failed: ${reason}`);
+      const reason = error instanceof Error ? error.message : this.i18n.t('common.unknownError');
+      this.importMessage.set(this.i18n.t('settings.signOutFailed', { reason }));
     }
   }
 
   async sendMagicLink(): Promise<void> {
     const email = this.authInputEmail().trim();
     if (!email) {
-      this.importMessage.set('Enter an email address first.');
+      this.importMessage.set(this.i18n.t('settings.enterEmailFirst'));
       return;
     }
 
     if (!this.authConfigured()) {
-      this.importMessage.set('Supabase is not configured. Add URL and publishable key first.');
+      this.importMessage.set(this.i18n.t('settings.supabaseNotConfiguredAddKeys'));
       return;
     }
 
     try {
       await this.supabaseStore.signInWithEmailMagicLink(email, globalThis.location.origin);
       localStorage.setItem('beez-auth-email', email);
-      this.importMessage.set('Magic link sent. Open your email and continue sign-in.');
+      this.importMessage.set(this.i18n.t('settings.magicLinkSent'));
     } catch (error: unknown) {
-      const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.importMessage.set(`Magic link failed: ${reason}`);
+      const reason = error instanceof Error ? error.message : this.i18n.t('common.unknownError');
+      this.importMessage.set(this.i18n.t('settings.magicLinkFailed', { reason }));
     }
   }
 
   clearOfflineQueue(): void {
     localStorage.setItem('beez-pending-local', '0');
     this.pendingLocalChanges.set(0);
-    this.importMessage.set('Offline queue cleared.');
+    this.importMessage.set(this.i18n.t('settings.offlineQueueCleared'));
   }
 
   exportAnalyticsSnapshot(): void {
@@ -236,7 +244,7 @@ export class SettingsPage implements OnDestroy, OnInit {
     anchor.download = `beez-analytics-${new Date().toISOString().slice(0, 10)}.json`;
     anchor.click();
     URL.revokeObjectURL(url);
-    this.importMessage.set('Analytics snapshot exported.');
+    this.importMessage.set(this.i18n.t('settings.analyticsSnapshotExported'));
   }
 
   updateReminderDays(value: string): void {
@@ -244,7 +252,7 @@ export class SettingsPage implements OnDestroy, OnInit {
     if (!Number.isFinite(days) || days <= 0) return;
     this.reminderDays.set(days);
     localStorage.setItem('beez-reminder-days', String(days));
-    this.importMessage.set('Inspection reminder updated.');
+    this.importMessage.set(this.i18n.t('settings.inspectionReminderUpdated'));
   }
 
   private loadReminderDays(): number {
@@ -273,7 +281,7 @@ export class SettingsPage implements OnDestroy, OnInit {
       }
 
       const email = await this.supabaseStore.getCurrentUserEmail();
-      this.authEmail.set(email ?? 'Signed in');
+      this.authEmail.set(email ?? this.i18n.t('settings.signedIn'));
     } catch {
       this.authSignedIn.set(false);
       this.authEmail.set('');
@@ -284,24 +292,28 @@ export class SettingsPage implements OnDestroy, OnInit {
 
   async uploadLocalToSupabase(): Promise<void> {
     if (!this.isOnline()) {
-      this.importMessage.set('You are offline. Reconnect before uploading to Supabase.');
+      this.importMessage.set(this.i18n.t('settings.offlineReconnectBeforeUpload'));
       return;
     }
 
     if (!this.authConfigured()) {
-      this.importMessage.set('Supabase is not configured.');
+      this.importMessage.set(this.i18n.t('settings.supabaseNotConfigured'));
       return;
     }
 
     const data = this.store.getData();
     const total = data.apiaries.length + data.hives.length + data.inspections.length;
     if (total === 0) {
-      this.importMessage.set('No local data to upload.');
+      this.importMessage.set(this.i18n.t('settings.noLocalDataToUpload'));
       return;
     }
 
     const confirmed = globalThis.confirm(
-      `Upload ${data.apiaries.length} apiaries, ${data.hives.length} hives, and ${data.inspections.length} inspections to Supabase? Existing records with the same ID will be overwritten.`
+      this.i18n.t('settings.confirmUploadToSupabase', {
+        apiaries: data.apiaries.length,
+        hives: data.hives.length,
+        inspections: data.inspections.length
+      })
     );
     if (!confirmed) return;
 
@@ -311,10 +323,16 @@ export class SettingsPage implements OnDestroy, OnInit {
       await this.supabaseStore.ensureSignedInAnonymously();
       await this.supabaseStore.upsertAll(data);
       this.store.cacheFromRemote(data); // resets pending counter + writes lastSyncAt
-      this.importMessage.set(`Uploaded ${data.apiaries.length} apiaries, ${data.hives.length} hives, ${data.inspections.length} inspections.`);
+      this.importMessage.set(
+        this.i18n.t('settings.uploadedToSupabase', {
+          apiaries: data.apiaries.length,
+          hives: data.hives.length,
+          inspections: data.inspections.length
+        })
+      );
     } catch (error: unknown) {
-      const reason = error instanceof Error ? error.message : 'Unknown error';
-      this.importMessage.set(`Upload failed: ${reason}`);
+      const reason = error instanceof Error ? error.message : this.i18n.t('common.unknownError');
+      this.importMessage.set(this.i18n.t('settings.uploadFailed', { reason }));
     } finally {
       this.isUploading.set(false);
     }

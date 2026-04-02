@@ -1,80 +1,80 @@
-<bee-app-shell tab="settings" eyebrow="Preferences" title="Settings" [backLink]="'/'" backLabel="Apiaries">
+<bee-app-shell tab="settings" [eyebrow]="'settings.preferences' | i18n" [title]="'settings.title' | i18n" [backLink]="'/'" [backLabel]="'apiaries.title' | i18n">
   <div shell-content class="settings-content">
-    <section class="panel" aria-label="Authentication">
-      <h2>Authentication</h2>
+    <section class="panel" [attr.aria-label]="'settings.authentication' | i18n">
+      <h2>{{ 'settings.authentication' | i18n }}</h2>
       @if (!authConfigured()) {
-        <p class="message">Supabase is not configured yet. Add URL and publishable key first.</p>
+        <p class="message">{{ 'auth.notConfigured' | i18n }}</p>
       } @else {
         <p class="message">
-          {{ authSignedIn() ? ('Signed in as ' + (authEmail() || 'Google user')) : 'Not signed in.' }}
+          {{ authSignedIn() ? ('auth.signedIn' | i18n:{ email: (authEmail() || ('auth.googleUser' | i18n)) }) : ('auth.notSignedIn' | i18n) }}
         </p>
         <label>
-          Email login
+          {{ 'auth.emailLogin' | i18n }}
           <input
             type="email"
-            placeholder="you@example.com"
+            [placeholder]="'auth.emailPlaceholder' | i18n"
             [value]="authInputEmail()"
             (input)="authInputEmail.set($any($event.target).value)"
           />
         </label>
         <div class="actions">
-          <button type="button" class="btn-secondary" (click)="sendMagicLink()">Send magic link</button>
-          <button type="button" class="btn-secondary" (click)="signInWithGoogle()">Sign in with Google</button>
-          <button type="button" class="btn-secondary btn-danger" [disabled]="!authSignedIn()" (click)="signOutSupabase()">Sign out</button>
+          <button type="button" class="btn-secondary" (click)="sendMagicLink()">{{ 'auth.sendMagicLink' | i18n }}</button>
+          <button type="button" class="btn-secondary" (click)="signInWithGoogle()">{{ 'auth.signInGoogle' | i18n }}</button>
+          <button type="button" class="btn-secondary btn-danger" [disabled]="!authSignedIn()" (click)="signOutSupabase()">{{ 'auth.signOut' | i18n }}</button>
         </div>
       }
     </section>
 
-    <section class="panel" aria-label="Inspection reminder">
-      <h2>Inspection reminder</h2>
+    <section class="panel" [attr.aria-label]="'settings.inspectionReminder' | i18n">
+      <h2>{{ 'settings.inspectionReminder' | i18n }}</h2>
       <label>
-        Cadence
+        {{ 'settings.reminderCadence' | i18n }}
         <select [value]="reminderDays()" (change)="updateReminderDays($any($event.target).value)">
-          <option value="7">Every 7 days</option>
-          <option value="14">Every 14 days</option>
-          <option value="21">Every 21 days</option>
-          <option value="30">Every 30 days</option>
+          <option value="7">{{ 'settings.every7' | i18n }}</option>
+          <option value="14">{{ 'settings.every14' | i18n }}</option>
+          <option value="21">{{ 'settings.every21' | i18n }}</option>
+          <option value="30">{{ 'settings.every30' | i18n }}</option>
         </select>
       </label>
     </section>
 
-    <section class="panel" aria-label="Backup">
-      <h2>Backup</h2>
+    <section class="panel" [attr.aria-label]="'settings.backup' | i18n">
+      <h2>{{ 'settings.backup' | i18n }}</h2>
       <div class="actions backup-actions">
-        <button type="button" class="btn-secondary btn-backup btn-backup-export" (click)="exportBackup()">Export JSON</button>
-        <button type="button" class="btn-secondary btn-backup btn-backup-import" (click)="openBackupPicker()">Import JSON</button>
+        <button type="button" class="btn-secondary btn-backup btn-backup-export" (click)="exportBackup()">{{ 'backup.export' | i18n }}</button>
+        <button type="button" class="btn-secondary btn-backup btn-backup-import" (click)="openBackupPicker()">{{ 'backup.import' | i18n }}</button>
       </div>
       <input #backupInput type="file" accept="application/json,.json" (change)="onBackupFileSelected($event)" hidden />
 
       @if (pendingImport(); as pending) {
         <div class="import-preview">
-          <p>Preview: {{ pending.preview.counts.apiaries }} apiaries, {{ pending.preview.counts.hives }} hives, {{ pending.preview.counts.inspections }} inspections</p>
-          <p>Duplicates: {{ pending.preview.duplicates.apiaries }} apiaries, {{ pending.preview.duplicates.hives }} hives, {{ pending.preview.duplicates.inspections }} inspections</p>
+          <p>{{ 'backup.importPreview' | i18n:{ apiaries: pending.preview.counts.apiaries, hives: pending.preview.counts.hives, inspections: pending.preview.counts.inspections } }}</p>
+          <p>{{ 'backup.duplicates' | i18n:{ apiaries: pending.preview.duplicates.apiaries, hives: pending.preview.duplicates.hives, inspections: pending.preview.duplicates.inspections } }}</p>
           @if (pending.preview.conflicts.apiaries.length || pending.preview.conflicts.hives.length || pending.preview.conflicts.inspections.length) {
             <div class="conflict-list">
-              <p class="conflict-title">Conflicts (existing vs incoming)</p>
+              <p class="conflict-title">{{ 'backup.conflictsTitle' | i18n }}</p>
               @for (c of pending.preview.conflicts.apiaries; track c.id) {
-                <p><strong>Apiary</strong> {{ c.existing }} -> {{ c.incoming }}</p>
+                <p><strong>{{ 'apiary.create' | i18n }}</strong> {{ c.existing }} -> {{ c.incoming }}</p>
               }
               @for (c of pending.preview.conflicts.hives; track c.id) {
-                <p><strong>Hive</strong> {{ c.existing }} -> {{ c.incoming }}</p>
+                <p><strong>{{ 'hive.create' | i18n }}</strong> {{ c.existing }} -> {{ c.incoming }}</p>
               }
               @for (c of pending.preview.conflicts.inspections; track c.id) {
-                <p><strong>Inspection</strong> {{ c.existing }} -> {{ c.incoming }}</p>
+                <p><strong>{{ 'inspection.create' | i18n }}</strong> {{ c.existing }} -> {{ c.incoming }}</p>
               }
             </div>
           }
           <div class="actions">
-            <button type="button" class="btn-secondary" (click)="applyImport('merge')">Merge</button>
-            <button type="button" class="btn-secondary btn-danger" (click)="applyImport('replace')">Replace</button>
-            <button type="button" class="btn-secondary" (click)="cancelImportPreview()">Cancel</button>
+            <button type="button" class="btn-secondary" (click)="applyImport('merge')">{{ 'common.merge' | i18n }}</button>
+            <button type="button" class="btn-secondary btn-danger" (click)="applyImport('replace')">{{ 'common.replace' | i18n }}</button>
+            <button type="button" class="btn-secondary" (click)="cancelImportPreview()">{{ 'common.cancel' | i18n }}</button>
           </div>
         </div>
       }
 
       @if (snapshots().length > 0) {
         <div class="snapshot-list">
-          <h3>Recent snapshots</h3>
+          <h3>{{ 'backup.recent' | i18n }}</h3>
           @for (snapshot of snapshots(); track snapshot.id) {
             <button type="button" class="snapshot-item" (click)="restoreSnapshot(snapshot.id)">
               <span>{{ snapshot.createdAt | date:'short' }}</span>
@@ -89,94 +89,94 @@
       }
     </section>
 
-    <section class="panel" aria-label="Analytics">
-      <h2>Quick analytics</h2>
+    <section class="panel" [attr.aria-label]="'settings.analytics' | i18n">
+      <h2>{{ 'settings.analytics' | i18n }}</h2>
       <div class="actions">
-        <button type="button" class="btn-secondary" (click)="exportAnalyticsSnapshot()">Export analytics</button>
+        <button type="button" class="btn-secondary" (click)="exportAnalyticsSnapshot()">{{ 'settings.exportAnalytics' | i18n }}</button>
       </div>
       <div class="analytics-grid">
         <article class="metric-card">
-          <p class="metric-label">Apiaries</p>
+          <p class="metric-label">{{ 'apiaries.title' | i18n }}</p>
           <p class="metric-value">{{ analytics().apiaries }}</p>
         </article>
         <article class="metric-card">
-          <p class="metric-label">Hives</p>
+          <p class="metric-label">{{ 'hives.title' | i18n }}</p>
           <p class="metric-value">{{ analytics().hives }}</p>
         </article>
         <article class="metric-card metric-wide">
-          <p class="metric-label">Inspections this month</p>
+          <p class="metric-label">{{ 'settings.inspectionsThisMonth' | i18n }}</p>
           <p class="metric-value">{{ analytics().inspectionsThisMonth }}</p>
         </article>
         <article class="metric-card metric-alert" [class.metric-ok]="analytics().overdue === 0">
-          <p class="metric-label">Overdue hives</p>
+          <p class="metric-label">{{ 'settings.overdueHives' | i18n }}</p>
           <p class="metric-value">{{ analytics().overdue }}</p>
         </article>
         <article class="metric-card metric-alert" [class.metric-ok]="analytics().lowStoresRecent === 0">
-          <p class="metric-label">Low stores (14d)</p>
+          <p class="metric-label">{{ 'settings.lowStores14d' | i18n }}</p>
           <p class="metric-value">{{ analytics().lowStoresRecent }}</p>
         </article>
       </div>
     </section>
 
-    <section class="panel" aria-label="Offline queue">
-      <h2>Offline queue</h2>
+    <section class="panel" [attr.aria-label]="'settings.offlineQueue' | i18n">
+      <h2>{{ 'settings.offlineQueue' | i18n }}</h2>
       <div class="queue-grid">
         <article class="queue-card">
-          <p class="queue-label">Pending changes</p>
+          <p class="queue-label">{{ 'settings.pendingChanges' | i18n }}</p>
           <p class="queue-value">{{ pendingLocalChanges() }}</p>
         </article>
         <article class="queue-card">
-          <p class="queue-label">Last sync</p>
-          <p class="queue-value">{{ lastSyncAt() ? lastSyncAt().slice(0, 16).replace('T', ' ') : 'Never' }}</p>
+          <p class="queue-label">{{ 'settings.lastSync' | i18n }}</p>
+          <p class="queue-value">{{ lastSyncAt() ? lastSyncAt().slice(0, 16).replace('T', ' ') : ('settings.never' | i18n) }}</p>
         </article>
       </div>
       <div class="actions">
-        <button type="button" class="btn-secondary" [disabled]="isUploading() || !isOnline()" (click)="uploadLocalToSupabase()">Upload to Supabase</button>
-        <button type="button" class="btn-secondary" (click)="clearOfflineQueue()">Clear queue</button>
+        <button type="button" class="btn-secondary" [disabled]="isUploading() || !isOnline()" (click)="uploadLocalToSupabase()">{{ 'settings.uploadSupabase' | i18n }}</button>
+        <button type="button" class="btn-secondary" (click)="clearOfflineQueue()">{{ 'settings.clearQueue' | i18n }}</button>
       </div>
     </section>
 
-    <section class="panel" aria-label="Data integrity">
-      <h2>Data integrity</h2>
+    <section class="panel" [attr.aria-label]="'settings.dataIntegrity' | i18n">
+      <h2>{{ 'settings.dataIntegrity' | i18n }}</h2>
       <div class="actions">
-        <button type="button" class="btn-secondary" (click)="runIntegrityCheck()">Run check</button>
-        <button type="button" class="btn-secondary btn-danger" (click)="repairIntegrity()">Repair</button>
+        <button type="button" class="btn-secondary" (click)="runIntegrityCheck()">{{ 'settings.runCheck' | i18n }}</button>
+        <button type="button" class="btn-secondary btn-danger" (click)="repairIntegrity()">{{ 'settings.repair' | i18n }}</button>
       </div>
       @if (integrityReport(); as report) {
         <div class="integrity-grid">
           <article class="integrity-card" [class.integrity-healthy]="report.orphanHives === 0">
-            <p class="integrity-label">Orphan hives</p>
+            <p class="integrity-label">{{ 'settings.orphanHives' | i18n }}</p>
             <p class="integrity-value">{{ report.orphanHives }}</p>
           </article>
           <article class="integrity-card" [class.integrity-healthy]="report.orphanInspections === 0">
-            <p class="integrity-label">Orphan inspections</p>
+            <p class="integrity-label">{{ 'settings.orphanInspections' | i18n }}</p>
             <p class="integrity-value">{{ report.orphanInspections }}</p>
           </article>
         </div>
         <p class="integrity-caption" [class.integrity-caption-ok]="report.orphanHives === 0 && report.orphanInspections === 0">
-          {{ report.orphanHives === 0 && report.orphanInspections === 0 ? 'Data graph is healthy.' : 'Integrity issues detected. Run repair to clean up orphan records.' }}
+          {{ report.orphanHives === 0 && report.orphanInspections === 0 ? ('settings.dataGraphHealthy' | i18n) : ('settings.integrityIssues' | i18n) }}
         </p>
       }
     </section>
 
-    <section class="panel" aria-label="Keyboard shortcuts">
-      <h2>Keyboard shortcuts</h2>
+    <section class="panel" [attr.aria-label]="'shortcuts.title' | i18n">
+      <h2>{{ 'shortcuts.title' | i18n }}</h2>
       <table class="shortcuts-table">
         <thead>
           <tr>
-            <th scope="col">Shortcut</th>
-            <th scope="col">Action</th>
+            <th scope="col">{{ 'shortcuts.shortcut' | i18n }}</th>
+            <th scope="col">{{ 'shortcuts.action' | i18n }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Navigate between items</td></tr>
-          <tr><td><kbd>Enter</kbd></td><td>Open selected item</td></tr>
-          <tr><td><kbd>E</kbd></td><td>Edit focused item</td></tr>
-          <tr><td><kbd>Delete</kbd> / <kbd>⌫</kbd></td><td>Delete focused item</td></tr>
+          <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>{{ 'shortcuts.navigateItems' | i18n }}</td></tr>
+          <tr><td><kbd>Enter</kbd></td><td>{{ 'shortcuts.openSelected' | i18n }}</td></tr>
+          <tr><td><kbd>E</kbd></td><td>{{ 'shortcuts.editFocused' | i18n }}</td></tr>
+          <tr><td><kbd>Delete</kbd> / <kbd>⌫</kbd></td><td>{{ 'shortcuts.deleteFocused' | i18n }}</td></tr>
         </tbody>
       </table>
       <div class="actions">
-        <button type="button" class="btn-secondary" (click)="openShortcutHelp()">Show shortcut help</button>
+        <button type="button" class="btn-secondary" (click)="openShortcutHelp()">{{ 'shortcuts.showHelp' | i18n }}</button>
       </div>
     </section>
   </div>

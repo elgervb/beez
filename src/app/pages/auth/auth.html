@@ -1,25 +1,25 @@
 <main class="auth-wrap">
-  <section class="auth-card" aria-label="Sign in">
-    <h1>{{ mode() === 'login' ? 'Sign in' : 'Create account' }}</h1>
+  <section class="auth-card" [attr.aria-label]="'auth.signIn' | i18n">
+    <h1>{{ mode() === 'login' ? ('auth.signIn' | i18n) : ('auth.createAccount' | i18n) }}</h1>
 
     <div class="mode-tabs" role="tablist">
-      <button role="tab" [class.active]="mode() === 'login'" (click)="setMode('login')">Sign in</button>
-      <button role="tab" [class.active]="mode() === 'register'" (click)="setMode('register')">Register</button>
+      <button role="tab" [class.active]="mode() === 'login'" (click)="setMode('login')">{{ 'auth.signIn' | i18n }}</button>
+      <button role="tab" [class.active]="mode() === 'register'" (click)="setMode('register')">{{ 'auth.register' | i18n }}</button>
     </div>
 
     @if (mode() === 'login') {
       <label>
-        Email
+        {{ 'auth.email' | i18n }}
         <input
           type="email"
           autocomplete="email"
-          placeholder="you@example.com"
+          [placeholder]="'auth.emailPlaceholder' | i18n"
           [value]="email()"
           (input)="email.set($any($event.target).value)"
         />
       </label>
       <label>
-        Password
+        {{ 'auth.password' | i18n }}
         <input
           type="password"
           autocomplete="current-password"
@@ -30,35 +30,35 @@
         />
       </label>
       <div class="actions">
-        <button type="button" (click)="signInWithEmailPassword()" [disabled]="busy()">Sign in</button>
+        <button type="button" (click)="signInWithEmailPassword()" [disabled]="busy()">{{ 'auth.signIn' | i18n }}</button>
       </div>
     }
 
     @if (mode() === 'register') {
-      <p class="hint">Fill in your details to create a new account.</p>
+      <p class="hint">{{ 'auth.fillDetails' | i18n }}</p>
       <label>
-        Email
+        {{ 'auth.email' | i18n }}
         <input
           type="email"
           autocomplete="email"
-          placeholder="you@example.com"
+          [placeholder]="'auth.emailPlaceholder' | i18n"
           [value]="email()"
           (input)="email.set($any($event.target).value)"
         />
       </label>
       <label>
-        Password
+        {{ 'auth.password' | i18n }}
         <input
           type="password"
           autocomplete="new-password"
-          placeholder="At least 6 characters"
+          [placeholder]="'auth.passwordMinHint' | i18n"
           [value]="password()"
           (input)="password.set($any($event.target).value)"
           (keydown.enter)="register()"
         />
       </label>
       <div class="actions">
-        <button type="button" (click)="register()" [disabled]="busy()">Create account</button>
+        <button type="button" (click)="register()" [disabled]="busy()">{{ 'auth.createAccount' | i18n }}</button>
       </div>
     }
 
