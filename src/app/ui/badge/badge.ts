@@ -1,5 +1,4 @@
 import { Component, computed, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'info' | 'neutral';
 export type BadgeSize = 'small' | 'medium' | 'large' | 'xs';
@@ -9,7 +8,6 @@ export type BadgeIcon = 'check' | 'warning' | 'error' | 'info' | 'success';
 @Component({
   selector: 'bee-badge',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './badge.html',
   styleUrl: './badge.css'
 })
@@ -42,13 +40,6 @@ export class BadgeComponent {
     if (this.circular()) classes.push('badge-circular');
     if (this.pulse()) classes.push('badge-pulse');
     return classes.join(' ');
-  });
-
-  readonly computedStyle = computed(() => {
-    const style: Record<string, string> = {};
-    if (this.bgColor()) style['--badge-bg'] = this.bgColor()!;
-    if (this.textColor()) style['--badge-text'] = this.textColor()!;
-    return style;
   });
 
   readonly iconPath = computed(() => {

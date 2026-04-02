@@ -1,7 +1,7 @@
-<span
-  [ngClass]="computedClasses()"
-  [ngStyle]="computedStyle()"
-  role="status"
+<output
+  [class]="computedClasses()"
+  [style.--badge-bg]="bgColor()"
+  [style.--badge-text]="textColor()"
   [attr.aria-label]="accessibleLabel()"
 >
   @if (iconPath()) {
@@ -10,4 +10,4 @@
     </svg>
   }
   <span class="badge-text">{{ label() }}</span>
-</span>
+</output>

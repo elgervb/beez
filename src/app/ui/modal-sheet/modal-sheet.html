@@ -1,5 +1,5 @@
-<div class="modal-overlay" (click)="dismiss.emit()"></div>
-<div class="modal-sheet" role="dialog" aria-modal="true" [attr.aria-labelledby]="'modal-title'" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+<button type="button" class="modal-overlay" (click)="dismiss.emit()" [attr.aria-label]="'modal.closeForm' | i18n"></button>
+<dialog class="modal-sheet" open [attr.aria-labelledby]="'modal-title'" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
   <header class="modal-header">
     <button class="modal-close" (click)="dismiss.emit()" [attr.aria-label]="'modal.closeForm' | i18n">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -13,4 +13,4 @@
   <main class="modal-content">
     <ng-content></ng-content>
   </main>
-</div>
+</dialog>

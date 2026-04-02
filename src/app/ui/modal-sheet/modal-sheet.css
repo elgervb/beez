@@ -9,6 +9,8 @@
 .modal-overlay {
   position: absolute;
   inset: 0;
+  border: 0;
+  padding: 0;
   background: rgb(0 0 0 / 32%);
   backdrop-filter: blur(2px);
   cursor: pointer;
@@ -19,6 +21,8 @@
   width: 100%;
   max-width: 24.75rem;
   margin: 0 auto;
+  border: 0;
+  padding: 0;
   border-radius: 1.4rem 1.4rem 0 0;
   background: #f0dc67;
   display: grid;
@@ -26,6 +30,10 @@
   max-height: 92vh;
   box-shadow: 0 -8px 32px rgb(0 0 0 / 12%);
   animation: slideUp 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-sheet::backdrop {
+  display: none;
 }
 
 .modal-header {
