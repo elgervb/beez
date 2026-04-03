@@ -1,17 +1,4 @@
-.panel {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  box-shadow: none;
-}
-
-h2 {
-  margin: 0 0 0.7rem;
-  font-size: 1.06rem;
-  font-family: 'Baloo 2', 'Nunito', sans-serif;
-  font-weight: 700;
-}
+@import '../../../shared/form-base.css';
 
 .preset-row {
   display: flex;
@@ -21,70 +8,19 @@ h2 {
 
 .preset-btn {
   min-height: 2rem;
-  padding: 0.22rem 0.5rem;
-  border-radius: 999px;
-  background: #d9d9d9;
-  color: #2a2a2a;
+  padding: var(--space-2xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-weak);
+  color: var(--color-text-strong);
   border: 0;
-  font-size: 0.72rem;
+  font-size: var(--font-size-xs);
   font-weight: 700;
-}
-
-.form-grid {
-  display: grid;
-  gap: 0.65rem;
-}
-
-label {
-  display: grid;
-  gap: 0.3rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-input,
-textarea,
-select,
-button {
-  font: inherit;
-}
-
-input,
-textarea,
-select {
-  border: 1px solid #d8d8d8;
-  border-radius: 10px;
-  padding: 0.6rem 0.65rem;
-  background: #fafafa;
-  font-size: 1rem;
-}
-
-button {
-  border: 0;
-  border-radius: 10px;
-  min-height: 2.4rem;
-  padding: 0.4rem 1rem;
-  background: #353535;
-  color: #f0dc67;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  transition: opacity 120ms ease-out;
-}
-
-button:active {
-  opacity: 0.88;
-}
-
-.btn-secondary {
-  background: #e8e8e8;
-  color: #353535;
 }
 
 .switch-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-md);
 }
 
 .switch-row input[type="checkbox"] {
@@ -92,8 +28,8 @@ button:active {
   -webkit-appearance: none;
   width: 2.6rem;
   height: 1.4rem;
-  border-radius: 999px;
-  background: #d0d0d0;
+  border-radius: var(--radius-pill);
+  background: var(--color-switch-track);
   border: 2px solid transparent;
   cursor: pointer;
   transition: background 150ms, border-color 150ms;
@@ -115,37 +51,19 @@ button:active {
 }
 
 .switch-row input[type="checkbox"]:checked {
-  background: #353535;
+  background: var(--color-surface-inverse);
 }
 
 .switch-row input[type="checkbox"]:checked::before {
   left: calc(100% - 1.1rem);
-  background: #f0dc67;
+  background: var(--color-chip-fg);
 }
 
 .switch-row input[type="checkbox"]:focus-visible {
-  outline: 2px solid #c87800;
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
-.row-buttons {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.3rem;
-}
-
-.row-buttons button {
-  flex: 1;
-}
-
-.field-error {
-  font-size: 0.75rem;
-  color: #8f1300;
-  font-weight: 500;
-  margin-top: -0.1rem;
-}
-
 input.field-invalid {
-  border-color: #c0392b;
-  background: #fff5f5;
+  border-color: var(--color-danger-focus);
 }

@@ -11,6 +11,7 @@ import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
 })
 export class InspectionFormComponent {
   readonly initial = input<Inspection | null>(null);
+  readonly draft = input<Omit<Inspection, 'id' | 'createdAt' | 'hiveId'> | null>(null);
   readonly knownInspectors = input<string[]>([]);
 
   readonly save = output<Omit<Inspection, 'id' | 'createdAt' | 'hiveId'>>();
@@ -47,15 +48,28 @@ export class InspectionFormComponent {
           inspector: init.inspector
         });
       } else {
-        this.formModel.set({
-          date: new Date().toISOString().slice(0, 10),
-          broodPattern: 'good',
-          storesLevel: 'medium',
-          broodSeen: false,
-          open: false,
-          notes: '',
-          inspector: localStorage.getItem('beez-inspector') ?? ''
-        });
+        const draft = this.draft();
+        if (draft) {
+          this.formModel.set({
+            date: draft.date,
+            broodPattern: draft.broodPattern,
+            storesLevel: draft.storesLevel,
+            broodSeen: draft.broodSeen,
+            open: draft.open,
+            notes: draft.notes,
+            inspector: draft.inspector
+          });
+        } else {
+          this.formModel.set({
+            date: new Date().toISOString().slice(0, 10),
+            broodPattern: 'good',
+            storesLevel: 'medium',
+            broodSeen: false,
+            open: false,
+            notes: '',
+            inspector: localStorage.getItem('beez-inspector') ?? ''
+          });
+        }
       }
       this.submitted.set(false);
     });

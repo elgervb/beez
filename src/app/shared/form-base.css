@@ -1,0 +1,88 @@
+.panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+h2 {
+  margin: 0 0 0.7rem;
+  font-size: 1.06rem;
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+label {
+  display: grid;
+  gap: var(--space-xs);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem var(--space-lg);
+  background: var(--color-surface-subtle);
+  font-size: var(--font-size-xl);
+}
+
+button {
+  border: 0;
+  border-radius: var(--radius-sm);
+  min-height: 2.4rem;
+  padding: var(--space-sm) 1rem;
+  background: var(--color-surface-inverse);
+  color: var(--color-chip-fg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  transition: opacity 120ms ease-out;
+}
+
+button:active {
+  opacity: 0.88;
+}
+
+.btn-secondary {
+  background: var(--color-surface-muted);
+  color: var(--color-surface-inverse);
+}
+
+.row-buttons {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
+}
+
+.row-buttons button {
+  flex: 1;
+}
+
+.field-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger-border);
+  font-weight: 500;
+  margin-top: -0.1rem;
+}
+
+input.field-invalid,
+textarea.field-invalid {
+  border-color: var(--color-danger-border);
+  background: var(--color-danger-subtle-bg);
+}

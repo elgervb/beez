@@ -56,6 +56,7 @@ export class InspectionListPage implements OnInit {
       b.date.localeCompare(a.date)
     )
   );
+  readonly latestInspection = computed(() => this.inspections()[0] ?? null);
   readonly search = signal(localStorage.getItem(InspectionListPage.SEARCH_KEY) ?? '');
   readonly searchExpanded = signal(this.search().trim().length > 0);
   readonly broodFilter = signal<'all' | 'excellent' | 'good' | 'poor'>(this.loadBroodFilter());
@@ -76,6 +77,7 @@ export class InspectionListPage implements OnInit {
   });
 
   readonly editingInspection = signal<Inspection | null>(null);
+  readonly draftInspection = signal<InspectionFormValue | null>(null);
   readonly pendingDeletedInspection = signal<Inspection | null>(null);
   readonly pendingBulkDeletedInspections = signal<Inspection[] | null>(null);
   readonly shareMessage = signal<string>('');
@@ -103,17 +105,21 @@ export class InspectionListPage implements OnInit {
   }
 
   openAdd(): void {
+    const latest = this.latestInspection();
     this.editingInspection.set(null);
+    this.draftInspection.set(latest ? this.createDraftFromInspection(latest) : null);
     this.modal.open();
   }
 
   openEdit(inspection: Inspection): void {
+    this.draftInspection.set(null);
     this.editingInspection.set(inspection);
     this.modal.open();
   }
 
   closeModal(): void {
     this.editingInspection.set(null);
+    this.draftInspection.set(null);
     this.modal.close();
   }
 
@@ -433,5 +439,17 @@ export class InspectionListPage implements OnInit {
     const value = localStorage.getItem(InspectionListPage.BROOD_KEY);
     if (value === 'excellent' || value === 'good' || value === 'poor') return value;
     return 'all';
+  }
+
+  private createDraftFromInspection(inspection: Inspection): InspectionFormValue {
+    return {
+      date: new Date().toISOString().slice(0, 10),
+      broodPattern: inspection.broodPattern,
+      storesLevel: inspection.storesLevel,
+      broodSeen: inspection.broodSeen,
+      open: inspection.open,
+      notes: '',
+      inspector: inspection.inspector
+    };
   }
 }

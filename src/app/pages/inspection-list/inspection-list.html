@@ -63,6 +63,6 @@
 
 @if (modal.isOpen()) {
   <bee-modal-sheet [title]="editingInspection() ? ('inspection.edit' | i18n) : ('inspection.add' | i18n)" (dismiss)="closeModal()">
-    <bee-inspection-form [initial]="editingInspection()" [knownInspectors]="knownInspectors()" (save)="saveInspection($event)" (dismissed)="closeModal()" />
+    <bee-inspection-form [initial]="editingInspection()" [draft]="draftInspection()" [knownInspectors]="knownInspectors()" (save)="saveInspection($event)" (dismissed)="closeModal()" />
   </bee-modal-sheet>
 }

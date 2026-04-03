@@ -1,3 +1,5 @@
+@import '../../shared/list-primitives.css';
+
 :host {
   display: block;
 }
@@ -16,20 +18,4 @@ bee-search-filter-bar {
   --search-open-width: min(100%, 22rem);
 }
 
-.btn-add:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
-.btn-add {
-  border: 0;
-  border-radius: var(--radius-pill);
-  min-height: 2rem;
-  padding: 0.22rem 0.75rem;
-  background: var(--color-chip-bg);
-  color: var(--color-chip-fg);
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
 

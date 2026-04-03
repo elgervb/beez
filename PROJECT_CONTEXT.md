@@ -108,6 +108,8 @@
 5. Add PWA update notification UX when a new service worker version is available.
 
 ## Changelog (recent)
+- Added a faster inspection logging workflow: the inspections page now offers a "Repeat last" action that opens a new inspection prefilled from the latest inspection for that hive while resetting the date to today.
+- Expanded Settings analytics into practical field reports with due-this-week hives, low-stores watch, weak-colony flags, and a queen-age overview.
 - Completed a broad i18n pass for remaining user-facing strings: localized relative date labels and locale formatting, converted remaining runtime settings/auth/sync messages and delete confirmations to translation keys, and expanded `en.json`/`nl.json` with the new keys.
 - Implemented lightweight i18n system: `TranslationService` with browser-locale auto-detection, language switcher in header, JSON translation files for English (en) and Dutch (nl), and reusable `TranslatePipe` for templates. Users can switch languages anytime; preference persists in localStorage (`beez-lang`). See `TRANSLATION_GUIDE.md` for usage.
 - `varroaSeen` field replaced by `broodSeen` + `open` on `Inspection`.

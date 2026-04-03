@@ -1,3 +1,5 @@
+@import '../../shared/list-primitives.css';
+
 :host {
   display: block;
 }
@@ -5,11 +7,6 @@
 .hive-content {
   display: grid;
   gap: 0.6rem;
-}
-
-.controls-panel {
-  display: grid;
-  gap: 0.4rem;
 }
 
 @media (min-width: 960px) {
@@ -32,21 +29,12 @@
   }
 }
 
-.controls-panel select {
-  border: 1px solid var(--color-panel-soft-border);
-  border-radius: var(--radius-sm);
-  min-height: 2rem;
-  padding: 0 0.55rem;
-  background: var(--color-panel-soft);
-  color: var(--color-text-soft);
-}
-
 .bulk-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.72rem;
+  font-size: var(--font-size-xs);
 }
 
 .bulk-actions button {
@@ -59,31 +47,17 @@
   font-size: 0.7rem;
 }
 
-.controls-panel select:focus-visible,
 .bulk-actions button:focus-visible,
-.btn-add:focus-visible,
 .due-item:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
-.btn-add {
-  border: 0;
-  border-radius: var(--radius-pill);
-  min-height: 2rem;
-  padding: 0.22rem 0.75rem;
-  background: var(--color-chip-bg);
-  color: var(--color-chip-fg);
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
 .due-panel {
   border-radius: var(--radius-md);
-  background: #ffe6bf;
-  border: 1px solid #e8c086;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
+  background: var(--color-card-warm-bg);
+  border: 1px solid var(--color-card-warm-border);
+  box-shadow: var(--shadow-soft);
   padding: 0.65rem 0.75rem;
   display: grid;
   gap: 0.42rem;
@@ -92,7 +66,7 @@
 .due-panel h2 {
   margin: 0;
   font-size: 0.9rem;
-  color: #5a350d;
+  color: var(--color-card-warm-text);
 }
 
 .due-list {
@@ -101,17 +75,17 @@
 }
 
 .due-item {
-  border: 1px solid #e4bd83;
+  border: 1px solid var(--color-card-warm-item-border);
   border-radius: var(--radius-sm);
-  background: #fff4e2;
+  background: var(--color-card-warm-item-bg);
   min-height: 2.35rem;
   padding: 0.35rem 0.55rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.6rem;
-  font-size: 0.74rem;
-  color: #4d2f0d;
+  font-size: var(--font-size-xs-soft);
+  color: var(--color-card-warm-item-text);
   font-weight: 700;
 }
 

@@ -1,0 +1,355 @@
+bee-app-shell .shortcuts-modal {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay);
+  display: grid;
+  place-items: center;
+  z-index: 30;
+  padding: 1rem;
+}
+
+bee-app-shell .shortcuts-modal__panel {
+  width: min(26rem, 92vw);
+  border-radius: var(--radius-lg);
+  background: var(--color-panel-soft);
+  border: 1px solid var(--color-panel-soft-border);
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+bee-app-shell .shortcuts-modal__panel h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+bee-app-shell .shortcuts-modal__panel ul {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--font-size-md-soft);
+}
+
+bee-app-shell .shortcuts-modal__panel button {
+  justify-self: end;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-chip-bg);
+  color: var(--color-chip-fg);
+  min-height: 2rem;
+  padding: 0.2rem 0.75rem;
+}
+
+bee-app-shell .app-bottom-nav {
+  background: var(--color-surface-subtle);
+  border-top: 1px solid var(--color-border-subtle);
+  min-height: calc(3.8rem + env(safe-area-inset-bottom));
+  padding: 0.35rem 0.6rem calc(0.35rem + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+
+bee-app-shell .app-bottom-nav__item {
+  border-radius: 0;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--color-text-strong) 48%, white);
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.2rem;
+  font-size: var(--font-size-3xs);
+  font-weight: 500;
+  transition: color 120ms ease-out;
+  padding: 0.4rem 0.2rem;
+  border-bottom: 2px solid transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+bee-app-shell .app-bottom-nav__item svg {
+  width: 1.08rem;
+  height: 1.08rem;
+  fill: currentcolor;
+  transition: transform 120ms ease-out;
+}
+
+bee-app-shell .app-bottom-nav__item.active {
+  color: var(--color-surface-inverse);
+  font-weight: 600;
+  border-bottom-color: var(--color-surface-inverse);
+}
+
+bee-app-shell .app-bottom-nav__item:active:not(.disabled) svg {
+  transform: scale(0.92);
+}
+
+bee-app-shell a:focus-visible,
+bee-app-shell button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+bee-app-shell .lang-flag-btn {
+  border: 1px solid color-mix(in srgb, var(--color-surface-inverse) 16%, transparent);
+  min-width: 2rem;
+  height: 1.8rem;
+  padding: 0.1rem 0.4rem;
+  background: var(--color-panel-soft);
+  color: var(--color-surface-inverse);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+bee-app-shell .lang-flag-btn:hover {
+  background: color-mix(in srgb, var(--color-panel-soft) 72%, var(--color-chip-fg));
+}
+
+bee-app-shell .lang-flag {
+  font-size: var(--font-size-4xs);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+bee-settings .analytics-grid,
+bee-settings .integrity-grid,
+bee-settings .queue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+bee-settings .report-summary-grid {
+  margin-bottom: 0.15rem;
+}
+
+bee-settings .metric-card,
+bee-settings .report-card,
+bee-settings .queue-card {
+  border: 1px solid #d8cfaa;
+  border-radius: 10px;
+  background: #fff9de;
+}
+
+bee-settings .metric-card,
+bee-settings .queue-card {
+  padding: 0.45rem 0.55rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+bee-settings .metric-wide {
+  grid-column: 1 / -1;
+}
+
+bee-settings .metric-label,
+bee-settings .integrity-label,
+bee-settings .queue-label,
+bee-settings .report-card__heading p,
+bee-settings .report-item__meta {
+  margin: 0;
+  font-size: 0.68rem;
+  color: #6f5842;
+}
+
+bee-settings .metric-label,
+bee-settings .integrity-label,
+bee-settings .queue-label {
+  font-weight: 700;
+}
+
+bee-settings .metric-value,
+bee-settings .integrity-value {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+bee-settings .metric-value,
+bee-settings .report-item__title,
+bee-settings .queue-value {
+  color: #2f2a1a;
+}
+
+bee-settings .metric-alert {
+  background: #fff1ec;
+  border-color: #e2b2a7;
+}
+
+bee-settings .metric-alert .metric-value,
+bee-settings .integrity-value,
+bee-settings .integrity-caption {
+  color: #7d1d10;
+}
+
+bee-settings .metric-ok,
+bee-settings .integrity-healthy {
+  background: #edf8ee;
+  border-color: #b9dbbe;
+}
+
+bee-settings .metric-ok .metric-value,
+bee-settings .integrity-healthy .integrity-value,
+bee-settings .integrity-caption-ok {
+  color: #226437;
+}
+
+bee-settings .report-stack {
+  display: grid;
+  gap: 0.45rem;
+}
+
+bee-settings .report-card {
+  padding: 0.55rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+bee-settings .report-card__heading {
+  display: grid;
+  gap: 0.12rem;
+}
+
+bee-settings .report-card__heading h3 {
+  margin: 0;
+  font-size: 0.79rem;
+  color: #3d3218;
+}
+
+bee-settings .report-list,
+bee-settings .snapshot-list {
+  display: grid;
+  gap: 0.35rem;
+}
+
+bee-settings .report-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+  border-radius: 9px;
+  background: #f5efd3;
+  padding: 0.45rem 0.5rem;
+}
+
+bee-settings .report-link {
+  color: inherit;
+  text-decoration: none;
+  transition: background 140ms ease-out, transform 140ms ease-out;
+}
+
+bee-settings .report-link:hover,
+bee-settings .report-link:focus-visible {
+  background: #efe6be;
+}
+
+bee-settings .report-link:focus-visible,
+bee-settings button:focus-visible,
+bee-settings select:focus-visible,
+bee-settings input:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+bee-settings .report-link:active {
+  transform: translateY(1px);
+}
+
+bee-settings .report-item__main,
+bee-settings .report-item__side {
+  display: grid;
+  gap: 0.08rem;
+}
+
+bee-settings .report-item__side {
+  justify-items: end;
+  text-align: right;
+}
+
+bee-settings .report-item__title,
+bee-settings .report-item__meta,
+bee-settings .report-item__status {
+  margin: 0;
+}
+
+bee-settings .report-item__title {
+  font-size: 0.77rem;
+  font-weight: 800;
+}
+
+bee-settings .report-item__status {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #594714;
+}
+
+bee-settings .integrity-card {
+  border: 1px solid #e0a9a0;
+  border-radius: 10px;
+  background: #ffece8;
+  padding: 0.45rem 0.55rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+bee-settings .integrity-caption {
+  margin: 0.1rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+bee-settings .queue-value {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+bee-settings .shortcuts-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.74rem;
+}
+
+bee-settings .shortcuts-table th {
+  text-align: left;
+  padding: 0.25rem 0.35rem;
+  font-size: 0.7rem;
+  color: #5a4a22;
+  font-weight: 800;
+}
+
+bee-settings .shortcuts-table td {
+  padding: 0.28rem 0.35rem;
+  vertical-align: middle;
+}
+
+bee-settings .shortcuts-table td:first-child {
+  white-space: nowrap;
+  color: #4f4527;
+}
+
+bee-settings kbd {
+  display: inline-block;
+  background: #e8e2cc;
+  border: 1px solid #c8bcaa;
+  border-radius: 4px;
+  padding: 0.06rem 0.35rem;
+  font-size: 0.68rem;
+  font-family: system-ui, monospace;
+  box-shadow: 0 1px 0 #b8ac9a;
+}
+
+@media (min-width: 960px) {
+  bee-app-shell .app-bottom-nav {
+    padding-inline: 1.25rem;
+  }
+
+  bee-app-shell .app-bottom-nav__item {
+    font-size: var(--font-size-xs-soft);
+  }
+}
