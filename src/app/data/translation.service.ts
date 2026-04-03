@@ -36,7 +36,7 @@ export class TranslationService {
     }
 
     try {
-      const response = await fetch(`/assets/i18n/${lang}.json`);
+        const response = await fetch(this.resolveAssetUrl(`assets/i18n/${lang}.json`));
       if (!response.ok) throw new Error(`Failed to load ${lang}.json`);
       const data = await response.json();
       this.i18nFiles[lang] = data;
@@ -51,6 +51,10 @@ export class TranslationService {
     }
   }
 
+    private resolveAssetUrl(relativePath: string): string {
+      const normalizedPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
+      return new URL(normalizedPath, document.baseURI).toString();
+    }
   t(key: string, params?: Record<string, string | number>): string {
     const lang = this.currentLang();
     const inCurrent = this.i18nFiles[lang]?.[key];
