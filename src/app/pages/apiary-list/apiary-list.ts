@@ -1,4 +1,5 @@
 import { Component, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BeeStore, DeletedApiaryBundle } from '../../data/bee-store';
 import { ConnectivityService } from '../../data/connectivity.service';
 import { ModalService } from '../../data/modal.service';
@@ -26,6 +27,7 @@ export class ApiaryListPage implements OnInit {
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
   private readonly cloudSync = inject(CloudSyncService);
+  private readonly route = inject(ActivatedRoute);
   readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-apiary-search';
   readonly modal = inject(ModalService);
@@ -52,6 +54,12 @@ export class ApiaryListPage implements OnInit {
 
   ngOnInit(): void {
     void this.initializeData();
+    // Auto-open form if navigating from dashboard with addApiary query param
+    this.route.queryParams.subscribe((params) => {
+      if (params['addApiary'] === 'true') {
+        this.openAdd();
+      }
+    });
   }
 
   readonly hiveCountByApiary = computed(() => {

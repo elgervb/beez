@@ -1,9 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, ElementRef, OnDestroy, OnInit, computed, inject, signal, viewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, ElementRef, OnDestroy, inject, signal, viewChild } from '@angular/core';
 import { BeeStore, DataSnapshot, ImportMode, ImportPreview } from '../../data/bee-store';
 import { ConnectivityService } from '../../data/connectivity.service';
-import { Inspection } from '../../data/models';
 import { TranslationService } from '../../data/translation.service';
 import { SupabaseStore } from '../../data/supabase-store';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
@@ -11,7 +9,7 @@ import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 
 @Component({
   selector: 'bee-settings',
-  imports: [AppShellComponent, DatePipe, TranslatePipe, RouterLink],
+  imports: [AppShellComponent, DatePipe, TranslatePipe],
   templateUrl: './settings.html',
   styleUrl: './settings.css'
 })
@@ -21,7 +19,6 @@ export class SettingsPage implements OnDestroy {
   private readonly supabaseStore = inject(SupabaseStore);
   readonly i18n = inject(TranslationService);
 
-  readonly data = computed(() => this.store.getData());
   readonly importMessage = signal<string>('');
   readonly pendingImport = signal<{ raw: unknown; preview: ImportPreview } | null>(null);
   readonly snapshots = signal<DataSnapshot[]>(this.store.listSnapshots());
@@ -29,114 +26,6 @@ export class SettingsPage implements OnDestroy {
   readonly pendingLocalChanges = signal(this.loadPendingLocalChanges());
   readonly lastSyncAt = signal(localStorage.getItem('beez-last-sync-at') ?? '');
   readonly isOnline = this.connectivity.isOnline;
-
-  readonly analytics = computed(() => {
-    const data = this.data();
-    const today = Date.now();
-    const month = new Date().toISOString().slice(0, 7);
-    const currentYear = new Date().getFullYear();
-    const apiaryNameById = new Map(data.apiaries.map((apiary) => [apiary.id, apiary.name]));
-    const latestInspectionByHive = new Map<string, Inspection>();
-    for (const inspection of data.inspections.slice().sort((a, b) => b.date.localeCompare(a.date))) {
-      if (!latestInspectionByHive.has(inspection.hiveId)) {
-        latestInspectionByHive.set(inspection.hiveId, inspection);
-      }
-    }
-    const inspectionsThisMonth = data.inspections.filter((i) => i.date.startsWith(month)).length;
-    const lowStoresRecent = data.inspections.filter((i) => i.storesLevel === 'low' && today - new Date(i.date).getTime() <= 14 * 86400000).length;
-    const reminder = this.reminderDays();
-    const overdue = data.hives.filter((h) => {
-      const latest = latestInspectionByHive.get(h.id);
-      if (!latest) return true;
-      const days = Math.floor((today - new Date(latest.date).getTime()) / 86400000);
-      return days >= reminder;
-    }).length;
-    const dueThisWeek = data.hives
-      .map((hive) => {
-        const latest = latestInspectionByHive.get(hive.id);
-        const daysSince = latest ? Math.floor((today - new Date(latest.date).getTime()) / 86400000) : reminder;
-        const dueInDays = latest ? reminder - daysSince : 0;
-
-        return {
-          hiveId: hive.id,
-          apiaryId: hive.apiaryId,
-          code: hive.code,
-          apiary: apiaryNameById.get(hive.apiaryId) ?? '',
-          latestDate: latest?.date ?? null,
-          dueInDays
-        };
-      })
-      .filter((report) => report.dueInDays <= 7)
-      .sort((a, b) => a.dueInDays - b.dueInDays || a.code.localeCompare(b.code));
-    const lowStoresWatch = data.hives
-      .map((hive) => {
-        const latest = latestInspectionByHive.get(hive.id);
-        if (latest?.storesLevel !== 'low') return null;
-        const daysSince = Math.floor((today - new Date(latest.date).getTime()) / 86400000);
-        if (daysSince > 14) return null;
-
-        return {
-          hiveId: hive.id,
-          apiaryId: hive.apiaryId,
-          code: hive.code,
-          apiary: apiaryNameById.get(hive.apiaryId) ?? '',
-          inspectedOn: latest.date
-        };
-      })
-      .filter((report): report is NonNullable<typeof report> => report !== null)
-      .sort((a, b) => b.inspectedOn.localeCompare(a.inspectedOn));
-    const weakColonies = data.hives
-      .map((hive) => {
-        const latest = latestInspectionByHive.get(hive.id);
-        const isWeakStatus = hive.status === 'weak';
-        const hasPoorBrood = latest?.broodPattern === 'poor';
-        if (!isWeakStatus && !hasPoorBrood) return null;
-
-        let reasonKey = 'settings.poorBrood';
-        if (isWeakStatus && hasPoorBrood) {
-          reasonKey = 'settings.weakStatusPoorBrood';
-        } else if (isWeakStatus) {
-          reasonKey = 'settings.weakStatus';
-        }
-
-        return {
-          hiveId: hive.id,
-          apiaryId: hive.apiaryId,
-          code: hive.code,
-          apiary: apiaryNameById.get(hive.apiaryId) ?? '',
-          latestDate: latest?.date ?? null,
-          reasonKey
-        };
-      })
-      .filter((report): report is NonNullable<typeof report> => report !== null)
-      .sort((a, b) => a.code.localeCompare(b.code));
-    const queenAgeOverview = data.hives
-      .map((hive) => ({
-        hiveId: hive.id,
-        apiaryId: hive.apiaryId,
-        code: hive.code,
-        apiary: apiaryNameById.get(hive.apiaryId) ?? '',
-        queenYear: hive.queenYear,
-        age: Math.max(0, currentYear - hive.queenYear)
-      }))
-      .sort((a, b) => b.age - a.age || a.code.localeCompare(b.code));
-    const queenAgeTwoPlus = queenAgeOverview.filter((item) => item.age >= 2).length;
-    const queenAgeThreePlus = queenAgeOverview.filter((item) => item.age >= 3).length;
-
-    return {
-      apiaries: data.apiaries.length,
-      hives: data.hives.length,
-      inspectionsThisMonth,
-      overdue,
-      lowStoresRecent,
-      dueThisWeek,
-      lowStoresWatch,
-      weakColonies,
-      queenAgeOverview: queenAgeOverview.slice(0, 4),
-      queenAgeTwoPlus,
-      queenAgeThreePlus
-    };
-  });
 
   private readonly backupInput = viewChild<ElementRef<HTMLInputElement>>('backupInput');
 
@@ -228,25 +117,6 @@ export class SettingsPage implements OnDestroy {
     localStorage.setItem('beez-pending-local', '0');
     this.pendingLocalChanges.set(0);
     this.importMessage.set(this.i18n.t('settings.offlineQueueCleared'));
-  }
-
-  exportAnalyticsSnapshot(): void {
-    const payload = {
-      generatedAt: new Date().toISOString(),
-      analytics: this.analytics(),
-      queue: {
-        pendingLocalChanges: this.pendingLocalChanges(),
-        lastSyncAt: this.lastSyncAt()
-      }
-    };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = `beez-analytics-${new Date().toISOString().slice(0, 10)}.json`;
-    anchor.click();
-    URL.revokeObjectURL(url);
-    this.importMessage.set(this.i18n.t('settings.analyticsSnapshotExported'));
   }
 
   updateReminderDays(value: string): void {

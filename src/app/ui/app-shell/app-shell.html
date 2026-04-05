@@ -85,6 +85,13 @@
     }
 
     <nav class="app-bottom-nav" aria-label="Primary">
+      <a class="app-bottom-nav__item" [class.active]="tab() === 'dashboard'" [routerLink]="dashboardLink()">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 20a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0v10h14a1 1 0 1 1 0 2zM8 16a1 1 0 0 1-1-1v-2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1zm4 0a1 1 0 0 1-1-1V5a1 1 0 1 1 2 0v10a1 1 0 0 1-1 1zm4 0a1 1 0 0 1-1-1V10a1 1 0 1 1 2 0v5a1 1 0 0 1-1 1z" />
+        </svg>
+        <span>{{ 'dashboard.title' | i18n }}</span>
+      </a>
+
       <a class="app-bottom-nav__item" [class.active]="tab() === 'apiaries'" [routerLink]="apiariesLink()">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M11.35 3.4a1 1 0 0 1 1.3 0l7 6a1 1 0 0 1-1.3 1.52L18 10.66V19a2 2 0 0 1-2 2h-2.5a1 1 0 0 1-1-1v-4h-1v4a1 1 0 0 1-1 1H8a2 2 0 0 1-2-2v-8.34l-.35.26a1 1 0 0 1-1.3-1.52z" />

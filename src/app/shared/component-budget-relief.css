@@ -47,7 +47,7 @@ bee-app-shell .app-bottom-nav {
   min-height: calc(3.8rem + env(safe-area-inset-bottom));
   padding: 0.35rem 0.6rem calc(0.35rem + env(safe-area-inset-bottom));
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0.4rem;
 }
 
@@ -116,118 +116,118 @@ bee-app-shell .lang-flag {
   line-height: 1;
 }
 
-bee-settings .analytics-grid,
+:is(bee-settings, bee-dashboard) .analytics-grid,
 bee-settings .integrity-grid,
-bee-settings .queue-grid {
+:is(bee-settings, bee-dashboard) .queue-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.4rem;
 }
 
-bee-settings .report-summary-grid {
+:is(bee-settings, bee-dashboard) .report-summary-grid {
   margin-bottom: 0.15rem;
 }
 
-bee-settings .metric-card,
-bee-settings .report-card,
-bee-settings .queue-card {
+:is(bee-settings, bee-dashboard) .metric-card,
+:is(bee-settings, bee-dashboard) .report-card,
+:is(bee-settings, bee-dashboard) .queue-card {
   border: 1px solid #d8cfaa;
   border-radius: 10px;
   background: #fff9de;
 }
 
-bee-settings .metric-card,
-bee-settings .queue-card {
+:is(bee-settings, bee-dashboard) .metric-card,
+:is(bee-settings, bee-dashboard) .queue-card {
   padding: 0.45rem 0.55rem;
   display: grid;
   gap: 0.2rem;
 }
 
-bee-settings .metric-wide {
+:is(bee-settings, bee-dashboard) .metric-wide {
   grid-column: 1 / -1;
 }
 
-bee-settings .metric-label,
+:is(bee-settings, bee-dashboard) .metric-label,
 bee-settings .integrity-label,
-bee-settings .queue-label,
-bee-settings .report-card__heading p,
-bee-settings .report-item__meta {
+:is(bee-settings, bee-dashboard) .queue-label,
+:is(bee-settings, bee-dashboard) .report-card__heading p,
+:is(bee-settings, bee-dashboard) .report-item__meta {
   margin: 0;
   font-size: 0.68rem;
   color: #6f5842;
 }
 
-bee-settings .metric-label,
+:is(bee-settings, bee-dashboard) .metric-label,
 bee-settings .integrity-label,
-bee-settings .queue-label {
+:is(bee-settings, bee-dashboard) .queue-label {
   font-weight: 700;
 }
 
-bee-settings .metric-value,
+:is(bee-settings, bee-dashboard) .metric-value,
 bee-settings .integrity-value {
   margin: 0;
   font-size: 1rem;
   font-weight: 800;
 }
 
-bee-settings .metric-value,
-bee-settings .report-item__title,
-bee-settings .queue-value {
+:is(bee-settings, bee-dashboard) .metric-value,
+:is(bee-settings, bee-dashboard) .report-item__title,
+:is(bee-settings, bee-dashboard) .queue-value {
   color: #2f2a1a;
 }
 
-bee-settings .metric-alert {
+:is(bee-settings, bee-dashboard) .metric-alert {
   background: #fff1ec;
   border-color: #e2b2a7;
 }
 
-bee-settings .metric-alert .metric-value,
+:is(bee-settings, bee-dashboard) .metric-alert .metric-value,
 bee-settings .integrity-value,
 bee-settings .integrity-caption {
   color: #7d1d10;
 }
 
-bee-settings .metric-ok,
+:is(bee-settings, bee-dashboard) .metric-ok,
 bee-settings .integrity-healthy {
   background: #edf8ee;
   border-color: #b9dbbe;
 }
 
-bee-settings .metric-ok .metric-value,
+:is(bee-settings, bee-dashboard) .metric-ok .metric-value,
 bee-settings .integrity-healthy .integrity-value,
 bee-settings .integrity-caption-ok {
   color: #226437;
 }
 
-bee-settings .report-stack {
+:is(bee-settings, bee-dashboard) .report-stack {
   display: grid;
   gap: 0.45rem;
 }
 
-bee-settings .report-card {
+:is(bee-settings, bee-dashboard) .report-card {
   padding: 0.55rem;
   display: grid;
   gap: 0.45rem;
 }
 
-bee-settings .report-card__heading {
+:is(bee-settings, bee-dashboard) .report-card__heading {
   display: grid;
   gap: 0.12rem;
 }
 
-bee-settings .report-card__heading h3 {
+:is(bee-settings, bee-dashboard) .report-card__heading h3 {
   margin: 0;
   font-size: 0.79rem;
   color: #3d3218;
 }
 
-bee-settings .report-list,
+:is(bee-settings, bee-dashboard) .report-list,
 bee-settings .snapshot-list {
   display: grid;
   gap: 0.35rem;
 }
 
-bee-settings .report-item {
+:is(bee-settings, bee-dashboard) .report-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem;
@@ -237,18 +237,18 @@ bee-settings .report-item {
   padding: 0.45rem 0.5rem;
 }
 
-bee-settings .report-link {
+:is(bee-settings, bee-dashboard) .report-link {
   color: inherit;
   text-decoration: none;
   transition: background 140ms ease-out, transform 140ms ease-out;
 }
 
-bee-settings .report-link:hover,
-bee-settings .report-link:focus-visible {
+:is(bee-settings, bee-dashboard) .report-link:hover,
+:is(bee-settings, bee-dashboard) .report-link:focus-visible {
   background: #efe6be;
 }
 
-bee-settings .report-link:focus-visible,
+:is(bee-settings, bee-dashboard) .report-link:focus-visible,
 bee-settings button:focus-visible,
 bee-settings select:focus-visible,
 bee-settings input:focus-visible {
@@ -256,33 +256,33 @@ bee-settings input:focus-visible {
   outline-offset: 2px;
 }
 
-bee-settings .report-link:active {
+:is(bee-settings, bee-dashboard) .report-link:active {
   transform: translateY(1px);
 }
 
-bee-settings .report-item__main,
-bee-settings .report-item__side {
+:is(bee-settings, bee-dashboard) .report-item__main,
+:is(bee-settings, bee-dashboard) .report-item__side {
   display: grid;
   gap: 0.08rem;
 }
 
-bee-settings .report-item__side {
+:is(bee-settings, bee-dashboard) .report-item__side {
   justify-items: end;
   text-align: right;
 }
 
-bee-settings .report-item__title,
-bee-settings .report-item__meta,
-bee-settings .report-item__status {
+:is(bee-settings, bee-dashboard) .report-item__title,
+:is(bee-settings, bee-dashboard) .report-item__meta,
+:is(bee-settings, bee-dashboard) .report-item__status {
   margin: 0;
 }
 
-bee-settings .report-item__title {
+:is(bee-settings, bee-dashboard) .report-item__title {
   font-size: 0.77rem;
   font-weight: 800;
 }
 
-bee-settings .report-item__status {
+:is(bee-settings, bee-dashboard) .report-item__status {
   font-size: 0.7rem;
   font-weight: 800;
   color: #594714;

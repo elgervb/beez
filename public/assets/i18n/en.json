@@ -61,6 +61,7 @@
   "hive.notes": "Notes",
   "hive.notesPlaceholder": "Blue box, south-facing...",
   "hive.nameRequired": "Name is required",
+  "dashboard.title": "Dashboard",
   "hive.inspections": "Inspections",
   "hive.dueNow": "Due now",
   "inspections.title": "Inspections",

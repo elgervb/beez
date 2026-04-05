@@ -23,10 +23,11 @@ export class AppShellComponent implements OnDestroy {
   readonly eyebrow = input<string>('');
   readonly backLabel = input<string>('');
   readonly backLink = input<AppRouteLink | null>(null);
-  readonly tab = input<'apiaries' | 'hives' | 'inspections' | 'settings'>('apiaries');
+  readonly tab = input<'apiaries' | 'hives' | 'inspections' | 'dashboard' | 'settings'>('apiaries');
   readonly apiariesLink = input<AppRouteLink>('/');
   readonly hivesLink = input<AppRouteLink | null>(null);
   readonly inspectionsLink = input<AppRouteLink | null>(null);
+  readonly dashboardLink = input<AppRouteLink>('/dashboard');
   readonly settingsLink = input<AppRouteLink>('/settings');
   readonly updateAvailable = signal(false);
   readonly isOnline = this.connectivity.isOnline;

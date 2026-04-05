@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+.dashboard-content {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.panel {
+  border-radius: 12px;
+  background: var(--panel, #ececec);
+  padding: 0.7rem;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
+  display: grid;
+  gap: 0.45rem;
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.btn-secondary {
+  border: 0;
+  border-radius: 999px;
+  min-height: 2rem;
+  padding: 0.22rem 0.75rem;
+  background: #d7d7d7;
+  color: #2f2f2f;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.message {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #5a4a22;
+}
+
+@media (min-width: 960px) {
+  .panel {
+    padding: 0.85rem;
+  }
+}
