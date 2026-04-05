@@ -13,37 +13,26 @@
       <bee-badge [label]="syncError()" variant="warning" icon="warning" appearance="soft" size="small" />
     }
 
-    @if (hives().length > 4) {
-      <section class="controls-panel" aria-label="Hive filters">
-        <bee-search-filter-bar
-          [value]="search()"
-          [expanded]="searchExpanded()"
-          [placeholder]="'hives.search' | i18n"
-          [ariaLabel]="'common.search' | i18n"
-          (valueChange)="setSearch($event)"
-          (expandedChange)="searchExpanded.set($event)"
-        />
-        <select [value]="statusFilter()" (change)="setStatusFilter($any($event.target).value)">
-          <option value="all">{{ 'hive.inspections' | i18n }}</option>
-          <option value="active">{{ 'hive.inspections' | i18n }}</option>
-          <option value="weak">{{ 'hive.inspections' | i18n }}</option>
-          <option value="wintering">{{ 'hive.inspections' | i18n }}</option>
-        </select>
-      </section>
-    }
-
-    @if (selectedHiveIds().length > 0) {
-      <div class="bulk-actions">
-        <bee-badge [label]="selectedHiveIds().length + ' selected'" variant="neutral" appearance="outline" size="small" />
-        <button type="button" (click)="applyBulkStatus('active')">{{ 'hive.inspections' | i18n }}</button>
-        <button type="button" (click)="applyBulkStatus('weak')">{{ 'hive.inspections' | i18n }}</button>
-        <button type="button" (click)="applyBulkStatus('wintering')">{{ 'hive.inspections' | i18n }}</button>
-      </div>
+    @if (hives().length > 4 || selectedHiveIds().length > 0) {
+      <bee-filter-panel
+        [searchValue]="search()"
+        [searchExpanded]="searchExpanded()"
+        [searchPlaceholder]="'hives.search' | i18n"
+        [filterOptions]="hiveFilterOptions"
+        [filterValue]="statusFilter()"
+        [selectedCount]="selectedHiveIds().length"
+        [bulkActions]="hiveBulkActions"
+        [ariaLabel]="'hives.title' | i18n"
+        (searchValueChange)="setSearch($event)"
+        (searchExpandedChange)="searchExpanded.set($event)"
+        (filterValueChange)="setStatusFilter($event)"
+        (bulkActionSelected)="onBulkActionSelected($event)"
+      />
     }
 
     @if (dueNowHives().length > 0) {
       <section class="due-panel">
-        <h2>{{ 'hive.inspections' | i18n }}</h2>
+        <h2>{{ 'hive.dueNow' | i18n }}</h2>
         <div class="due-list">
           @for (hive of dueNowHives(); track hive.id) {
             <button type="button" class="due-item" (click)="openHiveInspections(hive.id)">

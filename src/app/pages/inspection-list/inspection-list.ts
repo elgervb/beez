@@ -12,9 +12,10 @@ import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { InspectionSparklineComponent } from '../../ui/inspection-sparkline/inspection-sparkline';
 import { BadgeComponent } from '../../ui/badge/badge';
-import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
 import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
+import { CloudSyncService } from '../../data/cloud-sync.service';
+import { FilterPanelComponent, BulkAction, FilterOption } from '../../ui/filter-panel/filter-panel';
 
 type InspectionFormValue = {
   date: string;
@@ -28,7 +29,7 @@ type InspectionFormValue = {
 
 @Component({
   selector: 'bee-inspection-list',
-  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent, TranslatePipe],
+  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, UndoBarComponent, TranslatePipe, FilterPanelComponent],
   templateUrl: './inspection-list.html',
   styleUrl: './inspection-list.css'
 })
@@ -36,6 +37,7 @@ export class InspectionListPage implements OnInit {
   private readonly connectivity = inject(ConnectivityService);
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
+  private readonly cloudSync = inject(CloudSyncService);
   readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-inspection-search';
   private static readonly BROOD_KEY = 'beez-filter-inspection-brood';
@@ -61,6 +63,17 @@ export class InspectionListPage implements OnInit {
   readonly searchExpanded = signal(this.search().trim().length > 0);
   readonly broodFilter = signal<'all' | 'excellent' | 'good' | 'poor'>(this.loadBroodFilter());
   readonly selectedInspectionIds = signal<string[]>([]);
+
+  readonly inspectionFilterOptions: FilterOption[] = [
+    { value: 'all', labelKey: 'common.all' },
+    { value: 'excellent', labelKey: 'inspection.broodPattern.excellent' },
+    { value: 'good', labelKey: 'inspection.broodPattern.good' },
+    { value: 'poor', labelKey: 'inspection.broodPattern.poor' }
+  ];
+
+  readonly inspectionBulkActions: BulkAction[] = [
+    { value: 'delete', labelKey: 'common.delete', variant: 'danger' }
+  ];
   readonly filteredInspections = computed(() => {
     const query = this.search().trim().toLowerCase();
     const brood = this.broodFilter();
@@ -221,8 +234,7 @@ export class InspectionListPage implements OnInit {
 
     this.isSyncing.set(true);
     try {
-      await this.remoteStore.ensureSignedInAnonymously();
-      await this.refreshRemoteData();
+      this.data.set(await this.cloudSync.syncPendingLocalThenRefresh());
       this.remoteReady.set(true);
       this.syncError.set('');
     } catch (error: unknown) {
@@ -235,22 +247,15 @@ export class InspectionListPage implements OnInit {
   }
 
   private async refreshRemoteData(): Promise<void> {
-    const remoteData = await this.remoteStore.fetchAll();
-    this.data.set(remoteData);
-    this.localStore.cacheFromRemote(remoteData);
+    this.data.set(await this.cloudSync.refreshRemoteData());
   }
 
   private async handleReconnect(): Promise<void> {
-    if (this.hasPendingLocalChanges() || this.isSyncing() || !this.connectivity.isOnline() || !this.remoteStore.isConfigured()) {
+    if (this.isSyncing() || !this.connectivity.isOnline() || !this.remoteStore.isConfigured()) {
       return;
     }
 
     await this.initializeData();
-  }
-
-  private hasPendingLocalChanges(): boolean {
-    const raw = Number(localStorage.getItem('beez-pending-local') ?? '0');
-    return Number.isFinite(raw) && raw > 0;
   }
 
   private async persistInspection(f: InspectionFormValue): Promise<void> {

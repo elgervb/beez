@@ -10,44 +10,11 @@
 }
 
 @media (min-width: 960px) {
-  .controls-panel {
-    grid-template-columns: minmax(14rem, 22rem) minmax(10rem, 13rem) 1fr;
-    align-items: center;
-    gap: 0.65rem;
-  }
-
-  bee-search-filter-bar {
-    --search-open-width: 100%;
-  }
-
-  .bulk-actions {
-    justify-content: flex-end;
-  }
-
   .due-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.bulk-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: var(--font-size-xs);
-}
-
-.bulk-actions button {
-  border: 0;
-  border-radius: var(--radius-pill);
-  min-height: 1.8rem;
-  padding: 0.12rem 0.55rem;
-  background: var(--color-chip-bg);
-  color: var(--color-chip-fg);
-  font-size: 0.7rem;
-}
-
-.bulk-actions button:focus-visible,
 .due-item:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;

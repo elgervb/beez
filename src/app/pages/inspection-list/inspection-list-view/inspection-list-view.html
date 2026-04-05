@@ -1,5 +1,10 @@
 @if (inspections().length > 0) {
-  <ul class="card-list">
+  <ul class="card-list"
+      beeListKeyboardNav
+      focusSelector="li.inspection-card"
+      [items]="inspections()"
+      (editItem)="editInspection.emit($event)"
+      (deleteItem)="deleteInspection.emit($event.id)">
     @for (inspection of inspections(); track inspection.id) {
         <li class="inspection-card"
           [beeSwipeToDeleteRow]="inspection.id"
@@ -26,24 +31,15 @@
             <p class="inspection-meta">{{ 'inspection.byInspector' | i18n:{ name: inspection.inspector } }}</p>
           </div>
         </div>
-        <div class="card-actions">
-          <label class="select-toggle" [attr.aria-label]="'inspection.select' | i18n">
-            <input
-              type="checkbox"
-              [checked]="selectedIds().includes(inspection.id)"
-              (touchstart)="$event.stopPropagation()"
-              (touchmove)="$event.stopPropagation()"
-              (touchend)="onSelectionToggle($event, inspection.id)"
-              (click)="onSelectionToggle($event, inspection.id)"
-              (keydown)="onSelectionKeyToggle($event, inspection.id)" />
-          </label>
-          <button class="btn-icon" type="button" [attr.aria-label]="'inspection.edit' | i18n" (click)="editInspection.emit(inspection)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-          </button>
-          <button class="btn-icon btn-icon-danger" type="button" [attr.aria-label]="'inspection.delete' | i18n" (click)="deleteInspection.emit(inspection.id)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-          </button>
-        </div>
+        <bee-row-actions
+          [selectable]="true"
+          [selected]="selectedIds().includes(inspection.id)"
+          [selectAriaLabel]="'inspection.select' | i18n"
+          [editAriaLabel]="'inspection.edit' | i18n"
+          [deleteAriaLabel]="'inspection.delete' | i18n"
+          (toggleSelected)="toggleSelected.emit({ id: inspection.id, checked: $event })"
+          (editItem)="editInspection.emit(inspection)"
+          (deleteItem)="deleteInspection.emit(inspection.id)" />
       </li>
     }
   </ul>

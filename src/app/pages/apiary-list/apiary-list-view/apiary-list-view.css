@@ -79,42 +79,6 @@
   z-index: 1;
 }
 
-.card-actions {
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid rgb(0 0 0 / 8%);
-}
-
-.btn-icon {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.4rem;
-  min-height: 2.4rem;
-  padding: 0 0.7rem;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  touch-action: manipulation;
-  transition: background 80ms;
-}
-
-.btn-icon svg {
-  width: 1rem;
-  height: 1rem;
-  fill: #705520;
-  pointer-events: none;
-}
-
-.btn-icon:active {
-  background: rgb(0 0 0 / 8%);
-}
-
-.btn-icon-danger svg {
-  fill: #b03020;
-}
-
 .card-body {
   flex: 1;
   min-width: 0;

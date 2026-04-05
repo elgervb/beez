@@ -1,0 +1,34 @@
+<bee-search-filter-bar
+  [value]="searchValue()"
+  [expanded]="searchExpanded()"
+  [placeholder]="searchPlaceholder()"
+  [ariaLabel]="'common.search' | i18n"
+  (valueChange)="searchValueChange.emit($event)"
+  (expandedChange)="searchExpandedChange.emit($event)"
+/>
+
+@if (filterOptions().length > 0) {
+  <select [value]="filterValue()" (change)="filterValueChange.emit($any($event.target).value)">
+    @for (option of filterOptions(); track option.value) {
+      <option [value]="option.value">{{ option.labelKey | i18n }}</option>
+    }
+  </select>
+}
+
+@if (selectedCount() > 0 && bulkActions().length > 0) {
+  <div class="bulk-actions">
+    <bee-badge
+      [label]="'common.selectedCount' | i18n:{ count: selectedCount() }"
+      variant="neutral"
+      appearance="outline"
+      size="small"
+    />
+    @for (action of bulkActions(); track action.value) {
+      <button
+        type="button"
+        [class.btn-action-danger]="action.variant === 'danger'"
+        (click)="bulkActionSelected.emit(action.value)"
+      >{{ action.labelKey | i18n }}</button>
+    }
+  </div>
+}

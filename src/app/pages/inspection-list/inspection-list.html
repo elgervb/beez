@@ -19,28 +19,20 @@
       <bee-badge [label]="syncError()" variant="warning" icon="warning" appearance="soft" size="small" />
     }
 
-    <section class="controls-panel" aria-label="Inspection filters">
-      <bee-search-filter-bar
-        [value]="search()"
-        [expanded]="searchExpanded()"
-        [placeholder]="'inspections.search' | i18n"
-        [ariaLabel]="'common.search' | i18n"
-        (valueChange)="setSearch($event)"
-        (expandedChange)="searchExpanded.set($event)"
-      />
-      <select [value]="broodFilter()" (change)="setBroodFilter($any($event.target).value)">
-        <option value="all">{{ 'inspection.broodPattern' | i18n }}</option>
-        <option value="excellent">{{ 'inspection.broodPatternExcellent' | i18n }}</option>
-        <option value="good">{{ 'inspection.broodPatternGood' | i18n }}</option>
-        <option value="poor">{{ 'inspection.broodPatternPoor' | i18n }}</option>
-      </select>
-      @if (selectedInspectionIds().length > 0) {
-        <div class="bulk-actions">
-          <bee-badge [label]="'common.selectedCount' | i18n:{ count: selectedInspectionIds().length }" variant="neutral" appearance="outline" size="small" />
-          <button type="button" (click)="bulkDeleteInspections()">{{ 'common.delete' | i18n }}</button>
-        </div>
-      }
-    </section>
+    <bee-filter-panel
+      [searchValue]="search()"
+      [searchExpanded]="searchExpanded()"
+      [searchPlaceholder]="'inspections.search' | i18n"
+      [filterOptions]="inspectionFilterOptions"
+      [filterValue]="broodFilter()"
+      [selectedCount]="selectedInspectionIds().length"
+      [bulkActions]="inspectionBulkActions"
+      [ariaLabel]="'inspections.title' | i18n"
+      (searchValueChange)="setSearch($event)"
+      (searchExpandedChange)="searchExpanded.set($event)"
+      (filterValueChange)="setBroodFilter($event)"
+      (bulkActionSelected)="bulkDeleteInspections()"
+    />
 
     @if (inspections().length >= 2) {
       <div class="spark-row">

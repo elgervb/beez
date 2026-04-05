@@ -1,5 +1,10 @@
 @if (hives().length > 0) {
-  <ul class="card-list">
+  <ul class="card-list"
+      beeListKeyboardNav
+      focusSelector="li.card-row .card-link"
+      [items]="hives()"
+      (editItem)="editHive.emit($event)"
+      (deleteItem)="deleteHive.emit($event.id)">
     @for (hive of hives(); track hive.id) {
       <li class="card-row"
           [beeSwipeToDeleteRow]="hive.id"
@@ -25,24 +30,15 @@
           </div>
           <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l1.4-1.4 6.4 6.4a1 1 0 0 1 0 1.4l-6.4 6.4L9 17.4l5.7-5.7z"/></svg>
         </a>
-        <div class="card-actions">
-          <label class="select-toggle" [attr.aria-label]="'hive.select' | i18n">
-            <input
-              type="checkbox"
-              [checked]="selectedIds().includes(hive.id)"
-              (touchstart)="$event.stopPropagation()"
-              (touchmove)="$event.stopPropagation()"
-              (touchend)="onSelectionToggle($event, hive.id)"
-              (click)="onSelectionToggle($event, hive.id)"
-              (keydown)="onSelectionKeyToggle($event, hive.id)" />
-          </label>
-          <button class="btn-icon" type="button" [attr.aria-label]="'hive.edit' | i18n" (click)="editHive.emit(hive)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-          </button>
-          <button class="btn-icon btn-icon-danger" type="button" [attr.aria-label]="'hive.delete' | i18n" (click)="deleteHive.emit(hive.id)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-          </button>
-        </div>
+        <bee-row-actions
+          [selectable]="true"
+          [selected]="selectedIds().includes(hive.id)"
+          [selectAriaLabel]="'hive.select' | i18n"
+          [editAriaLabel]="'hive.edit' | i18n"
+          [deleteAriaLabel]="'hive.delete' | i18n"
+          (toggleSelected)="toggleSelected.emit({ id: hive.id, checked: $event })"
+          (editItem)="editHive.emit(hive)"
+          (deleteItem)="deleteHive.emit(hive.id)" />
       </li>
     }
   </ul>

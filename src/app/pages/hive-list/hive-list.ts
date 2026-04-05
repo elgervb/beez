@@ -11,9 +11,10 @@ import { HiveListViewComponent } from './hive-list-view/hive-list-view';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { ModalSheetComponent } from '../../ui/modal-sheet/modal-sheet';
 import { BadgeComponent } from '../../ui/badge/badge';
-import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
 import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
+import { CloudSyncService } from '../../data/cloud-sync.service';
+import { FilterPanelComponent, BulkAction, FilterOption } from '../../ui/filter-panel/filter-panel';
 
 type HiveFormValue = {
   code: string;
@@ -25,7 +26,7 @@ type HiveFormValue = {
 
 @Component({
   selector: 'bee-hive-list',
-  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent, SearchFilterBarComponent, UndoBarComponent, TranslatePipe],
+  imports: [AppShellComponent, HiveListViewComponent, HiveFormComponent, ModalSheetComponent, BadgeComponent, UndoBarComponent, TranslatePipe, FilterPanelComponent],
   templateUrl: './hive-list.html',
   styleUrl: './hive-list.css'
 })
@@ -33,6 +34,7 @@ export class HiveListPage implements OnInit {
   private readonly connectivity = inject(ConnectivityService);
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
+  private readonly cloudSync = inject(CloudSyncService);
   readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-hive-search';
   private static readonly STATUS_KEY = 'beez-filter-hive-status';
@@ -55,6 +57,19 @@ export class HiveListPage implements OnInit {
   readonly editingHive = signal<Hive | null>(null);
   readonly pendingDeletedHive = signal<DeletedHiveBundle | null>(null);
   readonly reminderDays = signal<number>(this.loadReminderDays());
+
+  readonly hiveFilterOptions: FilterOption[] = [
+    { value: 'all', labelKey: 'common.all' },
+    { value: 'active', labelKey: 'hive.status.active' },
+    { value: 'weak', labelKey: 'hive.status.weak' },
+    { value: 'wintering', labelKey: 'hive.status.wintering' }
+  ];
+
+  readonly hiveBulkActions: BulkAction[] = [
+    { value: 'active', labelKey: 'hive.status.active' },
+    { value: 'weak', labelKey: 'hive.status.weak' },
+    { value: 'wintering', labelKey: 'hive.status.wintering' }
+  ];
 
   private undoDeleteTimer: ReturnType<typeof setTimeout> | null = null;
   private lastReconnectHandled = 0;
@@ -176,6 +191,12 @@ export class HiveListPage implements OnInit {
     void this.persistBulkStatus(status);
   }
 
+  onBulkActionSelected(value: string): void {
+    if (value === 'active' || value === 'weak' || value === 'wintering') {
+      this.applyBulkStatus(value);
+    }
+  }
+
   deleteHive(id: string): void {
     void this.removeHive(id);
   }
@@ -215,8 +236,7 @@ export class HiveListPage implements OnInit {
 
     this.isSyncing.set(true);
     try {
-      await this.remoteStore.ensureSignedInAnonymously();
-      await this.refreshRemoteData();
+      this.data.set(await this.cloudSync.syncPendingLocalThenRefresh());
       this.remoteReady.set(true);
       this.syncError.set('');
     } catch (error: unknown) {
@@ -229,22 +249,15 @@ export class HiveListPage implements OnInit {
   }
 
   private async refreshRemoteData(): Promise<void> {
-    const remoteData = await this.remoteStore.fetchAll();
-    this.data.set(remoteData);
-    this.localStore.cacheFromRemote(remoteData);
+    this.data.set(await this.cloudSync.refreshRemoteData());
   }
 
   private async handleReconnect(): Promise<void> {
-    if (this.hasPendingLocalChanges() || this.isSyncing() || !this.connectivity.isOnline() || !this.remoteStore.isConfigured()) {
+    if (this.isSyncing() || !this.connectivity.isOnline() || !this.remoteStore.isConfigured()) {
       return;
     }
 
     await this.initializeData();
-  }
-
-  private hasPendingLocalChanges(): boolean {
-    const raw = Number(localStorage.getItem('beez-pending-local') ?? '0');
-    return Number.isFinite(raw) && raw > 0;
   }
 
   private async persistHive(f: HiveFormValue): Promise<void> {

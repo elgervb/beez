@@ -13,6 +13,7 @@ import { BadgeComponent } from '../../ui/badge/badge';
 import { SearchFilterBarComponent } from '../../ui/search-filter-bar/search-filter-bar';
 import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
+import { CloudSyncService } from '../../data/cloud-sync.service';
 
 @Component({
   selector: 'bee-apiary-list',
@@ -24,6 +25,7 @@ export class ApiaryListPage implements OnInit {
   private readonly connectivity = inject(ConnectivityService);
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
+  private readonly cloudSync = inject(CloudSyncService);
   readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-apiary-search';
   readonly modal = inject(ModalService);
@@ -120,8 +122,7 @@ export class ApiaryListPage implements OnInit {
 
     this.isSyncing.set(true);
     try {
-      await this.remoteStore.ensureSignedInAnonymously();
-      await this.refreshRemoteData();
+      this.data.set(await this.cloudSync.syncPendingLocalThenRefresh());
       this.remoteReady.set(true);
       this.syncError.set('');
     } catch (error: unknown) {
@@ -134,22 +135,15 @@ export class ApiaryListPage implements OnInit {
   }
 
   private async refreshRemoteData(): Promise<void> {
-    const remoteData = await this.remoteStore.fetchAll();
-    this.data.set(remoteData);
-    this.localStore.cacheFromRemote(remoteData);
+    this.data.set(await this.cloudSync.refreshRemoteData());
   }
 
   private async handleReconnect(): Promise<void> {
-    if (this.hasPendingLocalChanges() || this.isSyncing() || !this.connectivity.isOnline() || !this.remoteStore.isConfigured()) {
+    if (this.isSyncing() || !this.connectivity.isOnline() || !this.remoteStore.isConfigured()) {
       return;
     }
 
     await this.initializeData();
-  }
-
-  private hasPendingLocalChanges(): boolean {
-    const raw = Number(localStorage.getItem('beez-pending-local') ?? '0');
-    return Number.isFinite(raw) && raw > 0;
   }
 
   private async persistApiary(f: { name: string; location: string; notes: string }): Promise<void> {
