@@ -1,30 +1,5 @@
 <bee-app-shell tab="settings" [eyebrow]="'settings.preferences' | i18n" [title]="'settings.title' | i18n" [backLink]="'/'" [backLabel]="'apiaries.title' | i18n">
   <div shell-content class="settings-content">
-    <section class="panel" [attr.aria-label]="'settings.authentication' | i18n">
-      <h2>{{ 'settings.authentication' | i18n }}</h2>
-      @if (!authConfigured()) {
-        <p class="message">{{ 'auth.notConfigured' | i18n }}</p>
-      } @else {
-        <p class="message">
-          {{ authSignedIn() ? ('auth.signedIn' | i18n:{ email: (authEmail() || ('auth.googleUser' | i18n)) }) : ('auth.notSignedIn' | i18n) }}
-        </p>
-        <label>
-          {{ 'auth.emailLogin' | i18n }}
-          <input
-            type="email"
-            [placeholder]="'auth.emailPlaceholder' | i18n"
-            [value]="authInputEmail()"
-            (input)="authInputEmail.set($any($event.target).value)"
-          />
-        </label>
-        <div class="actions">
-          <button type="button" class="btn-secondary" (click)="sendMagicLink()">{{ 'auth.sendMagicLink' | i18n }}</button>
-          <button type="button" class="btn-secondary" (click)="signInWithGoogle()">{{ 'auth.signInGoogle' | i18n }}</button>
-          <button type="button" class="btn-secondary btn-danger" [disabled]="!authSignedIn()" (click)="signOutSupabase()">{{ 'auth.signOut' | i18n }}</button>
-        </div>
-      }
-    </section>
-
     <section class="panel" [attr.aria-label]="'settings.inspectionReminder' | i18n">
       <h2>{{ 'settings.inspectionReminder' | i18n }}</h2>
       <label>
@@ -258,29 +233,6 @@
         <button type="button" class="btn-secondary" [disabled]="isUploading() || !isOnline()" (click)="uploadLocalToSupabase()">{{ 'settings.uploadSupabase' | i18n }}</button>
         <button type="button" class="btn-secondary" (click)="clearOfflineQueue()">{{ 'settings.clearQueue' | i18n }}</button>
       </div>
-    </section>
-
-    <section class="panel" [attr.aria-label]="'settings.dataIntegrity' | i18n">
-      <h2>{{ 'settings.dataIntegrity' | i18n }}</h2>
-      <div class="actions">
-        <button type="button" class="btn-secondary" (click)="runIntegrityCheck()">{{ 'settings.runCheck' | i18n }}</button>
-        <button type="button" class="btn-secondary btn-danger" (click)="repairIntegrity()">{{ 'settings.repair' | i18n }}</button>
-      </div>
-      @if (integrityReport(); as report) {
-        <div class="integrity-grid">
-          <article class="integrity-card" [class.integrity-healthy]="report.orphanHives === 0">
-            <p class="integrity-label">{{ 'settings.orphanHives' | i18n }}</p>
-            <p class="integrity-value">{{ report.orphanHives }}</p>
-          </article>
-          <article class="integrity-card" [class.integrity-healthy]="report.orphanInspections === 0">
-            <p class="integrity-label">{{ 'settings.orphanInspections' | i18n }}</p>
-            <p class="integrity-value">{{ report.orphanInspections }}</p>
-          </article>
-        </div>
-        <p class="integrity-caption" [class.integrity-caption-ok]="report.orphanHives === 0 && report.orphanInspections === 0">
-          {{ report.orphanHives === 0 && report.orphanInspections === 0 ? ('settings.dataGraphHealthy' | i18n) : ('settings.integrityIssues' | i18n) }}
-        </p>
-      }
     </section>
 
     <section class="panel" [attr.aria-label]="'shortcuts.title' | i18n">

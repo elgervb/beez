@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, computed, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BeeStore, DataSnapshot, ImportMode, ImportPreview, IntegrityReport } from '../../data/bee-store';
+import { BeeStore, DataSnapshot, ImportMode, ImportPreview } from '../../data/bee-store';
 import { ConnectivityService } from '../../data/connectivity.service';
 import { Inspection } from '../../data/models';
 import { TranslationService } from '../../data/translation.service';
@@ -15,7 +15,7 @@ import { TranslatePipe } from '../../ui/pipes/translate.pipe';
   templateUrl: './settings.html',
   styleUrl: './settings.css'
 })
-export class SettingsPage implements OnDestroy, OnInit {
+export class SettingsPage implements OnDestroy {
   private readonly store = inject(BeeStore);
   private readonly connectivity = inject(ConnectivityService);
   private readonly supabaseStore = inject(SupabaseStore);
@@ -26,13 +26,8 @@ export class SettingsPage implements OnDestroy, OnInit {
   readonly pendingImport = signal<{ raw: unknown; preview: ImportPreview } | null>(null);
   readonly snapshots = signal<DataSnapshot[]>(this.store.listSnapshots());
   readonly reminderDays = signal<number>(this.loadReminderDays());
-  readonly integrityReport = signal<IntegrityReport | null>(null);
   readonly pendingLocalChanges = signal(this.loadPendingLocalChanges());
   readonly lastSyncAt = signal(localStorage.getItem('beez-last-sync-at') ?? '');
-  readonly authConfigured = signal(this.supabaseStore.isConfigured());
-  readonly authSignedIn = signal(false);
-  readonly authEmail = signal('');
-  readonly authInputEmail = signal(localStorage.getItem('beez-auth-email') ?? '');
   readonly isOnline = this.connectivity.isOnline;
 
   readonly analytics = computed(() => {
@@ -154,10 +149,6 @@ export class SettingsPage implements OnDestroy, OnInit {
     globalThis.addEventListener('beez-data-changed', this.onDataChanged);
   }
 
-  ngOnInit(): void {
-    void this.refreshAuthStatus();
-  }
-
   ngOnDestroy(): void {
     globalThis.removeEventListener('beez-data-changed', this.onDataChanged);
   }
@@ -229,81 +220,8 @@ export class SettingsPage implements OnDestroy, OnInit {
     this.importMessage.set(restored ? this.i18n.t('settings.snapshotRestored') : this.i18n.t('settings.snapshotRestoreFailed'));
   }
 
-  runIntegrityCheck(): void {
-    const report = this.store.getIntegrityReport();
-    this.integrityReport.set(report);
-    if (report.orphanHives === 0 && report.orphanInspections === 0) {
-      this.importMessage.set(this.i18n.t('settings.integrityCheckPassed'));
-    } else {
-      this.importMessage.set(this.i18n.t('settings.integrityIssuesFound'));
-    }
-  }
-
-  repairIntegrity(): void {
-    const repaired = this.store.repairIntegrity();
-    this.integrityReport.set(repaired.after);
-    if (repaired.before.orphanHives === 0 && repaired.before.orphanInspections === 0) {
-      this.importMessage.set(this.i18n.t('settings.noIntegrityIssuesToRepair'));
-    } else {
-      this.importMessage.set(
-        this.i18n.t('settings.integrityRepairSummary', {
-          orphanHives: repaired.before.orphanHives,
-          orphanInspections: repaired.before.orphanInspections
-        })
-      );
-    }
-  }
-
   openShortcutHelp(): void {
     globalThis.dispatchEvent(new CustomEvent('beez-open-shortcuts'));
-  }
-
-  async signInWithGoogle(): Promise<void> {
-    if (!this.authConfigured()) {
-      this.importMessage.set(this.i18n.t('settings.supabaseNotConfiguredAddKeys'));
-      return;
-    }
-
-    try {
-      await this.supabaseStore.signInWithGoogle(globalThis.location.origin);
-    } catch (error: unknown) {
-      const reason = error instanceof Error ? error.message : this.i18n.t('common.unknownError');
-      this.importMessage.set(this.i18n.t('settings.googleSignInFailed', { reason }));
-    }
-  }
-
-  async signOutSupabase(): Promise<void> {
-    try {
-      await this.supabaseStore.signOut();
-      this.authSignedIn.set(false);
-      this.authEmail.set('');
-      this.importMessage.set(this.i18n.t('settings.signedOutFromSupabase'));
-    } catch (error: unknown) {
-      const reason = error instanceof Error ? error.message : this.i18n.t('common.unknownError');
-      this.importMessage.set(this.i18n.t('settings.signOutFailed', { reason }));
-    }
-  }
-
-  async sendMagicLink(): Promise<void> {
-    const email = this.authInputEmail().trim();
-    if (!email) {
-      this.importMessage.set(this.i18n.t('settings.enterEmailFirst'));
-      return;
-    }
-
-    if (!this.authConfigured()) {
-      this.importMessage.set(this.i18n.t('settings.supabaseNotConfiguredAddKeys'));
-      return;
-    }
-
-    try {
-      await this.supabaseStore.signInWithEmailMagicLink(email, globalThis.location.origin);
-      localStorage.setItem('beez-auth-email', email);
-      this.importMessage.set(this.i18n.t('settings.magicLinkSent'));
-    } catch (error: unknown) {
-      const reason = error instanceof Error ? error.message : this.i18n.t('common.unknownError');
-      this.importMessage.set(this.i18n.t('settings.magicLinkFailed', { reason }));
-    }
   }
 
   clearOfflineQueue(): void {
@@ -316,7 +234,6 @@ export class SettingsPage implements OnDestroy, OnInit {
     const payload = {
       generatedAt: new Date().toISOString(),
       analytics: this.analytics(),
-      integrity: this.integrityReport() ?? this.store.getIntegrityReport(),
       queue: {
         pendingLocalChanges: this.pendingLocalChanges(),
         lastSyncAt: this.lastSyncAt()
@@ -350,29 +267,6 @@ export class SettingsPage implements OnDestroy, OnInit {
     return Number.isFinite(raw) && raw > 0 ? raw : 0;
   }
 
-  private async refreshAuthStatus(): Promise<void> {
-    if (!this.authConfigured()) {
-      this.authSignedIn.set(false);
-      this.authEmail.set('');
-      return;
-    }
-
-    try {
-      const hasSession = await this.supabaseStore.hasActiveSession();
-      this.authSignedIn.set(hasSession);
-      if (!hasSession) {
-        this.authEmail.set('');
-        return;
-      }
-
-      const email = await this.supabaseStore.getCurrentUserEmail();
-      this.authEmail.set(email ?? this.i18n.t('settings.signedIn'));
-    } catch {
-      this.authSignedIn.set(false);
-      this.authEmail.set('');
-    }
-  }
-
   readonly isUploading = signal(false);
 
   async uploadLocalToSupabase(): Promise<void> {
@@ -381,7 +275,7 @@ export class SettingsPage implements OnDestroy, OnInit {
       return;
     }
 
-    if (!this.authConfigured()) {
+    if (!this.supabaseStore.isConfigured()) {
       this.importMessage.set(this.i18n.t('settings.supabaseNotConfigured'));
       return;
     }
