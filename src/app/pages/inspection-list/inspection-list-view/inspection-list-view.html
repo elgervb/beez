@@ -8,38 +8,42 @@
     @for (inspection of inspections(); track inspection.id) {
         <li class="inspection-card"
           [beeSwipeToDeleteRow]="inspection.id"
-          (beeSwipeDelete)="deleteInspection.emit($event)">
+          (beeSwipeDelete)="deleteInspection.emit($event)"
+          (beeSwipeEdit)="editInspection.emit(inspection)">
+        <div class="swipe-reveal swipe-reveal-edit">{{ 'common.edit' | i18n }}</div>
         <div class="swipe-reveal">{{ 'common.delete' | i18n }}</div>
-        <div class="inspection-main">
-          <div class="inspection-header">
-            <div class="inspection-date">{{ inspection.date | relativeDate }}</div>
-          </div>
-          <div class="inspection-body">
-            <div class="inspection-tags">
-              <bee-badge [label]="'inspection.broodLabel' | i18n:{ value: (('inspection.broodPattern.' + inspection.broodPattern) | i18n) }" [variant]="inspection.broodPattern === 'excellent' ? 'success' : inspection.broodPattern === 'good' ? 'default' : 'warning'" [icon]="inspection.broodPattern === 'excellent' ? 'check' : inspection.broodPattern === 'poor' ? 'warning' : null" appearance="soft" size="small" />
-              <bee-badge [label]="'inspection.storesLabel' | i18n:{ value: (('inspection.storesLevel.' + inspection.storesLevel) | i18n) }" [variant]="inspection.storesLevel === 'high' ? 'success' : inspection.storesLevel === 'medium' ? 'default' : 'danger'" [icon]="inspection.storesLevel === 'low' ? 'warning' : null" appearance="soft" size="small" />
-              @if (inspection.broodSeen) {
-                <bee-badge [label]="'inspection.broodSeen' | i18n" variant="success" icon="check" appearance="soft" size="small" />
-              }
-              @if (inspection.open) {
-                <bee-badge [label]="'inspection.openBrood' | i18n" variant="success" icon="check" appearance="soft" size="small" />
-              }
+        <div class="swipe-foreground">
+          <div class="inspection-main">
+            <div class="inspection-header">
+              <div class="inspection-date">{{ inspection.date | relativeDate }}</div>
             </div>
-            @if (inspection.notes) {
-              <p class="inspection-notes">{{ inspection.notes }}</p>
-            }
-            <p class="inspection-meta">{{ 'inspection.byInspector' | i18n:{ name: inspection.inspector } }}</p>
+            <div class="inspection-body">
+              <div class="inspection-tags">
+                <bee-badge [label]="'inspection.broodLabel' | i18n:{ value: (('inspection.broodPattern.' + inspection.broodPattern) | i18n) }" [variant]="inspection.broodPattern === 'excellent' ? 'success' : inspection.broodPattern === 'good' ? 'default' : 'warning'" [icon]="inspection.broodPattern === 'excellent' ? 'check' : inspection.broodPattern === 'poor' ? 'warning' : null" appearance="soft" size="small" />
+                <bee-badge [label]="'inspection.storesLabel' | i18n:{ value: (('inspection.storesLevel.' + inspection.storesLevel) | i18n) }" [variant]="inspection.storesLevel === 'high' ? 'success' : inspection.storesLevel === 'medium' ? 'default' : 'danger'" [icon]="inspection.storesLevel === 'low' ? 'warning' : null" appearance="soft" size="small" />
+                @if (inspection.broodSeen) {
+                  <bee-badge [label]="'inspection.broodSeen' | i18n" variant="success" icon="check" appearance="soft" size="small" />
+                }
+                @if (inspection.open) {
+                  <bee-badge [label]="'inspection.openBrood' | i18n" variant="success" icon="check" appearance="soft" size="small" />
+                }
+              </div>
+              @if (inspection.notes) {
+                <p class="inspection-notes">{{ inspection.notes }}</p>
+              }
+              <p class="inspection-meta">{{ 'inspection.byInspector' | i18n:{ name: inspection.inspector } }}</p>
+            </div>
           </div>
+          <bee-row-actions
+            [selectable]="true"
+            [selected]="selectedIds().includes(inspection.id)"
+            [selectAriaLabel]="'inspection.select' | i18n"
+            [editAriaLabel]="'inspection.edit' | i18n"
+            [deleteAriaLabel]="'inspection.delete' | i18n"
+            (toggleSelected)="toggleSelected.emit({ id: inspection.id, checked: $event })"
+            (editItem)="editInspection.emit(inspection)"
+            (deleteItem)="deleteInspection.emit(inspection.id)" />
         </div>
-        <bee-row-actions
-          [selectable]="true"
-          [selected]="selectedIds().includes(inspection.id)"
-          [selectAriaLabel]="'inspection.select' | i18n"
-          [editAriaLabel]="'inspection.edit' | i18n"
-          [deleteAriaLabel]="'inspection.delete' | i18n"
-          (toggleSelected)="toggleSelected.emit({ id: inspection.id, checked: $event })"
-          (editItem)="editInspection.emit(inspection)"
-          (deleteItem)="deleteInspection.emit(inspection.id)" />
       </li>
     }
   </ul>

@@ -1,12 +1,15 @@
-import { Directive, OnDestroy, computed, input, output, signal } from '@angular/core';
+import { Directive, OnDestroy, computed, inject, input, output, signal } from '@angular/core';
+import { HapticFeedbackService } from '../../data/haptic-feedback.service';
 
 @Directive({
   selector: '[beeSwipeToDeleteRow]',
   standalone: true,
   host: {
     '[class.swiping]': 'isSwiping()',
+    '[class.swiping-left]': 'isSwipingLeft()',
+    '[class.swiping-right]': 'isSwipingRight()',
     '[class.swipe-out]': 'isSwipingOut()',
-    '[style.transform]': 'transform()',
+    '[style.--swipe-offset]': 'offsetPx()',
     '(pointerdown)': 'onPointerDown($event)',
     '(pointermove)': 'onPointerMove($event)',
     '(pointerup)': 'onPointerUp($event)',
@@ -19,12 +22,17 @@ import { Directive, OnDestroy, computed, input, output, signal } from '@angular/
   }
 })
 export class SwipeToDeleteRowDirective implements OnDestroy {
+  private readonly haptics = inject(HapticFeedbackService);
+
   readonly beeSwipeToDeleteRow = input.required<string>();
   readonly swipeThreshold = input<number>(72);
   readonly swipeOutDurationMs = input<number>(240);
   readonly swipeIgnoreSelector = input<string>('.card-actions');
+  readonly enableSwipeEdit = input<boolean>(true);
+  readonly hapticDurationMs = input<number>(10);
 
   readonly beeSwipeDelete = output<string>();
+  readonly beeSwipeEdit = output<string>();
 
   private touchStartX: number | null = null;
   private pointerStartX: number | null = null;
@@ -35,9 +43,11 @@ export class SwipeToDeleteRowDirective implements OnDestroy {
   private readonly swipingOut = signal<boolean>(false);
   private swipeOutTimer: ReturnType<typeof setTimeout> | null = null;
 
-  readonly isSwiping = computed(() => this.offset() < 0 && !this.swipingOut());
+  readonly isSwiping = computed(() => this.offset() !== 0 && !this.swipingOut());
+  readonly isSwipingLeft = computed(() => this.offset() < 0 && !this.swipingOut());
+  readonly isSwipingRight = computed(() => this.offset() > 0 && !this.swipingOut());
   readonly isSwipingOut = computed(() => this.swipingOut());
-  readonly transform = computed(() => `translateX(${this.offset()}px)`);
+  readonly offsetPx = computed(() => `${this.offset()}px`);
 
   onPointerDown(event: PointerEvent): void {
     if (event.pointerType === 'touch') return;
@@ -55,12 +65,12 @@ export class SwipeToDeleteRowDirective implements OnDestroy {
 
     const delta = event.clientX - this.pointerStartX;
     if (!this.pointerDragging) {
-      if (delta > -this.pointerDragStartThresholdPx) return;
+      if (Math.abs(delta) < this.pointerDragStartThresholdPx) return;
       this.pointerDragging = true;
       this.setPointerCapture(event.currentTarget, event.pointerId);
     }
 
-    this.offset.set(Math.min(0, delta));
+    this.offset.set(delta);
     event.preventDefault();
   }
 
@@ -106,7 +116,7 @@ export class SwipeToDeleteRowDirective implements OnDestroy {
     if (this.touchStartX === null) return;
     const x = event.touches[0]?.clientX;
     if (x === undefined) return;
-    this.offset.set(Math.min(0, x - this.touchStartX));
+    this.offset.set(x - this.touchStartX);
   }
 
   onTouchEnd(event: TouchEvent): void {
@@ -144,15 +154,27 @@ export class SwipeToDeleteRowDirective implements OnDestroy {
     this.pointerId = null;
     this.pointerDragging = false;
 
+    if (currentOffset >= this.swipeThreshold() && this.enableSwipeEdit()) {
+      this.triggerHaptic();
+      this.beeSwipeEdit.emit(this.beeSwipeToDeleteRow());
+      return;
+    }
+
     if (currentOffset > -this.swipeThreshold()) return;
 
     this.swipingOut.set(true);
     this.clearSwipeTimer();
     this.swipeOutTimer = setTimeout(() => {
+      this.triggerHaptic();
       this.beeSwipeDelete.emit(this.beeSwipeToDeleteRow());
       this.swipingOut.set(false);
       this.swipeOutTimer = null;
     }, this.swipeOutDurationMs());
+  }
+
+  private triggerHaptic(): void {
+    const duration = this.hapticDurationMs();
+    this.haptics.vibrate(duration);
   }
 
   private setPointerCapture(currentTarget: EventTarget | null, pointerId: number): void {

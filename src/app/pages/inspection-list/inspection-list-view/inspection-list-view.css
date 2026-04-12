@@ -13,14 +13,18 @@
   border-radius: 14px;
   padding: 0;
   box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
-  display: flex;
-  align-items: stretch;
   user-select: none;
   overflow: hidden;
+}
+
+.swipe-foreground {
+  display: flex;
+  align-items: stretch;
+  transform: translateX(var(--swipe-offset, 0px));
   transition: transform 120ms ease-out;
 }
 
-.inspection-card.swipe-out {
+.inspection-card.swipe-out .swipe-foreground {
   transform: translateX(-110%) !important;
   transition: transform 220ms ease-in;
   opacity: 0;
@@ -40,15 +44,24 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  z-index: 4;
+  pointer-events: none;
   opacity: 0;
   transition: opacity 120ms ease-out;
 }
 
-.inspection-card.swiping .swipe-reveal {
+.swipe-reveal-edit {
+  left: 0;
+  right: auto;
+  background: #1f6a3b;
+}
+
+.inspection-card.swiping-left .swipe-reveal:not(.swipe-reveal-edit),
+.inspection-card.swiping-right .swipe-reveal-edit {
   opacity: 1;
 }
 
-.inspection-card > :not(.swipe-reveal) {
+.swipe-foreground {
   position: relative;
   z-index: 1;
 }

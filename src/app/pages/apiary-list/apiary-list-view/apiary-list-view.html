@@ -8,21 +8,25 @@
     @for (apiary of apiaries(); track apiary.id) {
       <li class="card-row"
           [beeSwipeToDeleteRow]="apiary.id"
-          (beeSwipeDelete)="deleteApiary.emit($event)">
+          (beeSwipeDelete)="deleteApiary.emit($event)"
+          (beeSwipeEdit)="editApiary.emit(apiary)">
+        <div class="swipe-reveal swipe-reveal-edit">{{ 'common.edit' | i18n }}</div>
         <div class="swipe-reveal">{{ 'common.delete' | i18n }}</div>
-        <a [routerLink]="['/apiary', apiary.id]" class="card-link">
-          <div class="card-body">
-            <strong>{{ apiary.name }}</strong>
-            <p>{{ apiary.location }}</p>
-          </div>
-          <bee-badge [label]="'apiary.hivesLabel' | i18n:{ count: (hiveCounts()[apiary.id] ?? 0) }" variant="neutral" appearance="outline" size="small" />
-          <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l1.4-1.4 6.4 6.4a1 1 0 0 1 0 1.4l-6.4 6.4L9 17.4l5.7-5.7z"/></svg>
-        </a>
-        <bee-row-actions
-          [editAriaLabel]="'apiary.edit' | i18n"
-          [deleteAriaLabel]="'apiary.delete' | i18n"
-          (editItem)="editApiary.emit(apiary)"
-          (deleteItem)="deleteApiary.emit(apiary.id)" />
+        <div class="swipe-foreground">
+          <a [routerLink]="['/apiary', apiary.id]" class="card-link">
+            <div class="card-body">
+              <strong>{{ apiary.name }}</strong>
+              <p>{{ apiary.location }}</p>
+            </div>
+            <bee-badge [label]="'apiary.hivesLabel' | i18n:{ count: (hiveCounts()[apiary.id] ?? 0) }" variant="neutral" appearance="outline" size="small" />
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l1.4-1.4 6.4 6.4a1 1 0 0 1 0 1.4l-6.4 6.4L9 17.4l5.7-5.7z"/></svg>
+          </a>
+          <bee-row-actions
+            [editAriaLabel]="'apiary.edit' | i18n"
+            [deleteAriaLabel]="'apiary.delete' | i18n"
+            (editItem)="editApiary.emit(apiary)"
+            (deleteItem)="deleteApiary.emit(apiary.id)" />
+        </div>
       </li>
     }
   </ul>

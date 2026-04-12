@@ -8,37 +8,41 @@
     @for (hive of hives(); track hive.id) {
       <li class="card-row"
           [beeSwipeToDeleteRow]="hive.id"
-          (beeSwipeDelete)="deleteHive.emit($event)">
+          (beeSwipeDelete)="deleteHive.emit($event)"
+          (beeSwipeEdit)="editHive.emit(hive)">
+        <div class="swipe-reveal swipe-reveal-edit">{{ 'common.edit' | i18n }}</div>
         <div class="swipe-reveal">{{ 'common.delete' | i18n }}</div>
-        <a [routerLink]="['/apiary', apiaryId(), 'hive', hive.id]" class="card-link">
-          <div class="card-body">
-            <strong>{{ hive.code }}</strong>
-            <p>{{ 'hive.queenYearLabel' | i18n:{ year: hive.queenYear } }} · <bee-badge [label]="('hive.temperament.' + hive.temperament) | i18n" [variant]="hive.temperament === 'defensive' ? 'warning' : hive.temperament === 'calm' ? 'success' : 'default'" appearance="soft" size="small" /></p>
-            @if (hive.notes) {
-              <p class="hive-notes">{{ hive.notes }}</p>
-            }
-          </div>
-          <div class="card-right">
-            <bee-badge [label]="('hive.status.' + hive.status) | i18n" [variant]="hive.status === 'active' ? 'success' : hive.status === 'weak' ? 'warning' : 'neutral'" [icon]="hive.status === 'active' ? 'check' : hive.status === 'weak' ? 'warning' : null" appearance="soft" size="small" />
-            <bee-badge [label]="'hive.healthLabel' | i18n:{ score: (healthScores()[hive.id] ?? 0) }" [variant]="healthVariant(healthScores()[hive.id] ?? 0)" appearance="soft" size="small" />
-            <bee-badge [label]="('hive.trend.' + ((trendLabels()[hive.id] ?? 'Stable').toLowerCase())) | i18n" [variant]="trendLabels()[hive.id] === 'Improving' ? 'success' : trendLabels()[hive.id] === 'Declining' ? 'danger' : 'neutral'" [icon]="trendLabels()[hive.id] === 'Improving' ? 'success' : trendLabels()[hive.id] === 'Declining' ? 'error' : null" appearance="soft" size="small" />
-            <bee-badge [label]="inspectionLabels()[hive.id] ?? ('hive.noInspections' | i18n)" variant="neutral" appearance="outline" size="small" />
-            @let dueLabel = dueLabels()[hive.id];
-            @if (dueLabel) {
-              <bee-badge [label]="dueLabel" [variant]="isDueByHive()[hive.id] ? 'warning' : 'neutral'" [icon]="isDueByHive()[hive.id] ? 'warning' : null" [pulse]="isDueByHive()[hive.id] ?? false" appearance="solid" size="small" />
-            }
-          </div>
-          <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l1.4-1.4 6.4 6.4a1 1 0 0 1 0 1.4l-6.4 6.4L9 17.4l5.7-5.7z"/></svg>
-        </a>
-        <bee-row-actions
-          [selectable]="true"
-          [selected]="selectedIds().includes(hive.id)"
-          [selectAriaLabel]="'hive.select' | i18n"
-          [editAriaLabel]="'hive.edit' | i18n"
-          [deleteAriaLabel]="'hive.delete' | i18n"
-          (toggleSelected)="toggleSelected.emit({ id: hive.id, checked: $event })"
-          (editItem)="editHive.emit(hive)"
-          (deleteItem)="deleteHive.emit(hive.id)" />
+        <div class="swipe-foreground">
+          <a [routerLink]="['/apiary', apiaryId(), 'hive', hive.id]" class="card-link">
+            <div class="card-body">
+              <strong>{{ hive.code }}</strong>
+              <p>{{ 'hive.queenYearLabel' | i18n:{ year: hive.queenYear } }} · <bee-badge [label]="('hive.temperament.' + hive.temperament) | i18n" [variant]="hive.temperament === 'defensive' ? 'warning' : hive.temperament === 'calm' ? 'success' : 'default'" appearance="soft" size="small" /></p>
+              @if (hive.notes) {
+                <p class="hive-notes">{{ hive.notes }}</p>
+              }
+            </div>
+            <div class="card-right">
+              <bee-badge [label]="('hive.status.' + hive.status) | i18n" [variant]="hive.status === 'active' ? 'success' : hive.status === 'weak' ? 'warning' : 'neutral'" [icon]="hive.status === 'active' ? 'check' : hive.status === 'weak' ? 'warning' : null" appearance="soft" size="small" />
+              <bee-badge [label]="'hive.healthLabel' | i18n:{ score: (healthScores()[hive.id] ?? 0) }" [variant]="healthVariant(healthScores()[hive.id] ?? 0)" appearance="soft" size="small" />
+              <bee-badge [label]="('hive.trend.' + ((trendLabels()[hive.id] ?? 'Stable').toLowerCase())) | i18n" [variant]="trendLabels()[hive.id] === 'Improving' ? 'success' : trendLabels()[hive.id] === 'Declining' ? 'danger' : 'neutral'" [icon]="trendLabels()[hive.id] === 'Improving' ? 'success' : trendLabels()[hive.id] === 'Declining' ? 'error' : null" appearance="soft" size="small" />
+              <bee-badge [label]="inspectionLabels()[hive.id] ?? ('hive.noInspections' | i18n)" variant="neutral" appearance="outline" size="small" />
+              @let dueLabel = dueLabels()[hive.id];
+              @if (dueLabel) {
+                <bee-badge [label]="dueLabel" [variant]="isDueByHive()[hive.id] ? 'warning' : 'neutral'" [icon]="isDueByHive()[hive.id] ? 'warning' : null" [pulse]="isDueByHive()[hive.id] ?? false" appearance="solid" size="small" />
+              }
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l1.4-1.4 6.4 6.4a1 1 0 0 1 0 1.4l-6.4 6.4L9 17.4l5.7-5.7z"/></svg>
+          </a>
+          <bee-row-actions
+            [selectable]="true"
+            [selected]="selectedIds().includes(hive.id)"
+            [selectAriaLabel]="'hive.select' | i18n"
+            [editAriaLabel]="'hive.edit' | i18n"
+            [deleteAriaLabel]="'hive.delete' | i18n"
+            (toggleSelected)="toggleSelected.emit({ id: hive.id, checked: $event })"
+            (editItem)="editHive.emit(hive)"
+            (deleteItem)="deleteHive.emit(hive.id)" />
+        </div>
       </li>
     }
   </ul>
