@@ -36,7 +36,8 @@ describe('ModalSheetComponent', () => {
     const host = fixture.nativeElement as HTMLElement;
     const dialog = host.querySelector('.modal-sheet');
     expect(dialog).not.toBeNull();
-    expect(dialog?.getAttribute('role')).toBe('dialog');
-    expect(dialog?.getAttribute('aria-modal')).toBe('true');
+    expect(dialog?.tagName.toLowerCase()).toBe('dialog');
+    expect(dialog?.hasAttribute('open')).toBe(true);
+    expect(dialog?.getAttribute('aria-labelledby')).toBe('modal-title');
   });
 });
