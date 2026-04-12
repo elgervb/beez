@@ -1,0 +1,33 @@
+<section class="todo-checklist">
+  <h3 class="todo-heading">{{ 'todos.nextInspection' | i18n }}</h3>
+  @if (openTodos().length > 0) {
+    <ul class="todo-items">
+      @for (todo of openTodos(); track todo.id) {
+        <li class="todo-item">
+          <label class="todo-label">
+            <input
+              type="checkbox"
+              class="todo-checkbox"
+              [checked]="isPendingComplete(todo.id)"
+              (change)="toggleTodo(todo.id, $any($event.target).checked)" />
+            <span class="todo-text">{{ todo.text }}</span>
+          </label>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="todo-empty">{{ 'todos.empty' | i18n }}</p>
+  }
+  <div class="todo-add-row">
+    <input
+      class="todo-input"
+      type="text"
+      [value]="newTodoText()"
+      (input)="newTodoText.set($any($event.target).value)"
+      (keydown)="onKeydown($event)"
+      [placeholder]="'todos.addPlaceholder' | i18n"
+      inputmode="text"
+      autocomplete="off" />
+    <button type="button" class="todo-add-btn" (click)="addTodo()">{{ 'todos.add' | i18n }}</button>
+  </div>
+</section>

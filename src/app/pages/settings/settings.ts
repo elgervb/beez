@@ -4,6 +4,7 @@ import { BeeStore, DataSnapshot, ImportMode, ImportPreview } from '../../data/be
 import { ConnectivityService } from '../../data/connectivity.service';
 import { TranslationService } from '../../data/translation.service';
 import { SupabaseStore } from '../../data/supabase-store';
+import { TodoStore } from '../inspection-list/todos/todo-store';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 
@@ -17,6 +18,7 @@ export class SettingsPage implements OnDestroy {
   private readonly store = inject(BeeStore);
   private readonly connectivity = inject(ConnectivityService);
   private readonly supabaseStore = inject(SupabaseStore);
+  private readonly todoStore = inject(TodoStore);
   readonly i18n = inject(TranslationService);
 
   readonly importMessage = signal<string>('');
@@ -151,7 +153,8 @@ export class SettingsPage implements OnDestroy {
     }
 
     const data = this.store.getData();
-    const total = data.apiaries.length + data.hives.length + data.inspections.length;
+    const todos = this.todoStore.exportData();
+    const total = data.apiaries.length + data.hives.length + data.inspections.length + todos.length;
     if (total === 0) {
       this.importMessage.set(this.i18n.t('settings.noLocalDataToUpload'));
       return;
@@ -161,7 +164,8 @@ export class SettingsPage implements OnDestroy {
       this.i18n.t('settings.confirmUploadToSupabase', {
         apiaries: data.apiaries.length,
         hives: data.hives.length,
-        inspections: data.inspections.length
+        inspections: data.inspections.length,
+        todos: todos.length
       })
     );
     if (!confirmed) return;
@@ -170,13 +174,18 @@ export class SettingsPage implements OnDestroy {
     this.importMessage.set('');
     try {
       await this.supabaseStore.ensureSignedInAnonymously();
-      await this.supabaseStore.upsertAll(data);
+      await Promise.all([
+        this.supabaseStore.upsertAll(data),
+        this.supabaseStore.upsertTodos(todos)
+      ]);
       this.store.cacheFromRemote(data); // resets pending counter + writes lastSyncAt
+      this.todoStore.cacheFromRemote(todos);
       this.importMessage.set(
         this.i18n.t('settings.uploadedToSupabase', {
           apiaries: data.apiaries.length,
           hives: data.hives.length,
-          inspections: data.inspections.length
+          inspections: data.inspections.length,
+          todos: todos.length
         })
       );
     } catch (error: unknown) {

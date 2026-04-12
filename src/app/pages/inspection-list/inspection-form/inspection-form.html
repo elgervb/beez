@@ -55,6 +55,7 @@
       {{ 'inspection.notes' | i18n }}
       <textarea [formField]="form.notes" rows="3" [placeholder]="'inspection.notesLongPlaceholder' | i18n"></textarea>
     </label>
+    <bee-todo-checklist class="full" [hiveId]="hiveId()" (completedTodoIds)="pendingCompletedTodoIds.set($event)" />
     <div class="row-buttons">
       <button type="button" class="btn-secondary" (click)="dismissed.emit()">{{ 'common.cancel' | i18n }}</button>
       <button type="submit">{{ initial() ? ('inspection.update' | i18n) : ('inspection.save' | i18n) }}</button>

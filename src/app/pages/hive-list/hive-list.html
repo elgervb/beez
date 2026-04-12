@@ -45,7 +45,7 @@
     }
 
     <bee-hive-list-view [apiaryId]="apiaryId" [hives]="filteredHives()" [inspectionLabels]="inspectionLabels()"
-      [healthScores]="healthScores()" [trendLabels]="trendLabels()" [dueLabels]="dueLabels()" [isDueByHive]="isDueByHive()"
+      [healthScores]="healthScores()" [trendLabels]="trendLabels()" [dueLabels]="dueLabels()" [isDueByHive]="isDueByHive()" [todoCounts]="todoCounts()"
       [selectedIds]="selectedHiveIds()" (toggleSelected)="toggleHiveSelection($event)"
       (editHive)="openEdit($event)" (deleteHive)="deleteHive($event)" (addRequested)="openAdd()" />
 

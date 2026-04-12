@@ -40,12 +40,26 @@ create table if not exists public.inspections (
   check ((brood_seen = true) or (open = false))
 );
 
+create table if not exists public.todos (
+  id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
+  hive_id uuid not null references public.hives(id) on delete cascade,
+  text text not null check (char_length(trim(text)) > 0),
+  done boolean not null default false,
+  created_at timestamptz not null default now(),
+  closed_at timestamptz,
+  check ((done = true) or (closed_at is null))
+);
+
 create index if not exists idx_apiaries_owner on public.apiaries(owner_id);
 create index if not exists idx_hives_owner on public.hives(owner_id);
 create index if not exists idx_hives_apiary on public.hives(apiary_id);
 create index if not exists idx_inspections_owner on public.inspections(owner_id);
 create index if not exists idx_inspections_hive on public.inspections(hive_id);
 create index if not exists idx_inspections_date on public.inspections(date desc);
+create index if not exists idx_todos_owner on public.todos(owner_id);
+create index if not exists idx_todos_hive on public.todos(hive_id);
+create index if not exists idx_todos_created on public.todos(created_at desc);
 
 
 -- RLS Policies (SQL)
@@ -53,6 +67,7 @@ create index if not exists idx_inspections_date on public.inspections(date desc)
 alter table public.apiaries enable row level security;
 alter table public.hives enable row level security;
 alter table public.inspections enable row level security;
+alter table public.todos enable row level security;
 
 -- APIARIES
 create policy "apiaries_select_own"
@@ -130,4 +145,34 @@ with check (
 
 create policy "inspections_delete_own"
 on public.inspections for delete
+using (owner_id = auth.uid());
+
+-- TODOS
+create policy "todos_select_own"
+on public.todos for select
+using (owner_id = auth.uid());
+
+create policy "todos_insert_own"
+on public.todos for insert
+with check (
+  owner_id = auth.uid()
+  and exists (
+    select 1 from public.hives h
+    where h.id = hive_id and h.owner_id = auth.uid()
+  )
+);
+
+create policy "todos_update_own"
+on public.todos for update
+using (owner_id = auth.uid())
+with check (
+  owner_id = auth.uid()
+  and exists (
+    select 1 from public.hives h
+    where h.id = hive_id and h.owner_id = auth.uid()
+  )
+);
+
+create policy "todos_delete_own"
+on public.todos for delete
 using (owner_id = auth.uid());

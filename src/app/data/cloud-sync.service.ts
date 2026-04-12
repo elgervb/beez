@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BeeData } from './models';
 import { BeeStore } from './bee-store';
 import { SupabaseStore } from './supabase-store';
+import { TodoStore } from '../pages/inspection-list/todos/todo-store';
 
 const PENDING_LOCAL_CHANGES_KEY = 'beez-pending-local';
 
@@ -9,10 +10,15 @@ const PENDING_LOCAL_CHANGES_KEY = 'beez-pending-local';
 export class CloudSyncService {
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
+  private readonly todoStore = inject(TodoStore);
 
   async refreshRemoteData(): Promise<BeeData> {
-    const remoteData = await this.remoteStore.fetchAll();
+    const [remoteData, remoteTodos] = await Promise.all([
+      this.remoteStore.fetchAll(),
+      this.remoteStore.fetchTodos()
+    ]);
     this.localStore.cacheFromRemote(remoteData);
+    this.todoStore.cacheFromRemote(remoteTodos);
     return remoteData;
   }
 
@@ -20,7 +26,10 @@ export class CloudSyncService {
     await this.remoteStore.ensureSignedInAnonymously();
 
     if (this.hasPendingLocalChanges()) {
-      await this.remoteStore.upsertAll(this.localStore.getData());
+      await Promise.all([
+        this.remoteStore.upsertAll(this.localStore.getData()),
+        this.remoteStore.upsertTodos(this.todoStore.exportData())
+      ]);
     }
 
     return this.refreshRemoteData();

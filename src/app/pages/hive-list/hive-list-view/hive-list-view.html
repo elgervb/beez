@@ -25,6 +25,7 @@
               <bee-badge [label]="('hive.status.' + hive.status) | i18n" [variant]="hive.status === 'active' ? 'success' : hive.status === 'weak' ? 'warning' : 'neutral'" [icon]="hive.status === 'active' ? 'check' : hive.status === 'weak' ? 'warning' : null" appearance="soft" size="small" />
               <bee-badge [label]="'hive.healthLabel' | i18n:{ score: (healthScores()[hive.id] ?? 0) }" [variant]="healthVariant(healthScores()[hive.id] ?? 0)" appearance="soft" size="small" />
               <bee-badge [label]="('hive.trend.' + ((trendLabels()[hive.id] ?? 'Stable').toLowerCase())) | i18n" [variant]="trendLabels()[hive.id] === 'Improving' ? 'success' : trendLabels()[hive.id] === 'Declining' ? 'danger' : 'neutral'" [icon]="trendLabels()[hive.id] === 'Improving' ? 'success' : trendLabels()[hive.id] === 'Declining' ? 'error' : null" appearance="soft" size="small" />
+              <bee-badge [label]="'hive.todosCount' | i18n:{ count: (todoCounts()[hive.id] ?? 0) }" variant="info" appearance="soft" size="small" />
               <bee-badge [label]="inspectionLabels()[hive.id] ?? ('hive.noInspections' | i18n)" variant="neutral" appearance="outline" size="small" />
               @let dueLabel = dueLabels()[hive.id];
               @if (dueLabel) {

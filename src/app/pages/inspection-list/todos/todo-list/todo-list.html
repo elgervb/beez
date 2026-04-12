@@ -1,0 +1,17 @@
+@if (openTodos().length > 0) {
+  <button class="todo-list" type="button" [attr.aria-label]="'todos.manage' | i18n" (click)="openRequested.emit()">
+    <div class="todo-card-header">
+      <h3 class="todo-heading">{{ 'todos.title' | i18n }}</h3>
+      <span class="todo-manage">{{ 'todos.manage' | i18n }}</span>
+    </div>
+    <ul class="todo-items">
+      @for (todo of openTodos(); track todo.id) {
+        <li class="todo-item">{{ todo.text }}</li>
+      }
+    </ul>
+    <p class="todo-summary">
+      {{ 'todos.openCount' | i18n:{ count: openTodos().length } }} ·
+      {{ 'todos.closedCount' | i18n:{ count: closedCount() } }}
+    </p>
+  </button>
+}

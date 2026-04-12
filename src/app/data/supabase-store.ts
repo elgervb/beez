@@ -2,6 +2,15 @@ import { Injectable } from '@angular/core';
 import { Apiary, BeeData, Hive, Inspection } from './models';
 import { getSupabaseClient } from './supabase.client';
 
+export type SyncedTodo = {
+  id: string;
+  hiveId: string;
+  text: string;
+  done: boolean;
+  createdAt: string;
+  closedAt?: string;
+};
+
 type ApiaryRow = {
   id: string;
   owner_id: string;
@@ -35,6 +44,16 @@ type InspectionRow = {
   notes: string;
   inspector: string;
   created_at: string;
+};
+
+type TodoRow = {
+  id: string;
+  owner_id: string;
+  hive_id: string;
+  text: string;
+  done: boolean;
+  created_at: string;
+  closed_at: string | null;
 };
 
 function toApiary(row: ApiaryRow): Apiary {
@@ -72,6 +91,17 @@ function toInspection(row: InspectionRow): Inspection {
     notes: row.notes,
     inspector: row.inspector,
     createdAt: row.created_at
+  };
+}
+
+function toTodo(row: TodoRow): SyncedTodo {
+  return {
+    id: row.id,
+    hiveId: row.hive_id,
+    text: row.text,
+    done: row.done,
+    createdAt: row.created_at,
+    closedAt: row.closed_at ?? undefined
   };
 }
 
@@ -169,6 +199,12 @@ export class SupabaseStore {
       hives: (hives ?? []).map((r) => toHive(r as HiveRow)),
       inspections: (inspections ?? []).map((r) => toInspection(r as InspectionRow))
     };
+  }
+
+  async fetchTodos(): Promise<SyncedTodo[]> {
+    const { data, error } = await this.client.from('todos').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    return (data ?? []).map((row) => toTodo(row as TodoRow));
   }
 
   async addApiary(payload: Pick<Apiary, 'name' | 'location' | 'notes'>): Promise<Apiary> {
@@ -339,5 +375,23 @@ export class SupabaseStore {
       );
       if (error) throw error;
     }
+  }
+
+  async upsertTodos(todos: SyncedTodo[]): Promise<void> {
+    if (todos.length === 0) return;
+
+    const { error } = await this.client.from('todos').upsert(
+      todos.map((todo) => ({
+        id: todo.id,
+        hive_id: todo.hiveId,
+        text: todo.text,
+        done: todo.done,
+        created_at: todo.createdAt,
+        closed_at: todo.closedAt ?? null
+      })),
+      { onConflict: 'id' }
+    );
+
+    if (error) throw error;
   }
 }

@@ -1,16 +1,21 @@
-import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { form, FormField, required, submit } from '@angular/forms/signals';
 import { Inspection } from '../../../data/models';
 import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
+import { TodoChecklistComponent } from '../todos/todo-checklist/todo-checklist';
+import { TodoStore } from '../todos/todo-store';
 
 @Component({
   selector: 'bee-inspection-form',
-  imports: [FormField, TranslatePipe],
+  imports: [FormField, TranslatePipe, TodoChecklistComponent],
   templateUrl: './inspection-form.html',
   styleUrl: './inspection-form.css'
 })
 export class InspectionFormComponent {
+  private readonly todoStore = inject(TodoStore);
+
   readonly initial = input<Inspection | null>(null);
+  readonly hiveId = input.required<string>();
   readonly draft = input<Omit<Inspection, 'id' | 'createdAt' | 'hiveId'> | null>(null);
   readonly knownInspectors = input<string[]>([]);
 
@@ -32,6 +37,7 @@ export class InspectionFormComponent {
 
   readonly showOpenBrood = computed(() => this.form.broodSeen().value());
   readonly submitted = signal(false);
+  readonly pendingCompletedTodoIds = signal<string[]>([]);
   readonly showInspectorError = computed(() => this.submitted() && !this.form.inspector().valid());
 
   constructor() {
@@ -71,6 +77,7 @@ export class InspectionFormComponent {
           });
         }
       }
+      this.pendingCompletedTodoIds.set([]);
       this.submitted.set(false);
     });
   }
@@ -118,6 +125,7 @@ export class InspectionFormComponent {
         inspector: value.inspector.trim(),
         open: this.showOpenBrood() ? value.open : false
       });
+      this.todoStore.closeMany(this.pendingCompletedTodoIds());
       localStorage.setItem('beez-inspector', value.inspector.trim());
       this.formModel.set({
         date: new Date().toISOString().slice(0, 10),
@@ -128,6 +136,7 @@ export class InspectionFormComponent {
         notes: '',
         inspector: ''
       });
+      this.pendingCompletedTodoIds.set([]);
       this.submitted.set(false);
     });
   }

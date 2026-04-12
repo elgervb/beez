@@ -22,6 +22,7 @@ export class HiveListViewComponent {
   readonly trendLabels = input.required<Partial<Record<string, 'Improving' | 'Stable' | 'Declining'>>>();
   readonly dueLabels = input.required<Partial<Record<string, string>>>();
   readonly isDueByHive = input.required<Partial<Record<string, boolean>>>();
+  readonly todoCounts = input.required<Partial<Record<string, number>>>();
   readonly selectedIds = input<string[]>([]);
   readonly editHive = output<Hive>();
   readonly deleteHive = output<string>();

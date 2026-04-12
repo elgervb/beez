@@ -1,0 +1,42 @@
+<section class="todo-manager">
+  <p class="todo-summary">
+    {{ 'todos.openCount' | i18n:{ count: openCount() } }} ·
+    {{ 'todos.closedCount' | i18n:{ count: closedCount() } }}
+  </p>
+
+  @if (todos().length > 0) {
+    <ul class="todo-list">
+      @for (todo of todos(); track todo.id) {
+        <li class="todo-row" [class.closed]="todo.done">
+          <input
+            type="checkbox"
+            class="todo-checkbox"
+            [checked]="todo.done"
+            [attr.aria-label]="'todos.toggleDone' | i18n"
+            (change)="toggleDone(todo.id, $any($event.target).checked)" />
+          <input
+            type="text"
+            class="todo-text"
+            [value]="todo.text"
+            [attr.aria-label]="'todos.editText' | i18n"
+            (change)="updateText(todo.id, $any($event.target).value)" />
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="todo-empty">{{ 'todos.emptyAll' | i18n }}</p>
+  }
+
+  <div class="todo-add-row">
+    <input
+      class="todo-input"
+      type="text"
+      [value]="newTodoText()"
+      (input)="newTodoText.set($any($event.target).value)"
+      (keydown)="onKeydown($event)"
+      [placeholder]="'todos.addPlaceholder' | i18n"
+      inputmode="text"
+      autocomplete="off" />
+    <button type="button" class="todo-add-btn" (click)="addTodo()">{{ 'todos.add' | i18n }}</button>
+  </div>
+</section>

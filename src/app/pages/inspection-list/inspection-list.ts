@@ -16,6 +16,8 @@ import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 import { CloudSyncService } from '../../data/cloud-sync.service';
 import { FilterPanelComponent, BulkAction, FilterOption } from '../../ui/filter-panel/filter-panel';
+import { TodoListComponent } from './todos/todo-list/todo-list';
+import { TodoManagerComponent } from './todos/todo-manager/todo-manager';
 
 type InspectionFormValue = {
   date: string;
@@ -29,7 +31,7 @@ type InspectionFormValue = {
 
 @Component({
   selector: 'bee-inspection-list',
-  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, UndoBarComponent, TranslatePipe, FilterPanelComponent],
+  imports: [AppShellComponent, InspectionListViewComponent, InspectionFormComponent, ModalSheetComponent, InspectionSparklineComponent, BadgeComponent, UndoBarComponent, TranslatePipe, FilterPanelComponent, TodoListComponent, TodoManagerComponent],
   templateUrl: './inspection-list.html',
   styleUrl: './inspection-list.css'
 })
@@ -94,6 +96,7 @@ export class InspectionListPage implements OnInit {
   readonly pendingDeletedInspection = signal<Inspection | null>(null);
   readonly pendingBulkDeletedInspections = signal<Inspection[] | null>(null);
   readonly shareMessage = signal<string>('');
+  readonly todoManagerOpen = signal(false);
   readonly undoMessage = computed(() => {
     const bulkDeleted = this.pendingBulkDeletedInspections();
     if (bulkDeleted?.length) return this.i18n.t('inspection.deletedMany', { count: bulkDeleted.length });
@@ -134,6 +137,14 @@ export class InspectionListPage implements OnInit {
     this.editingInspection.set(null);
     this.draftInspection.set(null);
     this.modal.close();
+  }
+
+  openTodoManager(): void {
+    this.todoManagerOpen.set(true);
+  }
+
+  closeTodoManager(): void {
+    this.todoManagerOpen.set(false);
   }
 
   saveInspection(f: InspectionFormValue): void {

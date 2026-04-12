@@ -15,6 +15,7 @@ import { UndoBarComponent } from '../../ui/undo-bar/undo-bar';
 import { SupabaseStore } from '../../data/supabase-store';
 import { CloudSyncService } from '../../data/cloud-sync.service';
 import { FilterPanelComponent, BulkAction, FilterOption } from '../../ui/filter-panel/filter-panel';
+import { TodoStore } from '../inspection-list/todos/todo-store';
 
 type HiveFormValue = {
   code: string;
@@ -33,6 +34,7 @@ type HiveFormValue = {
 export class HiveListPage implements OnInit {
   private readonly connectivity = inject(ConnectivityService);
   private readonly localStore = inject(BeeStore);
+  private readonly todoStore = inject(TodoStore);
   private readonly remoteStore = inject(SupabaseStore);
   private readonly cloudSync = inject(CloudSyncService);
   readonly i18n = inject(TranslationService);
@@ -109,6 +111,15 @@ export class HiveListPage implements OnInit {
       labels[hive.id] = this.computeDueLabel(hive.id);
     }
     return labels;
+  });
+
+  readonly todoCounts = computed(() => {
+    const counts: Record<string, number> = {};
+    const todos = this.todoStore.todos();
+    for (const hive of this.hives()) {
+      counts[hive.id] = todos.filter((todo) => todo.hiveId === hive.id).length;
+    }
+    return counts;
   });
 
   readonly isDueByHive = computed(() => {
