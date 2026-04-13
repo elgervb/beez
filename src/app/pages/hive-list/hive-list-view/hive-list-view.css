@@ -72,19 +72,15 @@
   letter-spacing: 0.02em;
   z-index: 4;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 120ms ease-out;
+  /* opacity driven by swipe distance: 0 at rest → 1 at threshold (72px) */
+  opacity: clamp(0, calc(var(--swipe-offset, 0px) / 1px / -72), 1);
 }
 
 .swipe-reveal-edit {
   left: 0;
   right: auto;
   background: #1f6a3b;
-}
-
-.card-row.swiping-left .swipe-reveal:not(.swipe-reveal-edit),
-.card-row.swiping-right .swipe-reveal-edit {
-  opacity: 1;
+  opacity: clamp(0, calc(var(--swipe-offset, 0px) / 1px / 72), 1);
 }
 
 .swipe-foreground {
