@@ -63,6 +63,12 @@
   color: var(--color-text-soft);
 }
 
+.todo-empty {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--font-size-sm-soft);
+}
+
 .todo-summary {
   margin: 0.45rem 0 0;
   color: var(--color-text-soft);

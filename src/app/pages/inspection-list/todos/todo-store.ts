@@ -88,20 +88,40 @@ export class TodoStore {
 
   private normalizeTodos(candidate: unknown): InspectionTodo[] {
     if (!Array.isArray(candidate)) return [];
-    return candidate.filter((todo): todo is InspectionTodo => this.isTodo(todo));
+    return candidate
+      .map((todo) => this.normalizeTodo(todo))
+      .filter((todo): todo is InspectionTodo => todo !== null);
   }
 
-  private isTodo(candidate: unknown): candidate is InspectionTodo {
-    const todo = candidate as InspectionTodo;
-    return (
-      !!todo &&
-      typeof todo.id === 'string' &&
-      typeof todo.hiveId === 'string' &&
-      typeof todo.text === 'string' &&
-      typeof todo.done === 'boolean' &&
-      typeof todo.createdAt === 'string' &&
-      (todo.closedAt === undefined || typeof todo.closedAt === 'string')
-    );
+  private normalizeTodo(candidate: unknown): InspectionTodo | null {
+    if (!candidate || typeof candidate !== 'object') return null;
+    const raw = candidate as Record<string, unknown>;
+    const id = this.readString(raw, 'id');
+    const hiveId = this.readString(raw, 'hiveId', 'hive_id');
+    const text = this.readString(raw, 'text');
+    const createdAt = this.readString(raw, 'createdAt', 'created_at');
+    const done = raw['done'];
+    if (!id || !hiveId || !text || !createdAt || typeof done !== 'boolean') return null;
+
+    const closedCandidate = raw['closedAt'] ?? raw['closed_at'];
+    const closedAt = typeof closedCandidate === 'string' ? closedCandidate : undefined;
+
+    return {
+      id,
+      hiveId,
+      text,
+      done,
+      createdAt,
+      ...(closedAt ? { closedAt } : {})
+    };
+  }
+
+  private readString(record: Record<string, unknown>, ...keys: string[]): string | null {
+    for (const key of keys) {
+      const value = record[key];
+      if (typeof value === 'string') return value;
+    }
+    return null;
   }
 
   private persist(): void {

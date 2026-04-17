@@ -18,6 +18,7 @@ import { CloudSyncService } from '../../data/cloud-sync.service';
 import { FilterPanelComponent, BulkAction, FilterOption } from '../../ui/filter-panel/filter-panel';
 import { TodoListComponent } from './todos/todo-list/todo-list';
 import { TodoManagerComponent } from './todos/todo-manager/todo-manager';
+import { TodoStore } from './todos/todo-store';
 
 type InspectionFormValue = {
   date: string;
@@ -40,6 +41,7 @@ export class InspectionListPage implements OnInit {
   private readonly localStore = inject(BeeStore);
   private readonly remoteStore = inject(SupabaseStore);
   private readonly cloudSync = inject(CloudSyncService);
+  private readonly todoStore = inject(TodoStore);
   readonly i18n = inject(TranslationService);
   private static readonly SEARCH_KEY = 'beez-filter-inspection-search';
   private static readonly BROOD_KEY = 'beez-filter-inspection-brood';
@@ -298,6 +300,11 @@ export class InspectionListPage implements OnInit {
           inspector: f.inspector
         });
       }
+
+      // Checklist items can be created/closed in the inspection form and must be pushed
+      // before refreshing remote data, or the refresh can wipe local checklist changes.
+      await this.remoteStore.upsertTodos(this.todoStore.exportData());
+
       await this.refreshRemoteData();
       this.syncError.set('');
       if ('vibrate' in navigator) navigator.vibrate(10);

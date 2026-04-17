@@ -117,7 +117,7 @@ export class HiveListPage implements OnInit {
     const counts: Record<string, number> = {};
     const todos = this.todoStore.todos();
     for (const hive of this.hives()) {
-      counts[hive.id] = todos.filter((todo) => todo.hiveId === hive.id).length;
+      counts[hive.id] = todos.filter((todo) => todo.hiveId === hive.id && !todo.done).length;
     }
     return counts;
   });
