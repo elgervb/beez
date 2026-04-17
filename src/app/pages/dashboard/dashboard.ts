@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { BeeStore } from '../../data/bee-store';
 import { Inspection } from '../../data/models';
 import { TranslationService } from '../../data/translation.service';
+import { TodoStore } from '../inspection-list/todos/todo-store';
 import { AppShellComponent } from '../../ui/app-shell/app-shell';
 import { EmptyStateComponent } from '../../ui/empty-state/empty-state';
 import { TranslatePipe } from '../../ui/pipes/translate.pipe';
@@ -16,6 +17,7 @@ import { TranslatePipe } from '../../ui/pipes/translate.pipe';
 })
 export class DashboardPage {
   private readonly store = inject(BeeStore);
+  private readonly todoStore = inject(TodoStore);
   private readonly router = inject(Router);
   readonly i18n = inject(TranslationService);
 
@@ -28,6 +30,13 @@ export class DashboardPage {
     const month = new Date().toISOString().slice(0, 7);
     const currentYear = new Date().getFullYear();
     const apiaryNameById = new Map(data.apiaries.map((apiary) => [apiary.id, apiary.name]));
+    const hiveById = new Map(data.hives.map((hive) => [hive.id, hive]));
+    const openTodoCountByHiveId = new Map<string, number>();
+    for (const todo of this.todoStore.todos()) {
+      if (todo.done) continue;
+      if (!hiveById.has(todo.hiveId)) continue;
+      openTodoCountByHiveId.set(todo.hiveId, (openTodoCountByHiveId.get(todo.hiveId) ?? 0) + 1);
+    }
     const latestInspectionByHive = new Map<string, Inspection>();
     for (const inspection of data.inspections.slice().sort((a, b) => b.date.localeCompare(a.date))) {
       if (!latestInspectionByHive.has(inspection.hiveId)) {
@@ -112,8 +121,24 @@ export class DashboardPage {
         age: Math.max(0, currentYear - hive.queenYear)
       }))
       .sort((a, b) => b.age - a.age || a.code.localeCompare(b.code));
+    const queenAgeAttention = queenAgeOverview.filter((item) => item.age >= 3);
     const queenAgeTwoPlus = queenAgeOverview.filter((item) => item.age >= 2).length;
-    const queenAgeThreePlus = queenAgeOverview.filter((item) => item.age >= 3).length;
+    const queenAgeThreePlus = queenAgeAttention.length;
+    const openTodosByHive = [...openTodoCountByHiveId.entries()]
+      .map(([hiveId, count]) => {
+        const hive = hiveById.get(hiveId);
+        if (!hive) return null;
+        return {
+          hiveId,
+          apiaryId: hive.apiaryId,
+          code: hive.code,
+          apiary: apiaryNameById.get(hive.apiaryId) ?? '',
+          count
+        };
+      })
+      .filter((item): item is NonNullable<typeof item> => item !== null)
+      .sort((a, b) => b.count - a.count || a.code.localeCompare(b.code));
+    const openTodoCount = openTodosByHive.reduce((total, item) => total + item.count, 0);
 
     return {
       apiaries: data.apiaries.length,
@@ -124,11 +149,27 @@ export class DashboardPage {
       dueThisWeek,
       lowStoresWatch,
       weakColonies,
-      queenAgeOverview: queenAgeOverview.slice(0, 4),
+      openTodosByHive,
+      openTodoCount,
+      queenAgeOverview: queenAgeAttention.slice(0, 4),
       queenAgeTwoPlus,
       queenAgeThreePlus
     };
   });
+
+  readonly showDueThisWeekReport = computed(() => this.analytics().dueThisWeek.length > 0);
+  readonly showLowStoresWatchReport = computed(() => this.analytics().lowStoresWatch.length > 0);
+  readonly showWeakColoniesReport = computed(() => this.analytics().weakColonies.length > 0);
+  readonly showOpenTodosReport = computed(() => this.analytics().openTodosByHive.length > 0);
+  readonly showQueenAgeOverviewReport = computed(() => this.analytics().queenAgeOverview.length > 0);
+  readonly showAnyFieldReport = computed(
+    () =>
+      this.showDueThisWeekReport() ||
+      this.showLowStoresWatchReport() ||
+      this.showWeakColoniesReport() ||
+      this.showOpenTodosReport() ||
+      this.showQueenAgeOverviewReport()
+  );
 
   private loadReminderDays(): number {
     const raw = Number(localStorage.getItem('beez-reminder-days') ?? '14');

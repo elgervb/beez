@@ -44,6 +44,12 @@
   color: #5a4a22;
 }
 
+.report-all-clear {
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  background: #f4f0e2;
+}
+
 @media (min-width: 960px) {
   .panel {
     padding: 0.85rem;
