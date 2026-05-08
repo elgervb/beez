@@ -32,6 +32,7 @@ describe('BeeStore', () => {
       date: '2026-03-01',
       broodPattern: 'good',
       storesLevel: 'medium',
+      honeyLevel: 50,
       broodSeen: true,
       open: false,
       notes: 'ok',
@@ -64,6 +65,7 @@ describe('BeeStore', () => {
       date: '2026-03-02',
       broodPattern: 'excellent',
       storesLevel: 'high',
+      honeyLevel: 80,
       broodSeen: true,
       open: true,
       notes: 'strong',
@@ -89,6 +91,7 @@ describe('BeeStore', () => {
       date: '2026-03-03',
       broodPattern: 'good',
       storesLevel: 'low',
+      honeyLevel: 20,
       broodSeen: false,
       open: false,
       notes: '  n  ',
@@ -100,6 +103,7 @@ describe('BeeStore', () => {
       date: '2026-03-04',
       broodPattern: 'poor',
       storesLevel: 'medium',
+      honeyLevel: 45,
       broodSeen: true,
       open: true,
       notes: '  updated  ',
@@ -127,7 +131,7 @@ describe('BeeStore', () => {
     const valid = {
       apiaries: [{ id: 'a1', name: 'A1', location: 'L1', createdAt: '2026-01-01', notes: '' }],
       hives: [{ id: 'h1', apiaryId: 'a1', code: 'H1', queenYear: 2024, temperament: 'calm', status: 'active', createdAt: '2026-01-01' }],
-      inspections: [{ id: 'i1', hiveId: 'h1', date: '2026-01-01', broodPattern: 'good', storesLevel: 'medium', broodSeen: true, open: false, notes: '', inspector: 'X', createdAt: '2026-01-01' }]
+      inspections: [{ id: 'i1', hiveId: 'h1', date: '2026-01-01', broodPattern: 'good', storesLevel: 'medium', honeyLevel: 50, broodSeen: true, open: false, notes: '', inspector: 'X', createdAt: '2026-01-01' }]
     };
     expect(store.importData(valid)).toBe(true);
     expect(store.getData().apiaries.length).toBe(1);
@@ -202,8 +206,8 @@ describe('BeeStore', () => {
         { id: 'h2', apiaryId: 'missing', code: 'H2', queenYear: 2024, temperament: 'calm', status: 'active', createdAt: '2026-01-01' }
       ],
       inspections: [
-        { id: 'i1', hiveId: 'h1', date: '2026-01-01', broodPattern: 'good', storesLevel: 'medium', broodSeen: true, open: false, notes: '', inspector: 'X', createdAt: '2026-01-01' },
-        { id: 'i2', hiveId: 'missing', date: '2026-01-01', broodPattern: 'good', storesLevel: 'medium', broodSeen: true, open: false, notes: '', inspector: 'X', createdAt: '2026-01-01' }
+        { id: 'i1', hiveId: 'h1', date: '2026-01-01', broodPattern: 'good', storesLevel: 'medium', honeyLevel: 50, broodSeen: true, open: false, notes: '', inspector: 'X', createdAt: '2026-01-01' },
+        { id: 'i2', hiveId: 'missing', date: '2026-01-01', broodPattern: 'good', storesLevel: 'medium', honeyLevel: 50, broodSeen: true, open: false, notes: '', inspector: 'X', createdAt: '2026-01-01' }
       ]
     }));
 

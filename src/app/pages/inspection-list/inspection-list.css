@@ -18,6 +18,11 @@
   box-shadow: var(--shadow-soft);
 }
 
+.spark-row bee-inspection-sparkline {
+  display: block;
+  width: 100%;
+}
+
 .share-message {
   border-radius: var(--radius-md);
   background: var(--color-chip-bg);

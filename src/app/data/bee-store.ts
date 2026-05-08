@@ -276,6 +276,7 @@ export class BeeStore {
   addInspection(payload: Omit<Inspection, 'id' | 'createdAt'>): void {
     const inspection: Inspection = {
       ...payload,
+      honeyLevel: this.normalizeHoneyLevel(payload.honeyLevel, payload.storesLevel),
       notes: payload.notes.trim(),
       inspector: payload.inspector.trim(),
       id: crypto.randomUUID(),
@@ -289,7 +290,15 @@ export class BeeStore {
     this._data.update((d) => ({
       ...d,
       inspections: d.inspections.map((i) =>
-        i.id === id ? { ...i, ...payload, notes: payload.notes.trim(), inspector: payload.inspector.trim() } : i
+        i.id === id
+          ? {
+              ...i,
+              ...payload,
+              honeyLevel: this.normalizeHoneyLevel(payload.honeyLevel, payload.storesLevel),
+              notes: payload.notes.trim(),
+              inspector: payload.inspector.trim()
+            }
+          : i
       )
     }));
     this.persist();
@@ -355,7 +364,12 @@ export class BeeStore {
     const apiaryIds = new Set(apiaries.map((a) => a.id));
     const filteredHives = hives.filter((h) => apiaryIds.has(h.apiaryId));
     const hiveIds = new Set(filteredHives.map((h) => h.id));
-    const filteredInspections = inspections.filter((i) => hiveIds.has(i.hiveId));
+    const filteredInspections = inspections
+      .filter((i) => hiveIds.has(i.hiveId))
+      .map((i) => ({
+        ...i,
+        honeyLevel: this.normalizeHoneyLevel((i as Partial<Inspection>).honeyLevel, i.storesLevel)
+      }));
 
     return {
       apiaries,
@@ -421,6 +435,15 @@ export class BeeStore {
   private isInspection(candidate: unknown): candidate is Inspection {
     const i = candidate as Inspection;
     return !!i && typeof i.id === 'string' && typeof i.hiveId === 'string' && typeof i.date === 'string' && typeof i.inspector === 'string' && typeof i.createdAt === 'string';
+  }
+
+  private normalizeHoneyLevel(level: unknown, storesLevel: Inspection['storesLevel']): number {
+    if (typeof level === 'number' && Number.isFinite(level)) {
+      return Math.max(0, Math.min(100, Math.round(level)));
+    }
+    if (storesLevel === 'high') return 80;
+    if (storesLevel === 'low') return 20;
+    return 50;
   }
 
   private persist(): void {

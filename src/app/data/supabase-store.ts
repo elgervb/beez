@@ -39,12 +39,17 @@ type InspectionRow = {
   date: string;
   brood_pattern: 'excellent' | 'good' | 'poor';
   stores_level: 'high' | 'medium' | 'low';
+  honey_level: number;
   brood_seen: boolean;
   open: boolean;
   notes: string;
   inspector: string;
   created_at: string;
 };
+
+function clampHoneyLevel(level: number): number {
+  return Math.max(0, Math.min(100, Math.round(level)));
+}
 
 type TodoRow = {
   id: string;
@@ -86,6 +91,7 @@ function toInspection(row: InspectionRow): Inspection {
     date: row.date,
     broodPattern: row.brood_pattern,
     storesLevel: row.stores_level,
+    honeyLevel: clampHoneyLevel(row.honey_level),
     broodSeen: row.brood_seen,
     open: row.open,
     notes: row.notes,
@@ -288,6 +294,7 @@ export class SupabaseStore {
         date: payload.date,
         brood_pattern: payload.broodPattern,
         stores_level: payload.storesLevel,
+        honey_level: clampHoneyLevel(payload.honeyLevel),
         brood_seen: payload.broodSeen,
         open: payload.broodSeen ? payload.open : false,
         notes: payload.notes.trim(),
@@ -307,6 +314,7 @@ export class SupabaseStore {
         date: payload.date,
         brood_pattern: payload.broodPattern,
         stores_level: payload.storesLevel,
+        honey_level: clampHoneyLevel(payload.honeyLevel),
         brood_seen: payload.broodSeen,
         open: payload.broodSeen ? payload.open : false,
         notes: payload.notes.trim(),
@@ -365,6 +373,7 @@ export class SupabaseStore {
           date: i.date,
           brood_pattern: i.broodPattern,
           stores_level: i.storesLevel,
+          honey_level: clampHoneyLevel(i.honeyLevel),
           brood_seen: i.broodSeen,
           open: i.open,
           notes: i.notes,

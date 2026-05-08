@@ -5,6 +5,16 @@ import { TranslatePipe } from '../../../ui/pipes/translate.pipe';
 import { TodoChecklistComponent } from '../todos/todo-checklist/todo-checklist';
 import { TodoStore } from '../todos/todo-store';
 
+function defaultHoneyLevel(storesLevel: Inspection['storesLevel']): number {
+  if (storesLevel === 'high') return 80;
+  if (storesLevel === 'low') return 20;
+  return 50;
+}
+
+function clampHoneyLevel(level: number): number {
+  return Math.max(0, Math.min(100, Math.round(level)));
+}
+
 @Component({
   selector: 'bee-inspection-form',
   imports: [FormField, TranslatePipe, TodoChecklistComponent],
@@ -26,6 +36,7 @@ export class InspectionFormComponent {
     date: new Date().toISOString().slice(0, 10),
     broodPattern: 'good' as Inspection['broodPattern'],
     storesLevel: 'medium' as Inspection['storesLevel'],
+    honeyLevel: 50,
     broodSeen: false,
     open: false,
     notes: '',
@@ -48,6 +59,7 @@ export class InspectionFormComponent {
           date: init.date,
           broodPattern: init.broodPattern,
           storesLevel: init.storesLevel,
+          honeyLevel: clampHoneyLevel(init.honeyLevel ?? defaultHoneyLevel(init.storesLevel)),
           broodSeen: init.broodSeen,
           open: init.open,
           notes: init.notes,
@@ -60,6 +72,7 @@ export class InspectionFormComponent {
             date: draft.date,
             broodPattern: draft.broodPattern,
             storesLevel: draft.storesLevel,
+            honeyLevel: clampHoneyLevel(draft.honeyLevel ?? defaultHoneyLevel(draft.storesLevel)),
             broodSeen: draft.broodSeen,
             open: draft.open,
             notes: draft.notes,
@@ -70,6 +83,7 @@ export class InspectionFormComponent {
             date: new Date().toISOString().slice(0, 10),
             broodPattern: 'good',
             storesLevel: 'medium',
+            honeyLevel: 50,
             broodSeen: false,
             open: false,
             notes: '',
@@ -89,6 +103,7 @@ export class InspectionFormComponent {
           ...f,
           broodPattern: 'good',
           storesLevel: 'medium',
+          honeyLevel: 60,
           broodSeen: true,
           open: false,
           notes: 'Routine check completed.'
@@ -99,6 +114,7 @@ export class InspectionFormComponent {
           ...f,
           broodPattern: 'good',
           storesLevel: 'low',
+          honeyLevel: 20,
           broodSeen: true,
           open: true,
           notes: 'Low stores, feeding recommended.'
@@ -108,6 +124,7 @@ export class InspectionFormComponent {
         ...f,
         broodPattern: 'poor',
         storesLevel: 'low',
+        honeyLevel: 15,
         broodSeen: true,
         open: false,
         notes: 'Needs follow-up inspection soon.'
@@ -122,6 +139,7 @@ export class InspectionFormComponent {
       const value = this.formModel();
       this.save.emit({
         ...value,
+        honeyLevel: clampHoneyLevel(value.honeyLevel),
         inspector: value.inspector.trim(),
         open: this.showOpenBrood() ? value.open : false
       });
@@ -131,6 +149,7 @@ export class InspectionFormComponent {
         date: new Date().toISOString().slice(0, 10),
         broodPattern: 'good',
         storesLevel: 'medium',
+        honeyLevel: 50,
         broodSeen: false,
         open: false,
         notes: '',

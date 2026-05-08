@@ -27,6 +27,12 @@
       </select>
     </label>
     <label>
+      {{ 'inspection.honeyLevel' | i18n }} ({{ formModel().honeyLevel }}%)
+      <input type="range" min="0" max="100" step="1"
+        [value]="formModel().honeyLevel"
+        (input)="formModel.update(f => ({ ...f, honeyLevel: +$any($event.target).value }))" />
+    </label>
+    <label>
       {{ 'inspection.inspector' | i18n }}
       <input autofocus [formField]="form.inspector" [placeholder]="'inspection.inspectorPlaceholder' | i18n" autocomplete="off" inputmode="text" list="inspectors-list" [class.field-invalid]="showInspectorError()" />
       @if (knownInspectors().length > 0) {

@@ -31,6 +31,7 @@ create table if not exists public.inspections (
   date date not null,
   brood_pattern text not null check (brood_pattern in ('excellent','good','poor')),
   stores_level text not null check (stores_level in ('high','medium','low')),
+  honey_level int not null default 0 check (honey_level between 0 and 100),
   brood_seen boolean not null default false,
   open boolean not null default false,
   notes text not null default '',
@@ -60,6 +61,41 @@ create index if not exists idx_inspections_date on public.inspections(date desc)
 create index if not exists idx_todos_owner on public.todos(owner_id);
 create index if not exists idx_todos_hive on public.todos(hive_id);
 create index if not exists idx_todos_created on public.todos(created_at desc);
+
+-- Migration for existing installations: add and backfill honey_level on inspections.
+alter table public.inspections
+  add column if not exists honey_level int;
+
+update public.inspections
+set honey_level = case stores_level
+  when 'high' then 80
+  when 'medium' then 50
+  else 20
+end
+where honey_level is null;
+
+update public.inspections
+set honey_level = least(100, greatest(0, honey_level));
+
+alter table public.inspections
+  alter column honey_level set default 0;
+
+alter table public.inspections
+  alter column honey_level set not null;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'inspections_honey_level_check'
+      and conrelid = 'public.inspections'::regclass
+  ) then
+    alter table public.inspections
+      add constraint inspections_honey_level_check
+      check (honey_level between 0 and 100);
+  end if;
+end $$;
 
 
 -- RLS Policies (SQL)

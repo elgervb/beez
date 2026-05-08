@@ -23,6 +23,7 @@ export interface Inspection {
   date: string;
   broodPattern: 'excellent' | 'good' | 'poor';
   storesLevel: 'high' | 'medium' | 'low';
+  honeyLevel: number;
   broodSeen: boolean;
   open: boolean;
   notes: string;

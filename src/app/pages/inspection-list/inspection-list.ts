@@ -24,6 +24,7 @@ type InspectionFormValue = {
   date: string;
   broodPattern: 'excellent' | 'good' | 'poor';
   storesLevel: 'high' | 'medium' | 'low';
+  honeyLevel: number;
   broodSeen: boolean;
   open: boolean;
   notes: string;
@@ -204,7 +205,7 @@ export class InspectionListPage implements OnInit {
       ...inspections.map((i) =>
         [
           `${i.date} · ${i.inspector}`,
-          `  Brood: ${i.broodPattern}, Stores: ${i.storesLevel}`,
+          `  Brood: ${i.broodPattern}, Stores: ${i.storesLevel}, Honey: ${i.honeyLevel}%`,
           i.notes ? `  ${i.notes}` : null
         ]
           .filter(Boolean)
@@ -294,6 +295,7 @@ export class InspectionListPage implements OnInit {
           date: f.date,
           broodPattern: f.broodPattern,
           storesLevel: f.storesLevel,
+          honeyLevel: f.honeyLevel,
           broodSeen: f.broodSeen,
           open: f.broodSeen ? f.open : false,
           notes: f.notes,
@@ -325,6 +327,7 @@ export class InspectionListPage implements OnInit {
         date: f.date,
         broodPattern: f.broodPattern,
         storesLevel: f.storesLevel,
+        honeyLevel: f.honeyLevel,
         broodSeen: f.broodSeen,
         open: f.broodSeen ? f.open : false,
         notes: f.notes,
@@ -419,6 +422,7 @@ export class InspectionListPage implements OnInit {
         date: pending.date,
         broodPattern: pending.broodPattern,
         storesLevel: pending.storesLevel,
+        honeyLevel: pending.honeyLevel,
         broodSeen: pending.broodSeen,
         open: pending.open,
         notes: pending.notes,
@@ -469,6 +473,7 @@ export class InspectionListPage implements OnInit {
       date: new Date().toISOString().slice(0, 10),
       broodPattern: inspection.broodPattern,
       storesLevel: inspection.storesLevel,
+      honeyLevel: inspection.honeyLevel,
       broodSeen: inspection.broodSeen,
       open: inspection.open,
       notes: '',

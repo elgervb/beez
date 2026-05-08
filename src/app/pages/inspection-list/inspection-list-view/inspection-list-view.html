@@ -21,6 +21,7 @@
               <div class="inspection-tags">
                 <bee-badge [label]="'inspection.broodLabel' | i18n:{ value: (('inspection.broodPattern.' + inspection.broodPattern) | i18n) }" [variant]="inspection.broodPattern === 'excellent' ? 'success' : inspection.broodPattern === 'good' ? 'default' : 'warning'" [icon]="inspection.broodPattern === 'excellent' ? 'check' : inspection.broodPattern === 'poor' ? 'warning' : null" appearance="soft" size="small" />
                 <bee-badge [label]="'inspection.storesLabel' | i18n:{ value: (('inspection.storesLevel.' + inspection.storesLevel) | i18n) }" [variant]="inspection.storesLevel === 'high' ? 'success' : inspection.storesLevel === 'medium' ? 'default' : 'danger'" [icon]="inspection.storesLevel === 'low' ? 'warning' : null" appearance="soft" size="small" />
+                <bee-badge [label]="'inspection.honeyLabel' | i18n:{ value: inspection.honeyLevel }" [variant]="inspection.honeyLevel >= 70 ? 'success' : inspection.honeyLevel >= 35 ? 'default' : 'warning'" [icon]="inspection.honeyLevel < 35 ? 'warning' : null" appearance="soft" size="small" />
                 @if (inspection.broodSeen) {
                   <bee-badge [label]="'inspection.broodSeen' | i18n" variant="success" icon="check" appearance="soft" size="small" />
                 }
