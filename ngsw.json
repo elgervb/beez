@@ -1,0 +1,107 @@
+{
+  "configVersion": 1,
+  "timestamp": 1778246016849,
+  "index": "/beez/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/beez/chunk-2J4A3LKC.js",
+        "/beez/chunk-3IFCQ4QH.js",
+        "/beez/chunk-AFXMDBA5.js",
+        "/beez/chunk-CAGJRAXU.js",
+        "/beez/chunk-DKG5WTLP.js",
+        "/beez/chunk-FT2OTLIH.js",
+        "/beez/chunk-GQWQQJSQ.js",
+        "/beez/chunk-KECUPMFZ.js",
+        "/beez/chunk-NZIFZDYC.js",
+        "/beez/chunk-TCPDJKDC.js",
+        "/beez/chunk-TS4YWGH3.js",
+        "/beez/chunk-UII4XYHS.js",
+        "/beez/chunk-VAQ7YDGF.js",
+        "/beez/chunk-XW2LEXME.js",
+        "/beez/favicon.ico",
+        "/beez/index.html",
+        "/beez/main-ZHICKEK3.js",
+        "/beez/manifest.webmanifest",
+        "/beez/styles-DN24YOQJ.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/beez/icons/beez-transparent.svg",
+        "/beez/icons/icon-128x128.png",
+        "/beez/icons/icon-144x144.png",
+        "/beez/icons/icon-152x152.png",
+        "/beez/icons/icon-192x192.png",
+        "/beez/icons/icon-384x384.png",
+        "/beez/icons/icon-512x512.png",
+        "/beez/icons/icon-72x72.png",
+        "/beez/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/beez/chunk-2J4A3LKC.js": "06242888377df5adfb0999eada36eb53d1a6a90b",
+    "/beez/chunk-3IFCQ4QH.js": "54f77d08edbb49e95bdf9e5a4ee5937578b6c0d8",
+    "/beez/chunk-AFXMDBA5.js": "0b476dc939cc0f0216206a0f5421e6fdfb294a44",
+    "/beez/chunk-CAGJRAXU.js": "20da37c2618479c228f04753907f520bf1e9e7e2",
+    "/beez/chunk-DKG5WTLP.js": "680f3b877fdf539bbe2893e7f9a7754a7db44218",
+    "/beez/chunk-FT2OTLIH.js": "25294283345aa02a058dcb4444299b5c45757743",
+    "/beez/chunk-GQWQQJSQ.js": "13574c34ebe637d4645c8b774d8ba468e9110375",
+    "/beez/chunk-KECUPMFZ.js": "8762bd03425ac0e233f4a707439631a8bb6d8748",
+    "/beez/chunk-NZIFZDYC.js": "f3e0fe6a1fe98d31eff32ac0dddfd3c71b9fb6f4",
+    "/beez/chunk-TCPDJKDC.js": "84fd3cd2697fff3a7d7d23a7465c07a09b180a30",
+    "/beez/chunk-TS4YWGH3.js": "5e929d9a8568aadafd0211571768df1a54eda3bd",
+    "/beez/chunk-UII4XYHS.js": "52a656bb027de010f16de75b105f557fde20b5d4",
+    "/beez/chunk-VAQ7YDGF.js": "8fa6927d1fba42f97ef8d7dafc03db9d2962059c",
+    "/beez/chunk-XW2LEXME.js": "97aecf49bbb6f7273ec36aa4c30cd26d74fa6c1f",
+    "/beez/favicon.ico": "58e5cd78b0f2ce4eb695bf3631fd2daac6ac1d12",
+    "/beez/icons/beez-transparent.svg": "f18befdb807a4cadfda5b1a40c2cc3b303fad688",
+    "/beez/icons/icon-128x128.png": "2be9771effe0253e175401dbe2428add52d71c14",
+    "/beez/icons/icon-144x144.png": "86ad518136094f71fc8b1077b719ab130cb8a405",
+    "/beez/icons/icon-152x152.png": "5aa62f19ed5cfd044cdafe53944fd1ccd1b71011",
+    "/beez/icons/icon-192x192.png": "05d6590c3ed1589bb6f6375c314e22b455ae3f2d",
+    "/beez/icons/icon-384x384.png": "2fe746d406b13254c9fc645e48b8a70dd9111816",
+    "/beez/icons/icon-512x512.png": "6d3365c2143f7319673766c7e3bd700f7209739c",
+    "/beez/icons/icon-72x72.png": "3a80eac036d87b26c44a0ed6548d834396ad4a98",
+    "/beez/icons/icon-96x96.png": "7b46c214f17c800f0e789176899399936a38a81c",
+    "/beez/index.html": "3ecee68531b8f7fdc49921fa3c215beb4b336f75",
+    "/beez/main-ZHICKEK3.js": "b5ea93a2c2f31969a6b9cab1c097bbf29f7a793c",
+    "/beez/manifest.webmanifest": "c9b1f7b74643cbea409e1fc4fb9cbac70876022e",
+    "/beez/styles-DN24YOQJ.css": "ba4e49950770e5a7cee8c07dda3fba453646c693"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
